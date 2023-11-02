@@ -53,7 +53,7 @@ export const Menubar = () => {
                     </li>
                   </ul>
                 </div>
-                {/* end col-3 */}
+
                 <div className="col-12 col-xl-4">
                   <h6 className="large-menu-title">Electronics</h6>
                   <ul className="list-unstyled">
@@ -75,15 +75,15 @@ export const Menubar = () => {
                     </li>
                   </ul>
                 </div>
-                {/* end col-3 */}
+
                 <div className="col-12 col-xl-4 d-none d-xl-block">
                   <div className="pramotion-banner1">
                     <img src="assets/images/gallery/menu-img.jpg" className="img-fluid" alt />
                   </div>
                 </div>
-                {/* end col-3 */}
+
               </div>
-              {/* end row */}
+
             </div>
           </li>
           <li className="nav-item">

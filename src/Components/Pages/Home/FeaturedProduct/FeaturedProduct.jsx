@@ -43,10 +43,7 @@ const FeaturedProduct = () => {
                        to={`/productdetails/${product.id}`}
                         
 
-                      <a
-                        href="/productdetails"
-                        // data-bs-toggle="modal"
-                        // data-bs-target="#QuickViewProduct"
+
                       >
                         Quick View
                       </Link>
