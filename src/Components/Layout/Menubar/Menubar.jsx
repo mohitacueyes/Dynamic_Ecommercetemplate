@@ -14,7 +14,7 @@ export const Menubar = () => {
       <div className="offcanvas-body primary-menu">
         <ul className="navbar-nav justify-content-start flex-grow-1 gap-1">
           <li className="nav-item">
-            <a className="nav-link" href="/home">Home</a>
+            <a className="nav-link" href="/">Home</a>
           </li>
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="tv-shows.html" data-bs-toggle="dropdown">

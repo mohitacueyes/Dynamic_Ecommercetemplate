@@ -15,10 +15,9 @@ function App() {
     <Searchbar/>
     <Menubar/>
       <Routes>
-        <Route path="/"  element={<h1>Home</h1>}></Route>
+        <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />}/>
         <Route path='/contact' element={<Contact />}/>
-        <Route path='/home' element={<Home />} />
       </Routes>
       <Footer />
     </>
