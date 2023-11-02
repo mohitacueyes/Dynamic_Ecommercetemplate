@@ -38,9 +38,15 @@ const FeaturedProduct = () => {
                       </a>
                     </div>
                     <div className="quick-view position-absolute start-0 bottom-0 end-0">
+
                       <Link
                        to={`/productdetails/${product.id}`}
                         
+
+                      <a
+                        href="/productdetails"
+                        // data-bs-toggle="modal"
+                        // data-bs-target="#QuickViewProduct"
                       >
                         Quick View
                       </Link>
