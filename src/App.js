@@ -7,6 +7,7 @@ import { Topbar } from './Components/Layout/Topbar/Topbar';
 import { Searchbar } from './Components/Layout/Searchbar/Searchbar';
 import { Menubar } from './Components/Layout/Menubar/Menubar';
 import { Home } from './Components/Pages/Home/Home';
+import { ProductDeatails, ProductDetails } from './Components/Pages/ProductDetails';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />}/>
         <Route path='/contact' element={<Contact />}/>
+        <Route path='/productdetails' element={<ProductDetails />}/>  
       </Routes>
       <Footer />
     </>
