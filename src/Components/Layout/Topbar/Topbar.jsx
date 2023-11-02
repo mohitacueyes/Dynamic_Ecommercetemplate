@@ -11,13 +11,13 @@ export const Topbar = () => {
       <ul className="navbar-nav ms-auto d-none d-lg-flex">
         <li className="nav-item"><a className="nav-link" href="order-tracking.html">Track Order</a>
         </li>
-        <li className="nav-item"><a className="nav-link" href="about-us.html">About</a>
+        <li className="nav-item"><a className="nav-link" href="/about">About</a>
         </li>
         <li className="nav-item"><a className="nav-link" href="shop-categories.html">Our Stores</a>
         </li>
         <li className="nav-item"><a className="nav-link" href="blog-post.html">Blog</a>
         </li>
-        <li className="nav-item"><a className="nav-link" href="contact-us.html">Contact</a>
+        <li className="nav-item"><a className="nav-link" href="/contact">Contact</a>
         </li>
         <li className="nav-item"><a className="nav-link" href="javascript:;">Help &amp; FAQs</a>
         </li>
