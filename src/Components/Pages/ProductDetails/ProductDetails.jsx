@@ -1,6 +1,19 @@
-import React from 'react'
-
+import React , { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom';
 const ProductDetails = () => {
+  const { id } = useParams();
+  const [productData, setProductData] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://ecom.iconixitsolution.com/api/product-detail/${id}`) // Replace with your actual API endpoint
+      .then(response => response.json())
+      .then(data => setProductData(data.ResponseData[0]))
+      .catch(error => console.error('Error fetching data:', error));
+  }, [id]);
+
+  if (!productData) {
+    return null; // Render nothing if data hasn't loaded yet
+  }
   return (
    <>
  {/*start page wrapper */}
@@ -66,7 +79,7 @@ const ProductDetails = () => {
               </div>
               <div className="col-12 col-lg-7">
                 <div className="product-info-section p-3">
-                  <h3 className="mt-3 mt-lg-0 mb-0">Allen Solly Men's Polo T-Shirt</h3>
+                  <h3 className="mt-3 mt-lg-0 mb-0">{productData.name}</h3>
                   <div className="product-rating d-flex align-items-center mt-2">
                     <div className="rates cursor-pointer font-13">	<i className="bx bxs-star text-warning" />
                       <i className="bx bxs-star text-warning" />
@@ -79,8 +92,8 @@ const ProductDetails = () => {
                     </div>
                   </div>
                   <div className="d-flex align-items-center mt-3 gap-2">
-                    <h5 className="mb-0 text-decoration-line-through text-light-3">$98.00</h5>
-                    <h4 className="mb-0">$49.00</h4>
+                    <h5 className="mb-0 text-decoration-line-through text-light-3">${ productData.price}</h5>
+                    <h4 className="mb-0">${ productData.discounted_price}</h4>
                   </div>
                   <div className="mt-3">
                     <h6>Discription :</h6>
@@ -324,15 +337,15 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </div>
-              {/*end row*/}
+              
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </section> 
     {/*end product more info*/}
     {/*start similar products*/}
-    <section className="py-4">
+     <section className="py-4">
       <div className="container">
         <div className="separator pb-4">
           <div className="line" />
@@ -603,11 +616,10 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-    </section>
-    {/*end similar products*/}
+    </section> 
+    
   </div>
 </div>
-{/*end page wrapper */}
 
    </>
   )
