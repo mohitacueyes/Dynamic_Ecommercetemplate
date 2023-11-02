@@ -76,7 +76,7 @@ export const Menubar = () => {
               {/* end row */}
             </div>
           </li>
-          <li className="nav-item dropdown">
+          {/* <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
               Shop <i className="bx bx-chevron-down ms-1" /> 
             </a>
@@ -118,15 +118,14 @@ export const Menubar = () => {
               <li><a className="dropdown-item" href="product-comparison.html">Product Comparison</a>
               </li>
             </ul>
+          </li> */}
+          <li className="nav-item">
+            <a className="nav-link" href="/about">About</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="about-us.html">About</a>
+            <a className="nav-link" href="/contact">Contact</a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="contact-us.html">Contact</a>
-          </li>
-          <li className="nav-item"> <a className="nav-link" href="shop-categories.html">Our Store</a> 
-          </li>
+        
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
               Account
@@ -148,7 +147,7 @@ export const Menubar = () => {
               <li><a className="dropdown-item" href="authentication-reset-password.html">Password</a></li>
             </ul>
           </li>
-          <li className="nav-item dropdown">
+          {/* <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
               Blog
             </a>
@@ -156,7 +155,7 @@ export const Menubar = () => {
               <li><a className="dropdown-item" href="blog-post.html">Blog Post</a></li>
               <li><a className="dropdown-item" href="blog-read.html">Blog Read</a></li>
             </ul>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>	
