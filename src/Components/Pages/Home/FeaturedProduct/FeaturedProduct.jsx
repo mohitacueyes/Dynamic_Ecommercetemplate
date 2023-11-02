@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const FeaturedProduct = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -37,15 +38,14 @@ const FeaturedProduct = () => {
                       </a>
                     </div>
                     <div className="quick-view position-absolute start-0 bottom-0 end-0">
-                      <a
-                        href="javascript:;"
-                        data-bs-toggle="modal"
-                        data-bs-target="#QuickViewProduct"
+                      <Link
+                       to={`/productdetails/${product.id}`}
+                        
                       >
                         Quick View
-                      </a>
+                      </Link>
                     </div>
-                    <a href="javascript:;">
+                    <a href="/productdetails">
                       <img
                         src="assets/images/products/01.png"
                         className="img-fluid"
