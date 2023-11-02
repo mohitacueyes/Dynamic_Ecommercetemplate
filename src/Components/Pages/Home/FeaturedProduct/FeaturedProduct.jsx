@@ -38,14 +38,14 @@ const FeaturedProduct = () => {
                     </div>
                     <div className="quick-view position-absolute start-0 bottom-0 end-0">
                       <a
-                        href="javascript:;"
-                        data-bs-toggle="modal"
-                        data-bs-target="#QuickViewProduct"
+                        href="/productdetails"
+                        // data-bs-toggle="modal"
+                        // data-bs-target="#QuickViewProduct"
                       >
                         Quick View
                       </a>
                     </div>
-                    <a href="javascript:;">
+                    <a href="/productdetails">
                       <img
                         src="assets/images/products/01.png"
                         className="img-fluid"

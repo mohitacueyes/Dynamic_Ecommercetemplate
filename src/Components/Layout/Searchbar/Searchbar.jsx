@@ -39,7 +39,7 @@ export const Searchbar = () => {
             <ul className="navbar-nav">
               <li className="nav-item"><a href="account-dashboard.html" className="nav-link cart-link"><i className="bx bx-user" /></a>
               </li>
-              <li className="nav-item"><a href="wishlist.html" className="nav-link cart-link"><i className="bx bx-heart" /></a>
+              <li className="nav-item"><a href="/wishlist" className="nav-link cart-link"><i className="bx bx-heart" /></a>
               </li>
               <li className="nav-item dropdown dropdown-large">
                 <a href="#" className="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative cart-link" data-bs-toggle="dropdown">	<span className="alert-count">8</span>

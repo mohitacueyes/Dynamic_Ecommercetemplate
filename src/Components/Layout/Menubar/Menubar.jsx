@@ -108,9 +108,9 @@ export const Menubar = () => {
               <li>
                 <hr className="dropdown-divider" />
               </li>
-              <li><a className="dropdown-item" href="authentication-login.html">Login</a></li>
-              <li><a className="dropdown-item" href="authentication-register.html">Register</a></li>
-              <li><a className="dropdown-item" href="authentication-reset-password.html">Password</a></li>
+              <li><a className="dropdown-item" href="/login">Login</a></li>
+              <li><a className="dropdown-item" href="/register">Register</a></li>
+              <li><a className="dropdown-item" href="/resetpassword">Password</a></li>
             </ul>
           </li>
         </ul>
