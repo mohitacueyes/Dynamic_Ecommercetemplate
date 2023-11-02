@@ -1,7 +1,59 @@
-import React from 'react'
-
+import React ,{useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 const Register = () => {
+    const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [full_name, setFullName] = useState('');
+  const [deviceToken, setDeviceToken] = useState('olkjkfdf');
+  const [deviceType, setDeviceType] = useState('Android');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('https://ecom.iconixitsolution.com/api/sign-up', {
+        method: 'POST',
+        headers: {
+                    'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          
+          email: email,
+          full_name: full_name,
+          phone : phone,
+          password: password,
+          device_token: deviceToken,
+          device_type: deviceType,
+          login_type: 'phone',
+        }),
+      });
+
+      const data = await response.json();
+
+      if ( data.ResponseData) {
+        // Login successful, store the token in local storage
+        // setAuthToken(data.ResponseData.token);
+        // Handle further actions like redirecting the user to another page
+        console.log('Registrtion successful');
+        navigate('/');
+        
+      } else {
+        // Login failed, handle error (show error message to user, etc.)
+        setError('Invalid credentials. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      setError('An error occurred. Please try again later.');
+    }
+  };
+
+
   return (
+    
    <>
  {/*start page wrapper */}
 <div className="page-wrapper">
@@ -51,23 +103,23 @@ const Register = () => {
                       <hr />
                     </div>
                     <div className="form-body">
-                      <form className="row g-3">
-                        <div className="col-sm-6">
-                          <label htmlFor="inputFirstName" className="form-label">First Name</label>
-                          <input type="email" className="form-control" id="inputFirstName" placeholder="Jhon" />
-                        </div>
-                        <div className="col-sm-6">
-                          <label htmlFor="inputLastName" className="form-label">Last Name</label>
-                          <input type="email" className="form-control" id="inputLastName" placeholder="Deo" />
+                      <form className="row g-3" onSubmit={handleRegister}>
+                        <div className="col-12">
+                          <label htmlFor="inputFirstName" className="form-label">Full Name</label>
+                          <input type="text" className="form-control" id="inputFirstName" placeholder="Full Name" onChange={(e) => setFullName(e.target.value)} required />
                         </div>
                         <div className="col-12">
+                                <label htmlFor="" className="form-label">Phone Number</label>
+                                <input type="number" value={phone} onChange={(e) => setPhone(e.target.value)} required className="form-control" placeholder="" />
+                              </div>
+                        <div className="col-12">
                           <label htmlFor="inputEmailAddress" className="form-label">Email Address</label>
-                          <input type="email" className="form-control" id="inputEmailAddress" placeholder="example@user.com" />
+                          <input type="email" className="form-control" id="inputEmailAddress" placeholder="example@user.com" onChange={(e) => setEmail(e.target.value)} required  />
                         </div>
                         <div className="col-12">
                           <label htmlFor="inputChoosePassword" className="form-label">Password</label>
                           <div className="input-group" id="show_hide_password">
-                            <input type="password" className="form-control border-end-0" id="inputChoosePassword" defaultValue={12345678} placeholder="Enter Password" /> <a href="javascript:;" className="input-group-text bg-transparent"><i className="bx bx-hide" /></a>
+                            <input type="password" className="form-control border-end-0" id="inputChoosePassword" onChange={(e) => setPassword(e.target.value)} required placeholder="Enter Password" /> <a href="javascript:;" className="input-group-text bg-transparent"><i className="bx bx-hide" /></a>
                           </div>
                         </div>
                         <div className="col-12">
