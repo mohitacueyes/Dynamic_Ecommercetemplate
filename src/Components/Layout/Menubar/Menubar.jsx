@@ -1,12 +1,24 @@
 import React , { useState, useEffect} from 'react'
 
 export const Menubar = () => {
-  const [menuList, setMenuList] = useState([]);
+    const [menuList, setMenuList] = useState([]);
 
   useEffect(() => {
     fetch('https://ecom.iconixitsolution.com/api/home') // Replace with your actual API endpoint
       .then(response => response.json())
-      .then(data => setMenuList(data.ResponseData.menuList))
+      .then(data => {
+        setMenuList(data.ResponseData.menuList);
+
+        data.ResponseData.menuList.forEach(category => {
+          fetch(`https://ecom.iconixitsolution.com/api/subcategories/${category.id}`) // Replace with the actual subcategory API endpoint
+            .then(response => response.json())
+            .then(subcategoryData => {
+              category.subcategorydata = subcategoryData;
+              setMenuList([...menuList]);
+            })
+            .catch(error => console.error(`Error fetching subcategory for category ${category.id}:`, error));
+        });
+      })
       .catch(error => console.error('Error fetching menu:', error));
   }, []);
   return (
@@ -23,9 +35,27 @@ export const Menubar = () => {
       <div className="offcanvas-body primary-menu">
         <ul className="navbar-nav justify-content-start flex-grow-1 gap-1">
         {menuList.map(item => (
-          <li className="nav-item" key={item.id}>
-            <a className="nav-link" href="/">{item.name}</a>
-          </li>
+          // <li className="nav-item" key={item.id}>
+          //   <a className="nav-link" href="/">{item.name}</a>
+          // </li>
+          <li className="nav-item dropdown">
+          <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="tv-shows.html" data-bs-toggle="dropdown">
+          {item.name}
+          </a>
+          <div className="dropdown-menu dropdown-large-menu">
+            <div className="row">
+              <div className="col-12 col-xl-4">
+                <ul className="list-unstyled">
+                {item.subcategorydata && item.subcategorydata.map(subcategory => (
+                <li>
+                  <a href="javascript:;">{subcategory.name}</a>
+                </li>
+                   ))} 
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
            ))}
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="tv-shows.html" data-bs-toggle="dropdown">
