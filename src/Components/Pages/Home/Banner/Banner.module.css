@@ -1,0 +1,12 @@
+.bannerr
+{
+    width: 100%;
+    height: 75vh;
+    object-fit: cover;
+    object-position: center;
+}
+.bannerr img
+{
+    width: 100%;
+    height: 100%;
+}

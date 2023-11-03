@@ -265,8 +265,7 @@ a {
 	border-radius: 0.25rem;
 	text-transform: uppercase;
   }
-
-  .primary-menu .dropdown-large-menu ul li a:hover {
+   .primary-menu .dropdown-large-menu ul li a:hover {
     background-color: #ebebeb;
   }
   
