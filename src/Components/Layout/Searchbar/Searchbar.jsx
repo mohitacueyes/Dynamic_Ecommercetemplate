@@ -12,7 +12,7 @@ export const Searchbar = () => {
             <i className="bx bx-menu" />
           </div>
           <div className="logo">
-            <a href="index.html">
+            <a href="/">
               <img src="assets/images/logo-icon.png" className="logo-icon" alt />
             </a>
           </div>
@@ -37,7 +37,7 @@ export const Searchbar = () => {
         <div className="top-cart-icons">
           <nav className="navbar navbar-expand">
             <ul className="navbar-nav">
-              <li className="nav-item"><a href="account-dashboard.html" className="nav-link cart-link"><i className="bx bx-user" /></a>
+              <li className="nav-item"><a href="/profile" className="nav-link cart-link"><i className="bx bx-user" /></a>
               </li>
               <li className="nav-item"><a href="/wishlist" className="nav-link cart-link"><i className="bx bx-heart" /></a>
               </li>
