@@ -49,7 +49,7 @@ const ProductDetails = () => {
                 <div className="image-zoom-section">
                   <div className="product-gallery owl-carousel owl-theme border mb-3 p-3" data-slider-id={1}>
                     <div className="item">
-                      <img src="assets/images/product-gallery/01.png" className="img-fluid" alt />
+                      <img src="../assets/images/product-gallery/01.png" className="img-fluid" alt />
                     </div>
                     <div className="item">
                       <img src="assets/images/product-gallery/02.png" className="img-fluid" alt />
