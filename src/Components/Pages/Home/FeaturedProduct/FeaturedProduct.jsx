@@ -40,10 +40,7 @@ const FeaturedProduct = () => {
                     <div className="quick-view position-absolute start-0 bottom-0 end-0">
 
                       <Link
-                       to={`/productdetails/${product.id}`}
-                        
-
-
+                       to={`/productdetails/${product.id}`}                    
                       >
                         Quick View
                       </Link>
