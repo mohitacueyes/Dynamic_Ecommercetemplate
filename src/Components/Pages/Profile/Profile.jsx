@@ -37,7 +37,8 @@ const Profile = () => {
               <div className="col-lg-4">
                 <div className="card shadow-none mb-3 mb-lg-0 border rounded-0">
                   <div className="card-body">
-                    <div className="list-group list-group-flush">	<a href="/profile" className="list-group-item active d-flex justify-content-between align-items-center">Dashboard <i className="bx bx-tachometer fs-5" /></a>
+                    <div className="list-group list-group-flush">
+                    	<a href="/profile" className="list-group-item active d-flex justify-content-between align-items-center">Dashboard <i className="bx bx-tachometer fs-5" /></a>
                       <a href="/order" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Orders <i className="bx bx-cart-alt fs-5" /></a>
                       <a href="/downloadprofile" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Downloads <i className="bx bx-download fs-5" /></a>
                       <a href="/address" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Addresses <i className="bx bx-home-smile fs-5" /></a>

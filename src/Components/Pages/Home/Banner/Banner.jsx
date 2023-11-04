@@ -17,7 +17,7 @@ const Banner = () => {
   }, []);
   return (
     <>
-     
+
      <Carousel interval={1000}>
       {bannerData.map((banner) => (
         <Carousel.Item key={banner.id}>
