@@ -1,6 +1,14 @@
-import React from 'react'
+import React , { useState, useEffect } from 'react'
 
 const SecondSection = () => {
+  const [bannerData, setBannerData] = useState([]);
+
+  useEffect(() => {
+    fetch('https://ecom.iconixitsolution.com/api/home')
+      .then(response => response.json())
+      .then(data => setBannerData(data.ResponseData.homeadbannerList))
+      .catch(error => console.error('Error:', error));
+  }, []);
   return (
    <>
   <div className="page-wrapper">
@@ -48,15 +56,16 @@ const SecondSection = () => {
     <section className="py-4">
       <div className="container">
         <div className="row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-4">
+        { bannerData && bannerData.map(banner => (
           <div className="col">
-            <div className="card rounded-0 shadow-none bg-info bg-opacity-25">
+            <div className="card rounded-0 shadow-none bg-info bg-opacity-25" >
               <div className="row g-0 align-items-center">
-                <div className="col">
-                  <img src="assets/images/promo/01.png" className="img-fluid" alt />
+                <div className="col mt-4 mb-4 ms-4"  key={banner.id}>
+                  <img src={banner.homeadd_banner} className="img-fluid" />
                 </div>
                 <div className="col">
                   <div className="card-body">
-                    <h5 className="card-title text-uppercase fw-bold">Men Wear</h5>
+                    <h5 className="card-title text-uppercase fw-bold">{banner.name}</h5>
                     <p className="card-text text-uppercase">Starting at $9</p>
                     <a href="javascript:;" className="btn btn-outline-dark btn-ecomm">SHOP NOW</a>
                   </div>
@@ -64,48 +73,12 @@ const SecondSection = () => {
               </div>
             </div>
           </div>
-          <div className="col">
-            <div className="card rounded-0 shadow-none bg-danger bg-opacity-25">
-              <div className="row g-0 align-items-center">
-                <div className="col">
-                  <img src="assets/images/promo/02.png" className="img-fluid" alt />
-                </div>
-                <div className="col">
-                  <div className="card-body">
-                    <h5 className="card-title text-uppercase fw-bold">Women Wear</h5>
-                    <p className="card-text text-uppercase">Starting at $9</p>	<a href="javascript:;" className="btn btn-outline-dark btn-ecomm">SHOP NOW</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col">
-            <div className="card rounded-0 shadow-none bg-warning bg-opacity-25">
-              <div className="row g-0 align-items-center">
-                <div className="col">
-                  <img src="assets/images/promo/03.png" className="img-fluid" alt />
-                </div>
-                <div className="col">
-                  <div className="card-body">
-                    <h5 className="card-title text-uppercase fw-bold">Kids Wear</h5>
-                    <p className="card-text text-uppercase">Starting at $9</p><a href="javascript:;" className="btn btn-outline-dark btn-ecomm">SHOP NOW</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
         {/*end row*/}
       </div>
     </section>
     {/*end pramotion*/}
-   
-    
-   
-   
-   
-    
-   
   </div>
 </div>
 

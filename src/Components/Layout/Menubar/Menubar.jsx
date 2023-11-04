@@ -14,7 +14,7 @@ export const Menubar = () => {
       })
       .catch(error => console.error('Error fetching menu:', error));
   }, []);
-  console.log(menuList);
+  // console.log(menuList);
   return (
   <>
   
@@ -51,72 +51,6 @@ export const Menubar = () => {
           </div>
         </li>
            ))}
-          {/* <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="tv-shows.html" data-bs-toggle="dropdown">
-              Categories
-            </a>
-            <div className="dropdown-menu dropdown-large-menu">
-              <div className="row">
-                <div className="col-12 col-xl-4">
-                  <h6 className="large-menu-title">Fashion</h6>
-                  <ul className="list-unstyled">
-                    <li><a href="javascript:;">Casual T-Shirts</a>
-                    </li>
-                    <li><a href="javascript:;">Formal Shirts</a>
-                    </li>
-                    <li><a href="javascript:;">Jackets</a>
-                    </li>
-                    <li><a href="javascript:;">Jeans</a>
-                    </li>
-                    <li><a href="javascript:;">Dresses</a>
-                    </li>
-                    <li><a href="javascript:;">Sneakers</a>
-                    </li>
-                    <li><a href="javascript:;">Belts</a>
-                    </li>
-                    <li><a href="javascript:;">Sports Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="col-12 col-xl-4">
-                  <h6 className="large-menu-title">Electronics</h6>
-                  <ul className="list-unstyled">
-                    <li><a href="javascript:;">Mobiles</a>
-                    </li>
-                    <li><a href="javascript:;">Laptops</a>
-                    </li>
-                    <li><a href="javascript:;">Macbook</a>
-                    </li>
-                    <li><a href="javascript:;">Televisions</a>
-                    </li>
-                    <li><a href="javascript:;">Lighting</a>
-                    </li>
-                    <li><a href="javascript:;">Smart Watch</a>
-                    </li>
-                    <li><a href="javascript:;">Galaxy Phones</a>
-                    </li>
-                    <li><a href="javascript:;">PC Monitors</a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="col-12 col-xl-4 d-none d-xl-block">
-                  <div className="pramotion-banner1">
-                    <img src="assets/images/gallery/menu-img.jpg" className="img-fluid" alt />
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </li> */}
-          <li className="nav-item">
-            {/* <a className="nav-link" href="/about">About</a> */}
-          </li>
-          {/* <li className="nav-item">
-            <a className="nav-link" href="/contact">Contact</a>
-          </li> */}
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
               Account

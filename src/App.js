@@ -7,7 +7,7 @@ import { Topbar } from './Components/Layout/Topbar/Topbar';
 import { Searchbar } from './Components/Layout/Searchbar/Searchbar';
 import { Menubar } from './Components/Layout/Menubar/Menubar';
 import { Home } from './Components/Pages/Home/Home';
-import { ProductDeatails, ProductDetails } from './Components/Pages/ProductDetails';
+import { ProductDetails } from './Components/Pages/ProductDetails';
 import ProductListsideBar from './Components/Pages/ProductListsideBar/ProductListsideBar';
 import Login from './Components/Pages/Login/Login';
 import ForgotPassword from './Components/Pages/ForgotPassword/ForgotPassword';

@@ -8,8 +8,8 @@ const AccountDetails = ({ userId }) => {
     bod: '',
     gender: null,
   });
-
   useEffect(() => {
+
     const userId = localStorage.getItem('userId');
     // API endpoint URL
     const apiUrl = 'https://ecom.iconixitsolution.com/api/userdetails';
@@ -48,12 +48,14 @@ const AccountDetails = ({ userId }) => {
       [name]: value,
     }));
   };
+
   function handleLogout() {
     // Clear user session data from local storage
     localStorage.removeItem('user');
     // Redirect the user to the login page or any other page you prefer
     window.location.href = '/login'; // Replace '/login' with the URL of your login page
   }
+
 
   return (
     <>
