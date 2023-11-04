@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const FeaturedProduct = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
-  // -------ADD TO CART --------//
+  const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
     // Fetch data from your API
@@ -16,7 +16,29 @@ const FeaturedProduct = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
   // console.log(featuredProducts);
+// -------ADD TO CART --------//
+const addToCart = async (productId,userId) => {
+  try {
+    const response = await fetch("https://ecom.iconixitsolution.com/api/add-cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: "1",
+        product_id: productId,
+        qty: "1",
+        price: "1",
+        save_for_later: "0",
+      }),
+    });
 
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+  }
+};
   
   return (
     <>
@@ -39,7 +61,7 @@ const FeaturedProduct = () => {
                       <div className="card">
                         <div className="position-relative overflow-hidden">
                           <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
-                            <a href="javascript:;">
+                            <a href="javascript:;" onClick={() => addToCart(product.id)}>
                               <i className="bx bx-cart-add" />
                             </a>
                           </div>

@@ -8,7 +8,6 @@ const AccountDetails = () => {
     bod: '',
     gender: '',
   });
-
   useEffect(() => {
     const userId = localStorage.getItem('userId'); // Retrieve user ID from localStorage
     if (userId) {
@@ -33,11 +32,9 @@ const AccountDetails = () => {
           console.error('Error fetching user data:', error);
         }
       };
-
       fetchUserData();
     }
   }, []);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({
@@ -45,17 +42,16 @@ const AccountDetails = () => {
       [name]: value,
     }));
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // Implement the logic to save the changes to the server if needed
     // For example, you can make another API call to update user details on the server
   };
- 
   if (!userData) {
     // Handle the case where userData is null or undefined
     return null; // or display a loading spinner, error message, etc.
   }
+
 
 
 
@@ -81,43 +77,6 @@ const AccountDetails = () => {
                   </nav>
                 </div>
               </div>
-
-              <div className="col-lg-8">
-                <div className="card shadow-none mb-0 border">
-                  <div className="card-body">
-                    <form className="row g-3">
-                      <div className="col-md-12">
-                        <label className="form-label">Full Name</label>
-                        <input type="text" className="form-control"  />
-                      </div>
-                      <div className="col-12">
-                        <label className="form-label">Gender</label>
-                        <select className="form-select"> 
-                          <option>Select Gender</option> 
-                          <option>Male</option>
-                          <option>Female</option>
-                          <option>Others</option>
-                        </select>
-                      </div>
-                      <div className="col-12">
-                        <label className="form-label">Birth Date</label>
-                        <input type="date" className="form-control"  />
-                      </div>
-                      <div className="col-12">
-                        <label className="form-label">Email</label>
-                        <input type="email" className="form-control"  />
-                      </div>
-                      <div className="col-12">
-                        <label className="form-label">Phone Number</label>
-                        <input type="number" className="form-control" />
-                      </div>
-                      {/* <div className="col-12">
-                        <label className="form-label"> Password</label>
-                        <input type="password"  className="form-control" />
-                      </div> */}
-                      <div className="col-12">
-                        <button type="button" className="btn btn-dark btn-ecomm">Save Changes</button>
-
             </div>
           </section>
           {/*end breadcrumb*/}
@@ -185,7 +144,6 @@ const AccountDetails = () => {
                             </div>
                           </form>
                         </div>
-
                       </div>
                     </div>
                   </div>
