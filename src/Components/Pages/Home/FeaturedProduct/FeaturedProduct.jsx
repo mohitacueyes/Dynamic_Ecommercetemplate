@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const FeaturedProduct = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [currentUser, setCurrentUser] = useState(null)
+  const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
 
   useEffect(() => {
     // Fetch data from your API
@@ -17,7 +18,7 @@ const FeaturedProduct = () => {
   }, []);
   // console.log(featuredProducts);
 // -------ADD TO CART --------//
-const addToCart = async (productId,userId) => {
+const addToCart = async (productId) => {
   try {
     const response = await fetch("https://ecom.iconixitsolution.com/api/add-cart", {
       method: "POST",
@@ -25,14 +26,15 @@ const addToCart = async (productId,userId) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        user_id: "1",
+        user_id: userId,
         product_id: productId,
         qty: "1",
         price: "1",
         save_for_later: "0",
       }),
+      
     });
-
+console.log(response);
     const data = await response.json();
     console.log(data);
   } catch (error) {
