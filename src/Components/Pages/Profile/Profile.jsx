@@ -1,6 +1,12 @@
 import React from 'react'
 
 const Profile = () => {
+  function handleLogout() {
+    // Clear user session data from local storage
+    localStorage.removeItem('user');
+    // Redirect the user to the login page or any other page you prefer
+    window.location.href = '/login'; // Replace '/login' with the URL of your login page
+  }
   return (
     <>
     <div class="wrapper">
@@ -15,7 +21,7 @@ const Profile = () => {
           <div className="ms-auto">
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb mb-0 p-0">
-                <li className="breadcrumb-item"><a href="javascript:;"><i className="bx bx-home-alt" /> Home</a>
+                <li className="breadcrumb-item"><a href="/"><i className="bx bx-home-alt" /> Home</a>
                 </li>
                 <li className="breadcrumb-item"><a href="javascript:;">Account</a>
                 </li>
@@ -44,7 +50,7 @@ const Profile = () => {
                       <a href="/address" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Addresses <i className="bx bx-home-smile fs-5" /></a>
                       <a href="/paymentdetail" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Payment Methods <i className="bx bx-credit-card fs-5" /></a>
                       <a href="/accountdetails" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Account Details <i className="bx bx-user-circle fs-5" /></a>
-                      <a href="#" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Logout <i className="bx bx-log-out fs-5" /></a>
+                      <a href="#" className="list-group-item d-flex justify-content-between align-items-center bg-transparent" onClick={handleLogout}>Logout <i className="bx bx-log-out fs-5" /></a>
                     </div>
                   </div>
                 </div>
