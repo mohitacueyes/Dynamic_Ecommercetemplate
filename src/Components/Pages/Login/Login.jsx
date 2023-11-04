@@ -18,30 +18,29 @@ const Login = () => {
       const response = await fetch('https://ecom.iconixitsolution.com/api/login', {
         method: 'POST',
         headers: {
-                    'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          
+
           email: email,
-          phone : phone,
+          phone: phone,
           password: password,
           device_token: deviceToken,
           device_type: deviceType,
           login_type: 'phone',
+
         }),
       });
 
       const data = await response.json();
 
       if (data.ResponseCode === 1 && data.ResponseData.token) {
-        // Login successful, store the token in local storage
+        const userId = data.ResponseData.user.id;
         setAuthToken(data.ResponseData.token);
-        // Handle further actions like redirecting the user to another page
+        localStorage.setItem('userId', userId);
         console.log('Login successful');
         navigate('/');
-        
       } else {
-        // Login failed, handle error (show error message to user, etc.)
         setError('Invalid credentials. Please try again.');
       }
     } catch (error) {
@@ -112,7 +111,7 @@ const Login = () => {
                                 <label htmlFor="inputChoosePassword" className="form-label">Enter Password</label>
                                 <div className="input-group" id="show_hide_password">
                                   <input type="password"
-                                  value={password} onChange={(e) => setPassword(e.target.value)} required
+                                    value={password} onChange={(e) => setPassword(e.target.value)} required
                                     className="form-control border-end-0"
                                     id="inputChoosePassword"
                                     // defaultValue={12345678}
