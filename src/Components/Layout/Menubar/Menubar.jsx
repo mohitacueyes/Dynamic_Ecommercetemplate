@@ -1,4 +1,5 @@
 import React , { useState, useEffect} from 'react'
+import { Link } from 'react-router-dom';
 
 export const Menubar = () => {
     const [menuList, setMenuList] = useState([]);
@@ -9,18 +10,11 @@ export const Menubar = () => {
       .then(data => {
         setMenuList(data.ResponseData.menuList);
 
-        data.ResponseData.menuList.forEach(category => {
-          fetch(`https://ecom.iconixitsolution.com/api/subcategories/${category.id}`) // Replace with the actual subcategory API endpoint
-            .then(response => response.json())
-            .then(subcategoryData => {
-              category.subcategorydata = subcategoryData;
-              setMenuList([...menuList]);
-            })
-            .catch(error => console.error(`Error fetching subcategory for category ${category.id}:`, error));
-        });
+      
       })
       .catch(error => console.error('Error fetching menu:', error));
   }, []);
+  console.log(menuList);
   return (
   <>
   
@@ -48,7 +42,7 @@ export const Menubar = () => {
                 <ul className="list-unstyled">
                 {item.subcategorydata && item.subcategorydata.map(subcategory => (
                 <li>
-                  <a href="javascript:;">{subcategory.name}</a>
+                  <a><Link to={`/productlistsideBar/${subcategory.id}`}>{subcategory.name}</Link></a>
                 </li>
                    ))} 
                 </ul>

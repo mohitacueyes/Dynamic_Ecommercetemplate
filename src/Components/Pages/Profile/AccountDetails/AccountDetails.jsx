@@ -51,34 +51,35 @@ const AccountDetails = () => {
                 <div className="card shadow-none mb-0 border">
                   <div className="card-body">
                     <form className="row g-3">
-                      <div className="col-md-6">
-                        <label className="form-label">First Name</label>
-                        <input type="text" className="form-control" defaultValue="Madison" />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label">Last Name</label>
-                        <input type="text" className="form-control" defaultValue="Ruiz" />
+                      <div className="col-md-12">
+                        <label className="form-label">Full Name</label>
+                        <input type="text" className="form-control"  />
                       </div>
                       <div className="col-12">
-                        <label className="form-label">Display Name</label>
-                        <input type="text" className="form-control" defaultValue="Madison Ruiz" />
+                        <label className="form-label">Gender</label>
+                        <select className="form-select"> 
+                          <option>Select Gender</option> 
+                          <option>Male</option>
+                          <option>Female</option>
+                          <option>Others</option>
+                        </select>
                       </div>
                       <div className="col-12">
-                        <label className="form-label">Email address</label>
-                        <input type="text" className="form-control" defaultValue="madison.ruiz@gmail.com" />
+                        <label className="form-label">Birth Date</label>
+                        <input type="date" className="form-control"  />
                       </div>
                       <div className="col-12">
-                        <label className="form-label">Current Password</label>
-                        <input type="text" className="form-control" defaultValue="................." />
+                        <label className="form-label">Email</label>
+                        <input type="email" className="form-control"  />
                       </div>
                       <div className="col-12">
-                        <label className="form-label">New Password</label>
-                        <input type="text" className="form-control" defaultValue="................." />
+                        <label className="form-label">Phone Number</label>
+                        <input type="number" className="form-control" />
                       </div>
-                      <div className="col-12">
-                        <label className="form-label">Confirm New Password</label>
-                        <input type="text" className="form-control" defaultValue="................." />
-                      </div>
+                      {/* <div className="col-12">
+                        <label className="form-label"> Password</label>
+                        <input type="password"  className="form-control" />
+                      </div> */}
                       <div className="col-12">
                         <button type="button" className="btn btn-dark btn-ecomm">Save Changes</button>
                       </div>
