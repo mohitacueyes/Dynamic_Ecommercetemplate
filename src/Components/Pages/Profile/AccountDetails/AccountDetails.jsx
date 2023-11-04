@@ -1,40 +1,46 @@
 import React, { useState, useEffect } from 'react'
-const AccountDetails = () => {
+const AccountDetails = ({ userId }) => {
   const [userData, setUserData] = useState({
-    id: '',
-    full_name:'',
+    id: null,
+    full_name: '',
     email: '',
     phone: '',
     bod: '',
-    gender: '',
+    gender: null,
   });
   useEffect(() => {
-    const userId = localStorage.getItem('userId'); // Retrieve user ID from localStorage
-    if (userId) {
-      const fetchUserData = async () => {
-        try {
-          const response = await fetch('https://ecom.iconixitsolution.com/api/userdetails', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              userId: userId,
-            }),
-          });
-          const data = await response.json();
-          if (data.ResponseCode === 1) {
-            setUserData(data.ResponseData || {}); // Set an empty object if ResponseData is null or undefined
-          } else {
-            console.error('Error fetching user data:', data.ResponseText);
-          }
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-        }
-      };
-      fetchUserData();
-    }
-  }, []);
+
+    const userId = localStorage.getItem('userId');
+    // API endpoint URL
+    const apiUrl = 'https://ecom.iconixitsolution.com/api/userdetails';
+
+    // Make API call using fetch
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: userId,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Set user data received from the API response
+        setUserData({
+          id: data.ResponseData.id,
+          full_name: data.ResponseData.full_name || '',
+          email: data.ResponseData.email || '',
+          phone: data.ResponseData.phone || '',
+          bod: data.ResponseData.bod || '',
+          gender: data.ResponseData.gender || null,
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching data: ', error);
+      });
+  }, []); // Empty dependency array ensures the effect runs once after initial render
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({
@@ -42,17 +48,13 @@ const AccountDetails = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Implement the logic to save the changes to the server if needed
-    // For example, you can make another API call to update user details on the server
-  };
-  if (!userData) {
-    // Handle the case where userData is null or undefined
-    return null; // or display a loading spinner, error message, etc.
+
+  function handleLogout() {
+    // Clear user session data from local storage
+    localStorage.removeItem('user');
+    // Redirect the user to the login page or any other page you prefer
+    window.location.href = '/login'; // Replace '/login' with the URL of your login page
   }
-
-
 
 
   return (
@@ -68,7 +70,7 @@ const AccountDetails = () => {
                 <div className="ms-auto">
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb mb-0 p-0">
-                      <li className="breadcrumb-item"><a href="javascript:;"><i className="bx bx-home-alt" /> Home</a>
+                      <li className="breadcrumb-item"><a href="/"><i className="bx bx-home-alt" /> Home</a>
                       </li>
                       <li className="breadcrumb-item"><a href="javascript:;">Account</a>
                       </li>
@@ -90,13 +92,14 @@ const AccountDetails = () => {
                     <div className="col-lg-4">
                       <div className="card shadow-none mb-3 mb-lg-0 border">
                         <div className="card-body">
-                          <div className="list-group list-group-flush"> <a href="account-dashboard.html" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Dashboard <i className="bx bx-tachometer fs-5" /></a>
-                            <a href="account-orders.html" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Orders <i className="bx bx-cart-alt fs-5" /></a>
-                            <a href="account-downloads.html" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Downloads <i className="bx bx-download fs-5" /></a>
-                            <a href="account-addresses.html" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Addresses <i className="bx bx-home-smile fs-5" /></a>
-                            <a href="account-payment-methods.html" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Payment Methods <i className="bx bx-credit-card fs-5" /></a>
-                            <a href="account-user-details.html" className="list-group-item active d-flex justify-content-between align-items-center">Account Details <i className="bx bx-user-circle fs-5" /></a>
-                            <a href="#" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Logout <i className="bx bx-log-out fs-5" /></a>
+                          <div className="list-group list-group-flush">
+                            <a href="/profile" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Dashboard <i className="bx bx-tachometer fs-5" /></a>
+                            <a href="/order" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Orders <i className="bx bx-cart-alt fs-5" /></a>
+                            <a href="/downloadprofile" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Downloads <i className="bx bx-download fs-5" /></a>
+                            <a href="/address" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Addresses <i className="bx bx-home-smile fs-5" /></a>
+                            <a href="/paymentdetail" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Payment Methods <i className="bx bx-credit-card fs-5" /></a>
+                            <a href="/accountdetails" className="list-group-item active d-flex justify-content-between align-items-center">Account Details <i className="bx bx-user-circle fs-5" /></a>
+                            <a href="#" className="list-group-item d-flex justify-content-between align-items-center bg-transparent" onClick={handleLogout}>Logout <i className="bx bx-log-out fs-5" /></a>
                           </div>
                         </div>
                       </div>
@@ -109,14 +112,14 @@ const AccountDetails = () => {
                               <label className="form-label">Full Name</label>
                               <input type="text"
                                 className="form-control"
-                                value={userData.full_name || ''}
-                                onChange={handleInputChange}
-                                name="full_name"
+                               name="full_name"
+                               value={userData.full_name}
+            onChange={handleInputChange}
                               />
                             </div>
                             <div className="col-12">
                               <label className="form-label">Gender</label>
-                              <select className="form-select" name="gender" value={userData.gender} onChange={handleInputChange}>
+                              <select className="form-select" name="gender"  onChange={handleInputChange} >
                                 <option>Select Gender</option>
                                 <option value="1">Male</option>
                                 <option value="2">Female</option>
@@ -125,22 +128,22 @@ const AccountDetails = () => {
                             </div>
                             <div className="col-12">
                               <label className="form-label">Birth Date</label>
-                              <input type="date" name='bod' value={userData.bod} className="form-control" />
+                              <input type="date" name='bod'  value={userData.bod} className="form-control" onChange={handleInputChange}/>
                             </div>
                             <div className="col-12">
                               <label className="form-label">Email</label>
-                              <input type="email" name='email' value={userData.email} className="form-control" />
+                              <input type="email" name='email' value={userData.email}  className="form-control" onChange={handleInputChange} />
                             </div>
                             <div className="col-12">
                               <label className="form-label">Phone Number</label>
-                              <input type="number" name='phone' value={userData.phone} className="form-control" />
+                              <input type="number" name='phone'  value={userData.phone} className="form-control" onChange={handleInputChange} />
                             </div>
                             {/* <div className="col-12">
                         <label className="form-label"> Password</label>
                         <input type="password"  className="form-control" />
                       </div> */}
                             <div className="col-12">
-                              <button type="button" className="btn btn-dark btn-ecomm" onClick={handleSubmit}>Save Changes</button>
+                              <button type="button" className="btn btn-dark btn-ecomm" >Save Changes</button>
                             </div>
                           </form>
                         </div>
@@ -160,6 +163,19 @@ const AccountDetails = () => {
   )
 }
 export default AccountDetails
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

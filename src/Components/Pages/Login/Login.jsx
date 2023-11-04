@@ -39,7 +39,8 @@ const Login = () => {
         setAuthToken(data.ResponseData.token);
         localStorage.setItem('userId', userId);
         console.log('Login successful');
-        navigate('/');
+        // navigate('/');
+        window.location.href = '/';
       } else {
         setError('Invalid credentials. Please try again.');
       }
@@ -65,7 +66,7 @@ const Login = () => {
                 <div className="ms-auto">
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb mb-0 p-0">
-                      <li className="breadcrumb-item"><a href="javascript:;"><i className="bx bx-home-alt" /> Home</a>
+                      <li className="breadcrumb-item"><a href="/"><i className="bx bx-home-alt" /> Home</a>
                       </li>
                       <li className="breadcrumb-item"><a href="javascript:;">Authentication</a>
                       </li>

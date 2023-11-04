@@ -20,6 +20,7 @@ import DownloadProfile from './Components/Pages/Profile/DownloadProfile/Download
 import { Address } from './Components/Pages/Profile/Address';
 import { PaymentDetail } from './Components/Pages/Profile/PaymentDetail';
 import { AccountDetails } from './Components/Pages/Profile/AccountDetails';
+import Logout from './Components/Pages/Logout/Logout';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path='/address' element={<Address/>}/>  
         <Route path='/paymentdetail' element={<PaymentDetail/>}/>  
         <Route path='/accountdetails' element={<AccountDetails/>}/>  
+        <Route path='/logout' element={<Logout/>}/>  
         </Routes>
       <Footer />
     </>
