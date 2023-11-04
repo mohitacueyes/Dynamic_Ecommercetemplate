@@ -57,7 +57,7 @@ export const Menubar = () => {
           </div>
         </li>
            ))}
-          <li className="nav-item dropdown">
+          {/* <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="tv-shows.html" data-bs-toggle="dropdown">
               Categories
             </a>
@@ -116,13 +116,13 @@ export const Menubar = () => {
               </div>
 
             </div>
-          </li>
+          </li> */}
           <li className="nav-item">
-            <a className="nav-link" href="/about">About</a>
+            {/* <a className="nav-link" href="/about">About</a> */}
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a className="nav-link" href="/contact">Contact</a>
-          </li>
+          </li> */}
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
               Account
