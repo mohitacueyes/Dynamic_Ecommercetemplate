@@ -1,13 +1,8 @@
 import React,{ useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import style from './Banner.module.css'
-
-
-
 const Banner = () => {
   const [bannerData, setBannerData] = useState([]);
-  
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,24 +13,20 @@ const Banner = () => {
         console.error('Error fetching data:', error);
       }
     };
-
     fetchData();
   }, []);
-
   return (
     <>
-   
+
      <Carousel interval={1000}>
       {bannerData.map((banner) => (
         <Carousel.Item key={banner.id}>
        <div className={style.bannerr}>
        <img
             src={banner.banner_imageLink}
-          
             alt={`Banner ${banner.id}`}
           />
        </div>
-        
           <Carousel.Caption>
             <h3>{banner.title}</h3>
             <p>{banner.short_description}</p>
@@ -49,5 +40,4 @@ const Banner = () => {
     </>
   )
 }
-
 export default Banner

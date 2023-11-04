@@ -49,30 +49,30 @@ const ProductDetails = () => {
                 <div className="image-zoom-section">
                   <div className="product-gallery owl-carousel owl-theme border mb-3 p-3" data-slider-id={1}>
                     <div className="item">
-                      <img src="../assets/images/product-gallery/01.png" className="img-fluid" alt />
+                      <img src={productData.product_imageLink} className="img-fluid" alt />
                     </div>
                     <div className="item">
-                      <img src="assets/images/product-gallery/02.png" className="img-fluid" alt />
+                      <img src={productData.product_imageLink}  className="img-fluid" alt />
                     </div>
                     <div className="item">
-                      <img src="assets/images/product-gallery/03.png" className="img-fluid" alt />
+                      <img src={productData.product_imageLink} className="img-fluid" alt />
                     </div>
                     <div className="item">
-                      <img src="assets/images/product-gallery/04.png" className="img-fluid" alt />
+                      <img src={productData.product_imageLink}  className="img-fluid" alt />
                     </div>
                   </div>
                   <div className="owl-thumbs d-flex justify-content-center" data-slider-id={1}>
                     <button className="owl-thumb-item">
-                      <img src="assets/images/product-gallery/01.png" className alt />
+                      <img src={productData.product_imageLink}  className alt />
                     </button>
                     <button className="owl-thumb-item">
-                      <img src="assets/images/product-gallery/02.png" className alt />
+                      <img src={productData.product_imageLink}  className alt />
                     </button>
                     <button className="owl-thumb-item">
-                      <img src="assets/images/product-gallery/03.png" className alt />
+                      <img src={productData.product_imageLink}  className alt />
                     </button>
                     <button className="owl-thumb-item">
-                      <img src="assets/images/product-gallery/04.png" className alt />
+                      <img src={productData.product_imageLink}  className alt />
                     </button>
                   </div>
                 </div>

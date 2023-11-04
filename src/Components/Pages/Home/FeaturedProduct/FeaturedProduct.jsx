@@ -15,7 +15,7 @@ const FeaturedProduct = () => {
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-  console.log(featuredProducts);
+  // console.log(featuredProducts);
 
   
   return (
@@ -44,14 +44,14 @@ const FeaturedProduct = () => {
                             </a>
                           </div>
                           <div className="quick-view position-absolute start-0 bottom-0 end-0">
-                            <Link to={`/productdetails/${product.id}`}>
+                            <a><Link to={`/productdetails/${product.id}`}>
                               Quick View
-                            </Link>
+                            </Link></a>
                           </div>
                           <a>
                             <img
-                              src="assets/images/products/01.png"
-                              className="img-fluid"
+                              src={product.product_imageLink}
+                              className="img-fluid"style={{height:"250px"}}
                               alt="..."
                             />
                           </a>
@@ -61,7 +61,7 @@ const FeaturedProduct = () => {
                             <div className>
                               <p className="mb-1 product-short-name"></p>
                               <h6 className="mb-0 fw-bold product-short-title">
-                                {product.name}
+                                {product.name.slice(0, 20)}...
                               </h6>
                             </div>
                             <div className="icon-wishlist">
