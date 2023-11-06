@@ -26,6 +26,8 @@ const addToCart = async (productId) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+
+        id: userId,
         user_id: userId,
         product_id: productId,
         qty: "1",

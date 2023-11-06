@@ -52,6 +52,38 @@ export const Searchbar = () => {
                   <a href="/">
                     <img src="assets/images/logo-icon.png" className="logo-icon" alt />
                   </a>
+
+                  <div className="cart-list">
+                    <a className="dropdown-item" href="javascript:;">
+                      <div className="d-flex align-items-center">
+                        <div className="flex-grow-1">
+                          <h6 className="cart-product-title">Men White T-Shirt</h6>
+                          <p className="cart-product-price">1 X $29.00</p>
+                        </div>
+                        <div className="position-relative">
+                          <div className="cart-product-cancel position-absolute"><i className="bx bx-x" />
+                          </div>
+                          <div className="cart-product">
+                            <img src="assets/images/products/01.png" className alt="product image" />
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                   
+                  </div>
+                  <a href="javascript:;">
+                    <div className="text-center cart-footer d-flex align-items-center">
+                      <h5 className="mb-0">TOTAL</h5>
+                      <h5 className="mb-0 ms-auto">$189.00</h5>
+                    </div>
+                  </a>
+                  <div className="d-grid p-3 border-top">	<a href="javascript:;" className="btn btn-dark btn-ecomm">CHECKOUT</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
+
                 </div>
               </div>
             </div>
@@ -120,6 +152,7 @@ export const Searchbar = () => {
             </div>
           </div>
           {/*end row*/}
+
         </div>
       </div>
 
