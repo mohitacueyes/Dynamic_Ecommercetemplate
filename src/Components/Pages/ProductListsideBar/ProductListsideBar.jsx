@@ -5,17 +5,43 @@ import { Link } from "react-router-dom";
 const ProductListsideBar = () => {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
+  const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
 
   useEffect(() => {
     // Make an API call to fetch product data
     fetch(
-      `https://ecom.iconixitsolution.com/api/subcategory-wise-product-byid/${id}`
+      `${process.env.REACT_APP_API}/api/subcategory-wise-product-byid/${id}`
     )
       .then((response) => response.json())
       .then((data) => setProducts(data.ResponseData))
       .catch((error) => console.error("Error:", error));
   }, []);
+// -------ADD TO CART --------//
+const addToCart = async (productId) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API}/api/add-cart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
 
+        id: userId,
+        user_id: userId,
+        product_id: productId,
+        qty: "1",
+        price: "1",
+        save_for_later: "0",
+      }),
+      
+    });
+console.log(response);
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+  }
+};
   return (
     <>
       {/*start page wrapper */}
@@ -1000,7 +1026,7 @@ const ProductListsideBar = () => {
                               <div className="card">
                                 <div className="position-relative overflow-hidden">
                                   <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
-                                    <a href="javascript:;">
+                                    <a href="javascript:;" onClick={() => addToCart(product.id)}>
                                       <i className="bx bx-cart-add" />
                                     </a>
                                   </div>

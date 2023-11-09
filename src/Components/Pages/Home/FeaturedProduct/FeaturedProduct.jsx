@@ -8,7 +8,8 @@ const FeaturedProduct = () => {
 
   useEffect(() => {
     // Fetch data from your API
-    fetch("https://ecom.iconixitsolution.com/api/home")
+    fetch(`${process.env.REACT_APP_API}/api/home`
+    )
       .then((response) => response.json())
       .then((data) => {
         // Assuming data.homefeedList is your list of featured products
@@ -20,7 +21,7 @@ const FeaturedProduct = () => {
 // -------ADD TO CART --------//
 const addToCart = async (productId) => {
   try {
-    const response = await fetch("https://ecom.iconixitsolution.com/api/add-cart", {
+    const response = await fetch(`${process.env.REACT_APP_API}/api/add-cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

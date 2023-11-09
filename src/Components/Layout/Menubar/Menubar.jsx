@@ -5,7 +5,7 @@ export const Menubar = () => {
     const [menuList, setMenuList] = useState([]);
 
   useEffect(() => {
-    fetch('https://ecom.iconixitsolution.com/api/home') // Replace with your actual API endpoint
+    fetch(`${process.env.REACT_APP_API}/api/home`) // Replace with your actual API endpoint
       .then(response => response.json())
       .then(data => {
         setMenuList(data.ResponseData.menuList);

@@ -1,21 +1,19 @@
-import React, { useState, useEffect } from 'react'
-
+import React, { useState, useEffect } from "react";
 export const Searchbar = () => {
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     const fetchCartData = async () => {
-      const userId = localStorage.getItem('userId');
+      const user_id = localStorage.getItem('userId');
       try {
-        if (userId) {
-          const response = await fetch('https://ecom.iconixitsolution.com/api/cart-listuseridwise', {
+        if (user_id) {
+          const response = await fetch(`${process.env.REACT_APP_API}/api/cart-listuseridwise`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userId }),
+            body: JSON.stringify({ user_id }),
           });
 
           if (response.ok) {
@@ -23,7 +21,7 @@ export const Searchbar = () => {
             if (Array.isArray(data.ResponseData)) {
               setCartItems(data.ResponseData);
             } else {
-              setCartItems([]); // Set cartItems state to an empty array when the response is empty
+              setCartItems([]);
             }
           } else {
             setError('Error fetching cart data: ' + response.statusText);
@@ -38,6 +36,7 @@ export const Searchbar = () => {
 
     fetchCartData();
   }, []);
+  // console.log(cartItems);
   return (
     <>
       <div className="header-content bg-warning">
@@ -45,57 +44,44 @@ export const Searchbar = () => {
           <div className="row align-items-center gx-4">
             <div className="col-auto">
               <div className="d-flex align-items-center gap-3">
-                <div className="mobile-toggle-menu d-inline d-xl-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <div
+                  className="mobile-toggle-menu d-inline d-xl-none"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasNavbar"
+                >
                   <i className="bx bx-menu" />
                 </div>
                 <div className="logo">
                   <a href="/">
-                    <img src="assets/images/logo-icon.png" className="logo-icon" alt />
+                    <img
+                      src="assets/images/logo-icon.png"
+                      className="logo-icon"
+                      alt
+                    />
                   </a>
-
-                  <div className="cart-list">
-                    <a className="dropdown-item" href="javascript:;">
-                      <div className="d-flex align-items-center">
-                        <div className="flex-grow-1">
-                          <h6 className="cart-product-title">Men White T-Shirt</h6>
-                          <p className="cart-product-price">1 X $29.00</p>
-                        </div>
-                        <div className="position-relative">
-                          <div className="cart-product-cancel position-absolute"><i className="bx bx-x" />
-                          </div>
-                          <div className="cart-product">
-                            <img src="assets/images/products/01.png" className alt="product image" />
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                   
-                  </div>
-                  <a href="javascript:;">
-                    <div className="text-center cart-footer d-flex align-items-center">
-                      <h5 className="mb-0">TOTAL</h5>
-                      <h5 className="mb-0 ms-auto">$189.00</h5>
-                    </div>
-                  </a>
-                  <div className="d-grid p-3 border-top">	<a href="javascript:;" className="btn btn-dark btn-ecomm">CHECKOUT</a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </nav>
-
                 </div>
               </div>
             </div>
             <div className="col-12 col-xl order-4 order-xl-0">
               <div className="input-group flex-nowrap pb-3 pb-xl-0">
-                <input type="text" className="form-control w-100 border-dark border border-3" placeholder="Search for Products" />
-                <button className="btn btn-dark btn-ecomm border-3" type="button">Search</button>
+                <input
+                  type="text"
+                  className="form-control w-100 border-dark border border-3"
+                  placeholder="Search for Products"
+                />
+                <button
+                  className="btn btn-dark btn-ecomm border-3"
+                  type="button"
+                >
+                  Search
+                </button>
               </div>
             </div>
             <div className="col-auto d-none d-xl-flex">
               <div className="d-flex align-items-center gap-3">
-                <div className="fs-1 text-content"><i className="bx bx-headphone" /></div>
+                <div className="fs-1 text-content">
+                  <i className="bx bx-headphone" />
+                </div>
                 <div className>
                   <p className="mb-0 text-content">CALL US NOW</p>
                   <h5 className="mb-0">+011 5827918</h5>
@@ -106,43 +92,74 @@ export const Searchbar = () => {
               <div className="top-cart-icons">
                 <nav className="navbar navbar-expand">
                   <ul className="navbar-nav">
-                    <li className="nav-item"><a href="/profile" className="nav-link cart-link"><i className="bx bx-user" /></a>
+                    <li className="nav-item">
+                      <a href="/profile" className="nav-link cart-link">
+                        <i className="bx bx-user" />
+                      </a>
                     </li>
-                    <li className="nav-item"><a href="/wishlist" className="nav-link cart-link"><i className="bx bx-heart" /></a>
+                    <li className="nav-item">
+                      <a href="/wishlist" className="nav-link cart-link">
+                        <i className="bx bx-heart" />
+                      </a>
                     </li>
                     <li className="nav-item dropdown dropdown-large">
-                      <a href="#" className="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative cart-link" data-bs-toggle="dropdown">	<span className="alert-count">8</span>
+                      <a
+                        href="#"
+                        className="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative cart-link"
+                        data-bs-toggle="dropdown"
+                      >
+                        {" "}
+                        <span className="alert-count">{cartItems.length}</span>
                         <i className="bx bx-shopping-bag" />
                       </a>
                       <div className="dropdown-menu dropdown-menu-end">
                         <a href="javascript:;">
                           <div className="cart-header">
-                            <p className="cart-header-title mb-0">8 ITEMS</p>
-                            <p className="cart-header-clear ms-auto mb-0">VIEW CART</p>
+                            <p className="cart-header-title mb-0">{cartItems.length} ITEMS</p>
+                            <p className="cart-header-clear ms-auto mb-0">
+                              <a href="/shopcart" className="btn btn-dark btn-ecomm">VIEW CART</a>
+                            </p>
                           </div>
                         </a>
+                        
                         <div className="cart-list">
-                          {cartItems.map((item) => (
-                            <a className="dropdown-item" href="javascript:;">
-
-                              <div className="d-flex align-items-center" key={item.id}>
-                                <div className="flex-grow-1">
-                                  <h6 className="cart-product-title"> {item.name}</h6>
-                                  <p className="cart-product-price">1 X $29.00</p>
+                        {cartItems.map((item , index) => (
+                          <a className="dropdown-item" href="javascript:;" key={index}>
+                            <div className="d-flex align-items-center">
+                              <div className="flex-grow-1">
+                                <h6 className="cart-product-title">
+                                  {item.name.slice(0, 20)}...
+                                </h6>
+                                <p className="cart-product-price">1 X ${item.discounted_price}</p>
+                              </div>
+                              <div className="position-relative">
+                                <div className="cart-product-cancel position-absolute">
+                                  <i className="bx bx-x" />
                                 </div>
-                                <div className="position-relative">
-                                  <div className="cart-product-cancel position-absolute"><i className="bx bx-x" />
-                                  </div>
-                                  <div className="cart-product">
-                                    <img src="assets/images/products/01.png" className alt="product image" />
-                                  </div>
+                                <div className="cart-product">
+                                  <img
+                                    src={item.imageLink}
+                                    className
+                                    alt="product image"
+                                  />
                                 </div>
                               </div>
-
-                            </a>
-                          ))}
+                            </div>
+                          </a>
+                            ))}
                         </div>
-                        <div className="d-grid p-3 border-top">	<a href="javascript:;" className="btn btn-dark btn-ecomm">CHECKOUT</a>
+                      
+                        <div className="d-grid p-3 border-top">
+                          <div className="d-flex align-items-center justify-content-between mb-3">
+                            <h5 className="mb-0">TOTAL</h5>
+                            <h5 className="mb-0">${cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</h5>
+                          </div>
+                          <a
+                            href="javascript:;"
+                            className="btn btn-dark btn-ecomm"
+                          >
+                            CHECKOUT
+                          </a>
                         </div>
                       </div>
                     </li>
@@ -152,10 +169,8 @@ export const Searchbar = () => {
             </div>
           </div>
           {/*end row*/}
-
         </div>
       </div>
-
     </>
-  )
-}
+  );
+};

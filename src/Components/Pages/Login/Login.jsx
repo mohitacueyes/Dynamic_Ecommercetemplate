@@ -15,7 +15,8 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://ecom.iconixitsolution.com/api/login', {
+      const response = await fetch(`${process.env.REACT_APP_API}/api/login`, {
+        // 'https://ecom.iconixitsolution.com/api/login'
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
