@@ -17,10 +17,13 @@ import Wishlist from './Components/Pages/Wishlist/Wishlist';
 import { Profile } from './Components/Pages/Profile';
 import { Order } from './Components/Pages/Profile/Order';
 import DownloadProfile from './Components/Pages/Profile/DownloadProfile/DownloadProfile';
-import { Address } from './Components/Pages/Profile/Address';
+import { AddAddres } from './Components/Pages/Profile/Address';
 import { PaymentDetail } from './Components/Pages/Profile/PaymentDetail';
 import { AccountDetails } from './Components/Pages/Profile/AccountDetails';
 import Logout from './Components/Pages/Logout/Logout';
+import Shopcart from './Components/Pages/Shopcart/Shopcart';
+import Address from './Components/Pages/Profile/Address/Address';
+import Editaddres from './Components/Pages/Profile/Address/Editaddres';
 
 function App() {
   return (
@@ -42,10 +45,13 @@ function App() {
         <Route path='/profile' element={<Profile/>}/>  
         <Route path='/order' element={<Order/>}/>  
         <Route path='/downloadprofile' element={<DownloadProfile/>}/>  
-        <Route path='/address' element={<Address/>}/>  
+        <Route path='/address' element={<Address/>}/>
         <Route path='/paymentdetail' element={<PaymentDetail/>}/>  
         <Route path='/accountdetails' element={<AccountDetails/>}/>  
         <Route path='/logout' element={<Logout/>}/>  
+        <Route path='/shopcart'element={<Shopcart/>}/>
+        <Route path='/addaddress' element={<AddAddres/>}/>
+        <Route path='/editaddress/:addresid' element={<Editaddres/>}/>
         </Routes>
       <Footer />
     </>

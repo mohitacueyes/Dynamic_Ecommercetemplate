@@ -5,7 +5,7 @@ export const Menubar = () => {
     const [menuList, setMenuList] = useState([]);
 
   useEffect(() => {
-    fetch('https://ecom.iconixitsolution.com/api/home') // Replace with your actual API endpoint
+    fetch(`${process.env.REACT_APP_API}/api/home`) // Replace with your actual API endpoint
       .then(response => response.json())
       .then(data => {
         setMenuList(data.ResponseData.menuList);
@@ -33,8 +33,8 @@ export const Menubar = () => {
           //   <a className="nav-link" href="/">{item.name}</a>
           // </li>
           <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="tv-shows.html" data-bs-toggle="dropdown">
-          {item.name}
+          <a className="nav-link  dropdown-toggle-nocaret" href="tv-shows.html" data-bs-toggle="dropdown">
+          {item.category_name}
           </a>
           <div className="dropdown-menu dropdown-large-menu">
             <div className="row">
@@ -42,7 +42,7 @@ export const Menubar = () => {
                 <ul className="list-unstyled">
                 {item.subcategorydata && item.subcategorydata.map(subcategory => (
                 <li>
-                  <a><Link to={`/productlistsideBar/${subcategory.id}`}>{subcategory.name}</Link></a>
+                  <a><Link to={`/productlistsideBar/${subcategory.id}`}>{subcategory.subcategory_name}</Link></a>
                 </li>
                    ))} 
                 </ul>

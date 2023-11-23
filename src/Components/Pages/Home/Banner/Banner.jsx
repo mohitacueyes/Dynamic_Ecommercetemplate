@@ -6,7 +6,7 @@ const Banner = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://ecom.iconixitsolution.com/api/home');
+        const response = await fetch(`${process.env.REACT_APP_API}/api/home`);
         const data = await response.json();
         setBannerData(data.ResponseData.bannerList);
       } catch (error) {

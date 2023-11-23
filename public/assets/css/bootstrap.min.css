@@ -206,7 +206,7 @@ sup {
 }
 a {
 	color: var(--bs-link-color);
-	text-decoration: underline
+	text-decoration: underline;
 }
 a:hover {
 	color: var(--bs-link-hover-color)
@@ -3052,7 +3052,7 @@ textarea.form-control-lg {
 	display: none
 }
 .dropstart .dropdown-toggle::before {
-	display: inline-block;
+	/* display: inline-block; */
 	margin-right: .255em;
 	vertical-align: .255em;
 	content: "";

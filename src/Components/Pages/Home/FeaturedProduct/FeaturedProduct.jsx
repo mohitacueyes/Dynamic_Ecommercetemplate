@@ -8,7 +8,8 @@ const FeaturedProduct = () => {
 
   useEffect(() => {
     // Fetch data from your API
-    fetch("https://ecom.iconixitsolution.com/api/home")
+    fetch(`${process.env.REACT_APP_API}/api/home`
+    )
       .then((response) => response.json())
       .then((data) => {
         // Assuming data.homefeedList is your list of featured products
@@ -20,7 +21,7 @@ const FeaturedProduct = () => {
 // -------ADD TO CART --------//
 const addToCart = async (productId) => {
   try {
-    const response = await fetch("https://ecom.iconixitsolution.com/api/add-cart", {
+    const response = await fetch(`${process.env.REACT_APP_API}/api/add-cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,6 +42,30 @@ console.log(response);
     console.log(data);
   } catch (error) {
     console.error("Error adding to cart:", error);
+  }
+};
+// -------ADD TO LIKES --------//
+const addToLikes = async (productId) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API}/api/add-favorites`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+
+        id: userId,
+        user_id: userId,
+        product_id: productId,
+        favorites : "1",
+      }),
+
+    });
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error adding to likes:", error);
   }
 };
   
@@ -65,7 +90,7 @@ console.log(response);
                       <div className="card">
                         <div className="position-relative overflow-hidden">
                           <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
-                            <a href="javascript:;" onClick={() => addToCart(product.id)}>
+                            <a onClick={() => addToCart(product.id)}>
                               <i className="bx bx-cart-add" />
                             </a>
                           </div>
@@ -91,7 +116,7 @@ console.log(response);
                               </h6>
                             </div>
                             <div className="icon-wishlist">
-                              <a href="javascript:;">
+                              <a onClick={() => addToLikes(product.id)}>
                                 <i className="bx bx-heart" />
                               </a>
                             </div>

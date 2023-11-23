@@ -12,8 +12,8 @@ const AccountDetails = ({ userId }) => {
 
     const userId = localStorage.getItem('userId');
     // API endpoint URL
-    const apiUrl = 'https://ecom.iconixitsolution.com/api/userdetails';
-
+    const apiUrl = `${process.env.REACT_APP_API}/api/userdetails`; ;
+  
     // Make API call using fetch
     fetch(apiUrl, {
       method: 'POST',
@@ -97,6 +97,7 @@ const AccountDetails = ({ userId }) => {
                             <a href="/order" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Orders <i className="bx bx-cart-alt fs-5" /></a>
                             <a href="/downloadprofile" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Downloads <i className="bx bx-download fs-5" /></a>
                             <a href="/address" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Addresses <i className="bx bx-home-smile fs-5" /></a>
+                            {/* <a href="/addaddress" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Add-Addresses <i className="bx bx-home-smile fs-5" /></a> */}
                             <a href="/paymentdetail" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Payment Methods <i className="bx bx-credit-card fs-5" /></a>
                             <a href="/accountdetails" className="list-group-item active d-flex justify-content-between align-items-center">Account Details <i className="bx bx-user-circle fs-5" /></a>
                             <a href="#" className="list-group-item d-flex justify-content-between align-items-center bg-transparent" onClick={handleLogout}>Logout <i className="bx bx-log-out fs-5" /></a>

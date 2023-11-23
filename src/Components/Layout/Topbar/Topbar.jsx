@@ -32,7 +32,7 @@ export const Topbar = () => {
           </ul>
         </li>
         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+          <a className="nav-link  dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
             <div className="lang d-flex gap-1">
               <div><i className="flag-icon flag-icon-um" />
               </div>

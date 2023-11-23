@@ -15,7 +15,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://ecom.iconixitsolution.com/api/sign-up', {
+      const response = await fetch(`${process.env.REACT_APP_API}/api/sign-up`, {
         method: 'POST',
         headers: {
                     'Content-Type': 'application/json',

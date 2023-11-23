@@ -1,11 +1,13 @@
 import React , { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
+
 const ProductDetails = () => {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
+  const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
 
   useEffect(() => {
-    fetch(`https://ecom.iconixitsolution.com/api/product-detail/${id}`) // Replace with your actual API endpoint
+    fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`) 
       .then(response => response.json())
       .then(data => setProductData(data.ResponseData[0]))
       .catch(error => console.error('Error fetching data:', error));
@@ -14,6 +16,34 @@ const ProductDetails = () => {
   if (!productData) {
     return null; // Render nothing if data hasn't loaded yet
   }
+
+  // -------ADD TO CART --------//
+const addToCart = async (productId) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API}/api/add-cart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+
+        id: userId,
+        user_id: userId,
+        product_id: productId,
+        qty: "1",
+        price: "1",
+        save_for_later: "0",
+      }),
+      
+    });
+console.log(response);
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+  }
+};
+
   return (
    <>
  {/*start page wrapper */}
@@ -49,7 +79,7 @@ const ProductDetails = () => {
                 <div className="image-zoom-section">
                   <div className="product-gallery owl-carousel owl-theme border mb-3 p-3" data-slider-id={1}>
                     <div className="item">
-                      <img src={productData.product_imageLink} className="img-fluid" alt />
+                      <img src={productData.image} className="img-fluid" alt />
                     </div>
                     <div className="item">
                       <img src={productData.product_imageLink}  className="img-fluid" alt />
@@ -136,7 +166,7 @@ const ProductDetails = () => {
                   </div>
                   {/*end row*/}
                   <div className="d-flex gap-2 mt-3">
-                    <a href="javascript:;" className="btn btn-dark btn-ecomm"><i className="bx bxs-cart-add" />Add to Cart</a> 
+                    <a href="javascript:;" onClick={() => addToCart(productData.id)} className="btn btn-dark btn-ecomm"><i className="bx bxs-cart-add" />Add to Cart</a> 
                     <a href="javascript:;" className="btn btn-light btn-ecomm"><i className="bx bx-heart" />Add to Wishlist</a>
                   </div>
                   <hr />
@@ -344,279 +374,7 @@ const ProductDetails = () => {
       </div>
     </section> 
     {/*end product more info*/}
-    {/*start similar products*/}
-     <section className="py-4">
-      <div className="container">
-        <div className="separator pb-4">
-          <div className="line" />
-          <h5 className="mb-0 fw-bold separator-title">Similar Products</h5>
-          <div className="line" />
-        </div>
-        <div className="product-grid">
-          <div className="similar-products owl-carousel owl-theme position-relative">
-            <div className="item">
-              <div className="card">
-                <div className="position-relative overflow-hidden">
-                  <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
-                    <a href="javascript:;"><i className="bx bx-cart-add" /></a>
-                  </div>
-                  <div className="quick-view position-absolute start-0 bottom-0 end-0">
-                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#QuickViewProduct">Quick View</a>
-                  </div>
-                  <a href="javascript:;">
-                    <img src="assets/images/similar-products/01.png" className="img-fluid" alt="..." />
-                  </a>
-                </div>
-                <div className="card-body px-0">
-                  <div className="d-flex align-items-center justify-content-between">
-                    <div className>
-                      <p className="mb-1 product-short-name">Topwear</p>
-                      <h6 className="mb-0 fw-bold product-short-title">White Polo Shirt</h6>
-                    </div>
-                    <div className="icon-wishlist">
-                      <a href="javascript:;"><i className="bx bx-heart" /></a>
-                    </div>
-                  </div>
-                  <div className="cursor-pointer rating mt-2">
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                  </div>
-                  <div className="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                    <div className="h6 fw-light fw-bold text-secondary text-decoration-line-through">$59.00</div>
-                    <div className="h6 fw-bold">$48.00</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="item">
-              <div className="card">
-                <div className="position-relative overflow-hidden">
-                  <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
-                    <a href="javascript:;"><i className="bx bx-cart-add" /></a>
-                  </div>
-                  <div className="quick-view position-absolute start-0 bottom-0 end-0">
-                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#QuickViewProduct">Quick View</a>
-                  </div>
-                  <a href="javascript:;">
-                    <img src="assets/images/similar-products/02.png" className="img-fluid" alt="..." />
-                  </a>
-                </div>
-                <div className="card-body px-0">
-                  <div className="d-flex align-items-center justify-content-between">
-                    <div className>
-                      <p className="mb-1 product-short-name">Topwear</p>
-                      <h6 className="mb-0 fw-bold product-short-title">White Polo Shirt</h6>
-                    </div>
-                    <div className="icon-wishlist">
-                      <a href="javascript:;"><i className="bx bx-heart" /></a>
-                    </div>
-                  </div>
-                  <div className="cursor-pointer rating mt-2">
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                  </div>
-                  <div className="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                    <div className="h6 fw-light fw-bold text-secondary text-decoration-line-through">$59.00</div>
-                    <div className="h6 fw-bold">$48.00</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="item">
-              <div className="card">
-                <div className="position-relative overflow-hidden">
-                  <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
-                    <a href="javascript:;"><i className="bx bx-cart-add" /></a>
-                  </div>
-                  <div className="quick-view position-absolute start-0 bottom-0 end-0">
-                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#QuickViewProduct">Quick View</a>
-                  </div>
-                  <a href="javascript:;">
-                    <img src="assets/images/similar-products/03.png" className="img-fluid" alt="..." />
-                  </a>
-                </div>
-                <div className="card-body px-0">
-                  <div className="d-flex align-items-center justify-content-between">
-                    <div className>
-                      <p className="mb-1 product-short-name">Topwear</p>
-                      <h6 className="mb-0 fw-bold product-short-title">White Polo Shirt</h6>
-                    </div>
-                    <div className="icon-wishlist">
-                      <a href="javascript:;"><i className="bx bx-heart" /></a>
-                    </div>
-                  </div>
-                  <div className="cursor-pointer rating mt-2">
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                  </div>
-                  <div className="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                    <div className="h6 fw-light fw-bold text-secondary text-decoration-line-through">$59.00</div>
-                    <div className="h6 fw-bold">$48.00</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="item">
-              <div className="card">
-                <div className="position-relative overflow-hidden">
-                  <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
-                    <a href="javascript:;"><i className="bx bx-cart-add" /></a>
-                  </div>
-                  <div className="quick-view position-absolute start-0 bottom-0 end-0">
-                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#QuickViewProduct">Quick View</a>
-                  </div>
-                  <a href="javascript:;">
-                    <img src="assets/images/similar-products/04.png" className="img-fluid" alt="..." />
-                  </a>
-                </div>
-                <div className="card-body px-0">
-                  <div className="d-flex align-items-center justify-content-between">
-                    <div className>
-                      <p className="mb-1 product-short-name">Topwear</p>
-                      <h6 className="mb-0 fw-bold product-short-title">White Polo Shirt</h6>
-                    </div>
-                    <div className="icon-wishlist">
-                      <a href="javascript:;"><i className="bx bx-heart" /></a>
-                    </div>
-                  </div>
-                  <div className="cursor-pointer rating mt-2">
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                  </div>
-                  <div className="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                    <div className="h6 fw-light fw-bold text-secondary text-decoration-line-through">$59.00</div>
-                    <div className="h6 fw-bold">$48.00</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="item">
-              <div className="card">
-                <div className="position-relative overflow-hidden">
-                  <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
-                    <a href="javascript:;"><i className="bx bx-cart-add" /></a>
-                  </div>
-                  <div className="quick-view position-absolute start-0 bottom-0 end-0">
-                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#QuickViewProduct">Quick View</a>
-                  </div>
-                  <a href="javascript:;">
-                    <img src="assets/images/similar-products/05.png" className="img-fluid" alt="..." />
-                  </a>
-                </div>
-                <div className="card-body px-0">
-                  <div className="d-flex align-items-center justify-content-between">
-                    <div className>
-                      <p className="mb-1 product-short-name">Topwear</p>
-                      <h6 className="mb-0 fw-bold product-short-title">White Polo Shirt</h6>
-                    </div>
-                    <div className="icon-wishlist">
-                      <a href="javascript:;"><i className="bx bx-heart" /></a>
-                    </div>
-                  </div>
-                  <div className="cursor-pointer rating mt-2">
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                  </div>
-                  <div className="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                    <div className="h6 fw-light fw-bold text-secondary text-decoration-line-through">$59.00</div>
-                    <div className="h6 fw-bold">$48.00</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="item">
-              <div className="card">
-                <div className="position-relative overflow-hidden">
-                  <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
-                    <a href="javascript:;"><i className="bx bx-cart-add" /></a>
-                  </div>
-                  <div className="quick-view position-absolute start-0 bottom-0 end-0">
-                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#QuickViewProduct">Quick View</a>
-                  </div>
-                  <a href="javascript:;">
-                    <img src="assets/images/similar-products/06.png" className="img-fluid" alt="..." />
-                  </a>
-                </div>
-                <div className="card-body px-0">
-                  <div className="d-flex align-items-center justify-content-between">
-                    <div className>
-                      <p className="mb-1 product-short-name">Topwear</p>
-                      <h6 className="mb-0 fw-bold product-short-title">White Polo Shirt</h6>
-                    </div>
-                    <div className="icon-wishlist">
-                      <a href="javascript:;"><i className="bx bx-heart" /></a>
-                    </div>
-                  </div>
-                  <div className="cursor-pointer rating mt-2">
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                  </div>
-                  <div className="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                    <div className="h6 fw-light fw-bold text-secondary text-decoration-line-through">$59.00</div>
-                    <div className="h6 fw-bold">$48.00</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="item">
-              <div className="card">
-                <div className="position-relative overflow-hidden">
-                  <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
-                    <a href="javascript:;"><i className="bx bx-cart-add" /></a>
-                  </div>
-                  <div className="quick-view position-absolute start-0 bottom-0 end-0">
-                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#QuickViewProduct">Quick View</a>
-                  </div>
-                  <a href="javascript:;">
-                    <img src="assets/images/similar-products/07.png" className="img-fluid" alt="..." />
-                  </a>
-                </div>
-                <div className="card-body px-0">
-                  <div className="d-flex align-items-center justify-content-between">
-                    <div className>
-                      <p className="mb-1 product-short-name">Topwear</p>
-                      <h6 className="mb-0 fw-bold product-short-title">White Polo Shirt</h6>
-                    </div>
-                    <div className="icon-wishlist">
-                      <a href="javascript:;"><i className="bx bx-heart" /></a>
-                    </div>
-                  </div>
-                  <div className="cursor-pointer rating mt-2">
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                    <i className="bx bxs-star text-warning" />
-                  </div>
-                  <div className="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                    <div className="h6 fw-light fw-bold text-secondary text-decoration-line-through">$59.00</div>
-                    <div className="h6 fw-bold">$48.00</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> 
+   
     
   </div>
 </div>
