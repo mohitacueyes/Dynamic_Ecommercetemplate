@@ -109,7 +109,7 @@ function Shopcart() {
                             <input
                               type="number"
                               className="form-control rounded-0"
-                              defaultValue={2}
+                              defaultValue={1}
                               min={1}
                             />
                           </div>
@@ -136,8 +136,6 @@ function Shopcart() {
                         <hr/>
                       </div>
                       ))}
-                      
-                      
                       <div className="d-lg-flex align-items-center gap-2">
                         <a
                           href="javascript:;"
@@ -215,13 +213,13 @@ function Shopcart() {
                       <div className="card rounded-0 border bg-transparent mb-0 shadow-none">
                         <div className="card-body">
                           <p className="mb-2">
-                            Subtotal: <span className="float-end">$198.00</span>
+                            Subtotal: <span className="float-end">${cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</span>
                           </p>
                           <p className="mb-2">
                             Shipping: <span className="float-end">--</span>
                           </p>
                           <p className="mb-2">
-                            Taxes: <span className="float-end">$14.00</span>
+                            Taxes: <span className="float-end">--</span>
                           </p>
                           <p className="mb-0">
                             Discount: <span className="float-end">--</span>
@@ -229,7 +227,7 @@ function Shopcart() {
                           <div className="my-3 border-top" />
                           <h5 className="mb-0">
                             Order Total:{" "}
-                            <span className="float-end">212.00</span>
+                            <span className="float-end">${cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</span>
                           </h5>
                           <div className="my-4" />
                           <div className="d-grid">

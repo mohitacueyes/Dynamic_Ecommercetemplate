@@ -3052,7 +3052,7 @@ textarea.form-control-lg {
 	display: none
 }
 .dropstart .dropdown-toggle::before {
-	display: inline-block;
+	/* display: inline-block; */
 	margin-right: .255em;
 	vertical-align: .255em;
 	content: "";

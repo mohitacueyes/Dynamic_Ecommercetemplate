@@ -107,7 +107,7 @@ const Login = () => {
                             <form className="row g-3" onSubmit={handleLogin}>
                               <div className="col-12">
                                 <label htmlFor="inputEmailAddress" className="form-label">Phone Number</label>
-                                <input type="number" value={phone} onChange={(e) => setPhone(e.target.value)} required className="form-control" id="inputEmailAddress" placeholder="Email Address" />
+                                <input type="number" value={phone} onChange={(e) => setPhone(e.target.value)} required className="form-control" id="inputEmailAddress" placeholder="Enter Phone Number" />
                               </div>
                               <div className="col-12">
                                 <label htmlFor="inputChoosePassword" className="form-label">Enter Password</label>

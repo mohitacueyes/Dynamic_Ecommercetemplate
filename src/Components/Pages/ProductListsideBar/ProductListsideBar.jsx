@@ -16,6 +16,7 @@ const ProductListsideBar = () => {
       .then((data) => setProducts(data.ResponseData))
       .catch((error) => console.error("Error:", error));
   }, []);
+
 // -------ADD TO CART --------//
 const addToCart = async (productId) => {
   try {
@@ -40,6 +41,31 @@ console.log(response);
     console.log(data);
   } catch (error) {
     console.error("Error adding to cart:", error);
+  }
+};
+
+// -------ADD TO LIKES --------//
+const addToLikes = async (productId) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API}/api/add-favorites`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+
+        id: userId,
+        user_id: userId,
+        product_id: productId,
+        favorites : "1",
+      }),
+
+    });
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error adding to likes:", error);
   }
 };
   return (
@@ -1037,7 +1063,7 @@ console.log(response);
                           </div>
                                   <a href="javascript:;">
                                     <img
-                                      src={product.product_image}
+                                      src={product.image}
                                       style={{ height: "250px" }}
                                       className="img-fluid"
                                       alt="..."
@@ -1055,7 +1081,7 @@ console.log(response);
                                       </h6>
                                     </div>
                                     <div className="icon-wishlist">
-                                      <a href="javascript:;">
+                                      <a onClick={() => addToLikes(product.id)}>
                                         <i className="bx bx-heart" />
                                       </a>
                                     </div>

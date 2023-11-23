@@ -4,9 +4,9 @@ const SecondSection = () => {
   const [bannerData, setBannerData] = useState([]);
 
   useEffect(() => {
-    fetch('https://ecom.iconixitsolution.com/api/home')
+    fetch(`${process.env.REACT_APP_API}/api/homeaddbanner-list`)
       .then(response => response.json())
-      .then(data => setBannerData(data.ResponseData.homeadbannerList))
+      .then(data => setBannerData(data.ResponseData))
       .catch(error => console.error('Error:', error));
   }, []);
   return (
@@ -61,7 +61,7 @@ const SecondSection = () => {
             <div className="card rounded-0 shadow-none bg-info bg-opacity-25" >
               <div className="row g-0 align-items-center">
                 <div className="col mt-4 mb-4 ms-4"  key={banner.id}>
-                  <img src={banner.homeadd_banner} className="img-fluid" />
+                  <img src={banner.image} className="img-fluid" />
                 </div>
                 <div className="col">
                   <div className="card-body">
