@@ -6,6 +6,8 @@ const ProductListsideBar = () => {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
+  
+
 
   useEffect(() => {
     // Make an API call to fetch product data
