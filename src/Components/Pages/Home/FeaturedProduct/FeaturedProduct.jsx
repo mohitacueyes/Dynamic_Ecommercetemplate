@@ -5,7 +5,7 @@ const FeaturedProduct = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [currentUser, setCurrentUser] = useState(null)
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
-
+  
   useEffect(() => {
     // Fetch data from your API
     fetch(`${process.env.REACT_APP_API}/api/home`
@@ -85,7 +85,7 @@ const addToLikes = async (productId) => {
               </div>
               <div className="product-grid">
                 <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3 g-sm-4">
-                  {feed.homefeed_product.map((product) => (
+                  {feed.homefeed_product.slice(0, 10).map((product) => (
                     <div className="col">
                       <div className="card">
                         <div className="position-relative overflow-hidden">
@@ -143,7 +143,9 @@ const addToLikes = async (productId) => {
                 </div>
               </div>
             </div>
+            
           ))}
+          
       </section>
     </>
   );
