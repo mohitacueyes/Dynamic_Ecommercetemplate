@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 export const Searchbar = () => {
   const [cartItems, setCartItems] = useState([]);
+  const user_id = localStorage.getItem("userId");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -37,6 +38,43 @@ export const Searchbar = () => {
     fetchCartData();
   }, []);
   // console.log(cartItems);
+
+  //-----DELETE favorites-----//
+ const [response, setResponse] = useState(null);
+
+ const handleDeleteClick = async (id ,productId) => {
+   const apiUrl = `${process.env.REACT_APP_API}/api/delete`; 
+
+   try {
+     const response = await fetch(apiUrl, {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({ 
+        user_id:user_id,
+        product_id:productId,
+        favorites:"2"
+
+        
+      
+      }),
+     });
+
+     const data = await response.json();
+
+     if (data.ResponseCode === 1) {
+       setResponse(data.ResponseText);
+       // Update addresses state after successful deletion
+       setCartItems(prevAddresses => prevAddresses.filter(cart => cart.id !== id));
+     } else {
+       setResponse('Error deleting cart items');
+     }
+   } catch (error) {
+     console.error('Error:', error);
+     setResponse('Error deleting cart items');
+   }
+ };
   return (
     <>
       <div className="header-content bg-warning">
@@ -133,8 +171,8 @@ export const Searchbar = () => {
                                 <p className="cart-product-price">1 X ${item.discounted_price}</p>
                               </div>
                               <div className="position-relative">
-                                <div className="cart-product-cancel position-absolute">
-                                  <i className="bx bx-x" />
+                                <div className="cart-product-cancel position-absolute" >
+                                  <i className="bx bx-x" onClick={() => handleDeleteClick(item.id)} />
                                 </div>
                                 <div className="cart-product">
                                   <img

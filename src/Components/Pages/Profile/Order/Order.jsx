@@ -1,19 +1,44 @@
-import React from 'react'
+import React , {useState, useEffect} from 'react'
 
-const Order = () => {
+const Order = ({ user_id }) => {
   function handleLogout() {
-    // Clear user session data from local storage
     localStorage.removeItem('user');
-    // Redirect the user to the login page or any other page you prefer
-    window.location.href = '/login'; // Replace '/login' with the URL of your login page
+    window.location.href = '/login'; 
   }
+  const [orders, setorders] = useState([]);
+
+  useEffect(() => {
+    const user_id = localStorage.getItem("userId");
+    const fetchAddressList = async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_API}/api/Orders-list`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: user_id,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.ResponseCode === 1) {
+        setorders(data.ResponseData);
+      } else {
+        console.error("Error fetching address list:", data.ResponseText);
+      }
+    };
+
+    fetchAddressList();
+  }, [user_id]);
   return (
    <>
    <div class="wrapper">
-   {/*start page wrapper */}
 <div className="page-wrapper">
   <div className="page-content">
-    {/*start breadcrumb*/}
     <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
       <div className="container">
         <div className="page-breadcrumb d-flex align-items-center">
@@ -32,8 +57,6 @@ const Order = () => {
         </div>
       </div>
     </section>
-    {/*end breadcrumb*/}
-    {/*start shop cart*/}
     <section className="py-4">
       <div className="container">
         <h3 className="d-none">Account</h3>
@@ -48,7 +71,6 @@ const Order = () => {
                     <a href="/order" className="list-group-item active d-flex justify-content-between align-items-center ">Orders <i className="bx bx-cart-alt fs-5 fs-5" /></a>
                       <a href="/downloadprofile" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Downloads <i className="bx bx-download fs-5" /></a>
                       <a href="/address" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Addresses <i className="bx bx-home-smile fs-5" /></a>
-                      {/* <a href="/addaddress" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Add-Addresses <i className="bx bx-home-smile fs-5" /></a> */}
                       <a href="/paymentdetail" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Payment Methods <i className="bx bx-credit-card fs-5" /></a>
                       <a href="/accountdetails" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Account Details <i className="bx bx-user-circle fs-5" /></a>
                       <a href="#" className="list-group-item d-flex justify-content-between align-items-center bg-transparent" onClick={handleLogout}>Logout <i className="bx bx-log-out fs-5" /></a>
@@ -70,113 +92,40 @@ const Order = () => {
                             <th>Actions</th>
                           </tr>
                         </thead>
+                        {orders.length > 0 ? (
+                                orders.map((address) => (
+                              
                         <tbody>
+
                           <tr>
-                            <td>#800</td>
-                            <td>Novermber 15, 2021</td>
+                            <td>#{address.ordernumber}</td>
+                            <td>{address.date_added}</td>
                             <td>
-                              <div className="badge rounded-pill bg-success w-100">Completed</div>
+                              <div className="badge rounded-pill bg-success w-100">{address.status}</div>
                             </td>
-                            <td>$100.00 for 1 item</td>
+                            <td>${address.total}</td>
                             <td>
                               <div className="d-flex gap-2">	<a href="javascript:;" className="btn btn-dark btn-sm rounded-0">View</a>
                               </div>
                             </td>
                           </tr>
-                          <tr>
-                            <td>#796</td>
-                            <td>Novermber 12, 2021</td>
-                            <td>
-                              <div className="badge rounded-pill bg-danger w-100">Failed</div>
-                            </td>
-                            <td>$100.00 for 1 item</td>
-                            <td>
-                              <div className="d-flex gap-2"> <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">View</a>
-                                <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">Pay</a>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>#859</td>
-                            <td>Novermber 10, 2021</td>
-                            <td>
-                              <div className="badge rounded-pill bg-danger w-100">Failed</div>
-                            </td>
-                            <td>$100.00 for 1 item</td>
-                            <td>
-                              <div className="d-flex gap-2"> <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">View</a>
-                                <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">Pay</a>
-                                <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">Cancel</a>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>#869</td>
-                            <td>Novermber 9, 2021</td>
-                            <td>
-                              <div className="badge rounded-pill bg-danger w-100">Cancelled</div>
-                            </td>
-                            <td>$120.00 for 1 item</td>
-                            <td>
-                              <div className="d-flex gap-2"> <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">View</a>
-                                <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">Pay</a>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>#829</td>
-                            <td>Novermber 8, 2021</td>
-                            <td>
-                              <div className="badge rounded-pill bg-success w-100">Completed</div>
-                            </td>
-                            <td>$224.00 for 2 item</td>
-                            <td>
-                              <div className="d-flex gap-2"> <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">View</a>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>#879</td>
-                            <td>Novermber 8, 2021</td>
-                            <td>
-                              <div className="badge rounded-pill bg-success w-100">Completed</div>
-                            </td>
-                            <td>$126.00 for 3 item</td>
-                            <td>
-                              <div className="d-flex gap-2"> <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">View</a>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>#863</td>
-                            <td>Novermber 4, 2021</td>
-                            <td>
-                              <div className="badge rounded-pill bg-danger w-100">Failed</div>
-                            </td>
-                            <td>$200.00 for 2 item</td>
-                            <td>
-                              <div className="d-flex gap-2"> <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">View</a>
-                                <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">Pay</a>
-                                <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">Cancel</a>
-                              </div>
-                            </td>
-                          </tr>
                         </tbody>
+                        ))
+                        ) : (
+                          <p>No orders found.</p>
+                        )}
                       </table>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            {/*end row*/}
           </div>
         </div>
       </div>
     </section>
-    {/*end shop cart*/}
   </div>
 </div>
-{/*end page wrapper */}
 </div>
    </>
   )
