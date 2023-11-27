@@ -75,6 +75,7 @@ const addToLikes = async (productId) => {
       <section className="py-4">
         {featuredProducts &&
           featuredProducts.map((feed) => (
+            feed.homefeed_product && feed.homefeed_product.length > 0 && (
             <div className="container">
               <div className="separator pb-4">
                 <div className="line" />
@@ -143,7 +144,7 @@ const addToLikes = async (productId) => {
                 </div>
               </div>
             </div>
-            
+            )
           ))}
           
       </section>
