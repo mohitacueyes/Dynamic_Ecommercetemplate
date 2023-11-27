@@ -2,6 +2,7 @@ import React ,{useState, useEffect} from "react";
 
 function Shopcart() { 
     const [cartItems, setCartItems] = useState([]);
+    const user_id = localStorage.getItem("userId");
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     useEffect(() => {
@@ -38,6 +39,45 @@ function Shopcart() {
       fetchCartData();
     }, []);
     console.log(cartItems);
+
+    //-----DELETE favorites-----//
+ const [response, setResponse] = useState(null);
+
+ const handleDeleteClick = async (id ,productId) => {
+   const apiUrl = `${process.env.REACT_APP_API}/api/delete`; 
+
+   try {
+     const response = await fetch(apiUrl, {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({ 
+        user_id:user_id,
+        product_id:productId,
+        favorites:"2"
+
+        
+      
+      }),
+     });
+
+     const data = await response.json();
+
+     if (data.ResponseCode === 1) {
+       setResponse(data.ResponseText);
+       // Update addresses state after successful deletion
+       setCartItems(prevAddresses => prevAddresses.filter(cart => cart.id !== id));
+     } else {
+       setResponse('Error deleting cart items');
+     }
+   } catch (error) {
+     console.error('Error:', error);
+     setResponse('Error deleting cart items');
+   }
+ };
+
+
   return (
     <>
       <div className="page-wrapper">
@@ -118,14 +158,14 @@ function Shopcart() {
                           <div className="text-center">
                             <div className="d-flex gap-3 justify-content-center justify-content-lg-end">
                               <a
-                                href="javascript:;"
+                                onClick={() => handleDeleteClick(item.id)}
                                 className="btn btn-outline-dark rounded-0 btn-ecomm"
                               >
                                 <i className="bx bx-x" />
                                 Remove
                               </a>
                               <a
-                                href="javascript:;"
+                                onClick={() => handleDeleteClick(item.id)}
                                 className="btn btn-light rounded-0 btn-ecomm"
                               >
                                 <i className="bx bx-heart me-0" />

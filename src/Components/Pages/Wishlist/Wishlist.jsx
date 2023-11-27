@@ -49,11 +49,11 @@ console.log(response);
   }
 };
 
- //-----DELETE ADDRESS-----//
+ //-----DELETE favorites-----//
  const [response, setResponse] = useState(null);
 
  const handleDeleteClick = async (id ,productId) => {
-   const apiUrl = `${process.env.REACT_APP_API}/api/favorites-remove/${id}`; // Replace with your actual API endpoint
+   const apiUrl = `${process.env.REACT_APP_API}/api/favorites-remove/${id}`; 
 
    try {
      const response = await fetch(apiUrl, {
@@ -76,13 +76,13 @@ console.log(response);
      if (data.ResponseCode === 1) {
        setResponse(data.ResponseText);
        // Update addresses state after successful deletion
-       setWishlistData(prevAddresses => prevAddresses.filter(address => address.id !== id));
+       setWishlistData(prevAddresses => prevAddresses.filter(favorites => favorites.id !== id));
      } else {
-       setResponse('Error deleting address');
+       setResponse('Error deleting favorites');
      }
    } catch (error) {
      console.error('Error:', error);
-     setResponse('Error deleting address');
+     setResponse('Error deleting favorites');
    }
  };
 
