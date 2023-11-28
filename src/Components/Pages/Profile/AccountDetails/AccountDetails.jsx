@@ -95,7 +95,7 @@ const AccountDetails = ({ userId }) => {
                           <div className="list-group list-group-flush">
                             <a href="/profile" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Dashboard <i className="bx bx-tachometer fs-5" /></a>
                             <a href="/order" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Orders <i className="bx bx-cart-alt fs-5" /></a>
-                            <a href="/downloadprofile" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Downloads <i className="bx bx-download fs-5" /></a>
+                            {/* <a href="/downloadprofile" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Downloads <i className="bx bx-download fs-5" /></a> */}
                             <a href="/address" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Addresses <i className="bx bx-home-smile fs-5" /></a>
                             {/* <a href="/addaddress" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Add-Addresses <i className="bx bx-home-smile fs-5" /></a> */}
                             <a href="/paymentdetail" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Payment Methods <i className="bx bx-credit-card fs-5" /></a>
@@ -120,7 +120,7 @@ const AccountDetails = ({ userId }) => {
                             </div>
                             <div className="col-12">
                               <label className="form-label">Gender</label>
-                              <select className="form-select" name="gender"  onChange={handleInputChange} >
+                              <select className="form-select" name="gender" value={userData.gender}  onChange={handleInputChange} >
                                 <option>Select Gender</option>
                                 <option value="1">Male</option>
                                 <option value="2">Female</option>

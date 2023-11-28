@@ -16,18 +16,13 @@ export const Home = () => {
    <Banner/>
    <SecondSection/>
    <FeaturedProduct/>
-   <NewArrival/>
+   {/* <NewArrival/> */}
    <AdvertiseBanner/>
-   <Categories/> 
-   <Support/>
-   <LatestNews/>
-   <Brands/>
-
-
-
-
-
-<ProductSection/>
+   {/* <Categories/>  */}
+   {/* <Support/> */}
+   {/* <LatestNews/> */}
+   {/* <Brands/> */}
+{/* <ProductSection/> */}
    </>
   )
 }

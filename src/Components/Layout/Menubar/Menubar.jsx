@@ -58,11 +58,11 @@ export const Menubar = () => {
             <ul className="dropdown-menu">
               <li><a className="dropdown-item" href="account-dashboard.html">Dashboard</a>
               </li>
-              <li><a className="dropdown-item" href="account-downloads.html">Downloads</a>
-              </li>
+              {/* <li><a className="dropdown-item" href="account-downloads.html">Downloads</a>
+              </li> */}
               <li><a className="dropdown-item" href="account-orders.html">My Orders</a>
               </li>
-              <li><a className="dropdown-item" href="account-user-details.html">User Details</a>
+              <li><a className="dropdown-item" href="accountdetails">User Details</a>
               </li>
               <li>
                 <hr className="dropdown-divider" />

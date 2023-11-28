@@ -1063,14 +1063,13 @@ const addToLikes = async (productId) => {
                               Quick View
                             </Link></a>
                           </div>
-                                  <a href="javascript:;">
+                                  <div style={{ height: "40vh" }}>
                                     <img
                                       src={product.image}
-                                      style={{ height: "250px" }}
                                       className="img-fluid"
                                       alt="..."
                                     />
-                                  </a>
+                                  </div>
                                 </div>
                                 <div className="card-body px-0">
                                   <div className="d-flex align-items-center justify-content-between">

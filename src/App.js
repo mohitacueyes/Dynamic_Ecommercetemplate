@@ -32,7 +32,7 @@ function App() {
     <Searchbar/>
     <Menubar/>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='*' element={<Home />} />
         <Route path='/about' element={<About />}/>
         <Route path='/contact' element={<Contact />}/>
         <Route path='/productdetails/:id' element={<ProductDetails />}/>  
@@ -44,7 +44,7 @@ function App() {
         <Route path='/wishlist' element={<Wishlist/>}/>  
         <Route path='/profile' element={<Profile/>}/>  
         <Route path='/order' element={<Order/>}/>  
-        <Route path='/downloadprofile' element={<DownloadProfile/>}/>  
+        {/* <Route path='/downloadprofile' element={<DownloadProfile/>}/>   */}
         <Route path='/address' element={<Address/>}/>
         <Route path='/paymentdetail' element={<PaymentDetail/>}/>  
         <Route path='/accountdetails' element={<AccountDetails/>}/>  
