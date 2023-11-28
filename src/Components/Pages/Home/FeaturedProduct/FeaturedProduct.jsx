@@ -103,7 +103,7 @@ const addToLikes = async (productId) => {
                           <a>
                             <img
                               src={product.product_imageLink}
-                              className="img-fluid"style={{height:"250px"}}
+                              className="img-fluid" style={{height:"300px" , width:"250px"}}
                               alt="..."
                             />
                           </a>

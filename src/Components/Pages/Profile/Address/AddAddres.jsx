@@ -141,12 +141,12 @@ function AddAddres() {
                             >
                               Orders <i className="bx bx-cart-alt fs-5" />
                             </a>
-                            <a
+                            {/* <a
                               href="/downloadprofile"
                               className="list-group-item d-flex justify-content-between align-items-center bg-transparent"
                             >
                               Downloads <i className="bx bx-download fs-5" />
-                            </a>
+                            </a> */}
                             <a
                               href="/address"
                               className="list-group-item active d-flex justify-content-between align-items-center "

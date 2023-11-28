@@ -28,7 +28,7 @@ const Banner = () => {
           />
        </div>
           <Carousel.Caption>
-            <h3>{banner.title}</h3>
+            <h3>{banner.title2}</h3>
             <p>{banner.short_description}</p>
             <a className="btn btn-dark btn-ecomm px-4" href={banner.slider_url}>
               Shop Now
