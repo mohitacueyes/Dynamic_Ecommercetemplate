@@ -4,6 +4,8 @@ export const Searchbar = () => {
   const user_id = localStorage.getItem("userId");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+const isLoggedIn = false;
   useEffect(() => {
     const fetchCartData = async () => {
       const user_id = localStorage.getItem('userId');
@@ -39,7 +41,7 @@ export const Searchbar = () => {
   }, []);
   // console.log(cartItems);
 
-  //-----DELETE favorites-----//
+  //-----DELETE Add to Cart-----//
  const [response, setResponse] = useState(null);
 
  const handleDeleteClick = async (id ,productId) => {
@@ -55,9 +57,6 @@ export const Searchbar = () => {
         user_id:user_id,
         product_id:productId,
         favorites:"2"
-
-        
-      
       }),
      });
 

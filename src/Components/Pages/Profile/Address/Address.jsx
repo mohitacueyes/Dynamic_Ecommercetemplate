@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 
 const Address = ({ user_id }) => {
   function handleLogout() {
-    localStorage.removeItem("user");
-    window.location.href = "/login";
-  }
+    // Clear user ID and token from local storage
+    localStorage.removeItem('userId');
+    localStorage.removeItem('token');
+    
+    // Redirect the user to the login page or any other page you prefer
+    window.location.href = '/login'; // Replace '/login' with the URL of your login page
+}
   const [addresses, setAddresses] = useState([]);
 
   useEffect(() => {
@@ -73,7 +77,7 @@ const Address = ({ user_id }) => {
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
             <div className="container">
               <div className="page-breadcrumb d-flex align-items-center">
-                <h3 className="breadcrumb-title pe-3">My Orders</h3>
+                <h3 className="breadcrumb-title pe-3">Address</h3>
                 <div className="ms-auto">
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb mb-0 p-0">

@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 
 const Order = ({ user_id }) => {
   function handleLogout() {
-    localStorage.removeItem("user");
-    window.location.href = "/login";
-  }
+    // Clear user ID and token from local storage
+    localStorage.removeItem('userId');
+    localStorage.removeItem('token');
+    
+    // Redirect the user to the login page or any other page you prefer
+    window.location.href = '/login'; // Replace '/login' with the URL of your login page
+}
   const [orders, setorders] = useState([]);
 
   useEffect(() => {
