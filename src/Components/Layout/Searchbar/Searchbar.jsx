@@ -77,7 +77,7 @@ export const Searchbar = () => {
  };
   return (
     <>
-      <div className="header-content bg-warning">
+      <div className="header-content bg-background">
         <div className="container">
           <div className="row align-items-center gx-4">
             <div className="col-auto">
@@ -174,10 +174,10 @@ export const Searchbar = () => {
                                 <div className="cart-product-cancel position-absolute" >
                                   <i className="bx bx-x" onClick={() => handleDeleteClick(item.id)} />
                                 </div>
-                                <div className="cart-product">
+                                <div className="cart-product img-fluid ">
                                   <img
                                     src={item.imageLink}
-                                    className
+                                    className = "img-fluid "
                                     alt="product image"
                                   />
                                 </div>
@@ -193,7 +193,7 @@ export const Searchbar = () => {
                             <h5 className="mb-0">${cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</h5>
                           </div>
                           <a
-                            href="javascript:;"
+                            href="/checkout"
                             className="btn btn-dark btn-ecomm"
                           >
                             CHECKOUT

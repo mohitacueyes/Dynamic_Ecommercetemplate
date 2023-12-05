@@ -1050,25 +1050,31 @@ const addToLikes = async (productId) => {
                       <div className="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-3 g-3 g-sm-4">
                         {products &&
                           products.map((product) => (
-                            <div className="col">
-                              <div className="card">
+                            <div className="col" >
+                              <div className="card" >
                                 <div className="position-relative overflow-hidden">
                                   <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
                                     <a href="javascript:;" onClick={() => addToCart(product.id)}>
                                       <i className="bx bx-cart-add" />
                                     </a>
                                   </div>
-                                  <div className="quick-view position-absolute start-0 bottom-0 end-0">
-                            <a><Link to={`/productdetails/${product.id}`}>
-                              Quick View
-                            </Link></a>
-                          </div>
-                                  <div style={{ height: "40vh" }}>
-                                    <img
-                                      src={product.image}
-                                      className="img-fluid"
-                                      alt="..."
-                                    />
+                                          {/* <div className="quick-view position-absolute start-0 bottom-0 end-0">
+                                    <a><Link to={`/productdetails/${product.id}`}>
+                                      Quick View
+                                    </Link></a>
+                                  </div> */}
+                                  <div   style={{height:"393.75px" }}>
+                                    <Link
+                                      to={`/productdetails/${product.id}`}
+                                    >
+                                      <img
+                                        src={product.image}
+                                        className="img-fluid rounded-4"
+                                        alt="..."
+                                      />
+                                    </Link>
+                                   
+                                   
                                   </div>
                                 </div>
                                 <div className="card-body px-0">
@@ -1078,7 +1084,7 @@ const addToLikes = async (productId) => {
                                         Topwear
                                       </p>
                                       <h6 className="mb-0 fw-bold product-short-title">
-                                        {product.name}
+                                        {product.name.slice(0, 20) || product.name}..
                                       </h6>
                                     </div>
                                     <div className="icon-wishlist">

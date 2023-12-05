@@ -74,7 +74,7 @@ const AccountDetails = ({ userId }) => {
                       </li>
                       <li className="breadcrumb-item"><a href="javascript:;">Account</a>
                       </li>
-                      <li className="breadcrumb-item active" aria-current="page">My Orders</li>
+                      <li className="breadcrumb-item active" aria-current="page">Account Details</li>
                     </ol>
                   </nav>
                 </div>
@@ -98,7 +98,7 @@ const AccountDetails = ({ userId }) => {
                             {/* <a href="/downloadprofile" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Downloads <i className="bx bx-download fs-5" /></a> */}
                             <a href="/address" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Addresses <i className="bx bx-home-smile fs-5" /></a>
                             {/* <a href="/addaddress" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Add-Addresses <i className="bx bx-home-smile fs-5" /></a> */}
-                            <a href="/paymentdetail" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Payment Methods <i className="bx bx-credit-card fs-5" /></a>
+                            {/* <a href="/paymentdetail" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Payment Methods <i className="bx bx-credit-card fs-5" /></a> */}
                             <a href="/accountdetails" className="list-group-item active d-flex justify-content-between align-items-center">Account Details <i className="bx bx-user-circle fs-5" /></a>
                             <a href="#" className="list-group-item d-flex justify-content-between align-items-center bg-transparent" onClick={handleLogout}>Logout <i className="bx bx-log-out fs-5" /></a>
                           </div>

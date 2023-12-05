@@ -24,6 +24,11 @@ import Logout from './Components/Pages/Logout/Logout';
 import Shopcart from './Components/Pages/Shopcart/Shopcart';
 import Address from './Components/Pages/Profile/Address/Address';
 import Editaddres from './Components/Pages/Profile/Address/Editaddres';
+import { Checkout } from './Components/Pages/Checkout';
+import Checkoutdetails from './Components/Pages/Checkout/Details/Checkoutdetails';
+import Checkoutshipping from './Components/Pages/Checkout/Shipping/Checkoutshipping';
+import Checkoutpayment from './Components/Pages/Checkout/Payment/Checkoutpayment';
+import Checkoutcomplete from './Components/Pages/Checkout/Complete/Checkoutcomplete';
 
 function App() {
   return (
@@ -52,6 +57,11 @@ function App() {
         <Route path='/shopcart'element={<Shopcart/>}/>
         <Route path='/addaddress' element={<AddAddres/>}/>
         <Route path='/editaddress/:addresid' element={<Editaddres/>}/>
+        <Route path='/checkout' element={<Checkout/>}/>
+        <Route path='/details' element={<Checkoutdetails/>}/>
+        <Route path='/shoppingcart' element={<Checkoutshipping/>}/>
+        <Route path='/payment' element={<Checkoutpayment/>}/>
+        <Route path='/complete' element={<Checkoutcomplete/>}/>
         </Routes>
       <Footer />
     </>

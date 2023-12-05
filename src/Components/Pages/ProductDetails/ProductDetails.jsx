@@ -185,11 +185,13 @@ const addToLikes = async (productId) => {
                             <button
                               className="owl-thumb-item    "
                               key={image.id}
+                              
                             >
                               <img
+                              
                                 src={image.image}
                                 style={{ height: "7vh" }}
-                                alt
+                                alt={`Sub Image ${image.id}`}
                               />
                             </button>
                           ))}
@@ -215,7 +217,7 @@ const addToLikes = async (productId) => {
                           </div>
                         </div>
                         <div className="d-flex align-items-center mt-3 gap-2">
-                          <h5 className="mb-0 text-decoration-line-through text-light-3">
+                          <h5 className="mb-0 text-decoration-line-through text-light-3 text-secondary">
                             ${productData.price}
                           </h5>
                           <h4 className="mb-0">
