@@ -40,7 +40,7 @@ function Shopcart() {
     }, []);
     console.log(cartItems);
 
-    //-----DELETE favorites-----//
+    //-----DELETE CART ITEMS-----//
  const [response, setResponse] = useState(null);
 
  const handleDeleteClick = async (id ,productId) => {
@@ -125,13 +125,16 @@ function Shopcart() {
                             <div className="cart-img text-center text-lg-start">
                               <img
                                 src={item.imageLink}
-                                width={130}
+                                className="rounded-3"
+                                width={100}
+                                height={150}
+                                style={{ objectFit: "cover" }}
                                 alt
                               />
                             </div>
                             <div className="cart-detail text-center text-lg-start">
                               <h6 className="mb-2">
-                                {item.name}
+                                {item.name.slice(0,18) || item.name}..
                               </h6>
                               <p className="mb-0">
                                 Size: <span>Regular</span>
@@ -139,8 +142,17 @@ function Shopcart() {
                               <p className="mb-2">
                                 Color: <span>White &amp; Blue</span>
                               </p>
-                              <h5 className="mb-0">${item.discounted_price}</h5>
+                              {/* <h5 className="mb-0">${item.discounted_price}</h5> */}
+                              <div className="d-flex align-items-center mt-3 gap-2">
+                          <h6 className="mb-0 text-decoration-line-through text-light-3 text-secondary">
+                            ${item.price}
+                          </h6>
+                          <h5 className="mb-0">
+                            ${item.discounted_price}
+                          </h5>
+                        </div>
                             </div>
+                           
                           </div>
 
                         </div>
@@ -183,15 +195,10 @@ function Shopcart() {
                         >
                           <i className="bx bx-shopping-bag" /> Continue Shoping
                         </a>
+                       
                         <a
                           href="javascript:;"
-                          className="btn btn-light btn-ecomm ms-auto"
-                        >
-                          <i className="bx bx-x-circle" /> Clear Cart
-                        </a>
-                        <a
-                          href="javascript:;"
-                          className="btn btn-white btn-ecomm"
+                          className="btn btn-white btn-light btn-ecomm  ms-auto"
                         >
                           <i className="bx bx-refresh" /> Update Cart
                         </a>
@@ -273,7 +280,7 @@ function Shopcart() {
                           <div className="d-grid">
                             {" "}
                             <a
-                              href="javascript:;"
+                              href="/checkout"
                               className="btn btn-dark btn-ecomm"
                             >
                               Proceed to Checkout

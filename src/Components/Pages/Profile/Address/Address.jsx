@@ -89,7 +89,7 @@ const Address = ({ user_id }) => {
                         className="breadcrumb-item active"
                         aria-current="page"
                       >
-                        My Orders
+                        Address
                       </li>
                     </ol>
                   </nav>
@@ -132,13 +132,13 @@ const Address = ({ user_id }) => {
                               Addresses <i className="bx bx-home-smile fs-5" />
                             </a>
                             
-                            <a
+                            {/* <a
                               href="/paymentdetail"
                               className="list-group-item d-flex justify-content-between align-items-center bg-transparent"
                             >
                               Payment Methods{" "}
                               <i className="bx bx-credit-card fs-5" />
-                            </a>
+                            </a> */}
                             <a
                               href="/accountdetails"
                               className="list-group-item d-flex justify-content-between align-items-center bg-transparent"

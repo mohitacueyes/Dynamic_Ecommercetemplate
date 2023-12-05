@@ -95,17 +95,20 @@ const addToLikes = async (productId) => {
                               <i className="bx bx-cart-add" />
                             </a>
                           </div>
-                          <div className="quick-view position-absolute start-0 bottom-0 end-0">
+                          {/* <div className="quick-view position-absolute start-0 bottom-0 end-0">
                             <a><Link to={`/productdetails/${product.id}`}>
                               Quick View
                             </Link></a>
-                          </div>
+                          </div> */}
                           <a>
+                            <Link to={`/productdetails/${product.id}`}>
                             <img
                               src={product.product_imageLink}
-                              className="img-fluid" style={{height:"300px" , width:"250px"}}
+                              className="img-fluid  rounded-4"
+                               style={{height:"393.75px" , width:"393.75px"}}
                               alt="..."
                             />
+                            </Link>
                           </a>
                         </div>
                         <div className="card-body px-0">
@@ -113,7 +116,7 @@ const addToLikes = async (productId) => {
                             <div className>
                               <p className="mb-1 product-short-name"></p>
                               <h6 className="mb-0 fw-bold product-short-title">
-                                {product.name.slice(0, 20)}...
+                                {product.name.slice(0, 20) || product.name}..
                               </h6>
                             </div>
                             <div className="icon-wishlist">

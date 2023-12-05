@@ -56,7 +56,7 @@ const SecondSection = () => {
     <section className="py-4">
       <div className="container">
         <div className="row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-4">
-        { bannerData && bannerData.map(banner => (
+        { bannerData .filter(banner => banner.is_active !== 2).map(banner => (
           <div className="col">
             <div className="card rounded-0 shadow-none bg-info bg-opacity-25" >
               <div className="row g-0 align-items-center">

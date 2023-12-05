@@ -1,12 +1,53 @@
-import React from 'react'
+import React , { useEffect , useState } from 'react'
 
 const PaymentDetail = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCartData = async () => {
+      const user_id = localStorage.getItem('userId');
+      try {
+        if (user_id) {
+          const response = await fetch(`${process.env.REACT_APP_API}/api/cart-listuseridwise`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user_id }),
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            if (Array.isArray(data.ResponseData)) {
+              setCartItems(data.ResponseData);
+            } else {
+              setCartItems([]);
+            }
+          } else {
+            setError('Error fetching cart data: ' + response.statusText);
+          }
+        }
+      } catch (error) {
+        setError('Error fetching cart data: ' + error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCartData();
+  }, []);
+  console.log(cartItems);
   function handleLogout() {
     // Clear user session data from local storage
     localStorage.removeItem('user');
     // Redirect the user to the login page or any other page you prefer
     window.location.href = '/login'; // Replace '/login' with the URL of your login page
   }
+
+
+  
   return (
    <>
   {/*start page wrapper */}
@@ -62,29 +103,22 @@ const PaymentDetail = () => {
                       <table className="table">
                         <thead className="table-light">
                           <tr>
-                            <th>Method</th>
-                            <th>Expires</th>
-                            <th />
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
+                        {cartItems.map((item , index) => (
                           <tr>
-                            <td>Visa ending in 1111</td>
-                            <td>11/12</td>
+                            <td>{item.name.substring(0, 19)}</td>
+                            <td>${item.discounted_price}</td>
                             <td>
                               <div className="d-flex gap-2">	<a href="javascript:;" className="btn btn-dark btn-sm rounded-0">Delete</a>
                               </div>
                             </td>
                           </tr>
-                          <tr>
-                            <td>Visa ending in 4242</td>
-                            <td>11/12</td>
-                            <td>
-                              <div className="d-flex gap-2"> <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">Delete</a>
-                                <a href="javascript:;" className="btn btn-dark btn-sm rounded-0">Make Default</a>
-                              </div>
-                            </td>
-                          </tr>
+                          ))}
                         </tbody>
                       </table>
                     </div> <a href="javascript:;" className="btn btn-dark rounded-0">Add Payment Method</a>
