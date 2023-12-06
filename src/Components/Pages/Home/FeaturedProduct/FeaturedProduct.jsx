@@ -78,11 +78,11 @@ const addToLikes = async (productId) => {
             feed.homefeed_product && feed.homefeed_product.length > 0 && (
             <div className="container">
               <div className="separator pb-4">
-                <div className="line" />
-                <h5 className="mb-0 fw-bold separator-title">
+               
+                <h5 className="mb-0 fw-bold separator-title border-bottom border-3 ms-2 ">
                   {feed.feedname}
                 </h5>
-                <div className="line" />
+             
               </div>
               <div className="product-grid">
                 <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3 g-sm-4">

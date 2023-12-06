@@ -1,63 +1,64 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 export const Footer = () => {
+  const [contactInfoVisible, setContactInfoVisible] = useState(false);
+  const [usefulLinksVisible, setUsefulLinksVisible] = useState(false);
+  const [policiesVisible, setPoliciesVisible] = useState(false);
+
+  const toggleContactInfo = () => {
+    setContactInfoVisible(!contactInfoVisible);
+  };
+
+  const toggleUsefulLinks = () => {
+    setUsefulLinksVisible(!usefulLinksVisible);
+  };
+
+  const togglePolicies = () => {
+    setPoliciesVisible(!policiesVisible);
+  };
   return (
- <>
+    <>
       {/*start footer section*/}
-<footer>
-  <section className="py-5 border-top bg-light">
-    <div className="container">
-      <div className="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
-        <div className="col">
-          <div className="footer-section1">
-            <h5 className="mb-4 text-uppercase fw-bold">Contact Info</h5>
-            <div className="address mb-3">
-              <h6 className="mb-0 text-uppercase fw-bold">Address</h6>
-              <p className="mb-0">123 Street Name, City, Australia</p>
-            </div>
-            <div className="phone mb-3">
-              <h6 className="mb-0 text-uppercase fw-bold">Phone</h6>
-              <p className="mb-0">Toll Free (123) 472-796</p>
-              <p className="mb-0">Mobile : +91-9910XXXX</p>
-            </div>
-            <div className="email mb-3">
-              <h6 className="mb-0 text-uppercase fw-bold">Email</h6>
-              <p className="mb-0">mail@example.com</p>
-            </div>
-            <div className="working-days mb-3">
-              <h6 className="mb-0 text-uppercase fw-bold">WORKING DAYS</h6>
-              <p className="mb-0">Mon - FRI / 9:30 AM - 6:30 PM</p>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="footer-section2">
-            <h5 className="mb-4 text-uppercase fw-bold">Categories</h5>
-            <ul className="list-unstyled">
-              <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Jeans</a>
-              </li>
-              <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> T-Shirts</a>
-              </li>
-              <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Sports</a>
-              </li>
-              <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Shirts &amp; Tops</a>
-              </li>
-              <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Clogs &amp; Mules</a>
-              </li>
-              <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Sunglasses</a>
-              </li>
-              <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Bags &amp; Wallets</a>
-              </li>
-              <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Sneakers &amp; Athletic</a>
-              </li>
-              <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Electronis</a>
-              </li>
-              <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Furniture</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="col">
+      <footer className="footer-section">
+        <section className="py-5 border-top bg-light">
+          <div className="container">
+            <div className="row row-cols-1 row-cols-lg-3 row-cols-xl-3">
+              <div className="col">
+                <div className="footer-section1">
+                  <h5 className="mb-4 text-uppercase fw-bold">Contact Info</h5>
+                  <div className="address mb-3">
+                    <h6 className="mb-0 text-uppercase fw-bold">Address</h6>
+                    <p className="mb-0">123 Street Name, City, Australia</p>
+                  </div>
+                  <div className="phone mb-3">
+                    <h6 className="mb-0 text-uppercase fw-bold">Phone</h6>
+                    <p className="mb-0">Toll Free (123) 472-796</p>
+                    <p className="mb-0">Mobile : +91-9910XXXX</p>
+                  </div>
+                  <div className="email mb-3">
+                    <h6 className="mb-0 text-uppercase fw-bold">Email</h6>
+                    <p className="mb-0">mail@example.com</p>
+                  </div>
+                  <div className="working-days mb-3">
+                    <h6 className="mb-0 text-uppercase fw-bold">WORKING DAYS</h6>
+                    <p className="mb-0">Mon - FRI / 9:30 AM - 6:30 PM</p>
+                  </div>
+                </div>
+              </div>
+              <div className="col">
+                <div className="footer-section2">
+                  <h5 className="mb-4 text-uppercase fw-bold">Categories</h5>
+                  <ul className="list-unstyled">
+                    <li className="mb-1"><a href="/terms-conditions"><i className="bx bx-chevron-right" /> Terms & Conditions</a>
+                    </li>
+                    <li className="mb-1"><a href="/privacy-policy"><i className="bx bx-chevron-right" /> Privacy Policy</a>
+                    </li>
+                    <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Refund Policy</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              {/* <div className="col">
           <div className="footer-section3">
             <h5 className="mb-4 text-uppercase fw-bold">Popular Tags</h5>
             <div className="tags-box d-flex flex-wrap gap-2">
@@ -77,60 +78,96 @@ export const Footer = () => {
               <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Shoes</a>
             </div>
           </div>
-        </div>
-        <div className="col">
-          <div className="footer-section4">
-            <h5 className="mb-4 text-uppercase fw-bold">Stay informed</h5>
-            <div className="subscribe">
-              <input type="text" className="form-control" placeholder="Enter Your Email" />
-              <div className="mt-3 d-grid">
-                <a href="javascript:;" className="btn btn-dark btn-ecomm">Subscribe</a>
+        </div> */}
+              <div className="col">
+                <div className="footer-section4">
+                  <h5 className="mb-4 text-uppercase fw-bold">Stay informed</h5>
+                  <div className="subscribe">
+                    <input type="text" className="form-control" placeholder="Enter Your Email" />
+                    <div className="mt-3 d-grid">
+                      <a href="javascript:;" className="btn btn-dark btn-ecomm">Subscribe</a>
+                    </div>
+                    <p className="mt-3 mb-0">Subscribe to our newsletter to receive early discount offers, updates and new products info.</p>
+                  </div>
+                  <div className="download-app mt-3">
+                    <h6 className="mb-3 text-uppercase fw-bold">Download our app</h6>
+                    <div className="d-flex align-items-center gap-2">
+                      <a href="javascript:;">
+                        <img src="assets/images/icons/apple-store.png" className width={140} alt />
+                      </a>
+                      <a href="javascript:;">
+                        <img src="assets/images/icons/play-store.png" className width={140} alt />
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <p className="mt-3 mb-0">Subscribe to our newsletter to receive early discount offers, updates and new products info.</p>
             </div>
-            <div className="download-app mt-3">
-              <h6 className="mb-3 text-uppercase fw-bold">Download our app</h6>
-              <div className="d-flex align-items-center gap-2">
-                <a href="javascript:;">
-                  <img src="assets/images/icons/apple-store.png" className width={140} alt />
-                </a>
-                <a href="javascript:;">
-                  <img src="assets/images/icons/play-store.png" className width={140} alt />
-                </a>
+            {/*end row*/}
+          </div>
+        </section>
+        <section className="footer-strip text-center py-3 border-top positon-absolute bottom-0">
+          <div className="container">
+            <div className="d-flex flex-column flex-lg-row align-items-center gap-3 justify-content-between">
+              <p className="mb-0">Copyright © 2022. All right reserved.</p>
+              <div className="payment-icon">
+                <div className="row row-cols-auto g-2 justify-content-end">
+                  <div className="col">
+                    <img src="assets/images/icons/visa.png" alt />
+                  </div>
+                  <div className="col">
+                    <img src="assets/images/icons/paypal.png" alt />
+                  </div>
+                  <div className="col">
+                    <img src="assets/images/icons/mastercard.png" alt />
+                  </div>
+                  <div className="col">
+                    <img src="assets/images/icons/american-express.png" alt />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+        </section>
+      </footer>
+      <footer className="footer-section-mobile p-3">
+        <div className="address mb-3 d-flex align-items-center  justify-content-between">
+          <h6 className="mb-0 text-uppercase fw-bold">Contact Us </h6>
+          <span className="plus-sign"  onClick={toggleContactInfo}> {contactInfoVisible ? '-' : '+'}</span>
         </div>
-      </div>
-      {/*end row*/}
-    </div>
-  </section>
-  <section className="footer-strip text-center py-3 border-top positon-absolute bottom-0">
-    <div className="container">
-      <div className="d-flex flex-column flex-lg-row align-items-center gap-3 justify-content-between">
-        <p className="mb-0">Copyright © 2022. All right reserved.</p>
-        <div className="payment-icon">
-          <div className="row row-cols-auto g-2 justify-content-end">
-            <div className="col">
-              <img src="assets/images/icons/visa.png" alt />
-            </div>
-            <div className="col">
-              <img src="assets/images/icons/paypal.png" alt />
-            </div>
-            <div className="col">
-              <img src="assets/images/icons/mastercard.png" alt />
-            </div>
-            <div className="col">
-              <img src="assets/images/icons/american-express.png" alt />
-            </div>
-          </div>
+        {contactInfoVisible && (
+        <div className="footer-section1">
+                 
+                  <div className="address mb-3">
+                    <h6 className="mb-0 text-uppercase fw-bold">Address</h6>
+                    <p className="mb-0">123 Street Name, City, Australia</p>
+                  </div>
+                  <div className="phone mb-3">
+                    <h6 className="mb-0 text-uppercase fw-bold">Phone</h6>
+                    <p className="mb-0">Toll Free (123) 472-796</p>
+                    <p className="mb-0">Mobile : +91-9910XXXX</p>
+                  </div>
+                  <div className="email mb-3">
+                    <h6 className="mb-0 text-uppercase fw-bold">Email</h6>
+                    <p className="mb-0">mail@example.com</p>
+                  </div>
+                  <div className="working-days mb-3">
+                    <h6 className="mb-0 text-uppercase fw-bold">WORKING DAYS</h6>
+                    <p className="mb-0">Mon - FRI / 9:30 AM - 6:30 PM</p>
+                  </div>
+                </div>
+                   )}
+        <div className="address mb-3 d-flex align-items-center  justify-content-between">
+          <h6 className="mb-0 text-uppercase fw-bold">Useful Links</h6>
+          <span className="plus-sign">+</span>
         </div>
-      </div>
-    </div>
-  </section>
-</footer>
-{/*end footer section*/}
+        <div className="address mb-3 d-flex align-items-center  justify-content-between">
+          <h6 className="mb-0 text-uppercase fw-bold">Policies</h6>
+          <span className="plus-sign">+</span>
+        </div>
+      </footer>
+      {/*end footer section*/}
 
- </>
+    </>
   )
 }
