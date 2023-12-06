@@ -9,6 +9,12 @@ const Profile = () => {
   useEffect(() => {
 
     const userId = localStorage.getItem('userId');
+
+    // Check if user ID exists
+    if (!userId) {
+      window.location.href = '/login';
+      return;
+    }
     // API endpoint URL
     const apiUrl = `${process.env.REACT_APP_API}/api/userdetails`; ;
   
@@ -36,12 +42,9 @@ const Profile = () => {
       });
   }, []); 
   function handleLogout() {
-    // Clear user ID and token from local storage
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
-    
-    // Redirect the user to the login page or any other page you prefer
-    window.location.href = '/login'; // Replace '/login' with the URL of your login page
+    window.location.href = '/login';
 }
   return (
     <>
@@ -96,7 +99,7 @@ const Profile = () => {
                 <div className="card shadow-none mb-0">
                   <div className="card-body">
                     <p>Hello <strong>{userData.full_name}</strong> (not <strong>{userData.full_name}?</strong>  <a onClick={handleLogout}>Logout</a>)</p>
-                    <p>From your account dashboard you can view your Recent Orders, manage your shipping and billing addesses and edit your password and account details</p>
+                    
                   </div>
                 </div>
               </div>

@@ -5,10 +5,11 @@ export const Searchbar = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   
-const isLoggedIn = false;
   useEffect(() => {
     const fetchCartData = async () => {
       const user_id = localStorage.getItem('userId');
+
+      
       try {
         if (user_id) {
           const response = await fetch(`${process.env.REACT_APP_API}/api/cart-listuseridwise`, {
