@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { setAuthToken } from '../../../Auth';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'; // Import from @react-oauth/google
+
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -10,6 +13,12 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+
+  
+  
+  
+   
+ 
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -54,9 +63,24 @@ const Login = () => {
   const setAuthToken = (token) => {
     localStorage.setItem('token', token);
   };
+  
+  const responseGoogle = (response) => {
+    console.log('Google Sign-In response:', response);
+  
+    if (response && response.profileObj) {
+      console.log('Google Sign-In successful!');
+      console.log('User details:', response.profileObj);
+  
+      // Handle the user profile data here as needed
+    } else {
+      console.error('Google Sign-In failed or insufficient data received.');
+    }
+  };
+  
   return (
     <>
       {/*start page wrapper */}
+      <GoogleOAuthProvider >
       <div className="page-wrapper">
         <div className="page-content">
           {/*start breadcrumb*/}
@@ -94,11 +118,22 @@ const Login = () => {
                             </p>
                           </div>
                           <div className="d-grid">
-                            <a className="btn my-4 shadow-sm btn-white" href="javascript:;"> <span className="d-flex justify-content-center align-items-center">
-                              <img className="me-2" src="assets/images/icons/search.svg" width={16} alt="Image Description" />
-                              <span>Sign in with Google</span>
+                          <GoogleLogin
+                    clientId="150663205861-03eapvr2hd1tqim8slu4ah8vg3sqohll.apps.googleusercontent.com"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    render={(renderProps) => (
+                      <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                        Login with Google
+                      </button>
+                    )}
+                  />
+                           
+                               <span className="d-flex justify-content-center align-items-center">
+                           
+                            
                             </span>
-                            </a> <a href="javascript:;" className="btn btn-white"><i className="bx bxl-facebook" />Sign in with Facebook</a>
+                            <a href="javascript:;" className="btn btn-white"><i className="bx bxl-facebook" />Sign in with Facebook</a>
                           </div>
                           <div className="login-separater text-center mb-4"> <span>OR SIGN IN WITH EMAIL</span>
                             <hr />
@@ -149,6 +184,7 @@ const Login = () => {
           {/*end shop cart*/}
         </div>
       </div>
+      </GoogleOAuthProvider>
       {/*end page wrapper */}
 
     </>
