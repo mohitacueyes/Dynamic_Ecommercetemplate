@@ -51,33 +51,12 @@ export const Menubar = () => {
           </div>
         </li>
            ))}
-          <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
-              Account
-            </a>
-            <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="account-dashboard.html">Dashboard</a>
-              </li>
-              {/* <li><a className="dropdown-item" href="account-downloads.html">Downloads</a>
-              </li> */}
-              <li><a className="dropdown-item" href="account-orders.html">My Orders</a>
-              </li>
-              <li><a className="dropdown-item" href="accountdetails">User Details</a>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li><a className="dropdown-item" href="/login">Login</a></li>
-              <li><a className="dropdown-item" href="/register">Register</a></li>
-              <li><a className="dropdown-item" href="/resetpassword">Password</a></li>
-            </ul>
-          </li>
+          
         </ul>
       </div>
     </div>	
   </nav>
 </div>
-
   </>
   )
 }
