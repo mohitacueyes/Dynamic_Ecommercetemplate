@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import Gallery from "react-image-gallery";
+import "react-medium-image-zoom/dist/styles.css";
+import "react-image-gallery/styles/css/image-gallery.css";
 
 const ProductDetails = () => {
   const { id } = useParams();
-    const [productData, setProductData] = useState(null);
+  const [productData, setProductData] = useState(null);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
   const owlCarouselRef = useRef(null);
-  
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
       .then((response) => response.json())
@@ -17,7 +19,7 @@ const ProductDetails = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, [id]);
 
-// useEffect(() => {
+  // useEffect(() => {
   //   // Initialize Owl Carousel once the component is mounted
   //   if (owlCarouselRef.current) {
   //     owlCarouselRef.current.owlCarousel({
@@ -76,32 +78,31 @@ const ProductDetails = () => {
     }
   };
 
-  
-
-// -------ADD TO LIKES --------//
-const addToLikes = async (productId) => {
-  try {
-    const response = await fetch(`${process.env.REACT_APP_API}/api/add-favorites`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-
-        id: userId,
-        user_id: userId,
-        product_id: productId,
-        favorites : "1",
-      }),
-
-    });
-    console.log(response);
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error("Error adding to likes:", error);
-  }
-};
+  // -------ADD TO LIKES --------//
+  const addToLikes = async (productId) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API}/api/add-favorites`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: userId,
+            user_id: userId,
+            product_id: productId,
+            favorites: "1",
+          }),
+        }
+      );
+      console.log(response);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error adding to likes:", error);
+    }
+  };
 
   return (
     <>
@@ -112,9 +113,7 @@ const addToLikes = async (productId) => {
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
             <div className="container">
               <div className="page-breadcrumb d-flex align-items-center">
-                <h3 className="breadcrumb-title pe-3">
-                  {productData.name}
-                </h3>
+                <h3 className="breadcrumb-title pe-3">{productData.name}</h3>
                 <div className="ms-auto">
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb mb-0 p-0">
@@ -146,57 +145,21 @@ const addToLikes = async (productId) => {
                 <div className="product-detail-body">
                   <div className="row g-0">
                     <div className="col-12 col-lg-5">
-                    <div className="image-zoom-section">
-      <OwlCarousel
-                          ref={owlCarouselRef}
-                          className="product-gallery border mb-3 p-3 img-fluid"
-                          items={1}
-                          loop
-                          nav={false}
-                          dots={false}
-                          thumbs={true}
-                          thumbsPrerendered={true}
-                          style={{ height: "50vh", width: "45vh" }}
-                        >
-                          <img
-                            src={productData.image}
-                            style={{ height: "46vh" }}
-                            alt={productData.name}
+                      <div className="image-zoom-section">
+                        <div style={{ width: '100%', height: '490px' }}>
+                          <Gallery
+                            
+                            items={productData.product_image.map((image) => ({
+                              original: image.image,
+                              thumbnail: image.image,
+                            }))}
+                            style={{ width: '100%', height: '490px' }}
+                            showNav={false}
+                            showFullscreenButton={false}
+                            showPlayButton={false}
                           />
-
-                          {/* Add additional images here */}
-          {productData.product_image.map((image, index) => (
-            <div className="item  " key={index}>
-              <img
-                                src={image.image}
-                                style={{ height: "46vh" }}
-                                alt={`Sub Image ${index}`}
-                              />
-            </div>
-          ))}
-        </OwlCarousel>
-
-                        <div
-                          className="owl-thumbs d-flex justify-content-center"
-                          style={{ width: "45vh" }}
-                          data-slider-id={1}
-                        >
-          {productData.product_image.map((image) => (
-            <button
-                              className="owl-thumb-item    "
-                              key={image.id}
-                              
-                            >
-              <img
-                              
-                                src={image.image}
-                                style={{ height: "7vh" }}
-                                alt={`Sub Image ${image.id}`}
-                              />
-                            </button>
-                          ))}
-      </div>
-    </div>
+                        </div>
+                      </div>
                     </div>
                     <div className="col-12 col-lg-7">
                       <div className="product-info-section p-3">
@@ -233,38 +196,7 @@ const addToLikes = async (productId) => {
                           <dt className="col-sm-3">Product id</dt>
                           <dd className="col-sm-9">#{productData.sku}</dd>
                         </dl>
-                        {/* <div className="row row-cols-auto align-items-center mt-3">
-                    <div className="col">
-                      <label className="form-label">Quantity</label>
-                      <select className="form-select form-select-sm">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
-                    </div>
-                    <div className="col">
-                      <label className="form-label">Size</label>
-                      <select className="form-select form-select-sm">
-                        <option>S</option>
-                        <option>M</option>
-                        <option>L</option>
-                        <option>XS</option>
-                        <option>XL</option>
-                      </select>
-                    </div>
-                    <div className="col">
-                      <label className="form-label">Colors</label>
-                      <div className="color-indigators d-flex align-items-center gap-2">
-                        <div className="color-indigator-item bg-primary" />
-                        <div className="color-indigator-item bg-danger" />
-                        <div className="color-indigator-item bg-success" />
-                        <div className="color-indigator-item bg-warning" />
-                      </div>
-                    </div>
-                  </div> */}
-                        {/*end row*/}
+                        
                         <div className="d-flex gap-2 mt-3">
                           <a
                             href="javascript:;"
@@ -279,14 +211,13 @@ const addToLikes = async (productId) => {
                             onClick={() => addToCart(productData.id)}
                             className="btn btn-dark btn-ecomm"
                           >
-                            Buy now 
+                            Buy now
                           </a>
                           <a
-                           onClick={() => addToLikes(productData.id)}
+                            onClick={() => addToLikes(productData.id)}
                             className="btn-facebook btn-ecomm"
                           >
                             <i className="bx bx-heart" />
-                            
                           </a>
                         </div>
                         <hr />
@@ -337,6 +268,7 @@ const addToLikes = async (productId) => {
               </div>
             </div>
           </section>
+
           {/*end product detail*/}
           {/*start product more info*/}
           <section className="py-4">
