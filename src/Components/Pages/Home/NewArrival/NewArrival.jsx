@@ -7,8 +7,9 @@ const NewArrival = () => {
    <section className="py-4">
       <div className="container">
         <div className="separator pb-4">
+        {/* <h5 className="mb-0 fw-bold separator-title">New Arrivals</h5> */}
           <div className="line" />
-          <h5 className="mb-0 fw-bold separator-title">New Arrivals</h5>
+        
           <div className="line" />
         </div>
         <div className="product-grid">

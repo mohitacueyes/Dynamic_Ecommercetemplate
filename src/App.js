@@ -29,6 +29,8 @@ import Checkoutdetails from './Components/Pages/Checkout/Details/Checkoutdetails
 import Checkoutshipping from './Components/Pages/Checkout/Shipping/Checkoutshipping';
 import Checkoutpayment from './Components/Pages/Checkout/Payment/Checkoutpayment';
 import Checkoutcomplete from './Components/Pages/Checkout/Complete/Checkoutcomplete';
+import TermsConditions from './Components/Pages/TermsConditions/TermsConditions';
+import PrivacyPolicy from './Components/Pages/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
   return (
@@ -62,6 +64,8 @@ function App() {
         <Route path='/shoppingcart' element={<Checkoutshipping/>}/>
         <Route path='/payment' element={<Checkoutpayment/>}/>
         <Route path='/complete' element={<Checkoutcomplete/>}/>
+        <Route path='/terms-conditions' element={<TermsConditions/>}/>
+        <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
         </Routes>
       <Footer />
     </>

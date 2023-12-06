@@ -113,8 +113,6 @@ a {
 	color: #fff;
 }
 
-
-
 /* Navigation */
 
 .primary-menu .navbar-nav a.nav-link {
@@ -1046,7 +1044,7 @@ ul.categories-list li {
 }
 
 .separator .separator-title {
-    padding: 0 1rem;
+    padding: 0 0 0.75rem 0;
 	text-transform: uppercase;
 }
 
@@ -1299,6 +1297,23 @@ ul.categories-list li {
 }
 .todo-done {
 	text-decoration: line-through
+}
+
+.plus-sign {
+
+	color: #000;
+	font-size: 2rem;
+  }
+  @media screen and (min-width: 1024px) {
+	.footer-section-mobile {
+		display: none;
+  }
+}
+@media screen and (max-width: 425px) {
+	.footer-section {
+		display: none
+	}
+	
 }
 /* Nav Tabs */
 
