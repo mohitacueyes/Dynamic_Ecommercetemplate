@@ -5,7 +5,7 @@ const AdvertiseBanner = () => {
     <>
       {/*start Advertise banne rs*/}
       <section className="py-4 ">
-        <div className="add-banner ">
+        <div className="add-banner">
           <div>
             <img
               src="assets/images/promo/ad-1.jpg"
@@ -20,8 +20,8 @@ const AdvertiseBanner = () => {
               controls
               src="https://cdn.shopify.com/videos/c/o/v/1b69248fa9454df0b17ccc09475fa199.mp4"
               type="video/mp4"
-              className="  p-5"
-              style={{ width: "100%", height: "600px" , objectFit: "cover" }}
+              className="  p-5 videosm"
+            
               alt="Video"
             ></video>
           </div>

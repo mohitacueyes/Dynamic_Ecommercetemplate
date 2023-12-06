@@ -10,3 +10,14 @@
     width: 100%;
     height: 100%;
 }
+@media  screen and  (max-width: 425px) {
+    .bannerr
+    {
+        height: 35vh;
+    }
+    .bannerr img
+    {
+        height: 100%;
+    }
+    
+}

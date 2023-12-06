@@ -58,28 +58,7 @@ export const Footer = () => {
                   </ul>
                 </div>
               </div>
-              {/* <div className="col">
-          <div className="footer-section3">
-            <h5 className="mb-4 text-uppercase fw-bold">Popular Tags</h5>
-            <div className="tags-box d-flex flex-wrap gap-2">
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Cloths</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Electronis</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Furniture</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Sports</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Men Wear</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Women Wear</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Laptops</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Formal Shirts</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Topwear</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Headphones</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Bottom Wear</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Bags</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Sofa</a>
-              <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Shoes</a>
-            </div>
-          </div>
-        </div> */}
-              <div className="col">
+                <div className="col">
                 <div className="footer-section4">
                   <h5 className="mb-4 text-uppercase fw-bold">Stay informed</h5>
                   <div className="subscribe">
@@ -133,39 +112,83 @@ export const Footer = () => {
       <footer className="footer-section-mobile p-3">
         <div className="address mb-3 d-flex align-items-center  justify-content-between">
           <h6 className="mb-0 text-uppercase fw-bold">Contact Us </h6>
-          <span className="plus-sign"  onClick={toggleContactInfo}> {contactInfoVisible ? '-' : '+'}</span>
+          <span className="plus-sign" onClick={toggleContactInfo}> {contactInfoVisible ? '-' : '+'}</span>
         </div>
         {contactInfoVisible && (
-        <div className="footer-section1">
-                 
-                  <div className="address mb-3">
-                    <h6 className="mb-0 text-uppercase fw-bold">Address</h6>
-                    <p className="mb-0">123 Street Name, City, Australia</p>
-                  </div>
-                  <div className="phone mb-3">
-                    <h6 className="mb-0 text-uppercase fw-bold">Phone</h6>
-                    <p className="mb-0">Toll Free (123) 472-796</p>
-                    <p className="mb-0">Mobile : +91-9910XXXX</p>
-                  </div>
-                  <div className="email mb-3">
-                    <h6 className="mb-0 text-uppercase fw-bold">Email</h6>
-                    <p className="mb-0">mail@example.com</p>
-                  </div>
-                  <div className="working-days mb-3">
-                    <h6 className="mb-0 text-uppercase fw-bold">WORKING DAYS</h6>
-                    <p className="mb-0">Mon - FRI / 9:30 AM - 6:30 PM</p>
-                  </div>
-                </div>
-                   )}
+          <div className="footer-section1">
+
+            <div className="address mb-3">
+              <h6 className="mb-0 text-uppercase fw-bold">Address</h6>
+              <p className="mb-0">123 Street Name, City, Australia</p>
+            </div>
+            <div className="phone mb-3">
+              <h6 className="mb-0 text-uppercase fw-bold">Phone</h6>
+              <p className="mb-0">Toll Free (123) 472-796</p>
+              <p className="mb-0">Mobile : +91-9910XXXX</p>
+            </div>
+            <div className="email mb-3">
+              <h6 className="mb-0 text-uppercase fw-bold">Email</h6>
+              <p className="mb-0">mail@example.com</p>
+            </div>
+            <div className="working-days mb-3">
+              <h6 className="mb-0 text-uppercase fw-bold">WORKING DAYS</h6>
+              <p className="mb-0">Mon - FRI / 9:30 AM - 6:30 PM</p>
+            </div>
+          </div>
+        )}
         <div className="address mb-3 d-flex align-items-center  justify-content-between">
           <h6 className="mb-0 text-uppercase fw-bold">Useful Links</h6>
           <span className="plus-sign">+</span>
         </div>
-        <div className="address mb-3 d-flex align-items-center  justify-content-between">
-          <h6 className="mb-0 text-uppercase fw-bold">Policies</h6>
-          <span className="plus-sign">+</span>
+        <div className="address mb-3 d-flex align-items-center justify-content-between">
+          <h6 className="mb-0 text-uppercase fw-bold" onClick={togglePolicies}>
+            Policies
+          </h6>
+          <span className="plus-sign" onClick={togglePolicies}>
+            {policiesVisible ? '-' : '+'}
+          </span>
         </div>
+        {policiesVisible && (
+          <ul className="list-unstyled">
+            <li className="mb-1">
+              <a href="/terms-conditions" className='text-decoration-none text-dark fw-bold'>
+                <i className="bx bx-chevron-right" /> Terms & Conditions
+              </a>
+            </li>
+            <li className="mb-1">
+              <a href="/privacy-policy" className='text-decoration-none text-dark fw-bold'>
+                <i className="bx bx-chevron-right" /> Privacy Policy
+              </a>
+            </li>
+            <li className="mb-1">
+              <a href="javascript:;">
+                <i className="bx bx-chevron-right" /> Refund Policy
+              </a>
+            </li>
+          </ul>
+        )}
       </footer>
+     <div className="homeFooter">
+     <div className="d-flex flex-row justify-content-between align-items-center p-3 shadow ">
+        <div className="d-flex flex-column align-items-center ">
+          <i className="bx bx-home" />
+          <span><a href="/home" className='text-decoration-none text-dark fw-bold'>Home</a></span>
+        </div>
+        <div className="d-flex flex-column align-items-center ">
+          <i className="bx bx-search" />
+          <span><a href="" className='text-decoration-none text-dark fw-bold'>Search</a></span>
+        </div>
+        <div className="d-flex flex-column align-items-center ">
+          <i className="bx bx-cart" />
+          <span><a href="" className='text-decoration-none text-dark fw-bold'> Cart </a></span>
+        </div>
+        <div className="d-flex flex-column align-items-center ">
+          <i className="bx bx-user" />
+          <span><a href="" className='text-decoration-none text-dark fw-bold'>Account</a></span>
+        </div>
+      
+      </div>
+     </div>
       {/*end footer section*/}
 
     </>
