@@ -41,7 +41,7 @@ const PaymentDetail = () => {
   console.log(cartItems);
   function handleLogout() {
     // Clear user session data from local storage
-    localStorage.removeItem('user');
+    localStorage.removeItem('userId');
     // Redirect the user to the login page or any other page you prefer
     window.location.href = '/login'; // Replace '/login' with the URL of your login page
   }

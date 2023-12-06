@@ -1,12 +1,48 @@
-import React from 'react'
+import React , { useEffect, useState } from 'react'
 
 const Profile = () => {
+
+  const [userData, setUserData] = useState({
+    id: null,
+    full_name: '',
+  });
+  useEffect(() => {
+
+    const userId = localStorage.getItem('userId');
+    // API endpoint URL
+    const apiUrl = `${process.env.REACT_APP_API}/api/userdetails`; ;
+  
+    // Make API call using fetch
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: userId,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Set user data received from the API response
+        setUserData({
+          id: data.ResponseData.id,
+          full_name: data.ResponseData.full_name || '',
+        
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching data: ', error);
+      });
+  }, []); 
   function handleLogout() {
-    // Clear user session data from local storage
-    localStorage.removeItem('user');
+    // Clear user ID and token from local storage
+    localStorage.removeItem('userId');
+    localStorage.removeItem('token');
+    
     // Redirect the user to the login page or any other page you prefer
     window.location.href = '/login'; // Replace '/login' with the URL of your login page
-  }
+}
   return (
     <>
     <div class="wrapper">
@@ -17,7 +53,7 @@ const Profile = () => {
     <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
       <div className="container">
         <div className="page-breadcrumb d-flex align-items-center">
-          <h3 className="breadcrumb-title pe-3">My Orders</h3>
+          <h3 className="breadcrumb-title pe-3">Profile</h3>
           <div className="ms-auto">
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb mb-0 p-0">
@@ -25,7 +61,7 @@ const Profile = () => {
                 </li>
                 <li className="breadcrumb-item"><a href="javascript:;">Account</a>
                 </li>
-                <li className="breadcrumb-item active" aria-current="page">My Orders</li>
+                <li className="breadcrumb-item active" aria-current="page">Dashboard</li>
               </ol>
             </nav>
           </div>
@@ -59,7 +95,7 @@ const Profile = () => {
               <div className="col-lg-8">
                 <div className="card shadow-none mb-0">
                   <div className="card-body">
-                    <p>Hello <strong>Madison Ruiz</strong> (not <strong>Madison Ruiz?</strong>  <a href="javascript:;">Logout</a>)</p>
+                    <p>Hello <strong>{userData.full_name}</strong> (not <strong>{userData.full_name}?</strong>  <a onClick={handleLogout}>Logout</a>)</p>
                     <p>From your account dashboard you can view your Recent Orders, manage your shipping and billing addesses and edit your password and account details</p>
                   </div>
                 </div>

@@ -6,10 +6,10 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const [productData, setProductData] = useState(null);
+    const [productData, setProductData] = useState(null);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
   const owlCarouselRef = useRef(null);
-
+  
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
       .then((response) => response.json())
@@ -17,7 +17,7 @@ const ProductDetails = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, [id]);
 
-  // useEffect(() => {
+// useEffect(() => {
   //   // Initialize Owl Carousel once the component is mounted
   //   if (owlCarouselRef.current) {
   //     owlCarouselRef.current.owlCarousel({
@@ -146,8 +146,8 @@ const addToLikes = async (productId) => {
                 <div className="product-detail-body">
                   <div className="row g-0">
                     <div className="col-12 col-lg-5">
-                      <div className="image-zoom-section">
-                        <OwlCarousel
+                    <div className="image-zoom-section">
+      <OwlCarousel
                           ref={owlCarouselRef}
                           className="product-gallery border mb-3 p-3 img-fluid"
                           items={1}
@@ -165,29 +165,29 @@ const addToLikes = async (productId) => {
                           />
 
                           {/* Add additional images here */}
-                          {productData.product_image.map((image, index) => (
-                            <div className="item  " key={index}>
-                              <img
+          {productData.product_image.map((image, index) => (
+            <div className="item  " key={index}>
+              <img
                                 src={image.image}
                                 style={{ height: "46vh" }}
                                 alt={`Sub Image ${index}`}
                               />
-                            </div>
-                          ))}
-                        </OwlCarousel>
+            </div>
+          ))}
+        </OwlCarousel>
 
                         <div
                           className="owl-thumbs d-flex justify-content-center"
                           style={{ width: "45vh" }}
                           data-slider-id={1}
                         >
-                          {productData.product_image.map((image) => (
-                            <button
+          {productData.product_image.map((image) => (
+            <button
                               className="owl-thumb-item    "
                               key={image.id}
                               
                             >
-                              <img
+              <img
                               
                                 src={image.image}
                                 style={{ height: "7vh" }}
@@ -195,8 +195,8 @@ const addToLikes = async (productId) => {
                               />
                             </button>
                           ))}
-                        </div>
-                      </div>
+      </div>
+    </div>
                     </div>
                     <div className="col-12 col-lg-7">
                       <div className="product-info-section p-3">
@@ -275,11 +275,18 @@ const addToLikes = async (productId) => {
                             Add to Cart
                           </a>
                           <a
+                            href="javascript:;"
+                            onClick={() => addToCart(productData.id)}
+                            className="btn btn-dark btn-ecomm"
+                          >
+                            Buy now 
+                          </a>
+                          <a
                            onClick={() => addToLikes(productData.id)}
-                            className="btn btn-light btn-ecomm"
+                            className="btn-facebook btn-ecomm"
                           >
                             <i className="bx bx-heart" />
-                            Add to Wishlist
+                            
                           </a>
                         </div>
                         <hr />
