@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+
+
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
+
 import Gallery from "react-image-gallery";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -16,6 +21,35 @@ const ProductDetails = () => {
       .then((data) => setProductData(data.ResponseData[0]))
       .catch((error) => console.error("Error fetching data:", error));
   }, [id]);
+
+
+  // useEffect(() => {
+  //   // Initialize Owl Carousel once the component is mounted
+  //   if (owlCarouselRef.current) {
+  //     owlCarouselRef.current.owlCarousel({
+  //       loop: true,
+  //       margin: 10,
+  //       responsiveClass: true,
+  //       nav: false,
+  //       dots: false,
+  //       thumbs: true,
+  //       thumbsPrerendered: true,
+  //       responsive: {
+  //         0: { items: 1 },
+  //         600: { items: 1 },
+  //         1000: { items: 1 }
+  //       }
+  //     });
+  //   }
+
+  // Cleanup the Owl Carousel instance when the component unmounts
+  //   return () => {
+  //     if (owlCarouselRef.current) {
+  //       owlCarouselRef.current.trigger('destroy.owl.carousel');
+  //     }
+  //   };
+  // }, [productData]);
+
 
   if (!productData) {
     return null;
@@ -117,18 +151,32 @@ const ProductDetails = () => {
                   <div className="row g-0">
                     <div className="col-12 col-lg-5">
                       <div className="image-zoom-section">
+
                         <div >
                    
                           <Gallery
+
+                        <div style={{ width: '100%', height: '490px' }}>
+                          <Gallery
+                            
+
                             items={productData.product_image.map((image) => ({
                               original: image.image,
                               thumbnail: image.image,
                             }))}
+
                             showNav={false}
                             showFullscreenButton={true}
                             showPlayButton={false}
                           />
                              
+
+                            style={{ width: '100%', height: '490px' }}
+                            showNav={false}
+                            showFullscreenButton={false}
+                            showPlayButton={false}
+                          />
+
                         </div>
                       </div>
                     </div>
@@ -239,6 +287,7 @@ const ProductDetails = () => {
               </div>
             </div>
           </section>
+
           {/*end product detail*/}
           {/*start product more info*/}
           <section className="py-4">

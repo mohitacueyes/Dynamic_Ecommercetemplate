@@ -152,9 +152,7 @@ function Shopcart() {
                           </h5>
                         </div>
                             </div>
-                           
                           </div>
-
                         </div>
                         <div className="col-12 col-lg-3">
                           <div className="cart-action text-center">
@@ -163,6 +161,7 @@ function Shopcart() {
                               className="form-control rounded-0"
                               defaultValue={1}
                               min={1}
+                              style={{ maxWidth: "80px" }}
                             />
                           </div>
                         </div>

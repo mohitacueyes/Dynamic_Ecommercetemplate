@@ -5,10 +5,11 @@ export const Searchbar = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   
-const isLoggedIn = false;
   useEffect(() => {
     const fetchCartData = async () => {
       const user_id = localStorage.getItem('userId');
+
+      
       try {
         if (user_id) {
           const response = await fetch(`${process.env.REACT_APP_API}/api/cart-listuseridwise`, {
@@ -99,6 +100,7 @@ const isLoggedIn = false;
                 </div>
               </div>
             </div>
+            <div className="searchbar">
             <div className="col-12 col-xl order-4 order-xl-0">
               <div className="input-group flex-nowrap pb-3 pb-xl-0">
                 <input
@@ -113,6 +115,7 @@ const isLoggedIn = false;
                   Search
                 </button>
               </div>
+            </div>
             </div>
             <div className="col-auto d-none d-xl-flex">
               <div className="d-flex align-items-center gap-3">

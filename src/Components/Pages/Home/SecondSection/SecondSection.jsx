@@ -11,13 +11,13 @@ const SecondSection = () => {
   }, []);
   return (
    <>
-  <div className="page-wrapper">
+ <div className='service24'>
+ <div className="page-wrapper">
   <div className="page-content">
-    {/*start information*/}
-    <section className="py-4">
+    <section className="py-4 ">
       <div className="container">
         <div className="row row-cols-1 row-cols-lg-3 g-4">
-          <div className="col">
+          <div className="col ">
             <div className="d-flex align-items-center justify-content-center p-3 border">
               <div className="fs-1 text-content"><i className="bx bx-taxi" />
               </div>
@@ -81,6 +81,7 @@ const SecondSection = () => {
     {/*end pramotion*/}
   </div>
 </div>
+ </div>
 
    </>
   )
