@@ -107,7 +107,7 @@ a {
 }
 
 .logo-icon {
-	width: 110px
+	width: 150px;
 }
 
 .top-cart-icons ul.navbar-nav .nav-item a.cart-link {
@@ -256,7 +256,7 @@ a {
 
 
 .primary-menu .dropdown-large-menu {
-	width: auto;
+	width:300px!important;
 	padding: 0.5rem;
 }
 
@@ -280,10 +280,14 @@ a {
 	border: 0;
 	border-radius: 0.25rem;
 	text-transform: uppercase;
+	transition: .4s ;
 }
 
 .primary-menu .dropdown-large-menu ul li a:hover {
-	background-color: #ebebeb;
+	color: #C29E54!important;
+	letter-spacing: 1px; 
+	/* background-color: #ebebeb; */
+	
 }
 
 
@@ -1437,7 +1441,10 @@ ul.categories-list li {
 		width: 100%;
 		object-fit: cover;
 	}
-
+.searchbar
+{
+	display: block;
+}
 
 @media screen and (max-width: 425px) {
 	.footer-section {
@@ -1465,6 +1472,10 @@ ul.categories-list li {
 	{
 		height: 80px;
 	}
+	.searchbar
+{
+	display: none;
+}
 }
 
 /* Nav Tabs */
