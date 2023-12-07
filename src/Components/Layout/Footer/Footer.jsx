@@ -1,9 +1,10 @@
-import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+
 import React, { useState } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import BottommNavigation from './BottommNavigation';
 
 
 
@@ -16,7 +17,8 @@ const styles = {
     margin: 0, // Ensure the navigation stays above other elements if needed
   },
 };
-export const Footer = () => {
+
+export const Footer = ({ currentPage }) => {
   const [contactInfoVisible, setContactInfoVisible] = useState(false);
   const [usefulLinksVisible, setUsefulLinksVisible] = useState(false);
   const [policiesVisible, setPoliciesVisible] = useState(false);
@@ -37,6 +39,9 @@ export const Footer = () => {
   const togglePolicies = () => {
     setPoliciesVisible(!policiesVisible);
   };
+
+
+
   return (
     <>
       {/*start footer section*/}
@@ -130,7 +135,7 @@ export const Footer = () => {
           </div>
         </section>
       </footer>
-      <footer className="footer-section-mobile p-3">
+      <footer className="footer-section-mobile pe-3 ps-3 pb-2">
         <div className="address mb-3 d-flex align-items-center  justify-content-between">
           <h6 className="mb-0 text-uppercase fw-bold">Contact Us </h6>
           <span className="plus-sign" onClick={toggleContactInfo}> {contactInfoVisible ? '-' : '+'}</span>
@@ -161,8 +166,8 @@ export const Footer = () => {
           <h6 className="mb-0 text-uppercase fw-bold">Useful Links</h6>
           <span className="plus-sign">+</span>
         </div>
-        <div className="address mb-3 d-flex align-items-center justify-content-between">
-          <h6 className="mb-0 text-uppercase fw-bold" onClick={togglePolicies}>
+        <div className="address  d-flex align-items-center justify-content-between">
+          <h6 className="mb-0 text-uppercase fw-bold " onClick={togglePolicies}>
             Policies
           </h6>
           <span className="plus-sign" onClick={togglePolicies}>
@@ -170,13 +175,13 @@ export const Footer = () => {
           </span>
         </div>
         {policiesVisible && (
-          <ul className="list-unstyled">
+          <ul className="list-unstyled mb-3">
             <li className="mb-1">
               <a href="/terms-conditions" className='text-decoration-none text-dark fw-bold'>
                 <i className="bx bx-chevron-right" /> Shopping Policy   
               </a>
             </li>
-            <li className="mb-1">
+            <li className="mb-5">
               <a href="/privacy-policy" className='text-decoration-none text-dark fw-bold'>
                 <i className="bx bx-chevron-right" /> Exchange Policy 
               </a>
@@ -185,47 +190,7 @@ export const Footer = () => {
           </ul>
         )}
       </footer>
-     <div className="homeFooter">
-     {/* <div className="d-flex flex-row justify-content-between align-items-center p-3 shadow "> */}
-        {/* <div className="d-flex flex-column align-items-center ">
-          <i className="bx bx-home" />
-          <span><a href="/home" className='text-decoration-none text-dark fw-bold'>Home</a></span>
-        </div>
-        <div className="d-flex flex-column align-items-center ">
-          <i className="bx bx-search" />
-          <span><a href="" className='text-decoration-none text-dark fw-bold'>Search</a></span>
-        </div>
-        <div className="d-flex flex-column align-items-center ">
-          <i className="bx bx-cart" />
-          <span><a href="" className='text-decoration-none text-dark fw-bold'> Cart </a></span>
-        </div>
-        <div className="d-flex flex-column align-items-center ">
-          <i className="bx bx-user" />
-          <span><a href="" className='text-decoration-none text-dark fw-bold'>Account</a></span>
-        </div> */}
-          <BottomNavigation  sx={styles.root} value={value} onChange={handleChange}>
-      <BottomNavigationAction
-        label="Home"
-        value="home"
-        icon={<HomeIcon />}
-      />
-      <BottomNavigationAction
-        label="Search"
-        value="search"
-        icon={<SearchIcon />}
-      />
-      <BottomNavigationAction
-        label="Cart"
-        value="cart"
-        icon={<ShoppingCartIcon />}
-      />
-      <BottomNavigationAction
-        label="Account"
-        value="account"
-        icon={<AccountCircleIcon />}
-      />
-    </BottomNavigation> 
-      </div>
+     <BottommNavigation />
      {/* </div> */}
       {/*end footer section*/}
 
