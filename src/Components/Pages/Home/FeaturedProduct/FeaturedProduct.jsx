@@ -101,10 +101,10 @@ const addToLikes = async (productId) => {
                             </Link></a>
                           </div> */}
                           <a>
-                            <Link to={`/productdetails/${product.id}`}>
+                            <Link to={`/productdetails/${product.id}/${product.slug}`}>
                             <img
                               src={product.product_imageLink}
-                              className="img-fluid  rounded-4"
+                              className="img-fluid  rounded-2"
                                style={{height:"393.75px" , width:"393.75px"}}
                               alt="..."
                             />

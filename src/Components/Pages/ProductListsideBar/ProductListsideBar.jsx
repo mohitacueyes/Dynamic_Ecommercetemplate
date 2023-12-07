@@ -1065,7 +1065,7 @@ const addToLikes = async (productId) => {
                                   </div> */}
                                   <div   style={{height:"393.75px" }}>
                                     <Link
-                                      to={`/productdetails/${product.id}`}
+                                      to={`/productdetails/${product.id}/${product.slug}`}
                                     >
                                       <img
                                         src={product.image}
