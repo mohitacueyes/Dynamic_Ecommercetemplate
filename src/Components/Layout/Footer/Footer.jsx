@@ -1,9 +1,30 @@
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import React, { useState } from 'react';
+import HomeIcon from '@mui/icons-material/Home';
+import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+
+
+const styles = {
+  root: {
+    width: '100%',
+    position: 'fixed',
+    bottom: 0,
+    zIndex: 1000,
+    margin: 0, // Ensure the navigation stays above other elements if needed
+  },
+};
 export const Footer = () => {
   const [contactInfoVisible, setContactInfoVisible] = useState(false);
   const [usefulLinksVisible, setUsefulLinksVisible] = useState(false);
   const [policiesVisible, setPoliciesVisible] = useState(false);
+  const [value, setValue] = React.useState('home');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const toggleContactInfo = () => {
     setContactInfoVisible(!contactInfoVisible);
@@ -49,12 +70,12 @@ export const Footer = () => {
                 <div className="footer-section2">
                   <h5 className="mb-4 text-uppercase fw-bold">Categories</h5>
                   <ul className="list-unstyled">
-                    <li className="mb-1"><a href="/terms-conditions"><i className="bx bx-chevron-right" /> Terms & Conditions</a>
+                    <li className="mb-1"><a href="/terms-conditions"><i className="bx bx-chevron-right" /> Shopping Policy </a>
                     </li>
-                    <li className="mb-1"><a href="/privacy-policy"><i className="bx bx-chevron-right" /> Privacy Policy</a>
+                    <li className="mb-1"><a href="/privacy-policy"><i className="bx bx-chevron-right" /> Exchange Policy </a>
                     </li>
-                    <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Refund Policy</a>
-                    </li>
+                    {/* <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Refund Policy</a>
+                    </li> */}
                   </ul>
                 </div>
               </div>
@@ -152,25 +173,21 @@ export const Footer = () => {
           <ul className="list-unstyled">
             <li className="mb-1">
               <a href="/terms-conditions" className='text-decoration-none text-dark fw-bold'>
-                <i className="bx bx-chevron-right" /> Terms & Conditions
+                <i className="bx bx-chevron-right" /> Shopping Policy   
               </a>
             </li>
             <li className="mb-1">
               <a href="/privacy-policy" className='text-decoration-none text-dark fw-bold'>
-                <i className="bx bx-chevron-right" /> Privacy Policy
+                <i className="bx bx-chevron-right" /> Exchange Policy 
               </a>
             </li>
-            <li className="mb-1">
-              <a href="javascript:;">
-                <i className="bx bx-chevron-right" /> Refund Policy
-              </a>
-            </li>
+            
           </ul>
         )}
       </footer>
      <div className="homeFooter">
-     <div className="d-flex flex-row justify-content-between align-items-center p-3 shadow ">
-        <div className="d-flex flex-column align-items-center ">
+     {/* <div className="d-flex flex-row justify-content-between align-items-center p-3 shadow "> */}
+        {/* <div className="d-flex flex-column align-items-center ">
           <i className="bx bx-home" />
           <span><a href="/home" className='text-decoration-none text-dark fw-bold'>Home</a></span>
         </div>
@@ -185,10 +202,31 @@ export const Footer = () => {
         <div className="d-flex flex-column align-items-center ">
           <i className="bx bx-user" />
           <span><a href="" className='text-decoration-none text-dark fw-bold'>Account</a></span>
-        </div>
-      
+        </div> */}
+          <BottomNavigation  sx={styles.root} value={value} onChange={handleChange}>
+      <BottomNavigationAction
+        label="Home"
+        value="home"
+        icon={<HomeIcon />}
+      />
+      <BottomNavigationAction
+        label="Search"
+        value="search"
+        icon={<SearchIcon />}
+      />
+      <BottomNavigationAction
+        label="Cart"
+        value="cart"
+        icon={<ShoppingCartIcon />}
+      />
+      <BottomNavigationAction
+        label="Account"
+        value="account"
+        icon={<AccountCircleIcon />}
+      />
+    </BottomNavigation> 
       </div>
-     </div>
+     {/* </div> */}
       {/*end footer section*/}
 
     </>

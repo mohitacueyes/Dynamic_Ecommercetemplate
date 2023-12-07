@@ -110,6 +110,7 @@ a {
 	width: 150px;
 }
 
+
 .top-cart-icons ul.navbar-nav .nav-item a.cart-link {
 	font-size: 30px;
 	color: #292929;
@@ -1441,10 +1442,7 @@ ul.categories-list li {
 		width: 100%;
 		object-fit: cover;
 	}
-.searchbar
-{
-	display: block;
-}
+
 
 @media screen and (max-width: 425px) {
 	.footer-section {
@@ -1472,10 +1470,7 @@ ul.categories-list li {
 	{
 		height: 80px;
 	}
-	.searchbar
-{
-	display: none;
-}
+
 }
 
 /* Nav Tabs */
