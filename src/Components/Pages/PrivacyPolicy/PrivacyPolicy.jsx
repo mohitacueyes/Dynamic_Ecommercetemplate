@@ -4,54 +4,41 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Container } from 'react-bootstrap';
 
 const PrivacyPolicy = () => {
-    const [apiData, setApiData] = useState(null);
+  const [responseData, setResponseData] = useState(null);
 
-    useEffect(() => {
-     
-      fetch(`${process.env.REACT_APP_API}/api/privacypolicy`) 
-        .then(response => response.json())
-        .then(data => {
-       
-          setApiData(data.ResponseData[0]); 
-        })
-        .catch(error => {
-        
-          console.error('Error fetching data:', error);
-        });
-    }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API}/api/privacypolicy`);
+        const data = await response.json();
+        setResponseData(data.ResponseData[0]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
    
     <>
-    <Container>
-       <div className="App mt-5 mb-5">
-       <div className="separator pb-4">
-                
-                <h5 className="mb-5 fw-bold separator-title border-bottom border-3 ms-2 ">
-                  Privacy Policy
-                </h5>
-             
-              </div>
- 
-         {apiData && (
-           <CKEditor
-             editor={ClassicEditor}
-             data={apiData.description} // Use the fetched HTML data here
-             onReady={editor => {
-               console.log('Editor is ready to use!', editor);
-             }}
-             onChange={event => {
-               console.log(event);
-             }}
-             onBlur={(event, editor) => {
-               console.log('Blur.', editor);
-             }}
-             onFocus={(event, editor) => {
-               console.log('Focus.', editor);
-             }}
-           />
-         )}
-       </div>
-     </Container>
+   <Container>
+        <div className="App mt-5 mb-5">
+           <div className="separator">
+            <h5 className="mb-5 fw-bold separator-title border-bottom border-3 ms-2">
+                Privacy Policy
+            </h5>
+            </div>
+          <div className="separator">
+          {responseData && (
+              <div
+              className="text-left"
+              style={{ fontSize: "16px", lineHeight: "1.6", color: "black" , textAlign: "justify"}}
+              dangerouslySetInnerHTML={{ __html: responseData.description }} />
+            )}
+          </div>
+        </div>
+      </Container>
    </>
   )
 }
