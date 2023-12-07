@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+
+
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+
 import Gallery from "react-image-gallery";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -18,6 +21,7 @@ const ProductDetails = () => {
       .then((data) => setProductData(data.ResponseData[0]))
       .catch((error) => console.error("Error fetching data:", error));
   }, [id]);
+
 
   // useEffect(() => {
   //   // Initialize Owl Carousel once the component is mounted
@@ -45,6 +49,7 @@ const ProductDetails = () => {
   //     }
   //   };
   // }, [productData]);
+
 
   if (!productData) {
     return null;
@@ -146,18 +151,32 @@ const ProductDetails = () => {
                   <div className="row g-0">
                     <div className="col-12 col-lg-5">
                       <div className="image-zoom-section">
+
+                        <div >
+                   
+                          <Gallery
+
                         <div style={{ width: '100%', height: '490px' }}>
                           <Gallery
                             
+
                             items={productData.product_image.map((image) => ({
                               original: image.image,
                               thumbnail: image.image,
                             }))}
+
+                            showNav={false}
+                            showFullscreenButton={true}
+                            showPlayButton={false}
+                          />
+                             
+
                             style={{ width: '100%', height: '490px' }}
                             showNav={false}
                             showFullscreenButton={false}
                             showPlayButton={false}
                           />
+
                         </div>
                       </div>
                     </div>
@@ -288,20 +307,6 @@ const ProductDetails = () => {
                       </div>
                     </a>
                   </li>
-                  {/* <li className="nav-item">
-              <a className="nav-link" data-bs-toggle="tab" href="#more-info">
-                <div className="d-flex align-items-center">
-                  <div className="tab-title text-uppercase fw-500">More Info</div>
-                </div>
-              </a>
-            </li> */}
-                  {/* <li className="nav-item">
-              <a className="nav-link" data-bs-toggle="tab" href="#tags">
-                <div className="d-flex align-items-center">
-                  <div className="tab-title text-uppercase fw-500">Tags</div>
-                </div>
-              </a>
-            </li> */}
                   <li className="nav-item">
                     <a
                       className="nav-link active"
@@ -351,24 +356,7 @@ const ProductDetails = () => {
                       accusamus tattooed echo park.
                     </p>
                   </div>
-                  {/* <div className="tab-pane fade" id="tags">
-              <div className="tags-box d-flex flex-wrap gap-2">
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Cloths</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Electronis</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Furniture</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Sports</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Men Wear</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Women Wear</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Laptops</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Formal Shirts</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Topwear</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Headphones</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Bottom Wear</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Bags</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Sofa</a>
-                <a href="javascript:;" className="btn btn-ecomm btn-outline-dark">Shoes</a>
-              </div>
-            </div> */}
+                  
                   <div className="tab-pane fade show active" id="reviews">
                     <div className="row">
                       <div className="col col-lg-8">
