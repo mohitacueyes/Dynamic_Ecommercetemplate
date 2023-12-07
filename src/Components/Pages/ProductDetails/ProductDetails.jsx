@@ -1,19 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-
-
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
-
 import Gallery from "react-image-gallery";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
+import ReactImageMagnify from 'react-image-magnify';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
-  const owlCarouselRef = useRef(null);
+  
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
@@ -22,37 +18,10 @@ const ProductDetails = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, [id]);
 
-
-  // useEffect(() => {
-  //   // Initialize Owl Carousel once the component is mounted
-  //   if (owlCarouselRef.current) {
-  //     owlCarouselRef.current.owlCarousel({
-  //       loop: true,
-  //       margin: 10,
-  //       responsiveClass: true,
-  //       nav: false,
-  //       dots: false,
-  //       thumbs: true,
-  //       thumbsPrerendered: true,
-  //       responsive: {
-  //         0: { items: 1 },
-  //         600: { items: 1 },
-  //         1000: { items: 1 }
-  //       }
-  //     });
-  //   }
-
-  // Cleanup the Owl Carousel instance when the component unmounts
-  //   return () => {
-  //     if (owlCarouselRef.current) {
-  //       owlCarouselRef.current.trigger('destroy.owl.carousel');
-  //     }
-  //   };
-  // }, [productData]);
-
+  const [selectedImage, setSelectedImage] = useState(null);
 
   if (!productData) {
-    return null;
+    return <div>Loading...</div>; // Placeholder for when data is loading
   }
 
   // -------ADD TO CART --------//
@@ -108,7 +77,8 @@ const ProductDetails = () => {
       console.error("Error adding to likes:", error);
     }
   };
-
+  const imageWidth = 500; // Set your desired width
+  const imageHeight = 600;
   return (
     <>
       {/*start page wrapper */}
@@ -149,37 +119,42 @@ const ProductDetails = () => {
               <div className="product-detail-card">
                 <div className="product-detail-body">
                   <div className="row g-0">
-                    <div className="col-12 col-lg-5">
-                      <div className="image-zoom-section">
-
-                        <div >
-                   
-                          <Gallery
-
-                        <div style={{ width: '100%', height: '490px' }}>
-                          <Gallery
-                            
-
-                            items={productData.product_image.map((image) => ({
-                              original: image.image,
-                              thumbnail: image.image,
-                            }))}
-
-                            showNav={false}
-                            showFullscreenButton={true}
-                            showPlayButton={false}
-                          />
-                             
-
-                            style={{ width: '100%', height: '490px' }}
-                            showNav={false}
-                            showFullscreenButton={false}
-                            showPlayButton={false}
-                          />
-
-                        </div>
-                      </div>
-                    </div>
+                  <div className="col-12 col-lg-5">
+        <div className="image-zoom-section">
+          <div  >
+          <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: 'Product Image',
+                  isFluidWidth: false, // Set to false to use fixed width
+                  src: selectedImage || productData.product_image[0].image,
+                  width: imageWidth,
+                  height: imageHeight,
+                },
+                largeImage: {
+                  src: selectedImage || productData.product_image[0].image,
+                  width: imageWidth * 2, // Double the width for the large image (adjust as needed)
+                  height: imageHeight * 2, // Double the height for the large image (adjust as needed)
+                },
+                lensStyle: { backgroundColor: 'rgba(0,0,0,.6)' },
+                enlargedImageContainerStyle: { background: 'rgba(0,0,0,.6)' },
+              }}
+            />
+          </div>
+          <div className="thumbnail-grid mt-3 d-flex align-items-center justify-content-between me-5 ">
+            {productData.product_image.map((image, index) => (
+              <img
+              key={index}
+              src={image.image}
+              alt={`Thumbnail ${index}`}
+              className={selectedImage === image.image ? "selected" : ""}
+              onClick={() => setSelectedImage(image.image)}
+              style={{ maxWidth: '145px', maxHeight: '145px' }} // Adjust these dimensions as needed
+            />
+            ))}
+          </div>
+        </div>
+      </div>
                     <div className="col-12 col-lg-7">
                       <div className="product-info-section p-3">
                         <h3 className="mt-3 mt-lg-0 mb-0">
