@@ -1069,7 +1069,8 @@ const addToLikes = async (productId) => {
                                     >
                                       <img
                                         src={product.image}
-                                        className="img-fluid rounded-4"
+                                        className="img-fluid rounded-2 img-cover"
+                                        style={{height:"393.75px"}}
                                         alt="..."
                                       />
                                     </Link>
@@ -1102,10 +1103,10 @@ const addToLikes = async (productId) => {
                                   </div>
                                   <div className="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                     <div className="h6 fw-light fw-bold text-secondary text-decoration-line-through">
-                                      ${product.price}
+                                    ₹{product.price}
                                     </div>
                                     <div className="h6 fw-bold">
-                                      ${product.discounted_price}
+                                    ₹{product.discounted_price}
                                     </div>
                                   </div>
                                 </div>
