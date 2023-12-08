@@ -79,7 +79,7 @@ export const Searchbar = () => {
     <>
       <div className="header-content bg-background">
         <div className="container">
-          <div className="row align-items-center gx-4">
+          <div className="row align-items-center gx-4 pt-3">
             <div className="col-auto">
               <div className="d-flex align-items-center gap-3">
                 <div
@@ -101,15 +101,15 @@ export const Searchbar = () => {
               </div>
             </div>
           
-            <div className="col-12 col-xl order-4 order-xl-0">
+            <div className="col-12 col-xl order-4 order-xl-0 ">
               <div className="input-group flex-nowrap pb-3 pb-xl-0">
                 <input
                   type="text"
-                  className="form-control w-100 border-dark border border-3"
+                  class="form-control w-100 border-dark border border-3 d-none d-sm-block"
                   placeholder="Search for Products"
                 />
                 <button
-                  className="btn btn-dark btn-ecomm border-3"
+                 class="btn btn-dark btn-ecomm border-3 d-none d-sm-block"
                   type="button"
                 >
                   Search
