@@ -2,12 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
+
+import ReactImageMagnify from "react-image-magnify";
+
 import ReactImageMagnify from 'react-image-magnify';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+
 
 const styles = {
   root: {
@@ -22,13 +26,13 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
+
+
   const [value, setValue] = React.useState('cart');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
@@ -138,42 +142,50 @@ const ProductDetails = () => {
               <div className="product-detail-card">
                 <div className="product-detail-body">
                   <div className="row g-0">
-                  <div className="col-12 col-lg-5">
-        <div className="image-zoom-section">
-          <div  >
-          <ReactImageMagnify
-              {...{
-                smallImage: {
-                  alt: 'Product Image',
-                  isFluidWidth: false, // Set to false to use fixed width
-                  src: selectedImage || productData.product_image[0].image,
-                  width: imageWidth,
-                  height: imageHeight,
-                },
-                largeImage: {
-                  src: selectedImage || productData.product_image[0].image,
-                  width: imageWidth * 2, // Double the width for the large image (adjust as needed)
-                  height: imageHeight * 2, // Double the height for the large image (adjust as needed)
-                },
-                lensStyle: { backgroundColor: 'rgba(0,0,0,.6)' },
-                enlargedImageContainerStyle: { background: 'rgba(0,0,0,.6)' },
-              }}
-            />
-          </div>
-          <div className="thumbnail-grid mt-3 d-flex align-items-center justify-content-between me-5 ">
-            {productData.product_image.map((image, index) => (
-              <img
-              key={index}
-              src={image.image}
-              alt={`Thumbnail ${index}`}
-              className={selectedImage === image.image ? "selected" : ""}
-              onClick={() => setSelectedImage(image.image)}
-              style={{ maxWidth: '145px', maxHeight: '145px' }} // Adjust these dimensions as needed
-            />
-            ))}
-          </div>
-        </div>
-      </div>
+                    <div className="col-12 col-lg-5">
+                      <div className="image-zoom-section">
+                        <div>
+                          <ReactImageMagnify
+                            {...{
+                              smallImage: {
+                                alt: "Product Image",
+                                isFluidWidth: false, // Set to false to use fixed width
+                                src:
+                                  selectedImage ||
+                                  productData.product_image[0].image,
+                                width: imageWidth,
+                                height: imageHeight,
+                              },
+                              largeImage: {
+                                src:
+                                  selectedImage ||
+                                  productData.product_image[0].image,
+                                width: imageWidth * 2, // Double the width for the large image (adjust as needed)
+                                height: imageHeight * 2, // Double the height for the large image (adjust as needed)
+                              },
+                              lensStyle: { backgroundColor: "rgba(0,0,0,.6)" },
+                              enlargedImageContainerStyle: {
+                                background: "rgba(0,0,0,.6)",
+                              },
+                            }}
+                          />
+                        </div>
+                        <div className="thumbnail-grid mt-3 d-flex align-items-center justify-content-between me-5 ">
+                          {productData.product_image.map((image, index) => (
+                            <img
+                              key={index}
+                              src={image.image}
+                              alt={`Thumbnail ${index}`}
+                              className={
+                                selectedImage === image.image ? "selected" : ""
+                              }
+                              onClick={() => setSelectedImage(image.image)}
+                              style={{ maxWidth: "145px", maxHeight: "145px" }} // Adjust these dimensions as needed
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                     <div className="col-12 col-lg-7">
                       <div className="product-info-section p-3">
                         <h3 className="mt-3 mt-lg-0 mb-0">
@@ -204,12 +216,49 @@ const ProductDetails = () => {
                           <h6>Discription :</h6>
                           <p className="mb-0">{productData.shotdescription}</p>
                         </div>
+
                         <dl className="row mt-3">
                           {" "}
                           <dt className="col-sm-3">Product id</dt>
                           <dd className="col-sm-9">#{productData.sku}</dd>
                         </dl>
-                        
+                        <div className="mt-3 align-items-center">
+                          <h6>Colors :</h6>
+                          <div className="d-flex align-items-center gap-2 w-16 h-25">
+                            <img
+                              src={productData.product_image[0].image}
+                              alt="colors"
+                              className="img-fluid "
+                            />
+                            <img
+                              src={productData.product_image[1].image}
+                              alt="colors"
+                              className="img-fluid"
+                            />
+                          </div>
+                        </div>
+                        <div class="row row-cols-auto align-items-center mt-3">
+                          <div class="col">
+                            <label class="form-label">Quantity</label>
+                            <select class="form-select form-select-sm">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </select>
+                          </div>
+                          <div class="col">
+                            <label class="form-label">Size</label>
+                            <select class="form-select form-select-sm">
+                              <option>S</option>
+                              <option>M</option>
+                              <option>L</option>
+                              <option>XS</option>
+                              <option>XL</option>
+                            </select>
+                          </div>
+                        </div>
                         <div className="d-flex gap-2 mt-3">
                           <a
                             href="javascript:;"
@@ -233,8 +282,8 @@ const ProductDetails = () => {
                             <i className="bx bx-heart" />
                           </a>
                         </div>
-                        <hr />
-                        <div className="product-sharing">
+
+                        <div className="product-sharing pt-3">
                           <div className="d-flex align-items-center gap-2 flex-wrap">
                             {/* <div className>
                         <button type="button" className="btn-social bg-twitter"><i className="bx bxl-twitter" /></button>
@@ -350,7 +399,7 @@ const ProductDetails = () => {
                       accusamus tattooed echo park.
                     </p>
                   </div>
-                  
+
                   <div className="tab-pane fade show active" id="reviews">
                     <div className="row">
                       <div className="col col-lg-8">
