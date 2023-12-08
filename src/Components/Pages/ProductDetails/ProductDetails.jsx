@@ -1,14 +1,38 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import Gallery from "react-image-gallery";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
+
 import ReactImageMagnify from "react-image-magnify";
 
+import ReactImageMagnify from 'react-image-magnify';
+import HomeIcon from '@mui/icons-material/Home';
+import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+
+
+const styles = {
+  root: {
+    width: '100%',
+    position: 'fixed',
+    bottom: 0,
+    zIndex: 1000,
+    margin: 0, // Ensure the navigation stays above other elements if needed
+  },
+};
 const ProductDetails = () => {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
+
+
+  const [value, setValue] = React.useState('cart');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
@@ -553,6 +577,7 @@ const ProductDetails = () => {
           </section>
           {/*end product more info*/}
         </div>
+    
       </div>
     </>
   );
