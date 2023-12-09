@@ -109,7 +109,10 @@ a {
 .logo-icon {
 	width: 150px;
 }
-
+.bgColor
+{
+	background-color: #C29E54;
+}
 
 .top-cart-icons ul.navbar-nav .nav-item a.cart-link {
 	font-size: 30px;
@@ -162,8 +165,6 @@ a {
 	text-decoration: none;
 	background-color: #f1f0f0
 }
-
-
 .secondary-menu.navbar-nav a.nav-link {
 	color: #212529;
 	font-size: 14px;
@@ -172,20 +173,16 @@ a {
 	padding-right: 0.6rem;
 	padding-left: 0.6rem
 }
-
-
 .navbar .dropdown-menu {
 	border: 0;
 	border-radius: 0;
 }
-
 .primary-menu .navbar .dropdown-menu .dropdown-item {
 	color: #212529;
 	font-size: 14px;
 	font-weight: 600;
 	text-transform: uppercase;
 }
-
 .secondary-menu .cart-badge {
 	position: absolute;
 	top: 6px;
@@ -290,7 +287,32 @@ a {
 	/* background-color: #ebebeb; */
 	
 }
+@media screen and (min-width:425px) 
+{
+	.producttopimage
+	{
+	   /* margin-top: -70px; */
+	   padding-left: 25px;
+	}
+	.subImage
+	{
+	   padding-left: 25px;
+	}
 
+}
+@media  screen and (max-width:375px) 
+{
+	.producttopimage
+	{
+	   margin-top: -60px;
+	   margin-left: -5px;
+	}
+	.subImage
+	{
+	   
+	}
+	
+}
 
 @media all and (min-width: 1200px) {
 
@@ -1443,7 +1465,13 @@ ul.categories-list li {
 		object-fit: cover;
 	}
 
-
+@media  screen and (max-width: 1280px) {
+	.page-wrapper
+	{
+		margin-top: 0 !important;
+	}
+	
+}
 @media screen and (max-width: 425px) {
 	.footer-section {
 		display: none;
@@ -1469,6 +1497,10 @@ ul.categories-list li {
     .add-banner img
 	{
 		height: 80px;
+	}
+	.page-wrapper
+	{
+		margin-top: 0 !important;
 	}
 
 }

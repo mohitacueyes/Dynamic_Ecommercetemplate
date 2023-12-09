@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
 export const Searchbar = () => {
   const [cartItems, setCartItems] = useState([]);
   const user_id = localStorage.getItem("userId");
@@ -78,10 +79,11 @@ export const Searchbar = () => {
   return (
     <>
       <div className="header-content bg-background">
-        <div className="container">
-          <div className="row align-items-center gx-4 pt-3">
-            <div className="col-auto">
-              <div className="d-flex align-items-center gap-3">
+        <Container fluid className="ps-5 pe-5">
+        <div >
+          <div className="row align-items-center gx-4 pt-3 pb-2 d-xl-flex ">
+            <div className="col-auto ">
+              <div className="d-flex align-items-center  gap-3 logog ">
                 <div
                   className="mobile-toggle-menu d-inline d-xl-none"
                   data-bs-toggle="offcanvas"
@@ -101,7 +103,7 @@ export const Searchbar = () => {
               </div>
             </div>
           
-            <div className="col-12 col-xl order-4 order-xl-0 ">
+            <div className="col-12 col-xl order-4 order-xl-0 d-none d-xl-flex ">
               <div className="input-group flex-nowrap pb-3 pb-xl-0">
                 <input
                   type="text"
@@ -117,7 +119,7 @@ export const Searchbar = () => {
               </div>
             </div>
           
-            <div className="col-auto d-none d-xl-flex">
+            <div className="col-auto d-none d-xl-flex d-none d-xl-flex">
               <div className="d-flex align-items-center gap-3">
                 <div className="fs-1 text-content">
                   <i className="bx bx-headphone" />
@@ -128,7 +130,7 @@ export const Searchbar = () => {
                 </div>
               </div>
             </div>
-            <div className="col-auto ms-auto">
+            <div className="col-auto ms-auto d-none d-xl-flex">
               <div className="top-cart-icons">
                 <nav className="navbar navbar-expand">
                   <ul className="navbar-nav">
@@ -209,6 +211,7 @@ export const Searchbar = () => {
             </div>
           </div>
            </div>
+           </Container>
       </div>
     </>
   );

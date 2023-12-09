@@ -24,7 +24,7 @@ const TermsConditions = () => {
         <div className="App mt-5 mb-5">
            <div className="separator">
             <h5 className="mb-5 fw-bold separator-title border-bottom border-3 ms-2">
-              Terms & Conditions
+              shopping policy
             </h5>
             </div>
           <div className="separator">
