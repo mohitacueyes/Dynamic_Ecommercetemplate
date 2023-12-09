@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 
 function About() {
   return (
@@ -8,7 +9,7 @@ function About() {
         <div className="page-content">
           {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
-            <div className="container">
+           <Container fluid className="pe-5 ps-5">
               <div className="page-breadcrumb d-flex align-items-center">
                 <h3 className="breadcrumb-title pe-3">About Us</h3>
                 <div className="ms-auto">
@@ -32,12 +33,12 @@ function About() {
                   </nav>
                 </div>
               </div>
-            </div>
+              </Container>
           </section>
           {/*end breadcrumb*/}
           {/*start page content*/}
           <section className="py-0 py-lg-4">
-            <div className="container">
+          <Container fluid className="pe-5 ps-5">
               <h4>Our Story</h4>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -65,7 +66,7 @@ function About() {
                 Ipsum passage, and going through the cites of the word in
                 classical literature, discovered the undoubtable source.
               </p>
-            </div>
+          </Container>
           </section>
           <section className="py-4">
             <div className="container">
@@ -128,8 +129,8 @@ function About() {
             </div>
           </section>
           <section className="py-4">
-            <div className="container">
-              <h4>Our Top Brands</h4>
+          <Container fluid className="pe-5 ps-5">   
+                       <h4>Our Top Brands</h4>
               <hr />
               <div className="row row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-xl-5 g-4">
                 <div className="col">
@@ -328,7 +329,7 @@ function About() {
                   </div>
                 </div>
               </div>
-            </div>
+              </Container>
           </section>
           {/*end start page content*/}
         </div>

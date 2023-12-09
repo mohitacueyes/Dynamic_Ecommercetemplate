@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -77,7 +78,7 @@ const addToLikes = async (productId) => {
         <div className="page-content">
           {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
-            <div className="container">
+            <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="page-breadcrumb d-flex align-items-center">
                 <h3 className="breadcrumb-title pe-3">
                   Shop Grid Left Sidebar
@@ -86,12 +87,12 @@ const addToLikes = async (productId) => {
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb mb-0 p-0">
                       <li className="breadcrumb-item">
-                        <a href="javascript:;">
+                        <a href="/home">
                           <i className="bx bx-home-alt" /> Home
                         </a>
                       </li>
                       <li className="breadcrumb-item">
-                        <a href="javascript:;">Shop</a>
+                        <a href="/shopcart">Shop</a>
                       </li>
                       <li
                         className="breadcrumb-item active"
@@ -103,12 +104,12 @@ const addToLikes = async (productId) => {
                   </nav>
                 </div>
               </div>
-            </div>
+            </Container>
           </section>
           {/*end breadcrumb*/}
           {/*start shop area*/}
           <section className="py-4">
-            <div className="container">
+          <Container fluid className="pe-lg-5 ps-lg-5">
               <div
                 className="btn btn-dark btn-ecomm d-xl-none position-fixed top-50 start-0 translate-middle-y z-index-1"
                 data-bs-toggle="offcanvas"
@@ -120,7 +121,7 @@ const addToLikes = async (productId) => {
                 </span>
               </div>
               <div className="row">
-                <div className="col-12 col-xl-3 filter-column">
+                <div className="col-12 col-xl-2 filter-column">
                   <nav className="navbar navbar-expand-xl flex-wrap p-0">
                     <div
                       className="offcanvas offcanvas-start"
@@ -1047,7 +1048,7 @@ const addToLikes = async (productId) => {
                       </div>
                     </div>
                     <div className="product-grid">
-                      <div className="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-3 g-3 g-sm-4">
+                      <div className="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-4 g-3 g-sm-4">
                         {products &&
                           products.map((product) => (
                             <div className="col" >
@@ -1063,20 +1064,20 @@ const addToLikes = async (productId) => {
                                       Quick View
                                     </Link></a>
                                   </div> */}
-                                  <div   style={{height:"393.75px" }}>
-                                    <Link
+                                <a>                                    <Link
                                       to={`/productdetails/${product.id}/${product.slug}`}
                                     >
                                       <img
                                         src={product.image}
-                                        className="img-fluid rounded-2 img-cover"
-                                        style={{height:"393.75px"}}
+                                        className="img-fluid rounded-2 cart-img"
+                                        style={{height:"393.75px",width:"393.75px"}}
                                         alt="..."
                                       />
                                     </Link>
                                    
-                                   
-                                  </div>
+                                    </a>
+
+                               
                                 </div>
                                 <div className="card-body px-0">
                                   <div className="d-flex align-items-center justify-content-between">
@@ -1173,7 +1174,7 @@ const addToLikes = async (productId) => {
                 </div>
               </div>
               {/*end row*/}
-            </div>
+              </Container>
           </section>
           {/*end shop area*/}
         </div>

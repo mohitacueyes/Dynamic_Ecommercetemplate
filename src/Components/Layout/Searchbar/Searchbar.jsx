@@ -79,11 +79,11 @@ export const Searchbar = () => {
   return (
     <>
       <div className="header-content bg-background">
-        <Container fluid className="ps-5 pe-5">
+        <Container fluid className="pe-lg-5 ps-lg-5">
         <div >
           <div className="row align-items-center gx-4 pt-3 pb-2 d-xl-flex ">
-            <div className="col-auto ">
-              <div className="d-flex align-items-center  gap-3 logog ">
+          <div className="col-auto">
+              <div className="d-flex align-items-center gap-3">
                 <div
                   className="mobile-toggle-menu d-inline d-xl-none"
                   data-bs-toggle="offcanvas"
@@ -94,7 +94,7 @@ export const Searchbar = () => {
                 <div className="logo">
                   <a href="/">
                     <img
-                      src="assets/images/logo-icon.png"
+                      src="assets/images/logo2.svg"
                       className="logo-icon"
                       alt
                     />

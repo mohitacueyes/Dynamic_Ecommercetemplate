@@ -189,7 +189,7 @@ const ProductDetails = () => {
                         <h3 className="mt-3 mt-lg-0 mb-0">
                           {productData.name}
                         </h3>
-                        <div className="product-rating d-flex align-items-center mt-2">
+                        {/* <div className="product-rating d-flex align-items-center mt-2">
                           <div className="rates cursor-pointer font-13">
                             {" "}
                             <i className="bx bxs-star text-warning" />
@@ -201,7 +201,7 @@ const ProductDetails = () => {
                           <div className="ms-1">
                             <p className="mb-0">(24 Ratings)</p>
                           </div>
-                        </div>
+                        </div> */}
                         <div className="d-flex align-items-center mt-3 gap-2">
                           <h5 className="mb-0 text-decoration-line-through text-light-3 text-secondary">
                             ₹{productData.price}
@@ -248,7 +248,7 @@ const ProductDetails = () => {
                               <option>5</option>
                             </select>
                           </div>
-                          <div class="col">
+                          {/* <div class="col">
                             <label class="form-label">Size</label>
                             <select class="form-select form-select-sm">
                               <option>S</option>
@@ -257,7 +257,7 @@ const ProductDetails = () => {
                               <option>XS</option>
                               <option>XL</option>
                             </select>
-                          </div>
+                          </div> */}
                         </div>
                         <div className="d-flex gap-2 mt-3">
                           <a
@@ -283,12 +283,12 @@ const ProductDetails = () => {
                           </a>
                         </div>
 
-                        <div className="product-sharing pt-3">
+                        {/* <div className="product-sharing pt-3">
                           <div className="d-flex align-items-center gap-2 flex-wrap">
                             {/* <div className>
                         <button type="button" className="btn-social bg-twitter"><i className="bx bxl-twitter" /></button>
                       </div> */}
-                            <div className>
+                            {/* <div className>
                               <button
                                 type="button"
                                 className="btn-social bg-facebook"
@@ -302,8 +302,8 @@ const ProductDetails = () => {
                                 className="btn-social bg-linkedin"
                               >
                                 <i className="bx bxl-linkedin" />
-                              </button>
-                            </div>
+                              </button> */}
+                            {/* </div>
                             <div className>
                               <button
                                 type="button"
@@ -311,8 +311,8 @@ const ProductDetails = () => {
                               >
                                 <i className="bx bxl-youtube" />
                               </button>
-                            </div>
-                            <div className>
+                            </div> */}
+                            {/* <div className>
                               <button
                                 type="button"
                                 className="btn-social bg-pinterest"
@@ -321,7 +321,7 @@ const ProductDetails = () => {
                               </button>
                             </div>
                           </div>
-                        </div>
+                        </div> */} 
                       </div>
                     </div>
                   </div>
@@ -339,7 +339,7 @@ const ProductDetails = () => {
                 <ul className="nav nav-tabs mb-0" role="tablist">
                   <li className="nav-item">
                     <a
-                      className="nav-link"
+                      className="nav-link active"
                       data-bs-toggle="tab"
                       href="#discription"
                     >
@@ -352,7 +352,7 @@ const ProductDetails = () => {
                   </li>
                   <li className="nav-item">
                     <a
-                      className="nav-link active"
+                      className="nav-link "
                       data-bs-toggle="tab"
                       href="#reviews"
                     >

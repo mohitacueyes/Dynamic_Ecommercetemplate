@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 function Wishlist() {
   const [wishlistData, setWishlistData] = useState([]);
@@ -94,7 +95,7 @@ console.log(response);
         <div className="page-content">
           {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
-            <div className="container">
+          <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="page-breadcrumb d-flex align-items-center">
                 <h3 className="breadcrumb-title pe-3">Wishlist Grid</h3>
                 <div className="ms-auto">
@@ -118,14 +119,14 @@ console.log(response);
                   </nav>
                 </div>
               </div>
-            </div>
+           </Container>
           </section>
           {/*end breadcrumb*/}
           {/*start Featured product*/}
           <section className="py-4">
-            <div className="container">
+           <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="product-grid">
-                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-5 g-4">
                   {wishlistData.map((item) => (
                     <div className="col" key={item.id}>
                       <div className="card rounded-0 border">
@@ -133,12 +134,10 @@ console.log(response);
                           <a>
                             <Link to={`/productdetails/${item.product_id}/${item.slug}`}>
                             <img
-                              src={item.image}
-                              
-                              className="card-img-top "
-                              // width={100}
-                              height={300}
-                              alt="..."
+                              src={item.image}              
+                              className="card-img-top img-fluid" 
+                              style={{ height: "393.75px" , width: "393.75px" }} 
+                                alt="..."
                             />
                             </Link>
                           </a>
@@ -191,7 +190,7 @@ console.log(response);
                   ))}
                 </div>
               </div>
-            </div>
+           </Container>
           </section>
           {/*end Featured product*/}
         </div>

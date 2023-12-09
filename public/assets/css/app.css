@@ -1460,7 +1460,7 @@ ul.categories-list li {
 }
 .videosm
 	{
-		height: 800px;
+		height: 600px;
 		width: 100%;
 		object-fit: cover;
 	}
@@ -1490,19 +1490,33 @@ ul.categories-list li {
 	}
 	.videosm
 	{
-		height: 400px;
+		height:250px;
 		width: 100%;
 		object-fit: cover;
 	}
     .add-banner img
 	{
-		height: 80px;
+		height: 150px;
 	}
 	.page-wrapper
 	{
 		margin-top: 0 !important;
 	}
-
+	.separator-title
+	{
+		margin-top: 10px;
+	}
+	.menuFlex
+	{
+		display: flex!important;
+		justify-content:space-between!important;
+		width: 100%!important;
+		gap: 20px!important;
+	}
+    .cart-imgg{
+		height: 300px!important;
+		width: 300px;
+	} 
 }
 
 /* Nav Tabs */

@@ -14,7 +14,7 @@ const SecondSection = () => {
  <div className='service24'>
  <div className="page-wrapper">
   <div className="page-content">
-    <section className="py-4 ">
+    <section className="py-4">
       <div className="container">
         <div className="row row-cols-1 row-cols-lg-3 g-4">
           <div className="col ">
@@ -51,9 +51,8 @@ const SecondSection = () => {
         {/*end row*/}
       </div>
     </section>
-    {/*end information*/}
-    {/*start pramotion*/}
-    <section className="py-4">
+  
+    {/* <section className="py-4">
       <div className="container">
         <div className="row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-4">
         { bannerData .filter(banner => banner.is_active !== 2).map(banner => (
@@ -75,10 +74,10 @@ const SecondSection = () => {
           </div>
           ))}
         </div>
-        {/*end row*/}
+       
       </div>
     </section>
-    {/*end pramotion*/}
+   */}
   </div>
 </div>
  </div>

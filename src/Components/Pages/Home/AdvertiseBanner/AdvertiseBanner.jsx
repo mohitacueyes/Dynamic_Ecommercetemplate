@@ -3,8 +3,7 @@ import React from "react";
 const AdvertiseBanner = () => {
   return (
     <>
-      {/*start Advertise banne rs*/}
-      <section className="py-4 ">
+         <section className="py-4 pe-3 ps-3 ">
         <div className="add-banner">
           <div>
             <img
@@ -20,15 +19,12 @@ const AdvertiseBanner = () => {
               controls
               src="https://cdn.shopify.com/videos/c/o/v/1b69248fa9454df0b17ccc09475fa199.mp4"
               type="video/mp4"
-              className="  p-5 videosm"
-            
+              className="pt-3 videosm"
               alt="Video"
             ></video>
           </div>
       </section>
-
-      {/*end Advertise banners*/}
-    </>
+        </>
   );
 };
 
