@@ -131,7 +131,7 @@ console.log(response);
                       <div className="card rounded-0 border">
                         <div className="card-img ">
                           <a>
-                            <Link to={`/productdetails/${item.product_id}`}>
+                            <Link to={`/productdetails/${item.product_id}/${item.slug}`}>
                             <img
                               src={item.image}
                               
@@ -154,10 +154,10 @@ console.log(response);
                               <div className="mb-1 product-price">
                                 {" "}
                                 <span className="me-1 text-decoration-line-through">
-                                  ${item.price}
+                                ₹{item.price}
                                 </span>
                                 <span className="fs-5">
-                                  ${item.discounted_price}
+                                ₹{item.discounted_price}
                                 </span>
                               </div>
                               <div className="cursor-pointer ms-auto">

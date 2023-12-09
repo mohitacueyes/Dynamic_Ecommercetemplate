@@ -172,7 +172,7 @@ export const Searchbar = () => {
                                 <h6 className="cart-product-title">
                                   {item.name.slice(0, 20)}...
                                 </h6>
-                                <p className="cart-product-price">1 X ${item.discounted_price}</p>
+                                <p className="cart-product-price">1 X ₹{item.discounted_price}</p>
                               </div>
                               <div className="position-relative">
                                 <div className="cart-product-cancel position-absolute" >
@@ -194,7 +194,7 @@ export const Searchbar = () => {
                         <div className="d-grid p-3 border-top">
                           <div className="d-flex align-items-center justify-content-between mb-3">
                             <h5 className="mb-0">TOTAL</h5>
-                            <h5 className="mb-0">${cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</h5>
+                            <h5 className="mb-0">₹{cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</h5>
                           </div>
                           <a
                             href="/checkout"

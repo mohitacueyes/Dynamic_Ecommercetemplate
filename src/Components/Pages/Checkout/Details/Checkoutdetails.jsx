@@ -266,7 +266,7 @@ function Checkoutdetails() {
                                 </a>
                                 <div className="ps-2">
                                 <h6 className="mb-1"><a href="javascript:;" className="text-dark">{item.name.slice(0, 18)}</a></h6>
-                                <div className="widget-product-meta"><span className="me-2">${item.discounted_price}.<small>00</small></span><span className>x 1</span>
+                                <div className="widget-product-meta"><span className="me-2">₹{item.discounted_price}.<small>00</small></span><span className>x 1</span>
                                 </div>
                                 </div>
                             </div>
@@ -276,7 +276,7 @@ function Checkoutdetails() {
                         </div>
                         <div className="card rounded-0 border bg-transparent mb-0 shadow-none">
                             <div className="card-body">
-                            <p className="mb-2">Subtotal: <span className="float-end">${cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</span>
+                            <p className="mb-2">Subtotal: <span className="float-end">₹{cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</span>
                             </p>
                             <p className="mb-2">Shipping: <span className="float-end">--</span>
                             </p>
@@ -285,7 +285,7 @@ function Checkoutdetails() {
                             <p className="mb-0">Discount: <span className="float-end">--</span>
                             </p>
                             <div className="my-3 border-top" />
-                            <h5 className="mb-0">Order Total: <span className="float-end">{cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</span></h5>
+                            <h5 className="mb-0">Order Total: <span className="float-end">₹{cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</span></h5>
                             </div>
                         </div>
                         </div>
