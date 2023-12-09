@@ -2,9 +2,31 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
-import ReactImageMagnify from "react-image-magnify";
+
+import ReactImageMagnify from 'react-image-magnify';
+import HomeIcon from '@mui/icons-material/Home';
+import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
+
+const styles = {
+  root: {
+    width: '100%',
+    position: 'fixed',
+    bottom: 0,
+    zIndex: 1000,
+    margin: 0, // Ensure the navigation stays above other elements if needed
+  },
+};
 
 const ProductDetails = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
@@ -75,8 +97,11 @@ const ProductDetails = () => {
       console.error("Error adding to likes:", error);
     }
   };
-  const imageWidth = 500; // Set your desired width
+
+  const imageWidth = isMobile ?  360 : 500; // Adjust the width for mobile view
   const imageHeight = 600;
+  const thumbnailSize = isMobile ? 100 : 145;
+
   return (
     <>
       {/*start page wrapper */}
@@ -119,7 +144,7 @@ const ProductDetails = () => {
                   <div className="row g-0">
                     <div className="col-12 col-lg-5">
                       <div className="image-zoom-section">
-                        <div>
+                        <div className="producttopimage">
                           <ReactImageMagnify
                             {...{
                               smallImage: {
@@ -145,18 +170,16 @@ const ProductDetails = () => {
                             }}
                           />
                         </div>
-                        <div className="thumbnail-grid mt-3 d-flex align-items-center justify-content-between me-5 ">
+                        <div className="thumbnail-grid mt-3 d-flex align-items-center justify-content-between me-5">
                           {productData.product_image.map((image, index) => (
-                            <img
-                              key={index}
-                              src={image.image}
-                              alt={`Thumbnail ${index}`}
-                              className={
-                                selectedImage === image.image ? "selected" : ""
-                              }
-                              onClick={() => setSelectedImage(image.image)}
-                              style={{ maxWidth: "145px", maxHeight: "145px" }} // Adjust these dimensions as needed
-                            />
+                            <div key={index} className="thumbnail-item subImage" onClick={() => setSelectedImage(image.image)}>
+                              <img
+                                src={image.image}
+                                alt={`Thumbnail ${index}`}
+                                className={selectedImage === image.image ? "selected" : ""}
+                                style={{ maxWidth: `${thumbnailSize}px`, maxHeight: `${thumbnailSize}px` }}
+                              />
+                            </div>
                           ))}
                         </div>
                       </div>
@@ -379,7 +402,7 @@ const ProductDetails = () => {
 
                   <div className="tab-pane fade show active" id="reviews">
                     <div className="row">
-                      <div className="col col-lg-8">
+                      <div className="col   col-12 col-lg-8 ">
                         <div className="product-review">
                           <h5 className="mb-4">3 Reviews For The Product</h5>
                           <div className="review-list">
@@ -496,7 +519,7 @@ const ProductDetails = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col col-lg-4">
+                      <div className="col   col-12  col-lg-4">
                         <div className="add-review border">
                           <div className="form-body p-3">
                             <h4 className="mb-4">Write a Review</h4>

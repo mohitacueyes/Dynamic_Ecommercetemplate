@@ -46,7 +46,7 @@ export const Footer = ({ currentPage }) => {
     <>
       {/*start footer section*/}
       <footer className="footer-section">
-        <section className="py-5 border-top bg-light">
+        <section className="py-5 border-top bgColor">
           <div className="container">
             <div className="row row-cols-1 row-cols-lg-3 row-cols-xl-3">
               <div className="col">

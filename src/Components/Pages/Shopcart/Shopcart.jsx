@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import axios from "axios";
 function Shopcart() {
   const [cartItems, setCartItems] = useState([]);
@@ -7,23 +8,24 @@ function Shopcart() {
   const [state, setstate] = useState([]);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
 
+
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
     const fetchCartData = async () => {
-      const user_id = localStorage.getItem("userId");
+
+      const user_id = localStorage.getItem('userId');
       try {
         if (user_id) {
-          const response = await fetch(
-            `${process.env.REACT_APP_API}/api/cart-listuseridwise`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ user_id }),
-            }
-          );
+          const response = await fetch(`${process.env.REACT_APP_API}/api/cart-listuseridwise`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user_id }),
+          });
+
+
           if (response.ok) {
             const data = await response.json();
             if (Array.isArray(data.ResponseData)) {
@@ -32,11 +34,13 @@ function Shopcart() {
               setCartItems([]);
             }
           } else {
-            setError("Error fetching cart data: " + response.statusText);
+
+            setError('Error fetching cart data: ' + response.statusText);
           }
         }
       } catch (error) {
-        setError("Error fetching cart data: " + error.message);
+        setError('Error fetching cart data: ' + error.message);
+
       } finally {
         setIsLoading(false);
       }
@@ -54,18 +58,32 @@ function Shopcart() {
 
     try {
       const response = await fetch(apiUrl, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           user_id: user_id,
           product_id: productId,
-          favorites: "2",
+          favorites: "2"
         }),
       });
 
       const data = await response.json();
+
+      if (data.ResponseCode === 1) {
+        setResponse(data.ResponseText);
+        // Update addresses state after successful deletion
+        setCartItems(prevAddresses => prevAddresses.filter(cart => cart.id !== id));
+      } else {
+        setResponse('Error deleting cart items');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setResponse('Error deleting cart items');
+    }
+  };
+
 
       if (data.ResponseCode === 1) {
         setResponse(data.ResponseText);
@@ -178,12 +196,14 @@ const imageHeight = 600;
               <div className="shop-cart">
                 <div className="row">
                   <div className="col-12 col-xl-8">
-                    <div className="shop-cart-list mb-3 p-3">
+
+                    <div className="shop-cart-list d-flex flex-column justify-content-center align-items-center mb-3 p-3">
                       {cartItems.map((item, index) => (
-                        <div className="row align-items-center g-3">
-                          <div className="col-12 col-lg-6 ">
+                        <div className="row align-items-center  g-3">
+                          <div className="col-12  col-lg-6 ">
                             <div className="d-lg-flex align-items-center gap-3">
-                              <div className="cart-img text-center text-lg-start ">
+                              <div className="cart-img text-sm-start text-lg-start">
+
                                 <img
                                   src={item.imageLink}
                                   className="rounded-3"
@@ -193,7 +213,9 @@ const imageHeight = 600;
                                   alt
                                 />
                               </div>
-                              <div className="cart-detail text-center text-lg-start">
+
+                              <div className="cart-detail  text-sm-start text-lg-start">
+
                                 <h6 className="mb-2">
                                   {item.name.slice(0, 18) || item.name}..
                                 </h6>
@@ -206,6 +228,7 @@ const imageHeight = 600;
                                 {/* <h5 className="mb-0">${item.discounted_price}</h5> */}
                                 <div className="d-flex align-items-center mt-3 gap-2">
                                   <h6 className="mb-0 text-decoration-line-through text-light-3 text-secondary">
+
                                     ₹{item.price}
                                   </h6>
                                   <h5 className="mb-0">
@@ -226,9 +249,11 @@ const imageHeight = 600;
                               />
                             </div>
                           </div>
+
                           <div className="col-12 col-lg-3">
                             <div className="text-center">
                               <div className="d-flex gap-3 justify-content-center justify-content-lg-end">
+
                                 <a
                                   onClick={() => handleDeleteClick(item.id)}
                                   className="btn btn-outline-dark rounded-0 btn-ecomm"
@@ -237,8 +262,10 @@ const imageHeight = 600;
                                   Remove
                                 </a>
                                 <a
+
                                     onClick={() => addToLikes(item.id)}
                                   className="btn-facebook btn-ecomm"
+
                                 >
                                   <i className="bx bx-heart me-0" />
                                 </a>

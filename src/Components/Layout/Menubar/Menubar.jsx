@@ -1,4 +1,5 @@
 import React , { useState, useEffect} from 'react'
+import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export const Menubar = () => {
@@ -17,9 +18,9 @@ export const Menubar = () => {
   // console.log(menuList);
   return (
   <>
-  
   <div className="primary-menu">
-  <nav className="navbar navbar-expand-xl w-100 navbar-dark container mb-0 p-0">
+  <Container fluid className="ps-5 pe-5">
+  <nav className="navbar navbar-expand-xl w-100 navbar-dark  mb-0 p-0">
     <div className="offcanvas offcanvas-start" tabIndex={-1} id="offcanvasNavbar">
       <div className="offcanvas-header">
         <div className="offcanvas-logo"><img src="assets/images/logo-icon.png" width={100} alt />
@@ -56,6 +57,7 @@ export const Menubar = () => {
       </div>
     </div>	
   </nav>
+</Container>
 </div>
   </>
   )

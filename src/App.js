@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { Footer } from './Components/Layout/Footer/Footer';
 import { About } from './Components/Pages/About';
 import Contact from './Components/Pages/Contact/Contact';
@@ -33,6 +33,7 @@ import TermsConditions from './Components/Pages/TermsConditions/TermsConditions'
 import PrivacyPolicy from './Components/Pages/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
+  const location = useLocation();
   return (
     <>
     <Topbar/>
@@ -67,7 +68,9 @@ function App() {
         <Route path='/terms-conditions' element={<TermsConditions/>}/>
         <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
         </Routes>
+        {location.pathname === '/' && <homeFooter />} 
       <Footer />
+   
    
     </>
   );
