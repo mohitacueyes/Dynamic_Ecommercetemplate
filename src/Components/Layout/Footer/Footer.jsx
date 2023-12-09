@@ -75,7 +75,7 @@ export const Footer = ({ currentPage }) => {
                 <div className="footer-section2">
                   <h5 className="mb-4 text-uppercase fw-bold">Categories</h5>
                   <ul className="list-unstyled">
-                    <li className="mb-1"><a href="/terms-conditions"><i className="bx bx-chevron-right" /> Shopping Policy </a>
+                    <li className="mb-1 "><a href="/terms-conditions"><i className="bx bx-chevron-right" /> Shopping Policy </a>
                     </li>
                     <li className="mb-1"><a href="/privacy-policy"><i className="bx bx-chevron-right" /> Exchange Policy </a>
                     </li>

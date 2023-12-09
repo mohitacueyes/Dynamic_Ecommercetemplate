@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 
 function Contact() {
   return (
@@ -8,14 +9,14 @@ function Contact() {
         <div className="page-content">
           {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
-            <div className="container">
+           <Container fluid className="pe-5 ps-5">
               <div className="page-breadcrumb d-flex align-items-center">
                 <h3 className="breadcrumb-title pe-3">Contact Us</h3>
                 <div className="ms-auto">
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb mb-0 p-0">
                       <li className="breadcrumb-item">
-                        <a href="javascript:;">
+                        <a href="/home">
                           <i className="bx bx-home-alt" /> Home
                         </a>
                       </li>
@@ -32,12 +33,12 @@ function Contact() {
                   </nav>
                 </div>
               </div>
-            </div>
+            </Container>
           </section>
           {/*end breadcrumb*/}
           {/*start page content*/}
           <section className="py-4">
-            <div className="container">
+          <Container fluid className="pe-5 ps-5">
               <h3 className="d-none">Google Map</h3>
               <div className="contact-map p-3 bg-light rounded-0 shadow-none">
                 <iframe
@@ -49,12 +50,12 @@ function Contact() {
                   loading="lazy"
                 />
               </div>
-            </div>
+              </Container>
           </section>
           <section className="py-4">
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-8">
+          <Container fluid className="pe-5 ps-5">
+              <div className="row justify-content-between d-flex">
+                <div className="col-lg-7">
                   <div className="p-3 bg-light">
                     <form>
                       <div className="form-body">
@@ -117,7 +118,7 @@ function Contact() {
                 </div>
               </div>
               {/*end row*/}
-            </div>
+              </Container>
           </section>
           {/*end start page content*/}
         </div>

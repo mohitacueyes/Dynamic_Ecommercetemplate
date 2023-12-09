@@ -79,14 +79,13 @@ const addToLikes = async (productId) => {
   return (
     <>
       {/*start Featured product*/}
-      <section className="py-4">
+      <section>
         {featuredProducts &&
           featuredProducts.map((feed) => (
             feed.homefeed_product && feed.homefeed_product.length > 0 && (
-              <Container fluid className="ps-5 pe-5 ">
+              <Container fluid className="ps-lg-5 pe-lg-5 ">
               <div className="separator pb-4">
-               
-                <h5 className="mb-0 fw-bold separator-title border-bottom border-3 ms-2 ">
+                <h5 className="mb-0 fw-bold separator-title border-bottom border-3 ms-2">
                   {feed.feedname}
                 </h5>
              
@@ -111,7 +110,7 @@ const addToLikes = async (productId) => {
                             <Link to={`/productdetails/${product.id}/${product.slug}`}>
                             <img
                               src={product.product_imageLink}
-                              className="img-fluid  rounded-2 cart-img "
+                              className="img-fluid  rounded-2 cart-img  cart-imgg"
                                style={{height:"393.75px" , width:"393.75px"}}
                               alt="..."
                             />
