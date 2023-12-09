@@ -15,18 +15,18 @@ function AddAddres() {
   const [CityData, setCityData] = useState([]);
   const [formData, setFormData] = useState({
     user_id: user_id,
-    type_id: "1 ",
+    type_id: "1",
     full_name: "",
     country_id: "",
     landmark: "",
-    city_id: "",
-    state_id: "",
+    city_id: " ",
+    state_id: " ",
     pincode: "",
     mobile: "",
     alternate_mobile: "",
     address: "",
   });
-
+  
   useEffect(() => {
     // ------------Fetch Country data-------------------//
     axios
@@ -39,14 +39,19 @@ function AddAddres() {
       });
 
     // ------------Fetch  data-------------------//
-    axios
-      .get(`${process.env.REACT_APP_API}/api/city-list`)
-      .then((response) => {
-        setCityData(response.data.ResponseData);
-      })
-      .catch((error) => {
-        console.error("Error fetching category data:", error);
-      });
+    // axios
+    //   .get(`${process.env.REACT_APP_API}/api/city-list-statewise`,{
+    //     params: {
+    //       state_id: StateData,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     setCityData(response.data.ResponseData);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching category data:", error);
+    //   });
+
       axios
       .get(`${process.env.REACT_APP_API}/api/state-list`)
       .then((response) => {
@@ -58,6 +63,21 @@ function AddAddres() {
   }, []);
   function handleChange(event) {
     const { name, value } = event.target;
+
+    if (name === "state_id") {
+      // Fetch City data based on the selected state using POST method
+      axios
+        .post(`${process.env.REACT_APP_API}/api/city-list-statewise`, {
+          state_id: value,
+        })
+        .then((response) => {
+          setCityData(response.data.ResponseData);
+        })
+        .catch((error) => {
+          console.error("Error fetching city data:", error);
+        });
+    }
+
     setFormData({
       ...formData,
       [name]: value,
@@ -224,6 +244,28 @@ function AddAddres() {
                                 onChange={handleChange}
                               />
                             </div>
+                          
+                            <div className="col-md-12">
+                              <label className="form-label">State</label>
+                              <select
+                                name="state_id"
+                                id="templateId"
+                                class="form-control"
+                                onChange={(e) => handleChange(e)}
+                              >
+                                <option value={formData.state_id ? "" : ""}>
+                                  --select --
+                                </option>
+                                {StateData &&
+                                  StateData.map((v, index) => {
+                                    return (
+                                      <option value={v.id} key={index.id}>
+                                        {v.statename}
+                                      </option>
+                                    );
+                                  })}
+                              </select>
+                            </div>
                             <div className="col-md-12">
                               <label className="form-label">City</label>
                               <select
@@ -245,27 +287,6 @@ function AddAddres() {
                                   })}
                               </select>
                               
-                            </div>
-                            <div className="col-md-12">
-                              <label className="form-label">State</label>
-                              <select
-                                name="state_id"
-                                id="templateId"
-                                class="form-control"
-                                onChange={(e) => handleChange(e)}
-                              >
-                                <option value={formData.state_id ? "" : ""}>
-                                  --select --
-                                </option>
-                                {StateData &&
-                                  StateData.map((v, index) => {
-                                    return (
-                                      <option value={v.id} key={index.id}>
-                                        {v.statename}
-                                      </option>
-                                    );
-                                  })}
-                              </select>
                             </div>
                             <div className="col-md-12">
                               <label className="form-label">Pincode</label>

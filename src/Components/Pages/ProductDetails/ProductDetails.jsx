@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate  } from "react-router-dom";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
-
+import Carousel from 'react-bootstrap/Carousel';
 import ReactImageMagnify from 'react-image-magnify';
-import HomeIcon from '@mui/icons-material/Home';
-import SearchIcon from '@mui/icons-material/Search';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 const styles = {
@@ -26,10 +23,10 @@ const styles = {
 const ProductDetails = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
@@ -67,6 +64,7 @@ const ProductDetails = () => {
       console.log(response);
       const data = await response.json();
       console.log(data);
+      toast.success("Add to cart successfully");
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
@@ -93,8 +91,10 @@ const ProductDetails = () => {
       console.log(response);
       const data = await response.json();
       console.log(data);
+      toast.success(data.ResponseText);
     } catch (error) {
       console.error("Error adding to likes:", error);
+      navigate("/login");
     }
   };
 
@@ -170,8 +170,10 @@ const ProductDetails = () => {
                             }}
                           />
                         </div>
+                          <Carousel >
                         <div className="thumbnail-grid mt-3 d-flex align-items-center justify-content-between me-5">
                           {productData.product_image.map((image, index) => (
+                            
                             <div key={index} className="thumbnail-item subImage" onClick={() => setSelectedImage(image.image)}>
                               <img
                                 src={image.image}
@@ -182,6 +184,7 @@ const ProductDetails = () => {
                             </div>
                           ))}
                         </div>
+                          </Carousel>
                       </div>
                     </div>
                     <div className="col-12 col-lg-7">
@@ -248,7 +251,7 @@ const ProductDetails = () => {
                               <option>5</option>
                             </select>
                           </div>
-                          <div class="col">
+                          {/* <div class="col">
                             <label class="form-label">Size</label>
                             <select class="form-select form-select-sm">
                               <option>S</option>
@@ -257,7 +260,7 @@ const ProductDetails = () => {
                               <option>XS</option>
                               <option>XL</option>
                             </select>
-                          </div>
+                          </div> */}
                         </div>
                         <div className="d-flex gap-2 mt-3">
                           <a
@@ -577,8 +580,8 @@ const ProductDetails = () => {
           </section>
           {/*end product more info*/}
         </div>
-
       </div>
+      <ToastContainer />
     </>
   );
 };

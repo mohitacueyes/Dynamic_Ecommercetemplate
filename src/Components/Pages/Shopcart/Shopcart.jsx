@@ -85,21 +85,7 @@ function Shopcart() {
   };
 
 
-      if (data.ResponseCode === 1) {
-        setResponse(data.ResponseText);
-        // Update addresses state after successful deletion
-        setCartItems((prevAddresses) =>
-          prevAddresses.filter((cart) => cart.id !== id)
-        );
-      } else {
-        setResponse("Error deleting cart items");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setResponse("Error deleting cart items");
-    }
-  };
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -153,6 +139,7 @@ function Shopcart() {
     console.log(data);
   } catch (error) {
     console.error("Error adding to likes:", error);
+    
   }
 };
 const imageWidth = 500; // Set your desired width

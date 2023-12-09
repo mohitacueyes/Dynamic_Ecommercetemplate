@@ -15,15 +15,12 @@ const Address = ({ user_id }) => {
     const user_id = localStorage.getItem("userId");
     const fetchAddressList = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_API}/api/user-addresslist`,
+        `${process.env.REACT_APP_API}/api/user-addresslist/${user_id}`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            user_id: user_id,
-          }),
+          }
         }
       );
 
