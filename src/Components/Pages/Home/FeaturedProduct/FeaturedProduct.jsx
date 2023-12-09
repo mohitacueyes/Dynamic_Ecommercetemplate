@@ -1,12 +1,15 @@
+import { Login } from "@mui/icons-material";
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 const FeaturedProduct = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [currentUser, setCurrentUser] = useState(null)
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
     // Fetch data from your API
     fetch(`${process.env.REACT_APP_API}/api/home`
@@ -40,6 +43,7 @@ const addToCart = async (productId) => {
     });
 console.log(response);
     const data = await response.json();
+    toast.success("Add to cart successfully");
     console.log(data);
   } catch (error) {
     console.error("Error adding to cart:", error);
@@ -65,8 +69,10 @@ const addToLikes = async (productId) => {
     console.log(response);
     const data = await response.json();
     console.log(data);
+    toast.success(data.ResponseText);
   } catch (error) {
     console.error("Error adding to likes:", error);
+    navigate("/login");
   }
 };
   
@@ -151,6 +157,7 @@ const addToLikes = async (productId) => {
           ))}
           
       </section>
+      <ToastContainer />
     </>
   );
 };

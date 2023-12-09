@@ -12,10 +12,10 @@ const Profile = () => {
     const userId = localStorage.getItem('userId');
 
     // Check if user ID exists
-    if (!userId) {
-      window.location.href = '/login';
-      return;
-    }
+    // if (!userId) {
+    //   window.location.href = '/login';
+    //   return;
+    // }
     // API endpoint URL
     const apiUrl = `${process.env.REACT_APP_API}/api/userdetails`; ;
   

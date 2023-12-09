@@ -31,6 +31,7 @@ import Checkoutpayment from './Components/Pages/Checkout/Payment/Checkoutpayment
 import Checkoutcomplete from './Components/Pages/Checkout/Complete/Checkoutcomplete';
 import TermsConditions from './Components/Pages/TermsConditions/TermsConditions';
 import PrivacyPolicy from './Components/Pages/PrivacyPolicy/PrivacyPolicy';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const location = useLocation();

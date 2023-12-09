@@ -86,8 +86,6 @@ function Shopcart() {
   };
 
 
-  
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -141,6 +139,7 @@ function Shopcart() {
     console.log(data);
   } catch (error) {
     console.error("Error adding to likes:", error);
+    
   }
 };
 const imageWidth = 500; // Set your desired width

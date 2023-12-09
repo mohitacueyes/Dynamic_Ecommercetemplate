@@ -5,6 +5,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [phone, setPhone] = useState("");
   const [deviceToken, setDeviceToken] = useState("olkjkfdf");
   const [deviceType, setDeviceType] = useState("Android");
@@ -68,6 +69,12 @@ const Login = () => {
     } else {
       console.error("Google Sign-In failed or insufficient data received.");
     }
+  };
+
+
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -171,7 +178,7 @@ const Login = () => {
                                   id="show_hide_password"
                                 >
                                   <input
-                                    type="password"
+                                    type={showPassword ? 'text' : 'password'}
                                     value={password}
                                     onChange={(e) =>
                                       setPassword(e.target.value)
@@ -183,10 +190,11 @@ const Login = () => {
                                     placeholder="Enter Password"
                                   />
                                   <a
-                                    href="javascript:;"
+                                    // href="javascript:;"
                                     className="input-group-text bg-transparent"
+                                    onClick={togglePasswordVisibility}
                                   >
-                                    <i className="bx bx-hide" />
+                                    <i className={showPassword ? 'bx bx-show' : 'bx bx-hide'}  />
                                   </a>
                                 </div>
                               </div>
