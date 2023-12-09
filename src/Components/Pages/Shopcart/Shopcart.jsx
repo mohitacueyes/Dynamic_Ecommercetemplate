@@ -86,7 +86,6 @@ function Shopcart() {
   };
 
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
