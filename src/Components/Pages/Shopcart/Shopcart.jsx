@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
 
 import axios from "axios";
 function Shopcart() {
@@ -85,20 +86,7 @@ function Shopcart() {
   };
 
 
-      if (data.ResponseCode === 1) {
-        setResponse(data.ResponseText);
-        // Update addresses state after successful deletion
-        setCartItems((prevAddresses) =>
-          prevAddresses.filter((cart) => cart.id !== id)
-        );
-      } else {
-        setResponse("Error deleting cart items");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setResponse("Error deleting cart items");
-    }
-  };
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -163,14 +151,14 @@ const imageHeight = 600;
         <div className="page-content">
           {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
-            <div className="container">
+          <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="page-breadcrumb d-flex align-items-center">
                 <h3 className="breadcrumb-title pe-3">Shop Cart</h3>
                 <div className="ms-auto">
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb mb-0 p-0">
                       <li className="breadcrumb-item">
-                        <a href="javascript:;">
+                        <a href="/home">
                           <i className="bx bx-home-alt" /> Home
                         </a>
                       </li>
@@ -187,22 +175,22 @@ const imageHeight = 600;
                   </nav>
                 </div>
               </div>
-            </div>
+            </Container>
           </section>
           {/*end breadcrumb*/}
           {/*start shop cart*/}
           <section className="py-4">
-            <div className="container">
+          <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="shop-cart">
                 <div className="row">
                   <div className="col-12 col-xl-8">
 
-                    <div className="shop-cart-list d-flex flex-column justify-content-center align-items-center mb-3 p-3">
+                    <div className="shop-cart-list  mb-3 p-3">
                       {cartItems.map((item, index) => (
-                        <div className="row align-items-center  g-3">
-                          <div className="col-12  col-lg-6 ">
+                        <div className="row align-items-center g-3">
+                          <div className="col-12  col-lg-6 col-xl-6">
                             <div className="d-lg-flex align-items-center gap-3">
-                              <div className="cart-img text-sm-start text-lg-start">
+                              <div className="cart-img text-sm-start  text-xl-start">
 
                                 <img
                                   src={item.imageLink}
@@ -214,7 +202,7 @@ const imageHeight = 600;
                                 />
                               </div>
 
-                              <div className="cart-detail  text-sm-start text-lg-start">
+                              <div className="cart-detail  text-sm-start text-lg-start text-xl-start">
 
                                 <h6 className="mb-2">
                                   {item.name.slice(0, 18) || item.name}..
@@ -226,7 +214,7 @@ const imageHeight = 600;
                                   Color: <span>White &amp; Blue</span>
                                 </p>
                                 {/* <h5 className="mb-0">${item.discounted_price}</h5> */}
-                                <div className="d-flex align-items-center mt-3 gap-2">
+                                <div className="d-flex align-items-center  mt-3 gap-2">
                                   <h6 className="mb-0 text-decoration-line-through text-light-3 text-secondary">
 
                                     ₹{item.price}
@@ -238,7 +226,7 @@ const imageHeight = 600;
                               </div>
                             </div>
                           </div>
-                          <div className="col-12 col-lg-3">
+                          <div className="col-12 col-lg-3 col-xl-3">
                             <div className="cart-action text-center">
                               <input
                                 type="number"
@@ -250,9 +238,9 @@ const imageHeight = 600;
                             </div>
                           </div>
 
-                          <div className="col-12 col-lg-3">
+                          <div className="col-12 col-lg-3 col-xl-3">
                             <div className="text-center">
-                              <div className="d-flex gap-3 justify-content-center justify-content-lg-end">
+                              <div className="d-flex gap-3 justify-content-lg-end">
 
                                 <a
                                   onClick={() => handleDeleteClick(item.id)}
@@ -402,7 +390,7 @@ const imageHeight = 600;
                 </div>
                 {/*end row*/}
               </div>
-            </div>
+            </Container>
           </section>
           {/*end shop cart*/}
         </div>

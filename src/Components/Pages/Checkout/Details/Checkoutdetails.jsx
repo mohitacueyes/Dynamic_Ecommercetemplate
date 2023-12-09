@@ -1,5 +1,6 @@
 import React , { useEffect, useState } from 'react'
 import { Order } from '../../Profile/Order';
+import { Container } from 'react-bootstrap';
 
 function Checkoutdetails() {
 
@@ -91,7 +92,7 @@ function Checkoutdetails() {
         <div className="page-content">
         {/*start breadcrumb*/}
         <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
-            <div className="container">
+           <Container fluid className="pe-lg-5 ps-lg-5">
             <div className="page-breadcrumb d-flex align-items-center">
                 <h3 className="breadcrumb-title pe-3">Checkout</h3>
                 <div className="ms-auto">
@@ -106,12 +107,12 @@ function Checkoutdetails() {
                 </nav>
                 </div>
             </div>
-            </div>
+            </Container>
         </section>
         {/*end breadcrumb*/}
         {/*start shop cart*/}
         <section className="py-4">
-            <div className="container">
+         <Container fluid className="pe-lg-5 ps-lg-5">
             <div className="shop-cart">
                 <div className="row">
                 <div className="col-12 col-xl-8">
@@ -295,7 +296,7 @@ function Checkoutdetails() {
                 </div>
                 {/*end row*/}
             </div>
-            </div>
+          </Container>
         </section>
         {/*end shop cart*/}
         </div>

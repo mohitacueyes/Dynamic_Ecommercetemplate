@@ -1,4 +1,5 @@
-import React , { useEffect, useState } from 'react'
+import React , { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 
 const Profile = () => {
 
@@ -54,7 +55,7 @@ const Profile = () => {
   <div className="page-content">
     {/*start breadcrumb*/}
     <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
-      <div className="container">
+    <Container fluid className="pe-lg-5 ps-lg-5">
         <div className="page-breadcrumb d-flex align-items-center">
           <h3 className="breadcrumb-title pe-3">Profile</h3>
           <div className="ms-auto">
@@ -69,7 +70,7 @@ const Profile = () => {
             </nav>
           </div>
         </div>
-      </div>
+    </Container>
     </section>
     {/*end breadcrumb*/}
     {/*start shop cart*/}
