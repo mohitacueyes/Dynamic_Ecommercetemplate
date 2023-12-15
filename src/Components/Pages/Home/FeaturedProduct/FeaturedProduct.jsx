@@ -91,8 +91,8 @@ const addToLikes = async (productId) => {
              
               </div>
               <div className="product-grid">
-                <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-6 g-3 g-sm-2">
-                  {feed.homefeed_product.slice(0, 12).map((product) => (
+                <div className="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-3 g-sm-2">
+                  {feed.homefeed_product.slice(0, 10).map((product) => (
                     <div className="col">
                       <div className="card">
                         <div className="position-relative overflow-hidden">
@@ -111,7 +111,7 @@ const addToLikes = async (productId) => {
                             <img
                               src={product.product_imageLink}
                               className="img-fluid  rounded-2 cart-img  cart-imgg"
-                               style={{height:"393.75px" , width:"393.75px"}}
+                               style={{height:"415.75px" , width:"393.75px"}}
                               alt="..."
                             />
                             </Link>
@@ -122,7 +122,7 @@ const addToLikes = async (productId) => {
                             <div className>
                               <p className="mb-1 product-short-name"></p>
                               <h6 className="mb-0 fw-bold product-short-title">
-                                {product.name.slice(0, 20) || product.name}..
+                                {product.name.slice(0, 18) || product.name}..
                               </h6>
                             </div>
                             <div className="icon-wishlist">

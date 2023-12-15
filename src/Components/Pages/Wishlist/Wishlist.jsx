@@ -126,11 +126,11 @@ console.log(response);
           <section className="py-4">
            <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="product-grid">
-                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-5 g-4">
+                <div className="row  row-cols-2 row-cols-md-3 row-cols-lg-3  row-cols-xl-4 row-cols-xxl-5 g-4">
                   {wishlistData.map((item) => (
                     <div className="col" key={item.id}>
-                      <div className="card rounded-0 border">
-                        <div className="card-img ">
+                      <div className="card rounded-0 border card-img">
+                        <div className="">
                           <a>
                             <Link to={`/productdetails/${item.product_id}/${item.slug}`}>
                             <img
@@ -146,39 +146,39 @@ console.log(response);
                           <div className="product-info">
                             <a href="javascript:;">
                               <h6 className="product-name mb-2">
-                                {item.name.substring(0, 19)}...
+                                {item.name.substring(0, 16)}...
                               </h6>
                             </a>
                             <div className="d-flex align-items-center">
                               <div className="mb-1 product-price">
                                 {" "}
-                                <span className="me-1 text-decoration-line-through">
+                                <span className="me-1 text-decoration-line-through ListName">
                                 ₹{item.price}
                                 </span>
-                                <span className="fs-5">
+                                <span className="fs-5 ListName">
                                 ₹{item.discounted_price}
                                 </span>
                               </div>
-                              <div className="cursor-pointer ms-auto">
+                              {/* <div className="cursor-pointer ms-auto">
                                 {" "}
                                 <i className="bx bxs-star text-warning" />
                                 <i className="bx bxs-star text-warning" />
                                 <i className="bx bxs-star text-warning" />
                                 <i className="bx bxs-star text-warning" />
                                 <i className="bx bxs-star text-warning" />
-                              </div>
+                              </div> */}
                             </div>
                             <div className="product-action mt-2">
                               <div className="d-grid gap-2">
-                                <a onClick={() => addToCart(item.product_id)} className="btn btn-dark btn-ecomm">
+                                <a onClick={() => addToCart(item.product_id)} className="btn btn-dark btn-ecomm ListName">
                                   <i className="bx bxs-cart-add" />
                                   Add to Cart
                                 </a>
                                 <a
                                   onClick={() => handleDeleteClick(item.id, item.product_id)}
-                                  className="btn btn-light btn-ecomm"
+                                  className="btn btn-light btn-ecomm sm-fs-3 ListName "
                                 >
-                                  <i className="bx bx-zoom-in" />
+                                  <i className="bx bx-zoom-in " />
                                   Remove From List
                                 </a>
                               </div>

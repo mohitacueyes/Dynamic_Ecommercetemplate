@@ -56,7 +56,6 @@ function Shopcart() {
 
   const handleDeleteClick = async (id, productId) => {
     const apiUrl = `${process.env.REACT_APP_API}/api/delete`;
-
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -183,26 +182,21 @@ const imageHeight = 600;
               <div className="shop-cart">
                 <div className="row">
                   <div className="col-12 col-xl-8">
-
                     <div className="shop-cart-list  mb-3 p-3">
                       {cartItems.map((item, index) => (
                         <div className="row align-items-center g-3">
-                          <div className="col-12  col-lg-6 col-xl-6">
-                            <div className="d-lg-flex align-items-center gap-3">
+                          <div className=" col-sm-6 col-lg-6 col-xl-6 col-xxl-6 ">
+                            <div className="d-flex flex-row align-items-start gap-3">
                               <div className="cart-img text-sm-start  text-xl-start">
-
                                 <img
                                   src={item.imageLink}
-                                  className="rounded-3"
-                                  width={100}
-                                  height={150}
+                                  className="rounded-3 "
+                                 
                                   style={{ objectFit: "cover" }}
                                   alt
                                 />
                               </div>
-
                               <div className="cart-detail  text-sm-start text-lg-start text-xl-start">
-
                                 <h6 className="mb-2">
                                   {item.name.slice(0, 18) || item.name}..
                                 </h6>
@@ -225,7 +219,7 @@ const imageHeight = 600;
                               </div>
                             </div>
                           </div>
-                          <div className="col-12 col-lg-3 col-xl-3">
+                          <div className="col-sm-3 col-lg-3 col-xl-3 col-xxl-3">
                             <div className="cart-action text-center">
                               <input
                                 type="number"
@@ -237,13 +231,13 @@ const imageHeight = 600;
                             </div>
                           </div>
 
-                          <div className="col-12 col-lg-3 col-xl-3">
+                          <div className="col-sm-3 col-lg-3 col-xl-3 col-xxl-3">
                             <div className="text-center">
-                              <div className="d-flex gap-3 justify-content-lg-end">
+                              <div className="d-flex gap-3 justify-content-lg-end align-items-sm-center">
 
                                 <a
                                   onClick={() => handleDeleteClick(item.id)}
-                                  className="btn btn-outline-dark rounded-0 btn-ecomm"
+                                  className="btn btn-outline-dark rounded-0 btn-ecomm Removebtn"
                                 >
                                   <i className="bx bx-x" />
                                   Remove
@@ -264,14 +258,14 @@ const imageHeight = 600;
                       ))}
                       <div className="d-lg-flex align-items-center gap-2">
                         <a
-                          href="javascript:;"
-                          className="btn btn-dark btn-ecomm"
+                          href="/"
+                          className="btn btn-dark btn-ecomm shopFont"
                         >
                           <i className="bx bx-shopping-bag" /> Continue Shoping
                         </a>
 
                         <a
-                          href="javascript:;"
+                          href="/"
                           className="btn btn-white btn-light btn-ecomm  ms-auto"
                         >
                           <i className="bx bx-refresh" /> Update Cart

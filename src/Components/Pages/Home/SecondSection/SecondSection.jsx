@@ -22,8 +22,8 @@ const SecondSection = () => {
               <div className="fs-1 text-content"><i className="bx bx-taxi" />
               </div>
               <div className="info-box-content ps-3">
-                <h6 className="mb-0 fw-bold">FREE SHIPPING &amp; RETURN</h6>
-                <p className="mb-0">Free shipping on all orders over $49</p>
+                <h6 className="mb-0 fw-bold TitleSecond">FREE SHIPPING &amp; RETURN</h6>
+                <p className="mb-0 ParaSecond">Free shipping on all orders over $49</p>
               </div>
             </div>
           </div>
@@ -32,8 +32,8 @@ const SecondSection = () => {
               <div className="fs-1 text-content"><i className="bx bx-dollar-circle" />
               </div>
               <div className="info-box-content ps-3">
-                <h6 className="mb-0 fw-bold">MONEY BACK GUARANTEE</h6>
-                <p className="mb-0">100% money back guarantee</p>
+                <h6 className="mb-0 fw-bold TitleSecond">MONEY BACK GUARANTEE</h6>
+                <p className="mb-0 ParaSecond">100% money back guarantee</p>
               </div>
             </div>
           </div>
@@ -42,8 +42,8 @@ const SecondSection = () => {
               <div className="fs-1 text-content"><i className="bx bx-support" />
               </div>
               <div className="info-box-content ps-3">
-                <h6 className="mb-0 fw-bold">ONLINE SUPPORT 24/7</h6>
-                <p className="mb-0">Awesome Support for 24/7 Days</p>
+                <h6 className="mb-0 fw-bold TitleSecond">ONLINE SUPPORT 24/7</h6>
+                <p className="mb-0 ParaSecond">Awesome Support for 24/7 Days</p>
               </div>
             </div>
           </div>

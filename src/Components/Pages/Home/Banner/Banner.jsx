@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import style from './Banner.module.css'
 const Banner = () => {
@@ -18,25 +18,25 @@ const Banner = () => {
   return (
     <>
 
-     <Carousel interval={1000}>
-      {bannerData.map((banner) => (
-        <Carousel.Item key={banner.id}>
-       <div className={style.bannerr}>
-       <img
-            src={banner.banner_imageLink}
-            alt={`Banner ${banner.id}`}
-          />
-       </div>
-          <Carousel.Caption>
-            <h3>{banner.title2}</h3>
-            <p>{banner.short_description}</p>
-            <a className="btn btn-dark btn-ecomm px-4" href={banner.slider_url}>
-              Shop Now
-            </a>
-          </Carousel.Caption>
-        </Carousel.Item>
-      ))}
-    </Carousel>
+      <Carousel interval={1000}>
+        {bannerData.map((banner) => (
+          <Carousel.Item key={banner.id}>
+            <div className={style.bannerr}>
+              <img
+                src={banner.banner_imageLink}
+                alt={`Banner ${banner.id}`}
+              />
+            </div>
+            <Carousel.Caption>
+              <h3>{banner.title2}</h3>
+              <p>{banner.short_description}</p>
+              <a className="btn btn-dark btn-ecomm px-4" href={banner.slider_url}>
+                Shop Now
+              </a>
+            </Carousel.Caption>
+          </Carousel.Item>
+        ))}
+      </Carousel>
     </>
   )
 }

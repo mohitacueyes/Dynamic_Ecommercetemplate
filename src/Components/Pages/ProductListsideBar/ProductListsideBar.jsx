@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -10,11 +10,35 @@ const ProductListsideBar = () => {
   const [products, setProducts] = useState([]);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
   const navigate = useNavigate();
-  
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [priceRange, setPriceRange] = useState({ min: 10, max: 10000 });
+  const [selectedColors, setSelectedColors] = useState([]);
+
+
+  //------------------ for filter----------- //
+  const handleCategoryFilter = (category) => {
+    // Logic to update selectedCategories state
+  };
+
+  // Function to handle brand filter selection
+  const handleBrandFilter = (brand) => {
+    // Logic to update selectedBrands state
+  };
+
+  // Function to handle price range filter
+  const handlePriceFilter = () => {
+    // Use the priceRange state to filter items within the selected price range
+  };
+
+  // Function to handle color filter selection
+  const handleColorFilter = (color) => {
+    // Logic to update selectedColors state
+  };
 
 
   useEffect(() => {
-    // Make an API call to fetch product data
+
     fetch(
       `${process.env.REACT_APP_API}/api/subcategory-wise-product-byid/${id}`
     )
@@ -23,63 +47,63 @@ const ProductListsideBar = () => {
       .catch((error) => console.error("Error:", error));
   }, []);
 
-// -------ADD TO CART --------//
-const addToCart = async (productId) => {
-  try {
-    const response = await fetch(`${process.env.REACT_APP_API}/api/add-cart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
 
-        id: userId,
-        user_id: userId,
-        product_id: productId,
-        qty: "1",
-        price: "1",
-        save_for_later: "0",
-      }),
-      
-    });
-console.log(response);
-    const data = await response.json();
-    toast.success("Add to cart successfully");
-    console.log(data);
-  } catch (error) {
-    console.error("Error adding to cart:", error);
-  }
-};
+  // -------ADD TO CART --------//
+  const addToCart = async (productId) => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API}/api/add-cart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
 
-// -------ADD TO LIKES --------//
-const addToLikes = async (productId) => {
-  try {
-    const response = await fetch(`${process.env.REACT_APP_API}/api/add-favorites`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+          id: userId,
+          user_id: userId,
+          product_id: productId,
+          qty: "1",
+          price: "1",
+          save_for_later: "0",
+        }),
 
-        id: userId,
-        user_id: userId,
-        product_id: productId,
-        favorites : "1",
-      }),
+      });
+      console.log(response);
+      const data = await response.json();
+      toast.success("Add to cart successfully");
+      console.log(data);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  };
 
-    });
-    console.log(response);
-    const data = await response.json();
-    console.log(data);
-    toast.success(data.ResponseText);
-  } catch (error) {
-    console.error("Error adding to likes:", error);
-    navigate("/login");
-  }
-};
+  // -------ADD TO LIKES --------//
+  const addToLikes = async (productId) => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API}/api/add-favorites`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+
+          id: userId,
+          user_id: userId,
+          product_id: productId,
+          favorites: "1",
+        }),
+
+      });
+      console.log(response);
+      const data = await response.json();
+      console.log(data);
+      toast.success(data.ResponseText);
+    } catch (error) {
+      console.error("Error adding to likes:", error);
+      navigate("/login");
+    }
+  };
   return (
     <>
-      {/*start page wrapper */}
       <div className="page-wrapper">
         <div className="page-content">
           {/*start breadcrumb*/}
@@ -115,7 +139,7 @@ const addToLikes = async (productId) => {
           {/*end breadcrumb*/}
           {/*start shop area*/}
           <section className="py-4">
-          <Container fluid className="pe-lg-5 ps-lg-5">
+            <Container fluid className="pe-lg-5 ps-lg-5">
               <div
                 className="btn btn-dark btn-ecomm d-xl-none position-fixed top-50 start-0 translate-middle-y z-index-1"
                 data-bs-toggle="offcanvas"
@@ -619,7 +643,9 @@ const addToLikes = async (productId) => {
                                     <input
                                       type="text"
                                       className="form-control rounded-0"
-                                      placeholder="$10"
+                                      placeholder=" ₹ 10"
+                                      value={priceRange.min}
+                                      onChange={(e) => setPriceRange({ ...priceRange, min: parseInt(e.target.value) || '' })}
                                     />
                                     <span className="input-group-text bg-section-1 border-0">
                                       -
@@ -627,12 +653,11 @@ const addToLikes = async (productId) => {
                                     <input
                                       type="text"
                                       className="form-control rounded-0"
-                                      placeholder="$10000"
+                                      placeholder=" ₹ 10000"
+                                      value={priceRange.max}
+                                      onChange={(e) => setPriceRange({ ...priceRange, max: parseInt(e.target.value) || '' })}
                                     />
-                                    <button
-                                      type="button"
-                                      className="btn btn-outline-dark rounded-0 ms-2"
-                                    >
+                                    <button type="button" className="btn btn-outline-dark rounded-0 ms-2" onClick={handlePriceFilter}>
                                       <i className="bx bx-chevron-right me-0" />
                                     </button>
                                   </div>
@@ -1065,25 +1090,25 @@ const addToLikes = async (productId) => {
                                       <i className="bx bx-cart-add" />
                                     </a>
                                   </div>
-                                          {/* <div className="quick-view position-absolute start-0 bottom-0 end-0">
+                                  {/* <div className="quick-view position-absolute start-0 bottom-0 end-0">
                                     <a><Link to={`/productdetails/${product.id}`}>
                                       Quick View
                                     </Link></a>
                                   </div> */}
-                                <a>                                    <Link
-                                      to={`/productdetails/${product.id}/${product.slug}`}
-                                    >
-                                      <img
-                                        src={product.image}
-                                        className="img-fluid rounded-2 cart-img"
-                                        style={{height:"393.75px",width:"393.75px"}}
-                                        alt="..."
-                                      />
-                                    </Link>
-                                   
-                                    </a>
+                                  <a>                                    <Link
+                                    to={`/productdetails/${product.id}/${product.slug}`}
+                                  >
+                                    <img
+                                      src={product.image}
+                                      className="img-fluid rounded-2 cart-img"
+                                      style={{ height: "393.75px", width: "393.75px" }}
+                                      alt="..."
+                                    />
+                                  </Link>
 
-                               
+                                  </a>
+
+
                                 </div>
                                 <div className="card-body px-0">
                                   <div className="d-flex align-items-center justify-content-between">
@@ -1110,10 +1135,10 @@ const addToLikes = async (productId) => {
                                   </div>
                                   <div className="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                     <div className="h6 fw-light fw-bold text-secondary text-decoration-line-through">
-                                    ₹{product.price}
+                                      ₹{product.price}
                                     </div>
                                     <div className="h6 fw-bold">
-                                    ₹{product.discounted_price}
+                                      ₹{product.discounted_price}
                                     </div>
                                   </div>
                                 </div>
@@ -1180,12 +1205,12 @@ const addToLikes = async (productId) => {
                 </div>
               </div>
               {/*end row*/}
-              </Container>
+            </Container>
           </section>
           {/*end shop area*/}
         </div>
       </div>
-      <ToastContainer />                        
+      <ToastContainer />
     </>
   );
 };

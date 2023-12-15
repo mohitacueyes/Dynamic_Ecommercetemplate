@@ -98,9 +98,9 @@ function Checkoutdetails() {
                 <div className="ms-auto">
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb mb-0 p-0">
-                    <li className="breadcrumb-item"><a href="javascript:;"><i className="bx bx-home-alt" /> Home</a>
+                    <li className="breadcrumb-item"><a href="/"><i className="bx bx-home-alt" /> Home</a>
                     </li>
-                    <li className="breadcrumb-item"><a href="javascript:;">Shop</a>
+                    <li className="breadcrumb-item"><a href="/">Shop</a>
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">Checkout</li>
                     </ol>

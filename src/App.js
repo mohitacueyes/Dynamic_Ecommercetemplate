@@ -69,7 +69,7 @@ function App() {
         <Route path='/terms-conditions' element={<TermsConditions/>}/>
         <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
         </Routes>
-        {location.pathname === '/' && <homeFooter />} 
+        {/* {location.pathname === '/' && <homeFooter />}  */}
       <Footer />
    
    

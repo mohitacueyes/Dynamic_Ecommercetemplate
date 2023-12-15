@@ -7,6 +7,7 @@ import ReactImageMagnify from 'react-image-magnify';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { ToastContainer, toast } from 'react-toastify';
+import { Container } from "react-bootstrap";
 
 
 
@@ -22,11 +23,20 @@ const styles = {
 
 const ProductDetails = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
   const navigate = useNavigate();
+
+  const xs = useMediaQuery('(max-width:575px)');
+  const sm = useMediaQuery('(min-width:576px) and (max-width:767px)');
+  const md = useMediaQuery('(min-width:768px) and (max-width:991px)');
+  const lg = useMediaQuery('(min-width:992px) and (max-width:1199px)');
+  const xl = useMediaQuery('(min-width:1200px) and (max-width:1399px)');
+  const xxl = useMediaQuery('(min-width:1400px)');
+  const isMobile = xs || sm || md || lg || xl || xxl;
+
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
@@ -98,9 +108,52 @@ const ProductDetails = () => {
     }
   };
 
-  const imageWidth = isMobile ?  360 : 500; // Adjust the width for mobile view
-  const imageHeight = 600;
-  const thumbnailSize = isMobile ? 100 : 145;
+  let imageWidth, imageHeight;
+
+  if (xs) {
+    imageWidth = 350;
+    imageHeight = 400;
+    
+  } else if (sm) {
+    imageWidth = 400;
+    imageHeight = 500;
+  
+  } else if (md) {
+    // For desktop and larger screens
+    imageWidth = 450;
+    imageHeight = 550;
+  } else if (lg) {
+    // For desktop and larger screens
+    imageWidth = 400;
+    imageHeight = 500;
+  } else if (xl) {
+    // For desktop and larger screens
+    imageWidth = 450;
+    imageHeight = 550;
+  } else if (xxl) {
+    // For desktop and larger screens
+    imageWidth = 500;
+    imageHeight = 600;
+  }
+
+  let thumbnailSize;
+
+if (xs) {
+  thumbnailSize = 103;
+} else if (sm) {
+  thumbnailSize = 120;
+} else if (md) {
+  thumbnailSize = 137; // Set the same value as 'md' if needed
+} else if (lg) {
+  thumbnailSize = 120; // Set the same value as 'lg' if needed
+} else if (xl) {
+  thumbnailSize = 137; // Set the same value as 'xl' if needed
+} else if (xxl) {
+  thumbnailSize = 145; // Set the same value as 'xxl' if needed
+}
+  // const imageWidth = isMobile ?  380 : 400; // Adjust the width for mobile view
+  // const imageHeight = isMobile ? 450 : 500;
+  // const thumbnailSize = isMobile ? 100 : 145;
 
   return (
     <>
@@ -109,19 +162,19 @@ const ProductDetails = () => {
         <div className="page-content">
           {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
-            <div className="container">
+            <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="page-breadcrumb d-flex align-items-center">
-                <h3 className="breadcrumb-title pe-3">{productData.name}</h3>
+                <h3 className="breadcrumb-title pe-3 ">{productData.name}</h3>
                 <div className="ms-auto">
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb mb-0 p-0">
                       <li className="breadcrumb-item">
-                        <a href="javascript:;">
+                        <a href="/">
                           <i className="bx bx-home-alt" /> Home
                         </a>
                       </li>
                       <li className="breadcrumb-item">
-                        <a href="javascript:;">Shop</a>
+                        <a href="/">Shop</a>
                       </li>
                       <li
                         className="breadcrumb-item active"
@@ -133,16 +186,16 @@ const ProductDetails = () => {
                   </nav>
                 </div>
               </div>
-            </div>
+          </Container>
           </section>
           {/*end breadcrumb*/}
           {/*start product detail*/}
           <section className="py-4">
-            <div className="container">
+          <Container fluid className="pe-lg-5 ps-lg-5 pe-3 ps-4">
               <div className="product-detail-card">
                 <div className="product-detail-body">
                   <div className="row g-0">
-                    <div className="col-12 col-lg-5">
+                    <div className="col-12 col-sm-12 col-lg-5 col-xl-5  col-xxl-5">
                       <div className="image-zoom-section">
                         <div className="producttopimage">
                           <ReactImageMagnify
@@ -153,8 +206,10 @@ const ProductDetails = () => {
                                 src:
                                   selectedImage ||
                                   productData.product_image[0].image,
+                                  
                                 width: imageWidth,
                                 height: imageHeight,
+                               
                               },
                               largeImage: {
                                 src:
@@ -170,8 +225,8 @@ const ProductDetails = () => {
                             }}
                           />
                         </div>
-                          <Carousel >
-                        <div className="thumbnail-grid mt-3 d-flex align-items-center justify-content-between me-5">
+                       
+                        <div className="thumbnail-grid mt-3 d-flex align-items-center gap-3 me-5">
                           {productData.product_image.map((image, index) => (
                             
                             <div key={index} className="thumbnail-item subImage" onClick={() => setSelectedImage(image.image)}>
@@ -184,11 +239,11 @@ const ProductDetails = () => {
                             </div>
                           ))}
                         </div>
-                          </Carousel>
+                     
                       </div>
                     </div>
-                    <div className="col-12 col-lg-7">
-                      <div className="product-info-section p-3">
+                    <div className="col-12 col-lg-7 col-xl-7 col-xxl-7" >
+                      <div className="product-info-section ">
                         <h3 className="mt-3 mt-lg-0 mb-0">
                           {productData.name}
                         </h3>
@@ -264,7 +319,7 @@ const ProductDetails = () => {
                         </div>
                         <div className="d-flex gap-2 mt-3">
                           <a
-                            href="javascript:;"
+                         
                             onClick={() => addToCart(productData.id)}
                             className="btn btn-dark btn-ecomm"
                           >
@@ -272,7 +327,7 @@ const ProductDetails = () => {
                             Add to Cart
                           </a>
                           <a
-                            href="javascript:;"
+                          
                             onClick={() => addToCart(productData.id)}
                             className="btn btn-dark btn-ecomm"
                           >
@@ -286,52 +341,14 @@ const ProductDetails = () => {
                           </a>
                         </div>
 
-                        {/* <div className="product-sharing pt-3">
-                          <div className="d-flex align-items-center gap-2 flex-wrap">
-                            {/* <div className>
-                        <button type="button" className="btn-social bg-twitter"><i className="bx bxl-twitter" /></button>
-                      </div> */}
-                            {/* <div className>
-                              <button
-                                type="button"
-                                className="btn-social bg-facebook"
-                              >
-                                <i className="bx bxl-facebook" />
-                              </button>
-                            </div>
-                            <div className>
-                              <button
-                                type="button"
-                                className="btn-social bg-linkedin"
-                              >
-                                <i className="bx bxl-linkedin" />
-                              </button> */}
-                            {/* </div>
-                            <div className>
-                              <button
-                                type="button"
-                                className="btn-social bg-youtube"
-                              >
-                                <i className="bx bxl-youtube" />
-                              </button>
-                            </div> */}
-                            {/* <div className>
-                              <button
-                                type="button"
-                                className="btn-social bg-pinterest"
-                              >
-                                <i className="bx bxl-pinterest" />
-                              </button>
-                            </div>
-                          </div>
-                        </div> */} 
+                       
                       </div>
                     </div>
                   </div>
                   {/*end row*/}
                 </div>
               </div>
-            </div>
+           </Container>
           </section>
 
           {/*end product detail*/}
@@ -412,11 +429,11 @@ const ProductDetails = () => {
                             <div className="d-flex align-items-start">
                               <div className="review-user">
                                 <img
-                                  src="../assets/images/avatars/avatar-1.png"
+                                  src="../../assets/images/avatars/avatar-1.png"
                                   width={65}
                                   height={65}
                                   className="rounded-circle"
-                                  alt
+                                  alt=""
                                 />
                               </div>
                               <div className="review-content ms-3">
@@ -449,11 +466,11 @@ const ProductDetails = () => {
                             <div className="d-flex align-items-start">
                               <div className="review-user">
                                 <img
-                                  src="../assets/images/avatars/avatar-2.png"
+                                  src="../../assets/images/avatars/avatar-2.png"
                                   width={65}
                                   height={65}
                                   className="rounded-circle"
-                                  alt
+                                  alt=""
                                 />
                               </div>
                               <div className="review-content ms-3">
@@ -486,7 +503,7 @@ const ProductDetails = () => {
                             <div className="d-flex align-items-start">
                               <div className="review-user">
                                 <img
-                                  src="../assets/images/avatars/avatar-3.png"
+                                  src="../../assets/images/avatars/avatar-3.png"
                                   width={65}
                                   height={65}
                                   className="rounded-circle"

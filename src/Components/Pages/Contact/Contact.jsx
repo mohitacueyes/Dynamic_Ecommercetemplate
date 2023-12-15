@@ -38,12 +38,12 @@ function Contact() {
           {/*end breadcrumb*/}
           {/*start page content*/}
           <section className="py-4">
-          <Container fluid className="pe-5 ps-5">
+          <Container fluid className="mapInfo">
               <h3 className="d-none">Google Map</h3>
               <div className="contact-map p-3 bg-light rounded-0 shadow-none">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d805184.6319269302!2d144.49269200596396!3d-37.971237009163936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad646b5d2ba4df7%3A0x4045675218ccd90!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sin!4v1618835176130!5m2!1sen!2sin"
-                  className="w-100"
+                  className="w-100 mapImage"
                   height={450}
                   style={{ border: 0 }}
                   allowFullScreen
@@ -53,7 +53,7 @@ function Contact() {
               </Container>
           </section>
           <section className="py-4">
-          <Container fluid className="pe-5 ps-5">
+          <Container fluid className="mapInfo">
               <div className="row justify-content-between d-flex">
                 <div className="col-lg-7">
                   <div className="p-3 bg-light">

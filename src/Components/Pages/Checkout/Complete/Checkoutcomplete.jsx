@@ -16,7 +16,7 @@ function Checkoutcomplete() {
                         <div className="ms-auto">
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb mb-0 p-0">
-                            <li className="breadcrumb-item"><a href="javascript:;"><i className="bx bx-home-alt" /> Home</a>
+                            <li className="breadcrumb-item"><a href="/"><i className="bx bx-home-alt" /> Home</a>
                             </li>
                             <li className="breadcrumb-item"><a href="javascript:;">Shop</a>
                             </li>
@@ -38,7 +38,7 @@ function Checkoutcomplete() {
                         <p className="fs-sm mb-2">Make sure you make note of your order number, which is <span className="fw-medium">34VB5540K83.</span>
                         </p>
                         <p className="fs-sm">You will be receiving an email shortly with confirmation of your order. <u>You can now:</u>
-                        </p><a className="btn btn-light rounded-0 mt-3 me-3" href="index.html">Go back shopping</a><a className="btn btn-white rounded-0 mt-3" href="order-tracking.html"><i className="bx bx-map" />Track order</a>
+                        </p><a className="btn btn-light rounded-0 mt-3 me-3" href="/">Go back shopping</a><a className="btn btn-white rounded-0 mt-3" href="order-tracking.html"><i className="bx bx-map" />Track order</a>
                         </div>
                     </div>
                     </div>
