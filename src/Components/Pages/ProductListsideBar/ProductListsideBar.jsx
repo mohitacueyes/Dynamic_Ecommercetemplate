@@ -1086,7 +1086,7 @@ const ProductListsideBar = () => {
                               <div className="card" >
                                 <div className="position-relative overflow-hidden">
                                   <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
-                                    <a href="javascript:;" onClick={() => addToCart(product.id)}>
+                                    <a href="" onClick={() => addToCart(product.id)}>
                                       <i className="bx bx-cart-add" />
                                     </a>
                                   </div>
@@ -1095,7 +1095,7 @@ const ProductListsideBar = () => {
                                       Quick View
                                     </Link></a>
                                   </div> */}
-                                  <a>                                    <Link
+                                                                  <Link
                                     to={`/productdetails/${product.id}/${product.slug}`}
                                   >
                                     <img
@@ -1106,7 +1106,7 @@ const ProductListsideBar = () => {
                                     />
                                   </Link>
 
-                                  </a>
+                                
 
 
                                 </div>

@@ -2396,8 +2396,9 @@ body.bg-theme15 {
 	}
 
 	.cart-img {
-		height: 250px !important;
+		height: 350px !important;
 		display: flex;
+		width: 400px!important;
 
 	}
 
@@ -2484,9 +2485,9 @@ body.bg-theme15 {
 
 	}
 	.cart-img {
-		height: 250px !important;
+		height: 400px !important;
 		display: flex;
-		width: 200px !important;
+		width: 400px !important;
 	}
 	.cart-img img {
 		height: 100% !important;
@@ -2512,7 +2513,10 @@ body.bg-theme15 {
 		font-size: 13px !important;
 		margin-right: 30px !important;
 	}
-
+	.TopSearch
+	{
+		margin-right: 0!important;
+	}
 
 
 }
@@ -2537,9 +2541,9 @@ body.bg-theme15 {
 		height: 450px !important;
 	}
 	.cart-img {
-		height: 250px !important;
+		height: 450px !important;
 		display: flex;
-		width: 200px !important;
+		width: 350px !important;
 	}
 	.cart-img img {
 		height: 100% !important;
@@ -2569,7 +2573,10 @@ body.bg-theme15 {
 		font-size: 13px !important;
 		margin-right: 30px !important;
 	}
-	
+	.TopSearch
+	{
+		margin-right: 0!important;
+	}
 
 }
 
@@ -2590,9 +2597,9 @@ body.bg-theme15 {
 		padding-right: 3rem !important;
 	}
 	.cart-img {
-		height: 200px !important;
+		height: 400px !important;
 		display: flex;
-		width: 150px !important;
+		width: 300px !important;
 	}
 	.cart-img img {
 		height: 100% !important;
@@ -2603,7 +2610,13 @@ body.bg-theme15 {
 	.Removebtn{
 		font-size: 16px!important;
 	}
-  
+    .TopSearch
+	{
+		margin-right: 0!important;
+	}
+	.footer-section-mobile {
+		display: none;
+	}
 	
 }
 
@@ -2628,9 +2641,9 @@ body.bg-theme15 {
 	}
 
 	.cart-img {
-		height: 200px !important;
+		height: 450px !important;
 		display: flex;
-		width: 150px !important;
+		width: 400px !important;
 
 	}
 	.cart-img img {
@@ -2639,6 +2652,9 @@ body.bg-theme15 {
 		object-fit: cover !important;
 		margin-right: 20px;
 	} 
+	.footer-section-mobile {
+		display: none;
+	}
 	
 }
 
@@ -2658,9 +2674,9 @@ body.bg-theme15 {
 	}
 
 	.cart-img {
-		height: 200px !important;
+		height: 400px !important;
 		display: flex;
-		width: 150px !important;
+		width: 320px !important;
 	}
 	.cart-img img {
 		height: 100% !important;
@@ -2668,7 +2684,9 @@ body.bg-theme15 {
 		object-fit: cover !important;
 		margin-right: 20px;
 	} 
-
+	.footer-section-mobile {
+		display: none;
+	}
 	/* .RemoveFlex {
 		display: flex;
 		justify-content: start;

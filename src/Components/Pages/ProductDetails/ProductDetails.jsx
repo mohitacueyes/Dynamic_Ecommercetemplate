@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate  } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
 import Carousel from 'react-bootstrap/Carousel';
@@ -113,11 +113,11 @@ const ProductDetails = () => {
   if (xs) {
     imageWidth = 350;
     imageHeight = 400;
-    
+
   } else if (sm) {
     imageWidth = 400;
     imageHeight = 500;
-  
+
   } else if (md) {
     // For desktop and larger screens
     imageWidth = 450;
@@ -138,19 +138,19 @@ const ProductDetails = () => {
 
   let thumbnailSize;
 
-if (xs) {
-  thumbnailSize = 103;
-} else if (sm) {
-  thumbnailSize = 120;
-} else if (md) {
-  thumbnailSize = 137; // Set the same value as 'md' if needed
-} else if (lg) {
-  thumbnailSize = 120; // Set the same value as 'lg' if needed
-} else if (xl) {
-  thumbnailSize = 137; // Set the same value as 'xl' if needed
-} else if (xxl) {
-  thumbnailSize = 145; // Set the same value as 'xxl' if needed
-}
+  if (xs) {
+    thumbnailSize = 90;
+  } else if (sm) {
+    thumbnailSize = 110;
+  } else if (md) {
+    thumbnailSize = 127; // Set the same value as 'md' if needed
+  } else if (lg) {
+    thumbnailSize = 110; // Set the same value as 'lg' if needed
+  } else if (xl) {
+    thumbnailSize = 127; // Set the same value as 'xl' if needed
+  } else if (xxl) {
+    thumbnailSize = 145; // Set the same value as 'xxl' if needed
+  }
   // const imageWidth = isMobile ?  380 : 400; // Adjust the width for mobile view
   // const imageHeight = isMobile ? 450 : 500;
   // const thumbnailSize = isMobile ? 100 : 145;
@@ -186,12 +186,12 @@ if (xs) {
                   </nav>
                 </div>
               </div>
-          </Container>
+            </Container>
           </section>
           {/*end breadcrumb*/}
           {/*start product detail*/}
           <section className="py-4">
-          <Container fluid className="pe-lg-5 ps-lg-5 pe-3 ps-4">
+            <Container fluid className="pe-lg-5 ps-lg-5 pe-3 ps-4">
               <div className="product-detail-card">
                 <div className="product-detail-body">
                   <div className="row g-0">
@@ -206,10 +206,10 @@ if (xs) {
                                 src:
                                   selectedImage ||
                                   productData.product_image[0].image,
-                                  
+
                                 width: imageWidth,
                                 height: imageHeight,
-                               
+
                               },
                               largeImage: {
                                 src:
@@ -225,10 +225,10 @@ if (xs) {
                             }}
                           />
                         </div>
-                       
-                        <div className="thumbnail-grid mt-3 d-flex align-items-center gap-3 me-5">
+
+                        <div className="thumbnail-grid mt-3 d-flex align-items-center  me-5">
                           {productData.product_image.map((image, index) => (
-                            
+
                             <div key={index} className="thumbnail-item subImage" onClick={() => setSelectedImage(image.image)}>
                               <img
                                 src={image.image}
@@ -239,10 +239,10 @@ if (xs) {
                             </div>
                           ))}
                         </div>
-                     
+
                       </div>
                     </div>
-                    <div className="col-12 col-lg-7 col-xl-7 col-xxl-7" >
+                    <div className="col-12 col-lg-7 col-xl-5 col-xxl-5" >
                       <div className="product-info-section ">
                         <h3 className="mt-3 mt-lg-0 mb-0">
                           {productData.name}
@@ -280,7 +280,7 @@ if (xs) {
                         </dl>
                         <div className="mt-3 align-items-center">
                           <h6>Colors :</h6>
-                          
+
                           <div className="d-flex align-items-center gap-2 w-16 h-25">
                             <img
                               src={productData.product_image[0].image}
@@ -292,7 +292,7 @@ if (xs) {
                               alt="colors"
                               className="img-fluid"
                             />
-                         
+
                           </div>
                         </div>
                         <div class="row row-cols-auto align-items-center mt-3">
@@ -319,7 +319,7 @@ if (xs) {
                         </div>
                         <div className="d-flex gap-2 mt-3">
                           <a
-                         
+
                             onClick={() => addToCart(productData.id)}
                             className="btn btn-dark btn-ecomm"
                           >
@@ -327,7 +327,7 @@ if (xs) {
                             Add to Cart
                           </a>
                           <a
-                          
+
                             onClick={() => addToCart(productData.id)}
                             className="btn btn-dark btn-ecomm"
                           >
@@ -341,20 +341,22 @@ if (xs) {
                           </a>
                         </div>
 
-                       
+
                       </div>
                     </div>
+                    <div className="col-12 col-lg-12 col-xl-2 col-xxl-2">
+                    </div>
+                    {/*end row*/}
                   </div>
-                  {/*end row*/}
                 </div>
-              </div>
-           </Container>
+                </div>
+            </Container>
           </section>
 
           {/*end product detail*/}
           {/*start product more info*/}
           <section className="py-4">
-            <div className="container">
+        <Container fluid className="pe-5 ps-5">
               <div className="product-more-info">
                 <ul className="nav nav-tabs mb-0" role="tablist">
                   <li className="nav-item">
@@ -593,7 +595,7 @@ if (xs) {
                   </div>
                 </div>
               </div>
-            </div>
+            </Container>
           </section>
           {/*end product more info*/}
         </div>

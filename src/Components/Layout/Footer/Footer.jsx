@@ -111,11 +111,11 @@ export const Footer = ({ currentPage }) => {
                   <div className="download-app mt-3">
                     <h6 className="mb-3 text-uppercase fw-bold">Download our app</h6>
                     <div className="d-flex align-items-center gap-2">
-                      <a href="javascript:;">
-                        <img src="assets/images/icons/apple-store.png" className width={140} alt />
+                      <a href="/">
+                        <img src="../../assets/images/icons/apple-store.png" className width={140} alt />
                       </a>
-                      <a href="javascript:;">
-                        <img src="assets/images/icons/play-store.png" className width={140} alt />
+                      <a href="/">
+                        <img src="../../assets/images/icons/play-store.png" className width={140} alt />
                       </a>
                     </div>
                   </div>
@@ -132,16 +132,16 @@ export const Footer = ({ currentPage }) => {
               <div className="payment-icon">
                 <div className="row row-cols-auto g-2 justify-content-end">
                   <div className="col">
-                    <img src="assets/images/icons/visa.png" alt />
+                    <img src="../../assets/images/icons/visa.png" alt />
                   </div>
                   <div className="col">
-                    <img src="assets/images/icons/paypal.png" alt />
+                    <img src="../../assets/images/icons/paypal.png" alt />
                   </div>
                   <div className="col">
-                    <img src="assets/images/icons/mastercard.png" alt />
+                    <img src="../../assets/images/icons/mastercard.png" alt />
                   </div>
                   <div className="col">
-                    <img src="assets/images/icons/american-express.png" alt />
+                    <img src="../../assets/images/icons/american-express.png" alt />
                   </div>
                 </div>
               </div>
