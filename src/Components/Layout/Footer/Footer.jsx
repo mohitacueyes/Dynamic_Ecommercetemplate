@@ -75,12 +75,25 @@ export const Footer = ({ currentPage }) => {
                 <div className="footer-section2">
                   <h5 className="mb-4 text-uppercase fw-bold">Categories</h5>
                   <ul className="list-unstyled">
-                    <li className="mb-1 "><a href="/terms-conditions"><i className="bx bx-chevron-right" /> Shopping Policy </a>
+                    <li className="mb-1 "><a href="/terms-conditions" className='text-decoration-none text-dark '><i className="bx bx-chevron-right" /> Shopping Policy </a>
                     </li>
-                    <li className="mb-1"><a href="/privacy-policy"><i className="bx bx-chevron-right" /> Exchange Policy </a>
+                    <li className="mb-1"><a href="/privacy-policy" className='text-decoration-none text-dark '><i className="bx bx-chevron-right" /> Exchange Policy </a>
                     </li>
-                    {/* <li className="mb-1"><a href="javascript:;"><i className="bx bx-chevron-right" /> Refund Policy</a>
-                    </li> */}
+                  </ul>
+                </div>
+                <div className="footer-section2">
+                  <h5 className="mb-4 text-uppercase fw-bold">Quick Links</h5>
+                  <ul className="list-unstyled ">
+                    <li className="mb-1 "><a href="order_track" className='text-decoration-none text-dark   '><i className="bx bx-chevron-right" />Track Order</a>
+                    </li>
+                    <li className="mb-1"><a href="/about" className='text-decoration-none text-dark'><i className="bx bx-chevron-right" /> About</a>
+                    </li>
+                    <li className="mb-1"><a href="blog" className='text-decoration-none text-dark'><i className="bx bx-chevron-right" /> Blog</a>
+                    </li>
+                    <li className="mb-1"><a href="/contact" className='text-decoration-none text-dark'><i className="bx bx-chevron-right" /> Contact</a>
+                    </li>
+                    <li className="mb-1"><a href="support" className='text-decoration-none text-dark'><i className="bx bx-chevron-right" /> Help &amp; FAQs</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -162,10 +175,46 @@ export const Footer = ({ currentPage }) => {
             </div>
           </div>
         )}
-        <div className="address mb-3 d-flex align-items-center  justify-content-between">
-          <h6 className="mb-0 text-uppercase fw-bold">Useful Links</h6>
-          <span className="plus-sign">+</span>
+        <div className="address mb-3 d-flex align-items-center justify-content-between">
+          <h6 className="mb-0 text-uppercase fw-bold" onClick={toggleUsefulLinks}>
+            Quick Links
+          </h6>
+          <span className="plus-sign" onClick={toggleUsefulLinks}>
+            {usefulLinksVisible ? '-' : '+'}
+          </span>
         </div>
+        {usefulLinksVisible && (
+          <div className="footer-section2">
+            <ul className="list-unstyled">
+              <li className="mb-1">
+                <a href="order_track" className='text-decoration-none text-dark'>
+                  <i className="bx bx-chevron-right" />Track Order
+                </a>
+              </li>
+              <li className="mb-1">
+                <a href="/about" className='text-decoration-none text-dark'>
+                  <i className="bx bx-chevron-right" /> About
+                </a>
+              </li>
+              <li className="mb-1">
+                <a href="blog" className='text-decoration-none text-dark'>
+                  <i className="bx bx-chevron-right" /> Blog
+                </a>
+              </li>
+              <li className="mb-1">
+                <a href="/contact" className='text-decoration-none text-dark'>
+                  <i className="bx bx-chevron-right" /> Contact
+                </a>
+              </li>
+              <li className="mb-1">
+                <a href="support" className='text-decoration-none text-dark'>
+                  <i className="bx bx-chevron-right" /> Help &amp; FAQs
+                </a>
+              </li>
+            </ul>
+          </div>
+        )}
+
         <div className="address  d-flex align-items-center justify-content-between">
           <h6 className="mb-0 text-uppercase fw-bold " onClick={togglePolicies}>
             Policies

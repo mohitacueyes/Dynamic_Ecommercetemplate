@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
+
 export const Searchbar = () => {
   const [cartItems, setCartItems] = useState([]);
   const user_id = localStorage.getItem("userId");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
+
   useEffect(() => {
     const fetchCartData = async () => {
       const user_id = localStorage.getItem('userId');
 
-      
+
       try {
         if (user_id) {
           const response = await fetch(`${process.env.REACT_APP_API}/api/cart-listuseridwise`, {
@@ -41,48 +43,50 @@ export const Searchbar = () => {
 
     fetchCartData();
   }, []);
-  // console.log(cartItems);
+
 
   //-----DELETE Add to Cart-----//
- const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState(null);
 
- const handleDeleteClick = async (id ,productId) => {
-   const apiUrl = `${process.env.REACT_APP_API}/api/delete`; 
+  const handleDeleteClick = async (id, productId) => {
+    const apiUrl = `${process.env.REACT_APP_API}/api/delete`;
 
-   try {
-     const response = await fetch(apiUrl, {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({ 
-        user_id:user_id,
-        product_id:productId,
-        favorites:"2"
-      }),
-     });
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_id: user_id,
+          product_id: productId,
+          favorites: "2"
+        }),
+      });
 
-     const data = await response.json();
+      const data = await response.json();
 
-     if (data.ResponseCode === 1) {
-       setResponse(data.ResponseText);
-       // Update addresses state after successful deletion
-       setCartItems(prevAddresses => prevAddresses.filter(cart => cart.id !== id));
-     } else {
-       setResponse('Error deleting cart items');
-     }
-   } catch (error) {
-     console.error('Error:', error);
-     setResponse('Error deleting cart items');
-   }
- };
+      if (data.ResponseCode === 1) {
+        setResponse(data.ResponseText);
+
+        setCartItems(prevAddresses => prevAddresses.filter(cart => cart.id !== id));
+      } else {
+        setResponse('Error deleting cart items');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setResponse('Error deleting cart items');
+    }
+  };
+
   return (
     <>
       <div className="header-content bg-background">
-        <Container fluid className="pe-lg-5 ps-lg-5">
-        <div >
-          <div className="row align-items-center gx-4 pt-3 pb-2 d-xl-flex ">
-          <div className="col-auto">
+        <Container fluid className="ps-lg-5 pe-lg-5">
+
+          <div className="row  gx-5 pt-3 pb-2 d-flex align-items-center ">
+
+            <div className="col-sm-8 col-md-4 col-lg-3 col-xl-2  col-xxl-2">
               <div className="d-flex align-items-center gap-3">
                 <div
                   className="mobile-toggle-menu d-inline d-xl-none"
@@ -102,46 +106,42 @@ export const Searchbar = () => {
                 </div>
               </div>
             </div>
-          
-            <div className="col-12 col-xl order-4 order-xl-0 d-none d-xl-flex ">
-              <div className="input-group flex-nowrap pb-3 pb-xl-0">
+
+            <div className="d-sm-none col-md-5 d-md-flex d-xxl-flex  col-lg-6 col-xl-8 col-xxl-8">
+              <div className="input-group flex-nowrap  pb-xl-0">
                 <input
                   type="text"
-                  class="form-control w-100 border-dark border border-3 d-none d-sm-block"
+                  class="form-control w-100 border-dark border border-2 d-none d-sm-block"
                   placeholder="Search for Products"
                 />
                 <button
-                 class="btn btn-dark btn-ecomm border-3 d-none d-sm-block"
+                  class="btn btn-dark btn-ecomm border-2 d-none d-sm-block"
                   type="button"
                 >
-                  Search
+                  <i className="bx bx-search" />
+
                 </button>
               </div>
             </div>
-          
-            <div className="col-auto d-none d-xl-flex d-none d-xl-flex">
-              <div className="d-flex align-items-center gap-3">
-                <div className="fs-1 text-content">
-                  <i className="bx bx-headphone" />
-                </div>
-                <div className>
-                  <p className="mb-0 text-content">CALL US NOW</p>
-                  <h5 className="mb-0">+011 5827918</h5>
-                </div>
-              </div>
-            </div>
-            <div className="col-auto ms-auto d-none d-xl-flex">
+
+            {/* <div className="phoneNumber d-sm-none col-md-3 col-auto d-md-none d-lg-none flex-column d-xl-flex col-xl-2 d-xxl-flex col-xxl-2  align-items-center"> */}
+              {/* <i className="bx bx-headphone fs-3 " /> */}
+              {/* <h5 className="mb-0" style={{ fontSize: "16px", fontWeight: "bold" }}>Call Us</h5> */}
+              {/* <h5 className="mb-0" style={{ fontSize: "16px" }}>+91 1234567890</h5> */}
+            {/* </div> */}
+
+            <div className="col-auto col-xl-2 col-xxl-2 col-sm-3 cartFlex">
               <div className="top-cart-icons">
                 <nav className="navbar navbar-expand">
                   <ul className="navbar-nav">
                     <li className="nav-item">
                       <a href="/profile" className="nav-link cart-link">
-                        <i className="bx bx-user" />
+                        <i className="bx bx-user fs-3" />
                       </a>
                     </li>
                     <li className="nav-item">
                       <a href="/wishlist" className="nav-link cart-link">
-                        <i className="bx bx-heart" />
+                        <i className="bx bx-heart  fs-3" />
                       </a>
                     </li>
                     <li className="nav-item dropdown dropdown-large">
@@ -152,7 +152,7 @@ export const Searchbar = () => {
                       >
                         {" "}
                         <span className="alert-count">{cartItems.length}</span>
-                        <i className="bx bx-shopping-bag" />
+                        <i className="bx bx-shopping-bag  fs-3" />
                       </a>
                       <div className="dropdown-menu dropdown-menu-end">
                         <a href="javascript:;">
@@ -163,34 +163,34 @@ export const Searchbar = () => {
                             </p>
                           </div>
                         </a>
-                        
+
                         <div className="cart-list">
-                        {cartItems.map((item , index) => (
-                          <a className="dropdown-item" href="javascript:;" key={index}>
-                            <div className="d-flex align-items-center">
-                              <div className="flex-grow-1">
-                                <h6 className="cart-product-title">
-                                  {item.name.slice(0, 20)}...
-                                </h6>
-                                <p className="cart-product-price">1 X ₹{item.discounted_price}</p>
-                              </div>
-                              <div className="position-relative">
-                                <div className="cart-product-cancel position-absolute" >
-                                  <i className="bx bx-x" onClick={() => handleDeleteClick(item.id)} />
+                          {cartItems.map((item, index) => (
+                            <a className="dropdown-item" href="javascript:;" key={index}>
+                              <div className="d-flex align-items-center">
+                                <div className="flex-grow-1">
+                                  <h6 className="cart-product-title">
+                                    {item.name.slice(0, 20)}...
+                                  </h6>
+                                  <p className="cart-product-price">1 X ₹{item.discounted_price}</p>
                                 </div>
-                                <div className="cart-product img-fluid ">
-                                  <img
-                                    src={item.imageLink}
-                                    className = "img-fluid "
-                                    alt="product image"
-                                  />
+                                <div className="position-relative">
+                                  <div className="cart-product-cancel position-absolute" >
+                                    <i className="bx bx-x" onClick={() => handleDeleteClick(item.id)} />
+                                  </div>
+                                  <div className="cart-product img-fluid ">
+                                    <img
+                                      src={item.imageLink}
+                                      className="img-fluid "
+                                      alt="product image"
+                                    />
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </a>
-                            ))}
+                            </a>
+                          ))}
                         </div>
-                      
+
                         <div className="d-grid p-3 border-top">
                           <div className="d-flex align-items-center justify-content-between mb-3">
                             <h5 className="mb-0">TOTAL</h5>
@@ -209,9 +209,10 @@ export const Searchbar = () => {
                 </nav>
               </div>
             </div>
+
           </div>
-           </div>
-           </Container>
+
+        </Container>
       </div>
     </>
   );

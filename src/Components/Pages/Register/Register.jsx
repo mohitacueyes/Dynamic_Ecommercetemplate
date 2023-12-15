@@ -82,7 +82,7 @@ const Register = () => {
     <section className="py-0 py-lg-5">
       <div className="container">
         <div className="section-authentication-signin d-flex align-items-center justify-content-center my-5">
-          <div className="row row-cols-1 row-cols-lg-1 row-cols-xl-2">
+          <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
             <div className="col mx-auto">
               <div className="card mb-0">
                 <div className="card-body">
@@ -95,11 +95,11 @@ const Register = () => {
                     <div className="d-grid">
                       <a className="btn my-4 shadow-sm btn-white" href="javascript:;"> <span className="d-flex justify-content-center align-items-center">
                           <img className="me-2" src="assets/images/icons/search.svg" width={16} alt="Image Description" />
-                          <span>Sign Up with Google</span>
+                          <span>Sign with Google</span>
                         </span>
-                      </a> <a href="javascript:;" className="btn btn-white"><i className="bx bxl-facebook" />Sign Up with Facebook</a>
+                      </a> <a href="javascript:;" className="btn btn-white"><i className="bx bxl-facebook" />Sign with Facebook</a>
                     </div>
-                    <div className="login-separater text-center mb-4"> <span>OR SIGN UP WITH EMAIL</span>
+                    <div className="login-separater text-center mb-4"> <span>OR SIGN  WITH EMAIL</span>
                       <hr />
                     </div>
                     <div className="form-body">

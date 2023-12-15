@@ -39,8 +39,9 @@ function About() {
           {/*start page content*/}
           <section className="py-0 py-lg-4">
           <Container fluid className="pe-5 ps-5">
-              <h4>Our Story</h4>
-              <p>
+            <h2 className="fw-bold mb-3 mt-4 aboutHead">About Us</h2>
+              <h4 className="AboutStory">Our Story</h4>
+              <p >
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s, when an unknown printer took a galley

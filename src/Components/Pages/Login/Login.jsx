@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import { GoogleLogin } from '@react-oauth/google';
 import { useGoogleLogin } from "@react-oauth/google";
+import FacebookLogin from 'react-facebook-login';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +15,23 @@ const Login = () => {
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => console.log(tokenResponse),
   });
+
+//--------------facebook---------------//
+const responseFacebook = (response) => {
+  console.log("Facebook Sign-In response:", response);
+
+  if (response && response.accessToken) {
+    console.log("Facebook Sign-In successful!");
+    console.log("User details:", response);
+
+    // Handle the user profile data here as needed
+  } else {
+    console.error("Facebook Sign-In failed or insufficient data received.");
+  }
+};
+
+
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -116,7 +134,7 @@ const Login = () => {
           <section className>
             <div className="container">
               <div className="section-authentication-signin d-flex align-items-center justify-content-center my-5">
-                <div className="row row-cols-1 row-cols-xl-2">
+                <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
                   <div className="col mx-auto">
                     <div className="card">
                       <div className="card-body">
@@ -133,7 +151,8 @@ const Login = () => {
                               onClick={() => login()}
                               className="btn btn-transparent"
                             >
-                              Login with Google{" "}
+                              <i className="bx bxl-google" />
+                                 Login with Google{" "}
                             </button>
 
                             <span className="d-flex justify-content-center align-items-center"></span>
