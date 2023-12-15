@@ -110,7 +110,7 @@ const addToLikes = async (productId) => {
                             <Link to={`/productdetails/${product.id}/${product.slug}`}>
                             <img
                               src={product.product_imageLink}
-                              className="img-fluid  rounded-2 cart-img  cart-imgg"
+                              className="img-fluid  rounded-2  cart-imgg"
                                style={{height:"415.75px" , width:"393.75px"}}
                               alt="..."
                             />

@@ -144,7 +144,7 @@ console.log(response);
                         </div>
                         <div className="card-body">
                           <div className="product-info">
-                            <a href="javascript:;">
+                            <a href="">
                               <h6 className="product-name mb-2">
                                 {item.name.substring(0, 16)}...
                               </h6>

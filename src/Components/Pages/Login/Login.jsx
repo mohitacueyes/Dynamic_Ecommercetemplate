@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // import { GoogleLogin } from '@react-oauth/google';
 import { useGoogleLogin } from "@react-oauth/google";
 import FacebookLogin from 'react-facebook-login';
+import { Container } from "react-bootstrap";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -103,7 +104,7 @@ const responseFacebook = (response) => {
         <div className="page-content">
           {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
-            <div className="container">
+          <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="page-breadcrumb d-flex align-items-center">
                 <h3 className="breadcrumb-title pe-3">Sign in</h3>
                 <div className="ms-auto">
@@ -127,7 +128,7 @@ const responseFacebook = (response) => {
                   </nav>
                 </div>
               </div>
-            </div>
+            </Container>
           </section>
           {/*end breadcrumb*/}
           {/*start shop cart*/}
