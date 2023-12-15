@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BottommNavigation from './BottommNavigation';
+import { Container } from 'react-bootstrap';
 
 
 
@@ -47,7 +48,7 @@ export const Footer = ({ currentPage }) => {
       {/*start footer section*/}
       <footer className="footer-section">
         <section className="py-5 border-top bgColor">
-          <div className="container">
+          <Container fluid className="pe-5 ps-5">
             <div className="row row-cols-1 row-cols-lg-3 row-cols-xl-3">
               <div className="col">
                 <div className="footer-section1">
@@ -122,7 +123,7 @@ export const Footer = ({ currentPage }) => {
               </div>
             </div>
             {/*end row*/}
-          </div>
+          </Container>
         </section>
         <section className="footer-strip text-center py-3 border-top positon-absolute bottom-0">
           <div className="container">

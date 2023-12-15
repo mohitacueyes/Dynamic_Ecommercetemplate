@@ -161,7 +161,7 @@ const imageHeight = 600;
                         </a>
                       </li>
                       <li className="breadcrumb-item">
-                        <a href="javascript:;">Shop</a>
+                        <a href="/">Shop</a>
                       </li>
                       <li
                         className="breadcrumb-item active"
@@ -196,7 +196,7 @@ const imageHeight = 600;
                                   alt
                                 />
                               </div>
-                              <div className="cart-detail  text-sm-start text-lg-start text-xl-start">
+                              <div className="cart-detail mt-5  text-sm-start text-lg-start text-xl-start">
                                 <h6 className="mb-2">
                                   {item.name.slice(0, 18) || item.name}..
                                 </h6>
@@ -239,7 +239,7 @@ const imageHeight = 600;
                                   onClick={() => handleDeleteClick(item.id)}
                                   className="btn btn-outline-dark rounded-0 btn-ecomm Removebtn"
                                 >
-                                  <i className="bx bx-x" />
+                                  <i className="bx bx-x d-md-none d-sm-none" />
                                   Remove
                                 </a>
                                 <a
@@ -248,7 +248,7 @@ const imageHeight = 600;
                                   className="btn-facebook btn-ecomm"
 
                                 >
-                                  <i className="bx bx-heart me-0" />
+                                  <i className="bx bx-heart me-0 Heart"  />
                                 </a>
                               </div>
                             </div>
