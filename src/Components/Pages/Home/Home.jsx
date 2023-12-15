@@ -14,7 +14,7 @@ export const Home = () => {
   return (
    <>
    <Banner/>
-   <SecondSection/>
+   {/* <SecondSection/> */}
    <FeaturedProduct/>
    {/* <NewArrival/> */}
    <AdvertiseBanner/>

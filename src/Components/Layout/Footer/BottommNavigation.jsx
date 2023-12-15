@@ -14,7 +14,7 @@ const styles = {
     width: '100%',
     position: 'fixed',
     bottom: 0,
-    zIndex: 1000,
+    // zIndex: 1000,
     margin: 0, // Ensure the navigation stays above other elements if needed
   },
 };

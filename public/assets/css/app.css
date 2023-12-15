@@ -2512,7 +2512,10 @@ body.bg-theme15 {
 		font-size: 13px !important;
 		margin-right: 30px !important;
 	}
-
+	.TopSearch
+	{
+		margin-right: 0!important;
+	}
 
 
 }
@@ -2569,7 +2572,10 @@ body.bg-theme15 {
 		font-size: 13px !important;
 		margin-right: 30px !important;
 	}
-	
+	.TopSearch
+	{
+		margin-right: 0!important;
+	}
 
 }
 
@@ -2603,7 +2609,10 @@ body.bg-theme15 {
 	.Removebtn{
 		font-size: 16px!important;
 	}
-  
+    .TopSearch
+	{
+		margin-right: 0!important;
+	}
 	
 }
 
