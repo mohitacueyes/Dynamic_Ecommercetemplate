@@ -85,7 +85,7 @@ const addToLikes = async (productId) => {
             feed.homefeed_product && feed.homefeed_product.length > 0 && (
               <Container fluid className="ps-lg-5 pe-lg-5 ">
               <div className="separator pb-4">
-                <h5 className="mb-0 fw-bold separator-title border-bottom border-3 ms-2">
+                <h5 className="mb-0 fw-bold separator-title border-bottom border-3 ms-2 mt-5">
                   {feed.feedname}
                 </h5>
              
@@ -94,9 +94,9 @@ const addToLikes = async (productId) => {
                 <div className="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-3 g-sm-2">
                   {feed.homefeed_product.slice(0, 10).map((product) => (
                     <div className="col">
-                      <div className="card">
-                        <div className="position-relative overflow-hidden">
-                          <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
+                      <div className="card ">
+                        <div className="position-relative overflow-hidden ">
+                          <div className="add-cart position-absolute top-0 end-0 mt-3 me-4">
                             <a onClick={() => addToCart(product.id)}>
                               <i className="bx bx-cart-add" />
                             </a>
@@ -106,16 +106,16 @@ const addToLikes = async (productId) => {
                               Quick View
                             </Link></a>
                           </div> */}
-                          <a>
+                          
                             <Link to={`/productdetails/${product.id}/${product.slug}`}>
                             <img
                               src={product.product_imageLink}
                               className="img-fluid  rounded-2  cart-imgg"
-                               style={{height:"415.75px" , width:"393.75px"}}
+                               style={{height:"450.75px" , width:"345.75px"}}
                               alt="..."
                             />
                             </Link>
-                          </a>
+                          
                         </div>
                         <div className="card-body px-0">
                           <div className="d-flex align-items-center justify-content-between">

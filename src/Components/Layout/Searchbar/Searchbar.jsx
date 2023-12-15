@@ -98,7 +98,7 @@ export const Searchbar = () => {
                 <div className="logo">
                   <a href="/">
                     <img
-                      src="assets/images/logo2.svg"
+                      src="../../assets/images/logo2.svg"
                       className="logo-icon"
                       alt
                     />
