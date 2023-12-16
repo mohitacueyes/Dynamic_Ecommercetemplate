@@ -2406,16 +2406,20 @@ body.bg-theme15 {
 		height: 100% !important;
 		object-fit: cover !important;
 	}
-
+   .cart-imggg
+   {
+   	height: 200px !important;
+   width: 150px!important;
+   }
+   .cart-imggg img
+   {
+   	height: 100% !important;
+   object-fit: cover !important;
+   }
 	.RemoveFlex {
 		display: flex;
 		justify-content: space-evenly;
 	}
-
-	.cart-detail {
-		padding-top: 50px;
-	}
-
 	.cart-detail p {
 		font-weight: bold;
 	}
@@ -2443,8 +2447,19 @@ body.bg-theme15 {
 
 	.cart-imgg {
 		height: 350px !important;
+		
 	}
-
+	.cart-imggg
+	{
+		height: 250px !important;
+	width: 190px!important;
+	}
+	.cart-imggg img
+	{
+		height: 100% !important;
+		width: 100%;
+	object-fit: cover !important;
+	}
 	.add-banner img {
 		height: 200px;
 	}
@@ -2501,6 +2516,11 @@ body.bg-theme15 {
 		justify-content: start;
 		gap: 15px;
 	}
+	.cart-detail
+	{
+		margin-left: 20px!important;
+		margin-top: 30px!important;
+	}
 		.cart-detail p {
 		font-weight: bold;
 	}
@@ -2551,7 +2571,16 @@ body.bg-theme15 {
 		object-fit: cover !important;
 		margin-right: 20px;
 	}
-
+	.cart-imggg
+	{
+		height: 200px !important;
+	width: 150px!important;
+	}
+	.cart-imggg img
+	{
+		height: 100% !important;
+	object-fit: cover !important;
+	}
 	.MainFlex {
 		display: flex;
 		justify-content: space-between;
@@ -2607,6 +2636,16 @@ body.bg-theme15 {
 		object-fit: cover !important;
 		margin-right: 20px;
 	}
+	.cart-imggg
+	{
+		height: 200px !important;
+	width: 150px!important;
+	}
+	.cart-imggg img
+	{
+		height: 100% !important;
+	object-fit: cover !important;
+	}
 	.Removebtn{
 		font-size: 16px!important;
 	}
@@ -2652,6 +2691,16 @@ body.bg-theme15 {
 		object-fit: cover !important;
 		margin-right: 20px;
 	} 
+	.cart-imggg
+	{
+		height: 200px !important;
+	width: 150px!important;
+	}
+	.cart-imggg img
+	{
+		height: 100% !important;
+	object-fit: cover !important;
+	}
 	.footer-section-mobile {
 		display: none;
 	}
@@ -2686,6 +2735,16 @@ body.bg-theme15 {
 	} 
 	.footer-section-mobile {
 		display: none;
+	}
+	.cart-imggg
+	{
+		height: 200px !important;
+	width: 150px!important;
+	}
+	.cart-imggg img
+	{
+		height: 100% !important;
+	object-fit: cover !important;
 	}
 	/* .RemoveFlex {
 		display: flex;
