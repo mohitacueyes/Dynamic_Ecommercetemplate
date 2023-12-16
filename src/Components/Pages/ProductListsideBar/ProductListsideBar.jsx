@@ -48,31 +48,53 @@ const ProductListsideBar = () => {
   }, []);
 
 
+
+  const checkLoggedIn = (userId) => {
+    if (!userId) {
+      throw new Error('User is not logged in');
+    }
+  };
+
+
+
+
+
   // -------ADD TO CART --------//
   const addToCart = async (productId) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API}/api/add-cart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      checkLoggedIn(userId);
+      const response = await fetch(
+        `${process.env.REACT_APP_API}/api/add-cart`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: userId,
+            user_id: userId,
+            product_id: productId,
+            qty: "1",
+            price: "1",
+            save_for_later: "0",
+          }),
+        }
+      );
 
-          id: userId,
-          user_id: userId,
-          product_id: productId,
-          qty: "1",
-          price: "1",
-          save_for_later: "0",
-        }),
-
-      });
-      console.log(response);
       const data = await response.json();
-      toast.success("Add to cart successfully");
-      console.log(data);
+
+      if (data.success) {
+        toast.success("Added to cart successfully");
+      } else {
+        toast.success("Added to cart successfully");
+      }
     } catch (error) {
       console.error("Error adding to cart:", error);
+      if (error.message === 'User is not logged in') {
+        window.location.href = '/login';
+      } else {
+        toast.error("An error occurred while adding to cart");
+      }
     }
   };
 
