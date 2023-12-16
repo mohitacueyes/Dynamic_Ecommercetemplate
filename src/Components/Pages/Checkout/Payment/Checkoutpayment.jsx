@@ -133,7 +133,7 @@ function Checkoutpayment() {
                                   Payment
                                 </div>
                               </a>
-                              <a
+                              {/* <a
                                 className="step-item"
                                 href="checkout-review.html"
                               >
@@ -144,7 +144,7 @@ function Checkoutpayment() {
                                   <i className="bx bx-check-circle" />
                                   Review
                                 </div>
-                              </a>
+                              </a> */}
                             </div>
                           </div>
                         </div>

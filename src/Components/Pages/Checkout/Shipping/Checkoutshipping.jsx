@@ -97,11 +97,11 @@ function Checkoutshipping() {
                                     </div>
                                     <div className="step-label"><i className="bx bx-credit-card" />Payment</div>
                                     </a>
-                                    <a className="step-item" href="checkout-review.html">
+                                    {/* <a className="step-item" href="checkout-review.html">
                                     <div className="step-progress"><span className="step-count">5</span>
                                     </div>
                                     <div className="step-label"><i className="bx bx-check-circle" />Review</div>
-                                    </a>
+                                    </a> */}
                                 </div>
                                 </div>
                             </div>

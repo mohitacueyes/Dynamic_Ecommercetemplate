@@ -84,7 +84,7 @@ export const Searchbar = () => {
       <div className="header-content bg-background">
         <Container fluid className="ps-lg-5 pe-lg-5">
 
-          <div className="row  gx-5 pt-3 pb-2 d-flex align-items-center TopSearch">
+          <div className="row  gx-5  d-flex align-items-center TopSearch">
 
             <div className="col-sm-8 col-md-4 col-lg-3 col-xl-2  col-xxl-2">
               <div className="d-flex align-items-center gap-3">

@@ -293,23 +293,17 @@ a {
 }
 
 @media screen and (min-width:430px) {
-	.producttopimage {
-		/* margin-top: -70px; */
-		padding-left: 25px;
-	}
 
-	.subImage {
-		padding-left: 25px;
-	}
 }
 
-@media screen and (max-width:375px) {
-	.producttopimage {
+@media screen and (max-width:375px) 
+{
+	/* .producttopimage {
 		margin-top: -60px;
 		margin-left: -5px;
-	}
+	} */
 
-	.subImage {}
+	/* .subImage {} */
 
 }
 
@@ -2331,6 +2325,11 @@ body.bg-theme15 {
 }
 
 @media screen and (min-width:10px) and (max-width: 430px) {
+	.TopSearch {
+		padding-top: 0!important;
+		padding-bottom: 0!important;
+	}
+
 	.service24 {
 		display: none;
 	}
@@ -2408,7 +2407,7 @@ body.bg-theme15 {
 	}
    .cart-imggg
    {
-   	height: 200px !important;
+   	height: 150px !important;
    width: 150px!important;
    }
    .cart-imggg img
@@ -2420,6 +2419,7 @@ body.bg-theme15 {
 		display: flex;
 		justify-content: space-evenly;
 	}
+
 	.cart-detail p {
 		font-weight: bold;
 	}
@@ -2432,11 +2432,28 @@ body.bg-theme15 {
 		font-size: 13px !important;
 		margin-right: 15px !important;
 	}
+	.producttopimage {
+		
+		padding-left: 25px;
+	}
+	
 
+	.subImage {
+		padding-left: 25px;
+	}
+	
+	.logo-icon {
+		width: 100px;
+	}
 
 }
 
 @media screen and (min-width:431px) and (max-width: 575px) {
+	.TopSearch {
+		padding-top: 0!important;
+		padding-bottom: 0!important;
+	}
+	
 	.service24 {
 		display: none;
 	}
@@ -2533,15 +2550,23 @@ body.bg-theme15 {
 		font-size: 13px !important;
 		margin-right: 30px !important;
 	}
-	.TopSearch
-	{
-		margin-right: 0!important;
+    .logo-icon {
+		width: 100px;
 	}
-
-
+	.producttopimage {
+		
+		padding-left: 25px;
+	}
+	.subImage {
+		padding-left: 25px;
+	}
+	
 }
 
 @media screen and (min-width:576px) and (max-width: 767px) {
+	.logo-icon {
+		width: 100px;
+	}
 	.cart-imgg {
 		height: 450px !important;
 	}
@@ -2606,10 +2631,23 @@ body.bg-theme15 {
 	{
 		margin-right: 0!important;
 	}
+	.producttopimage {
+		
+		padding-left: 25px;
+	}
+	
+
+	.subImage {
+		padding-left: 25px;
+	}
+	
 
 }
 
 @media screen and (min-width:768px) and (max-width: 991px) {
+	.logo-icon {
+		width: 100px;
+	}
 	.add-banner img {
 		height: 300px;
 	}
@@ -2656,10 +2694,28 @@ body.bg-theme15 {
 	.footer-section-mobile {
 		display: none;
 	}
+	.producttopimage {
+		
+		padding-left: 25px;
+	}
+	
+
+	.subImage {
+		padding-left: 25px;
+	}
+	.Titlesub
+	{
+		font-size: 16px;
+		margin-left: 20px;
+	}
+	
 	
 }
 
 @media screen and (min-width:992px) and (max-width: 1199px) {
+	.logo-icon {
+		width: 100px;
+	}
 	.TitleSecond {
 		font-size: 14px;
 	}
@@ -2704,10 +2760,34 @@ body.bg-theme15 {
 	.footer-section-mobile {
 		display: none;
 	}
-	
+	.producttopimage {
+		
+		padding-left: 25px;
+	}
+	.producttopimage img
+	{
+		height: 100% !important;
+		object-fit: cover !important;
+		width: 370px !important;
+	}
+		.subImage {
+		padding-left: 25px!important;
+		
+	}
+	.product-info-section
+	{
+		padding-left: 30px!important;
+	}
+
 }
 
-@media screen and (min-width:1200px) {
+@media screen and (min-width:1200px) and (max-width: 1399px) {
+	.logo-icon {
+		width: 100px;
+	}
+	.TitleSecond {
+		font-size: 14px;
+	}
 
 	.ParaSecond {
 		font-size: 13px;
@@ -2746,14 +2826,64 @@ body.bg-theme15 {
 		height: 100% !important;
 	object-fit: cover !important;
 	}
-	/* .RemoveFlex {
-		display: flex;
-		justify-content: start;
-		align-items: center;
-	} */
-
+	.subImage {
+		padding-left: 25px!important;
+		
+		}
+		.producttopimage {
+				
+			padding-left: 25px;
+		}
+		.product-info-section
+	{
+		padding-left: 30px!important;
+	}
+}
+@media  screen and (min-width:1400px) and (max-width: 1599px) {
+	
+	.subImage {
+		padding-left: 25px!important;
+		
+		}
+		.producttopimage {
+				
+			padding-left: 25px!important;
+		}
+		.product-info-section
+	{
+		padding-left: 30px!important;
+	}
+}
+@media screen and (min-width:1600px) and (max-width: 1799px) {
+	.subImage {
+		padding-left: 25px!important;
+		
+		}
+		.producttopimage {
+				
+			padding-left: 25px!important;
+		}
+		.product-info-section
+	{
+		padding-left: 30px!important;
+	}
+}
+@media  screen and (min-width:1800px) and (max-width: 1999px) {
+	.subImage {
+		padding-left: 25px!important;
+		
+		}
+		.producttopimage {
+				
+			padding-left: 25px!important;
+		}
+	
 	
 }
+
+	
+	
+
 
 
 
