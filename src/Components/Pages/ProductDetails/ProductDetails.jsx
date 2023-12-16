@@ -145,7 +145,7 @@ const ProductDetails = () => {
   } else if (md) {
     thumbnailSize = 127; // Set the same value as 'md' if needed
   } else if (lg) {
-    thumbnailSize = 110; // Set the same value as 'lg' if needed
+    thumbnailSize = 100; // Set the same value as 'lg' if needed
   } else if (xl) {
     thumbnailSize = 127; // Set the same value as 'xl' if needed
   } else if (xxl) {
@@ -164,7 +164,7 @@ const ProductDetails = () => {
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
             <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="page-breadcrumb d-flex align-items-center">
-                <h3 className="breadcrumb-title pe-3 ">{productData.name}</h3>
+                <h3 className="breadcrumb-title pe-3  Titlesub">{productData.name}</h3>
                 <div className="ms-auto">
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb mb-0 p-0">
@@ -195,7 +195,7 @@ const ProductDetails = () => {
               <div className="product-detail-card">
                 <div className="product-detail-body">
                   <div className="row g-0">
-                    <div className="col-12 col-sm-12 col-lg-5 col-xl-5  col-xxl-5">
+                    <div className="col-12 col-sm-12 col-lg-5 col-xl-6  col-xxl-5">
                       <div className="image-zoom-section">
                         <div className="producttopimage">
                           <ReactImageMagnify
@@ -242,7 +242,7 @@ const ProductDetails = () => {
 
                       </div>
                     </div>
-                    <div className="col-12 col-lg-7 col-xl-5 col-xxl-5" >
+                    <div className="col-12 col-lg-7 col-xl-6 col-xxl-5" >
                       <div className="product-info-section ">
                         <h3 className="mt-3 mt-lg-0 mb-0">
                           {productData.name}
@@ -344,7 +344,7 @@ const ProductDetails = () => {
 
                       </div>
                     </div>
-                    <div className="col-12 col-lg-12 col-xl-2 col-xxl-2">
+                    <div className="col-12   col-xxl-2">
                     </div>
                     {/*end row*/}
                   </div>

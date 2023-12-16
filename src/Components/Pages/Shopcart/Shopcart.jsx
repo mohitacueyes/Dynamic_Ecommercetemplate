@@ -191,7 +191,7 @@ const imageHeight = 600;
                               <img
                                   src={item.imageLink}
                                   className="rounded-3 " 
-                                  style={{ objectFit: "cover" }}
+                                  style={{ objectFit: "cover"}}
                                   alt
                                 />
                               </div>
