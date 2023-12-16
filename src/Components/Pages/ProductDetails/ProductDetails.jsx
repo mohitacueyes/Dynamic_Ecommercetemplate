@@ -28,7 +28,7 @@ const ProductDetails = () => {
   const [productData, setProductData] = useState(null);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
   const navigate = useNavigate();
-
+  const [reviews, setReviews] = useState([]);
   const xs = useMediaQuery('(max-width:575px)');
   const sm = useMediaQuery('(min-width:576px) and (max-width:767px)');
   const md = useMediaQuery('(min-width:768px) and (max-width:991px)');
@@ -45,15 +45,34 @@ const ProductDetails = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, [id]);
 
+   // -------Reviews --------//
+   useEffect(() => {
+    // Replace 'your-api-endpoint' with the actual endpoint for fetching reviews
+    fetch(`${process.env.REACT_APP_API}/api/feedbacklist/${id}`)
+      .then(response => response.json())
+      .then(data => setReviews(data.ResponseData))
+      .catch(error => console.error('Error fetching reviews:', error));
+  }, []);
+
   const [selectedImage, setSelectedImage] = useState(null);
 
   if (!productData) {
     return <div>Loading...</div>; // Placeholder for when data is loading
   }
+  const checkLoggedIn = (userId) => {
+    if (!userId) {
+      throw new Error('User is not logged in');
+    }
+  };
+
+
+
+
 
   // -------ADD TO CART --------//
   const addToCart = async (productId) => {
     try {
+      checkLoggedIn(userId);
       const response = await fetch(
         `${process.env.REACT_APP_API}/api/add-cart`,
         {
@@ -71,12 +90,21 @@ const ProductDetails = () => {
           }),
         }
       );
-      console.log(response);
+
       const data = await response.json();
-      console.log(data);
-      toast.success("Add to cart successfully");
+
+      if (data.success) {
+        toast.success("Added to cart successfully");
+      } else {
+        toast.success("Added to cart successfully");
+      }
     } catch (error) {
       console.error("Error adding to cart:", error);
+      if (error.message === 'User is not logged in') {
+        window.location.href = '/login';
+      } else {
+        toast.error("An error occurred while adding to cart");
+      }
     }
   };
 
@@ -356,7 +384,7 @@ const ProductDetails = () => {
           {/*end product detail*/}
           {/*start product more info*/}
           <section className="py-4">
-        <Container fluid className="pe-5 ps-5">
+            <Container fluid className="pe-5 ps-5">
               <div className="product-more-info">
                 <ul className="nav nav-tabs mb-0" role="tablist">
                   <li className="nav-item">
@@ -387,7 +415,7 @@ const ProductDetails = () => {
                   </li>
                 </ul>
                 <div className="tab-content pt-3">
-                  <div className="tab-pane fade" id="discription">
+                  <div className="tab-pane fade show active" id="discription">
                     <p>{productData.shotdescription}</p>
                     <ul>
                       <li>Not just for commute</li>
@@ -404,139 +432,42 @@ const ProductDetails = () => {
                       voluptate nisi.
                     </p>
                   </div>
-                  <div className="tab-pane fade" id="more-info">
-                    <p>
-                      Food truck fixie locavore, accusamus mcsweeney's marfa
-                      nulla single-origin coffee squid. Exercitation +1 labore
-                      velit, blog sartorial PBR leggings next level wes anderson
-                      artisan four loko farm-to-table craft beer twee. Qui photo
-                      booth letterpress, commodo enim craft beer mlkshk aliquip
-                      jean shorts ullamco ad vinyl cillum PBR. Homo nostrud
-                      organic, assumenda labore aesthetic magna delectus mollit.
-                      Keytar helvetica VHS salvia yr, vero magna velit sapiente
-                      labore stumptown. Vegan fanny pack odio cillum wes
-                      anderson 8-bit, sustainable jean shorts beard ut DIY
-                      ethical culpa terry richardson biodiesel. Art party
-                      scenester stumptown, tumblr butcher vero sint qui sapiente
-                      accusamus tattooed echo park.
-                    </p>
-                  </div>
-
-                  <div className="tab-pane fade show active" id="reviews">
+                  <div className="tab-pane fade " id="reviews">
                     <div className="row">
                       <div className="col   col-12 col-lg-8 ">
                         <div className="product-review">
                           <h5 className="mb-4">3 Reviews For The Product</h5>
                           <div className="review-list">
-                            <div className="d-flex align-items-start">
-                              <div className="review-user">
-                                <img
-                                  src="../../assets/images/avatars/avatar-1.png"
-                                  width={65}
-                                  height={65}
-                                  className="rounded-circle"
-                                  alt=""
-                                />
-                              </div>
-                              <div className="review-content ms-3">
-                                <div className="rates cursor-pointer fs-6">
-                                  <i className="bx bxs-star text-warning" />
-                                  <i className="bx bxs-star text-warning" />
-                                  <i className="bx bxs-star text-warning" />
-                                  <i className="bx bxs-star text-warning" />
-                                  <i className="bx bxs-star text-warning" />
+                            <div>
+                              {reviews.map(review => (
+                                <div>
+                                  <div key={review.id} className="d-flex align-items-start">
+                                    <div className="review-user">
+                                      <img
+                                        src={review.image} // Assuming 'image' field in the API response contains the user's avatar URL
+                                        width={65}
+                                        height={65}
+                                        className="rounded-circle"
+                                        alt=""
+                                      />
+                                    </div>
+                                    <div className="review-content ms-3">
+                                      <div className="rates cursor-pointer fs-6">
+                                        {/* Generating stars based on the 'rating' field in the API response */}
+                                        {Array.from({ length: review.rating }, (_, index) => (
+                                          <i key={index} className="bx bxs-star text-warning" />
+                                        ))}
+                                      </div>
+                                      <div className="d-flex align-items-center mb-2">
+                                        <h6 className="mb-0">{review.user_id}</h6>
+                                        <p className="mb-0 ms-auto">{review.created_at}</p>
+                                      </div>
+                                      <p>{review.review}</p>
+                                    </div>
+                                  </div>
+                                  <hr />
                                 </div>
-                                <div className="d-flex align-items-center mb-2">
-                                  <h6 className="mb-0">James Caviness</h6>
-                                  <p className="mb-0 ms-auto">
-                                    February 16, 2021
-                                  </p>
-                                </div>
-                                <p>
-                                  Nesciunt tofu stumptown aliqua, retro synth
-                                  master cleanse. Mustache cliche tempor,
-                                  williamsburg carles vegan helvetica.
-                                  Reprehenderit butcher retro keffiyeh
-                                  dreamcatcher synth. Cosby sweater eu banh mi,
-                                  qui irure terry richardson ex squid. Aliquip
-                                  placeat salvia cillum iphone. Seitan aliquip
-                                  quis cardigan
-                                </p>
-                              </div>
-                            </div>
-                            <hr />
-                            <div className="d-flex align-items-start">
-                              <div className="review-user">
-                                <img
-                                  src="../../assets/images/avatars/avatar-2.png"
-                                  width={65}
-                                  height={65}
-                                  className="rounded-circle"
-                                  alt=""
-                                />
-                              </div>
-                              <div className="review-content ms-3">
-                                <div className="rates cursor-pointer fs-6">
-                                  <i className="bx bxs-star text-warning" />
-                                  <i className="bx bxs-star text-warning" />
-                                  <i className="bx bxs-star text-warning" />
-                                  <i className="bx bxs-star text-warning" />
-                                  <i className="bx bxs-star text-warning" />
-                                </div>
-                                <div className="d-flex align-items-center mb-2">
-                                  <h6 className="mb-0">David Buckley</h6>
-                                  <p className="mb-0 ms-auto">
-                                    February 22, 2021
-                                  </p>
-                                </div>
-                                <p>
-                                  Nesciunt tofu stumptown aliqua, retro synth
-                                  master cleanse. Mustache cliche tempor,
-                                  williamsburg carles vegan helvetica.
-                                  Reprehenderit butcher retro keffiyeh
-                                  dreamcatcher synth. Cosby sweater eu banh mi,
-                                  qui irure terry richardson ex squid. Aliquip
-                                  placeat salvia cillum iphone. Seitan aliquip
-                                  quis cardigan
-                                </p>
-                              </div>
-                            </div>
-                            <hr />
-                            <div className="d-flex align-items-start">
-                              <div className="review-user">
-                                <img
-                                  src="../../assets/images/avatars/avatar-3.png"
-                                  width={65}
-                                  height={65}
-                                  className="rounded-circle"
-                                  alt
-                                />
-                              </div>
-                              <div className="review-content ms-3">
-                                <div className="rates cursor-pointer fs-6">
-                                  <i className="bx bxs-star text-warning" />
-                                  <i className="bx bxs-star text-warning" />
-                                  <i className="bx bxs-star text-warning" />
-                                  <i className="bx bxs-star text-warning" />
-                                  <i className="bx bxs-star text-warning" />
-                                </div>
-                                <div className="d-flex align-items-center mb-2">
-                                  <h6 className="mb-0">Peter Costanzo</h6>
-                                  <p className="mb-0 ms-auto">
-                                    February 26, 2021
-                                  </p>
-                                </div>
-                                <p>
-                                  Nesciunt tofu stumptown aliqua, retro synth
-                                  master cleanse. Mustache cliche tempor,
-                                  williamsburg carles vegan helvetica.
-                                  Reprehenderit butcher retro keffiyeh
-                                  dreamcatcher synth. Cosby sweater eu banh mi,
-                                  qui irure terry richardson ex squid. Aliquip
-                                  placeat salvia cillum iphone. Seitan aliquip
-                                  quis cardigan
-                                </p>
-                              </div>
+                              ))}
                             </div>
                           </div>
                         </div>
