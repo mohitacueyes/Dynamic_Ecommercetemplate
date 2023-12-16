@@ -285,7 +285,7 @@ const ProductDetails = () => {
                             <img
                               src={productData.product_image[0].image}
                               alt="colors"
-                              className="img-fluid "
+                              className="img-fluid"
                             />
                             <img
                               src={productData.product_image[1].image}

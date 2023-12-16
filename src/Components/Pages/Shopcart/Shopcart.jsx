@@ -187,11 +187,10 @@ const imageHeight = 600;
                         <div className="row align-items-center g-3">
                           <div className=" col-sm-6 col-lg-6 col-xl-6 col-xxl-6 ">
                             <div className="d-flex flex-row align-items-start gap-3">
-                              <div className="cart-img text-sm-start  text-xl-start">
-                                <img
+                              <div className="cart-imggg text-sm-start  text-xl-start">
+                              <img
                                   src={item.imageLink}
-                                  className="rounded-3 "
-                                 
+                                  className="rounded-3 " 
                                   style={{ objectFit: "cover" }}
                                   alt
                                 />
