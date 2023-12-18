@@ -2328,6 +2328,7 @@ body.bg-theme15 {
 	.TopSearch {
 		padding-top: 0!important;
 		padding-bottom: 0!important;
+		margin-right: 0!important;
 	}
 
 	.service24 {
@@ -2363,6 +2364,7 @@ body.bg-theme15 {
 
 	.homeFooter {
 		display: block;
+		
 	}
 
 	.aboutHead {
@@ -2436,22 +2438,41 @@ body.bg-theme15 {
 		
 		padding-left: 25px;
 	}
-	
-
-	.subImage {
+		.subImage {
 		padding-left: 25px;
 	}
 	
 	.logo-icon {
 		width: 100px;
 	}
+	.css-1tpajth-MuiButtonBase-root-MuiBottomNavigationAction-root
+	{
+		min-width: 1%!important;
+  max-width: 50%!important;
+	}
 
+.css-bls161-MuiButtonBase-root-MuiBottomNavigationAction-root
+{
+	min-width: 1%!important;
+  max-width: 50%!important;
+}
+	/* .css-bls161-MuiButtonBase-root-MuiBottomNavigationAction-root
+	{
+		min-width: 1%!important;
+  max-width: 50%!important;
+	}
+	.css-1tpajth-MuiButtonBase-root-MuiBottomNavigationAction-root
+	{
+		min-width: 1%!important;
+  max-width: 50%!important; */
+	/* } */
 }
 
 @media screen and (min-width:431px) and (max-width: 575px) {
 	.TopSearch {
 		padding-top: 0!important;
 		padding-bottom: 0!important;
+		margin-right: 0!important;
 	}
 	
 	.service24 {
@@ -2560,6 +2581,27 @@ body.bg-theme15 {
 	.subImage {
 		padding-left: 25px;
 	}
+	.css-1tpajth-MuiButtonBase-root-MuiBottomNavigationAction-root
+	{
+		min-width: 1%!important;
+  max-width: 50%!important;
+	}
+
+.css-bls161-MuiButtonBase-root-MuiBottomNavigationAction-root
+{
+	min-width: 1%!important;
+  max-width: 50%!important;
+}
+	/* .css-bls161-MuiButtonBase-root-MuiBottomNavigationAction-root
+	{
+		min-width: 1%!important;
+  max-width: 50%!important;
+	}
+	.css-1pxy6dk-MuiButtonBase-root-MuiBottomNavigationAction-root
+	{
+		min-width: 1%!important;
+  max-width: 50%!important;
+	} */
 	
 }
 

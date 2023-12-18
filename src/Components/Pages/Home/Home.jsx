@@ -9,6 +9,7 @@ import LatestNews from './LatestNews/LatestNews'
 import NewArrival from './NewArrival/NewArrival'
 import ProductSection from './ProductSection/ProductSection'
 import { Support } from './Support'
+import BottommNavigation from '../../Layout/Footer/BottommNavigation'
 
 export const Home = () => {
   return (
@@ -23,6 +24,7 @@ export const Home = () => {
    {/* <LatestNews/> */}
    {/* <Brands/> */}
 {/* <ProductSection/> */}
+<BottommNavigation/>
    </>
   )
 }

@@ -1,6 +1,7 @@
 import React , { useEffect, useState } from 'react'
 import { Order } from '../../Profile/Order';
 import { Container } from 'react-bootstrap';
+import ProductBottomNavigation from '../../../Layout/Footer/ProductBottomNavigation/ProductBottomNavigation';
 
 function Checkoutdetails() {
 
@@ -303,7 +304,7 @@ function Checkoutdetails() {
     </div>
     {/*end page wrapper */}
     </div>
-
+{/* <ProductBottomNavigation /> */}
     </>
   )
 }
