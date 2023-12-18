@@ -15,6 +15,14 @@ function Shopcart() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
+
+    const userId = localStorage.getItem('userId');
+
+    // Check if user ID exists
+    if (!userId) {
+      window.location.href = '/login';
+      return;
+    }
     const fetchCartData = async () => {
 
       const user_id = localStorage.getItem('userId');
