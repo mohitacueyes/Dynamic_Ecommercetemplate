@@ -60,43 +60,38 @@ function Shopcart() {
 
     fetchCartData();
   }, []);
-  console.log(cartItems);
+  // console.log(cartItems);
+   const [response, setResponse] = useState(null);
 
-  
-  //-----DELETE CART ITEMS-----//
+ const handleDeleteClick = async (cart_id) => {
+   const apiUrl = `${process.env.REACT_APP_API}/api/delete`; 
 
-  const handleRemoveProduct = async (cart_id) => {
-    try {
-      const requestBody = {
+   try {
+     const response = await fetch(apiUrl, {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({ 
         cart_id: cart_id,
-      };
+      }),
+     });
 
-      const response = await fetch(`${process.env.REACT_APP_API}/api/delete`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
+     const data = await response.json();
 
-      if (response.ok) {
-        const responseData = await response.json();
-
-        if (responseData.ResponseCode === 1) {
-          toast.success('Product remove in cart')
-        } else {
-          console.error('Product removal failed. ResponseCode:', responseData.ResponseCode);
-        }
-      } else {
-        console.error('Failed to make API call. Status code:', response.status);
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  };
-  
-  //--------------------------//
-
+     if (data.ResponseCode === 1) {
+       setResponse(data.ResponseText);
+       // Update addresses state after successful deletion
+       setCartItems(prevAddresses => prevAddresses.filter(favorites => favorites.cart_id !== cart_id));
+       toast.success(data.ResponseText);
+     } else {
+       setResponse('Error deleting favorites');
+     }
+   } catch (error) {
+     console.error('Error:', error);
+     setResponse('Error deleting favorites');
+   }
+ };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -248,7 +243,7 @@ const imageHeight = 600;
                               <div className="d-flex gap-3 justify-content-lg-end align-items-sm-center">
 
                                 <a
-                                 onClick={() =>handleRemoveProduct(item.cart_id)}
+                                 onClick={() =>handleDeleteClick(item.cart_id)}
                                   className="btn btn-outline-dark rounded-0 btn-ecomm Removebtn"
                                 >
                                   <i className="bx bx-x d-md-none d-sm-none" />

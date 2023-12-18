@@ -29,10 +29,6 @@ const FeaturedProduct = () => {
     }
   };
 
-
-
-
-
   // -------ADD TO CART --------//
   const addToCart = async (productId) => {
     try {

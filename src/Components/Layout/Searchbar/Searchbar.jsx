@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
+import { ToastContainer, toast } from 'react-toastify';
 
 export const Searchbar = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -45,47 +46,45 @@ export const Searchbar = () => {
   }, []);
 
 
-  //-----DELETE Add to Cart-----//
-  const [response, setResponse] = useState(null);
+  //-----DELETE CART ITEMS-----//
+const [response, setResponse] = useState(null);
 
-  const handleDeleteClick = async (id, productId) => {
-    const apiUrl = `${process.env.REACT_APP_API}/api/delete`;
+const handleDeleteClick = async (cart_id) => {
+  const apiUrl = `${process.env.REACT_APP_API}/api/delete`; 
 
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user_id: user_id,
-          product_id: productId,
-          favorites: "2"
-        }),
-      });
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+       cart_id: cart_id,
+     }),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (data.ResponseCode === 1) {
-        setResponse(data.ResponseText);
-
-        setCartItems(prevAddresses => prevAddresses.filter(cart => cart.id !== id));
-      } else {
-        setResponse('Error deleting cart items');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      setResponse('Error deleting cart items');
+    if (data.ResponseCode === 1) {
+      setResponse(data.ResponseText);
+      // Update addresses state after successful deletion
+      setCartItems(prevAddresses => prevAddresses.filter(favorites => favorites.cart_id !== cart_id));
+      toast.success(data.ResponseText);
+    } else {
+      setResponse('Error deleting favorites');
     }
-  };
+  } catch (error) {
+    console.error('Error:', error);
+    setResponse('Error deleting favorites');
+  }
+};
+ //--------------------------//
 
   return (
     <>
       <div className="header-content bg-background">
         <Container fluid className="ps-lg-5 pe-lg-5">
-
           <div className="row  gx-5  d-flex align-items-center TopSearch">
-
             <div className="col-sm-8 col-md-4 col-lg-3 col-xl-2  col-xxl-2">
               <div className="d-flex align-items-center gap-3">
                 <div
@@ -106,7 +105,6 @@ export const Searchbar = () => {
                 </div>
               </div>
             </div>
-
             <div className="d-sm-none col-md-5 d-md-flex d-xxl-flex  col-lg-6 col-xl-8 col-xxl-8">
               <div className="input-group flex-nowrap  pb-xl-0">
                 <input
@@ -123,13 +121,6 @@ export const Searchbar = () => {
                 </button>
               </div>
             </div>
-
-            {/* <div className="phoneNumber d-sm-none col-md-3 col-auto d-md-none d-lg-none flex-column d-xl-flex col-xl-2 d-xxl-flex col-xxl-2  align-items-center"> */}
-              {/* <i className="bx bx-headphone fs-3 " /> */}
-              {/* <h5 className="mb-0" style={{ fontSize: "16px", fontWeight: "bold" }}>Call Us</h5> */}
-              {/* <h5 className="mb-0" style={{ fontSize: "16px" }}>+91 1234567890</h5> */}
-            {/* </div> */}
-
             <div className="col-auto col-xl-2 col-xxl-2 col-sm-3 cartFlex">
               <div className="top-cart-icons">
                 <nav className="navbar navbar-expand">
@@ -176,7 +167,7 @@ export const Searchbar = () => {
                                 </div>
                                 <div className="position-relative">
                                   <div className="cart-product-cancel position-absolute" >
-                                    <i className="bx bx-x" onClick={() => handleDeleteClick(item.id)} />
+                                    <i className="bx bx-x" onClick={() => handleDeleteClick(item.cart_id)} />
                                   </div>
                                   <div className="cart-product img-fluid ">
                                     <img
@@ -209,11 +200,10 @@ export const Searchbar = () => {
                 </nav>
               </div>
             </div>
-
           </div>
-
         </Container>
       </div>
+      <ToastContainer />
     </>
   );
 };
