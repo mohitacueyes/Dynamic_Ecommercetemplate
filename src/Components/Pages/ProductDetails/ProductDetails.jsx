@@ -182,6 +182,7 @@ const ProductDetails = () => {
   // const imageWidth = isMobile ?  380 : 400; // Adjust the width for mobile view
   // const imageHeight = isMobile ? 450 : 500;
   // const thumbnailSize = isMobile ? 100 : 145;
+  
 
   return (
     <>

@@ -8,6 +8,10 @@ function Wishlist() {
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
 
   useEffect(() => {
+    if (!userId) {
+      window.location.href = '/login';
+      return;
+    }
     const fetchWishlistData = async () => {
       try {
         const response = await fetch(
