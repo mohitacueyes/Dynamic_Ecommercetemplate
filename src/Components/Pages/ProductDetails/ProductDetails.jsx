@@ -8,6 +8,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { ToastContainer, toast } from 'react-toastify';
 import { Container } from "react-bootstrap";
+import ProductBottomNavigation from "../../Layout/Footer/ProductBottomNavigation/ProductBottomNavigation";
 
 
 
@@ -309,16 +310,16 @@ const ProductDetails = () => {
                         <div className="mt-3 align-items-center">
                           <h6>Colors :</h6>
 
-                          <div className="d-flex align-items-center gap-2 w-16 h-25">
+                          <div className="d-flex align-items-center gap-2 w-16 h-25 ">
                             <img
                               src={productData.product_image[0].image}
                               alt="colors"
-                              className="img-fluid"
+                              className="img-fluid border p-1"
                             />
                             <img
                               src={productData.product_image[1].image}
                               alt="colors"
-                              className="img-fluid"
+                              className="img-fluid border p-1"
                             />
 
                           </div>
@@ -532,6 +533,7 @@ const ProductDetails = () => {
         </div>
       </div>
       <ToastContainer />
+      <ProductBottomNavigation />
     </>
   );
 };

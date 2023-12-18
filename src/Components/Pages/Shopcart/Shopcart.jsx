@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 import axios from "axios";
+import ProductBottomNavigation from "../../Layout/Footer/ProductBottomNavigation/ProductBottomNavigation";
 function Shopcart() {
   const [cartItems, setCartItems] = useState([]);
   const user_id = localStorage.getItem("userId");
@@ -400,7 +401,7 @@ const imageHeight = 600;
         </div>
       </div>
       <ToastContainer />
-
+{/* <ProductBottomNavigation/> */}
     </>
   );
 }

@@ -155,7 +155,7 @@ export const Searchbar = () => {
                         <i className="bx bx-shopping-bag  fs-3" />
                       </a>
                       <div className="dropdown-menu dropdown-menu-end">
-                        <a href="javascript:;">
+                        <a href="">
                           <div className="cart-header">
                             <p className="cart-header-title mb-0">{cartItems.length} ITEMS</p>
                             <p className="cart-header-clear ms-auto mb-0">

@@ -30,7 +30,7 @@ const BottommNavigation = () => {
        {/* Your modal */}
     
 
-      <div className='buttonnavigation'>
+      {/* <div className='buttonnavigation'>
         <BottomNavigation value={value} onChange={handleChange}>
      
         <BottomNavigationAction
@@ -65,7 +65,7 @@ const BottommNavigation = () => {
             }}
           />
         </BottomNavigation>
-      </div>
+      </div> */}
       <div className="homeFooter mt-5">
         <BottomNavigation sx={styles.root} value={value} onChange={handleChange}>
           <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} component={Link} to="*" />

@@ -149,7 +149,7 @@ export const Footer = ({ currentPage }) => {
           </div>
         </section>
       </footer>
-      <footer className="footer-section-mobile pe-3 ps-3 pb-2">
+      <footer className="footer-section-mobile pe-3 ps-3 pb-2 mb-5">
         <div className="address mb-3 d-flex align-items-center  justify-content-between">
           <h6 className="mb-0 text-uppercase fw-bold">Contact Us </h6>
           <span className="plus-sign" onClick={toggleContactInfo}> {contactInfoVisible ? '-' : '+'}</span>
@@ -240,7 +240,6 @@ export const Footer = ({ currentPage }) => {
           </ul>
         )}
       </footer>
-     <BottommNavigation />
      {/* </div> */}
       {/*end footer section*/}
 
