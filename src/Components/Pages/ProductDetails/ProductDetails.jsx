@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -9,6 +10,7 @@ import { useTheme } from "@mui/material/styles";
 import { ToastContainer, toast } from 'react-toastify';
 import { Container } from "react-bootstrap";
 import ProductBottomNavigation from "../../Layout/Footer/ProductBottomNavigation/ProductBottomNavigation";
+
 
 
 
@@ -27,6 +29,10 @@ const ProductDetails = () => {
   // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
+  const [productImage, setProductImage] = useState(null);
+  const [productOptionImage, setProductOptionImage] = useState('');
+  const [productOptionImages, setProductOptionImages] = useState([]);
+  const [productImages, setProductImages] = useState([]);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
   const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
@@ -37,8 +43,39 @@ const ProductDetails = () => {
   const xl = useMediaQuery('(min-width:1200px) and (max-width:1399px)');
   const xxl = useMediaQuery('(min-width:1400px)');
   const isMobile = xs || sm || md || lg || xl || xxl;
+  
+
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API}/api/product-detail/${id}`);
+        if (
+          response.data.ResponseData &&
+          response.data.ResponseData.productList &&
+          response.data.ResponseData.productList.length > 0
+        ) {
+          const product = response.data.ResponseData.productList[0];
+          setProductData(product);
+
+          const productLinks = response.data.ResponseData.productlink;
+          if (productLinks && productLinks.length > 0) {
+            const productOptions = productLinks[0].product_options;
+            if (productOptions && productOptions.length > 0) {
+              const image = productOptions[0].image;
+              setProductOptionImage(image || '');
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching product details:', error);
+      }
+    };
+
+    fetchProductData();
+  }, [id]);
 
 
+  
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
       .then((response) => response.json())
@@ -136,6 +173,9 @@ const ProductDetails = () => {
       navigate("/login");
     }
   };
+
+
+
 
   let imageWidth, imageHeight;
 
@@ -309,22 +349,24 @@ const ProductDetails = () => {
                           <dd className="col-sm-9">#{productData.sku}</dd>
                         </dl>
                         <div className="mt-3 align-items-center">
-                          <h6>Colors :</h6>
-
-                          <div className="d-flex align-items-center gap-2 w-16 h-25 ">
-                            <img
-                              src={productData.product_image[0].image}
-                              alt="colors"
-                              className="img-fluid border p-1"
-                            />
-                            <img
-                              src={productData.product_image[1].image}
-                              alt="colors"
-                              className="img-fluid border p-1"
-                            />
-
-                          </div>
-                        </div>
+                        <h1>{productData.name}</h1>
+      {productOptionImages && productOptionImages.length > 0 && (
+        <div>
+          <h6>Product Option Images:</h6>
+          <div className="d-flex align-items-center gap-2">
+            {productOptionImages.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`Product Option ${index + 1}`}
+                className=" border p-1"
+                style={{ maxWidth: "100px", maxHeight: "100px",objectFit: "cover" }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+  </div>
                         <div class="row row-cols-auto align-items-center mt-3">
                           <div class="col">
                             <label class="form-label">Quantity</label>
@@ -370,8 +412,6 @@ const ProductDetails = () => {
                             <i className="bx bx-heart" />
                           </a>
                         </div>
-
-
                       </div>
                     </div>
                     <div className="col-12   col-xxl-2">
