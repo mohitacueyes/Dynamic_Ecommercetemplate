@@ -10,7 +10,11 @@ import { useTheme } from "@mui/material/styles";
 import { ToastContainer, toast } from 'react-toastify';
 import { Container } from "react-bootstrap";
 import ProductBottomNavigation from "../../Layout/Footer/ProductBottomNavigation/ProductBottomNavigation";
-
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link } from 'react-router-dom';
+import PaymentIcon from '@mui/icons-material/Payment';
 
 
 
@@ -43,7 +47,56 @@ const ProductDetails = () => {
   const xl = useMediaQuery('(min-width:1200px) and (max-width:1399px)');
   const xxl = useMediaQuery('(min-width:1400px)');
   const isMobile = xs || sm || md || lg || xl || xxl;
+
+  const [value, setValue] = React.useState('cart');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  }
+
+
+  const [formData, setFormData] = useState({
+    product_id: id,
+    user_id: userId,
+    rating: "",
+    image: null,
+    review: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+
+    fetch(`${process.env.REACT_APP_API}/api/addfeedback`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the API response here
+        console.log(data);
+        // You can perform further actions based on the API response
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        // Handle errors here
+      });
+  };
+
+
+
+
   
+
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -102,10 +155,6 @@ const ProductDetails = () => {
       throw new Error('User is not logged in');
     }
   };
-
-
-
-
 
   // -------ADD TO CART --------//
   const addToCart = async (productId) => {
@@ -400,7 +449,7 @@ const ProductDetails = () => {
                           </a>
                           <a
 
-                            onClick={() => addToCart(productData.id)}
+                            // onClick={() => addToCart(productData.id)}
                             className="btn btn-dark btn-ecomm"
                           >
                             Buy now
@@ -450,7 +499,7 @@ const ProductDetails = () => {
                     >
                       <div className="d-flex align-items-center">
                         <div className="tab-title text-uppercase fw-500">
-                          (3) Reviews
+                           Reviews
                         </div>
                       </div>
                     </a>
@@ -478,7 +527,7 @@ const ProductDetails = () => {
                     <div className="row">
                       <div className="col   col-12 col-lg-8 ">
                         <div className="product-review">
-                          <h5 className="mb-4">3 Reviews For The Product</h5>
+                          <h5 className="mb-4"> All Reviews For The Product</h5>
                           <div className="review-list">
                             <div>
                               {reviews.map(review => (
@@ -521,20 +570,28 @@ const ProductDetails = () => {
                             <div className="mb-3">
                               <label className="form-label">Your Name</label>
                               <input
-                                type="text"
-                                className="form-control rounded-0"
-                              />
+                  type="text"
+                  className="form-control rounded-0"
+                  name="name"
+                  onChange={handleInputChange}
+                />
                             </div>
                             <div className="mb-3">
                               <label className="form-label">Your Email</label>
                               <input
-                                type="text"
-                                className="form-control rounded-0"
-                              />
+                  type="file"
+                  className="form-control rounded-0"
+                  name="image"
+                  onChange={handleInputChange}
+                />
                             </div>
                             <div className="mb-3">
                               <label className="form-label">Rating</label>
-                              <select className="form-select rounded-0">
+                              <select
+                  className="form-select rounded-0"
+                  name="rating"
+                  onChange={handleInputChange}
+                >
                                 <option selected>Choose Rating</option>
                                 <option value={1}>1</option>
                                 <option value={2}>2</option>
@@ -548,16 +605,18 @@ const ProductDetails = () => {
                                 Example textarea
                               </label>
                               <textarea
-                                className="form-control rounded-0"
-                                rows={3}
-                                defaultValue={""}
-                              />
+                  className="form-control rounded-0"
+                  rows={3}
+                  name="review"
+                  onChange={handleInputChange}
+                />
                             </div>
                             <div className="d-grid">
-                              <button
-                                type="button"
-                                className="btn btn-dark btn-ecomm"
-                              >
+                            <button
+                  type="button"
+                  className="btn btn-dark btn-ecomm"
+                  onClick={handleSubmit}
+                >
                                 Submit a Review
                               </button>
                             </div>
@@ -571,10 +630,46 @@ const ProductDetails = () => {
             </Container>
           </section>
           {/*end product more info*/}
+          <div className="homeFooter mt-5">
+        <BottomNavigation sx={styles.root} value={value} onChange={handleChange} showLabels={true}>
+          <BottomNavigationAction
+            label="Add to Cart"
+            value="cart"
+            icon={<ShoppingCartIcon />}
+            component={Link}
+            onClick={() => addToCart(productData.id)}
+            sx={{
+              "&.Mui-selected": {
+                color: "white",
+              },
+              backgroundColor: "red",
+              "&:hover": {
+                backgroundColor: "red",
+              },
+            }}
+          />
+          <BottomNavigationAction
+            label="Buy Now"
+            value="buy"
+            icon={<PaymentIcon />}
+            component={Link}
+            to="/checkout"
+            sx={{
+              '&.Mui-selected': {
+                color: "white",
+              },
+              backgroundColor: "skyblue",
+              '&:hover': {
+                backgroundColor: "skyblue",
+              },
+            }}
+          />
+        </BottomNavigation>
+      </div>
         </div>
       </div>
       <ToastContainer />
-      <ProductBottomNavigation />
+      {/* <ProductBottomNavigation /> */}
     </>
   );
 };
