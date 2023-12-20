@@ -10,11 +10,7 @@ import { useTheme } from "@mui/material/styles";
 import { ToastContainer, toast } from 'react-toastify';
 import { Container } from "react-bootstrap";
 import ProductBottomNavigation from "../../Layout/Footer/ProductBottomNavigation/ProductBottomNavigation";
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Link } from 'react-router-dom';
-import PaymentIcon from '@mui/icons-material/Payment';
+
 
 
 
@@ -47,56 +43,7 @@ const ProductDetails = () => {
   const xl = useMediaQuery('(min-width:1200px) and (max-width:1399px)');
   const xxl = useMediaQuery('(min-width:1400px)');
   const isMobile = xs || sm || md || lg || xl || xxl;
-
-  const [value, setValue] = React.useState('cart');
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  }
-
-
-  const [formData, setFormData] = useState({
-    product_id: id,
-    user_id: userId,
-    rating: "",
-    image: null,
-    review: "",
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = () => {
-
-    fetch(`${process.env.REACT_APP_API}/api/addfeedback`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the API response here
-        console.log(data);
-        // You can perform further actions based on the API response
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        // Handle errors here
-      });
-  };
-
-
-
-
   
-
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -112,11 +59,10 @@ const ProductDetails = () => {
 
           const productLinks = response.data.ResponseData.productlink;
           if (productLinks && productLinks.length > 0) {
-            const productOptions = productLinks[0].product_options;
-            if (productOptions && productOptions.length > 0) {
-              const image = productOptions[0].image;
-              setProductOptionImage(image || '');
-            }
+            const images = productLinks.flatMap((link) =>
+              link.product_options.map((option) => option.image)
+            );
+            setProductOptionImages(images || []);
           }
         }
       } catch (error) {
@@ -155,6 +101,10 @@ const ProductDetails = () => {
       throw new Error('User is not logged in');
     }
   };
+
+
+
+
 
   // -------ADD TO CART --------//
   const addToCart = async (productId) => {
@@ -317,32 +267,32 @@ const ProductDetails = () => {
                     <div className="col-12 col-sm-12 col-lg-5 col-xl-6  col-xxl-5">
                       <div className="image-zoom-section">
                         <div className="producttopimage">
-                          <ReactImageMagnify
-                            {...{
-                              smallImage: {
-                                alt: "Product Image",
-                                isFluidWidth: false, // Set to false to use fixed width
-                                src:
-                                  selectedImage ||
-                                  productData.product_image[0].image,
-
-                                width: imageWidth,
-                                height: imageHeight,
-
-                              },
-                              largeImage: {
-                                src:
-                                  selectedImage ||
-                                  productData.product_image[0].image,
-                                width: imageWidth * 2, // Double the width for the large image (adjust as needed)
-                                height: imageHeight * 2, // Double the height for the large image (adjust as needed)
-                              },
-                              lensStyle: { backgroundColor: "rgba(0,0,0,.6)" },
-                              enlargedImageContainerStyle: {
-                                background: "rgba(0,0,0,.6)",
-                              },
-                            }}
-                          />
+                        {productData.product_image && productData.product_image.length > 0 && (
+        <ReactImageMagnify
+          {...{
+            smallImage: {
+              alt: "Product Image",
+              isFluidWidth: false,
+              src:
+                selectedImage ||
+                productData.product_image[0].image,
+              width: imageWidth,
+              height: imageHeight,
+            },
+            largeImage: {
+              src:
+                selectedImage ||
+                productData.product_image[0].image,
+              width: imageWidth * 2,
+              height: imageHeight * 2,
+            },
+            lensStyle: { backgroundColor: "rgba(0,0,0,.6)" },
+            enlargedImageContainerStyle: { background: "rgba(0,0,0,.6)" },
+          }}
+        />
+      ) || (
+        <img src={productData.image} alt="No Image" className="img-fluid w-50" />
+      )}
                         </div>
 
                         <div className="thumbnail-grid mt-3 d-flex align-items-center  me-5">
@@ -449,7 +399,7 @@ const ProductDetails = () => {
                           </a>
                           <a
 
-                            // onClick={() => addToCart(productData.id)}
+                            onClick={() => addToCart(productData.id)}
                             className="btn btn-dark btn-ecomm"
                           >
                             Buy now
@@ -499,7 +449,7 @@ const ProductDetails = () => {
                     >
                       <div className="d-flex align-items-center">
                         <div className="tab-title text-uppercase fw-500">
-                           Reviews
+                          (3) Reviews
                         </div>
                       </div>
                     </a>
@@ -527,7 +477,7 @@ const ProductDetails = () => {
                     <div className="row">
                       <div className="col   col-12 col-lg-8 ">
                         <div className="product-review">
-                          <h5 className="mb-4"> All Reviews For The Product</h5>
+                          <h5 className="mb-4">3 Reviews For The Product</h5>
                           <div className="review-list">
                             <div>
                               {reviews.map(review => (
@@ -570,28 +520,20 @@ const ProductDetails = () => {
                             <div className="mb-3">
                               <label className="form-label">Your Name</label>
                               <input
-                  type="text"
-                  className="form-control rounded-0"
-                  name="name"
-                  onChange={handleInputChange}
-                />
+                                type="text"
+                                className="form-control rounded-0"
+                              />
                             </div>
                             <div className="mb-3">
                               <label className="form-label">Your Email</label>
                               <input
-                  type="file"
-                  className="form-control rounded-0"
-                  name="image"
-                  onChange={handleInputChange}
-                />
+                                type="text"
+                                className="form-control rounded-0"
+                              />
                             </div>
                             <div className="mb-3">
                               <label className="form-label">Rating</label>
-                              <select
-                  className="form-select rounded-0"
-                  name="rating"
-                  onChange={handleInputChange}
-                >
+                              <select className="form-select rounded-0">
                                 <option selected>Choose Rating</option>
                                 <option value={1}>1</option>
                                 <option value={2}>2</option>
@@ -605,18 +547,16 @@ const ProductDetails = () => {
                                 Example textarea
                               </label>
                               <textarea
-                  className="form-control rounded-0"
-                  rows={3}
-                  name="review"
-                  onChange={handleInputChange}
-                />
+                                className="form-control rounded-0"
+                                rows={3}
+                                defaultValue={""}
+                              />
                             </div>
                             <div className="d-grid">
-                            <button
-                  type="button"
-                  className="btn btn-dark btn-ecomm"
-                  onClick={handleSubmit}
-                >
+                              <button
+                                type="button"
+                                className="btn btn-dark btn-ecomm"
+                              >
                                 Submit a Review
                               </button>
                             </div>
@@ -630,46 +570,10 @@ const ProductDetails = () => {
             </Container>
           </section>
           {/*end product more info*/}
-          <div className="homeFooter mt-5">
-        <BottomNavigation sx={styles.root} value={value} onChange={handleChange} showLabels={true}>
-          <BottomNavigationAction
-            label="Add to Cart"
-            value="cart"
-            icon={<ShoppingCartIcon />}
-            component={Link}
-            onClick={() => addToCart(productData.id)}
-            sx={{
-              "&.Mui-selected": {
-                color: "white",
-              },
-              backgroundColor: "red",
-              "&:hover": {
-                backgroundColor: "red",
-              },
-            }}
-          />
-          <BottomNavigationAction
-            label="Buy Now"
-            value="buy"
-            icon={<PaymentIcon />}
-            component={Link}
-            to="/checkout"
-            sx={{
-              '&.Mui-selected': {
-                color: "white",
-              },
-              backgroundColor: "skyblue",
-              '&:hover': {
-                backgroundColor: "skyblue",
-              },
-            }}
-          />
-        </BottomNavigation>
-      </div>
         </div>
       </div>
       <ToastContainer />
-      {/* <ProductBottomNavigation /> */}
+      <ProductBottomNavigation />
     </>
   );
 };
