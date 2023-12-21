@@ -1247,8 +1247,17 @@ ul.categories-list li {
 	width: 42px
 }
 
+/* .react-multi-carousel-item
+{
+	width:100px !important;
+} */
 /* Invoice */
+.react-multi-carousel-list ul li
+{
+	padding: 0 10px !important;
+	width: auto !important;
 
+}
 #invoice {
 	padding: 0
 }

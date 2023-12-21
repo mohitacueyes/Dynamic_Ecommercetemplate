@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
-import Carousel from 'react-bootstrap/Carousel';
 import ReactImageMagnify from 'react-image-magnify';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { ToastContainer, toast } from 'react-toastify';
 import { Container } from "react-bootstrap";
 import ProductBottomNavigation from "../../Layout/Footer/ProductBottomNavigation/ProductBottomNavigation";
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PaymentIcon from '@mui/icons-material/Payment';
+
 
 
 
@@ -29,10 +36,7 @@ const ProductDetails = () => {
   // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
-  const [productImage, setProductImage] = useState(null);
-  const [productOptionImage, setProductOptionImage] = useState('');
   const [productOptionImages, setProductOptionImages] = useState([]);
-  const [productImages, setProductImages] = useState([]);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
   const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
@@ -43,7 +47,15 @@ const ProductDetails = () => {
   const xl = useMediaQuery('(min-width:1200px) and (max-width:1399px)');
   const xxl = useMediaQuery('(min-width:1400px)');
   const isMobile = xs || sm || md || lg || xl || xxl;
+
+
+
+
+    const [value, setValue] = React.useState('cart');
   
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    }
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -74,7 +86,7 @@ const ProductDetails = () => {
   }, [id]);
 
 
-  
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
       .then((response) => response.json())
@@ -82,8 +94,8 @@ const ProductDetails = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, [id]);
 
-   // -------Reviews --------//
-   useEffect(() => {
+  // -------Reviews --------//
+  useEffect(() => {
     // Replace 'your-api-endpoint' with the actual endpoint for fetching reviews
     fetch(`${process.env.REACT_APP_API}/api/feedbacklist/${id}`)
       .then(response => response.json())
@@ -222,7 +234,6 @@ const ProductDetails = () => {
   // const imageWidth = isMobile ?  380 : 400; // Adjust the width for mobile view
   // const imageHeight = isMobile ? 450 : 500;
   // const thumbnailSize = isMobile ? 100 : 145;
-  
 
   return (
     <>
@@ -264,49 +275,103 @@ const ProductDetails = () => {
               <div className="product-detail-card">
                 <div className="product-detail-body">
                   <div className="row g-0">
-                    <div className="col-12 col-sm-12 col-lg-5 col-xl-6  col-xxl-5">
+                    <div className="col-12 col-sm-12 col-lg-5 col-xl-6  col-xxl-5 ">
                       <div className="image-zoom-section">
                         <div className="producttopimage">
-                        {productData.product_image && productData.product_image.length > 0 && (
-        <ReactImageMagnify
-          {...{
-            smallImage: {
-              alt: "Product Image",
-              isFluidWidth: false,
-              src:
-                selectedImage ||
-                productData.product_image[0].image,
-              width: imageWidth,
-              height: imageHeight,
-            },
-            largeImage: {
-              src:
-                selectedImage ||
-                productData.product_image[0].image,
-              width: imageWidth * 2,
-              height: imageHeight * 2,
-            },
-            lensStyle: { backgroundColor: "rgba(0,0,0,.6)" },
-            enlargedImageContainerStyle: { background: "rgba(0,0,0,.6)" },
-          }}
-        />
-      ) || (
-        <img src={productData.image} alt="No Image" className="img-fluid w-50" />
-      )}
+                          {productData.product_image && productData.product_image.length > 0 && (
+                            <ReactImageMagnify
+                              {...{
+                                smallImage: {
+                                  alt: "Product Image",
+                                  isFluidWidth: false,
+                                  src:
+                                    selectedImage ||
+                                    productData.product_image[0].image,
+                                  width: imageWidth,
+                                  height: imageHeight,
+                                },
+                                largeImage: {
+                                  src:
+                                    selectedImage ||
+                                    productData.product_image[0].image,
+                                  width: imageWidth * 2,
+                                  height: imageHeight * 2,
+                                },
+                                lensStyle: { backgroundColor: "rgba(0,0,0,.6)" },
+                                enlargedImageContainerStyle: { background: "rgba(0,0,0,.6)" },
+                              }}
+                            />
+                          ) || (
+                              <div className="producttopimage"  >
+                                <img src={productData.image} alt="No Image" className="img-fluid " style={{
+                                  width: imageWidth,
+                                  height: imageHeight
+                                }} />
+                              </div>
+                            )}
                         </div>
 
-                        <div className="thumbnail-grid mt-3 d-flex align-items-center  me-5">
-                          {productData.product_image.map((image, index) => (
-
-                            <div key={index} className="thumbnail-item subImage" onClick={() => setSelectedImage(image.image)}>
-                              <img
-                                src={image.image}
-                                alt={`Thumbnail ${index}`}
-                                className={selectedImage === image.image ? "selected" : ""}
-                                style={{ maxWidth: `${thumbnailSize}px`, maxHeight: `${thumbnailSize}px` }}
-                              />
-                            </div>
-                          ))}
+                        <div className="thumbnail-grid mt-3 d-flex">
+                          <Carousel
+                            additionalTransfrom={0}
+                            arrows
+                            autoPlaySpeed={3000}
+                            centerMode={false}
+                            autoPlay
+                            containerClass="container"
+                            customButtonGroup={<button></button>}
+                            dotListClass=""
+                            draggable
+                            focusOnSelect={false}
+                            infinite
+                            itemClass="custom-carousel-item"
+                            keyBoardControl
+                            minimumTouchDrag={80}
+                            renderButtonGroupOutside={false}
+                            renderDotsOutside={false}
+                            responsive={{
+                              desktop: {
+                                breakpoint: {
+                                  max: 3000,
+                                  min: 1024,
+                                },
+                                items: 4,
+                              },
+                              mobile: {
+                                breakpoint: {
+                                  max: 464,
+                                  min: 0,
+                                },
+                                items: 2,
+                              },
+                              tablet: {
+                                breakpoint: {
+                                  max: 1024,
+                                  min: 464,
+                                },
+                                items: 4,
+                              },
+                            }}
+                            showDots={false}
+                            sliderClass=""
+                            slidesToSlide={1}
+                            swipeable
+                          >
+                            {productData.product_image.slice(0, 4).map((image, index) => (
+                              <div
+                                key={index}
+                                className="thumbnail-item"
+                                onClick={() => setSelectedImage(image.image)}
+                              >
+                                <img
+                                  src={image.image}
+                                  alt={`Thumbnail ${index}`}
+                                  className={selectedImage === image.image ? "selected" : ""}
+                                  style={{ maxWidth: `${thumbnailSize}px`, maxHeight: `${thumbnailSize}px` }}
+                                />
+                              </div>
+                            ))}
+                          </Carousel>
                         </div>
 
                       </div>
@@ -348,24 +413,26 @@ const ProductDetails = () => {
                           <dd className="col-sm-9">#{productData.sku}</dd>
                         </dl>
                         <div className="mt-3 align-items-center">
-                        <h1>{productData.name}</h1>
-      {productOptionImages && productOptionImages.length > 0 && (
-        <div>
-          <h6>Product Option Images:</h6>
-          <div className="d-flex align-items-center gap-2">
-            {productOptionImages.map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt={`Product Option ${index + 1}`}
-                className=" border p-1"
-                style={{ maxWidth: "100px", maxHeight: "100px",objectFit: "cover" }}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-  </div>
+                          {/* <h1>{productData.name}</h1> */}
+                          {productOptionImages && productOptionImages.length > 0 && (
+                            <div>
+                              <h6>Product Option Images:</h6>
+                              <div className="d-flex align-items-center gap-2">
+                                {productOptionImages.map((image, index) => (
+                                  <Link to={`/productdetails/${productData.id}`}>
+                                    <img
+                                      key={index}
+                                      src={image}
+                                      alt={`Product Option ${index + 1}`}
+                                      className=" border p-1"
+                                      style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
+                                    />
+                                    </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
                         <div class="row row-cols-auto align-items-center mt-3">
                           <div class="col">
                             <label class="form-label">Quantity</label>
@@ -399,7 +466,7 @@ const ProductDetails = () => {
                           </a>
                           <a
 
-                            onClick={() => addToCart(productData.id)}
+                            // onClick={() => addToCart(productData.id)}
                             className="btn btn-dark btn-ecomm"
                           >
                             Buy now
@@ -418,7 +485,7 @@ const ProductDetails = () => {
                     {/*end row*/}
                   </div>
                 </div>
-                </div>
+              </div>
             </Container>
           </section>
 
@@ -573,7 +640,42 @@ const ProductDetails = () => {
         </div>
       </div>
       <ToastContainer />
-      <ProductBottomNavigation />
+      <div className="homeFooter mt-5">
+        <BottomNavigation sx={styles.root} value={value} onChange={handleChange} showLabels={true}>
+          <BottomNavigationAction
+            label="Add to Cart"
+            value="cart"
+            icon={<ShoppingCartIcon />}
+            component={Link}
+            onClick={() => addToCart(productData.id)}
+            sx={{
+              "&.Mui-selected": {
+                color: "white",
+              },
+              backgroundColor: "red",
+              "&:hover": {
+                backgroundColor: "red",
+              },
+            }}
+          />
+          <BottomNavigationAction
+            label="Buy Now"
+            value="buy"
+            icon={<PaymentIcon />}
+            component={Link}
+            to="/checkout"
+            sx={{
+              '&.Mui-selected': {
+                color: "white",
+              },
+              backgroundColor: "skyblue",
+              '&:hover': {
+                backgroundColor: "skyblue",
+              },
+            }}
+          />
+        </BottomNavigation>
+      </div>
     </>
   );
 };

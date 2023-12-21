@@ -61,38 +61,40 @@ function Shopcart() {
     fetchCartData();
   }, []);
   // console.log(cartItems);
-   const [response, setResponse] = useState(null);
 
- const handleDeleteClick = async (cart_id) => {
-   const apiUrl = `${process.env.REACT_APP_API}/api/delete`; 
+  //-----DELETE CART ITEMS-----//
+  const [response, setResponse] = useState(null);
 
-   try {
-     const response = await fetch(apiUrl, {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({ 
-        cart_id: cart_id,
-      }),
-     });
-
-     const data = await response.json();
-
-     if (data.ResponseCode === 1) {
-       setResponse(data.ResponseText);
-       // Update addresses state after successful deletion
-       setCartItems(prevAddresses => prevAddresses.filter(favorites => favorites.cart_id !== cart_id));
-       toast.success(data.ResponseText);
-     } else {
-       setResponse('Error deleting favorites');
-     }
-   } catch (error) {
-     console.error('Error:', error);
-     setResponse('Error deleting favorites');
-   }
- };
-
+  const handleDeleteClick = async (cart_id) => {
+    const apiUrl = `${process.env.REACT_APP_API}/api/delete`; 
+  
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+         cart_id: cart_id,
+       }),
+      });
+  
+      const data = await response.json();
+  
+      if (data.ResponseCode === 1) {
+        setResponse(data.ResponseText);
+        // Update addresses state after successful deletion
+        setCartItems(prevAddresses => prevAddresses.filter(favorites => favorites.cart_id !== cart_id));
+        toast.success(data.ResponseText);
+      } else {
+        setResponse('Error deleting favorites');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setResponse('Error deleting favorites');
+    }
+  };
+   //--------------------------//
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -243,7 +245,7 @@ const imageHeight = 600;
                               <div className="d-flex gap-3 justify-content-lg-end align-items-sm-center">
 
                                 <a
-                                 onClick={() =>handleDeleteClick(item.cart_id)}
+                                 onClick={() => handleDeleteClick(item.cart_id)}
                                   className="btn btn-outline-dark rounded-0 btn-ecomm Removebtn"
                                 >
                                   <i className="bx bx-x d-md-none d-sm-none" />

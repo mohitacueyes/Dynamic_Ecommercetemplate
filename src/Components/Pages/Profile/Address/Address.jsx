@@ -171,20 +171,19 @@ const Address = ({ user_id }) => {
                           >
                             ADD-Address
                           </button>
-                          <div className="row d-flex flex-cloumn w-100 ">
-                          <h5 className="mb-3">Addresses</h5>
-                            <div className="col-12 col-6 ms-5" style={{ display:"flex",gap:"20px", flexDirection:"row",alignItems:"center" } }>
+                          <h5 className="mb-4">Addresses</h5>
+                          <div className="row">
+                            <div className="col-12 col-lg-6  ">
                               {addresses.length > 0 ? (
                                 addresses.map((address) => (
-                              
-                                  <address key={address.id}>
+                                  <div key={address.id}>
                                    <span className="h6">Name:-</span>{address.full_name}
                                     <br />
                                     <span className="h6">Address:-</span>{address.address}
                                     <br />
                                     <span className="h6">Lan mark:-</span>{address.landmark}
                                     <br />
-                                    <span className="h6">City:-</span>{address.city_id}<span className="h6">,State:-</span>{address.state_id}
+                                    <span className="h6">City:-</span>{address.city_id} <br /><span className="h6">State:-</span>{address.state_id}
                                     <br />
                                     <span className="h6">Pincode:-</span>{address.pincode}
                                     <br />
@@ -207,14 +206,13 @@ const Address = ({ user_id }) => {
                                       Delete
                                     </button>
                                   
-                                  </address>
+                                  </div>
                              
                                 ))
                               ) : (
                                 <p>No addresses found for this user.</p>
                               )}
                             </div>
-                            
                           </div>
                         </div>
                       </div>
