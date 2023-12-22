@@ -56,6 +56,44 @@ const ProductDetails = () => {
     const handleChange = (event, newValue) => {
       setValue(newValue);
     }
+    const [formData, setFormData] = useState({
+      product_id: id,
+      user_id: userId,
+      rating: "",
+      image: null,
+      review: "",
+    });
+  
+
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    };
+  
+    const handleSubmit = () => {
+  
+      fetch(`${process.env.REACT_APP_API}/api/addfeedback`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Handle the API response here
+          console.log(data);
+          // You can perform further actions based on the API response
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          // Handle errors here
+        });
+    };
+  
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -104,7 +142,6 @@ const ProductDetails = () => {
   }, []);
 
   const [selectedImage, setSelectedImage] = useState(null);
-
   if (!productData) {
     return <div>Loading...</div>; // Placeholder for when data is loading
   }
@@ -311,13 +348,13 @@ const ProductDetails = () => {
                             )}
                         </div>
 
-                        <div className="thumbnail-grid mt-3 d-flex">
+                        <div className=" mt-3 thumbnailimage " >
                           <Carousel
                             additionalTransfrom={0}
                             arrows
                             autoPlaySpeed={3000}
                             centerMode={false}
-                            autoPlay
+                            // autoPlay ={false}
                             containerClass="container"
                             customButtonGroup={<button></button>}
                             dotListClass=""
@@ -342,7 +379,8 @@ const ProductDetails = () => {
                                   max: 464,
                                   min: 0,
                                 },
-                                items: 2,
+                                items: 4,
+                                
                               },
                               tablet: {
                                 breakpoint: {
@@ -358,22 +396,16 @@ const ProductDetails = () => {
                             swipeable
                           >
                             {productData.product_image.slice(0, 4).map((image, index) => (
-                              <div
-                                key={index}
-                                className="thumbnail-item"
-                                onClick={() => setSelectedImage(image.image)}
-                              >
                                 <img
                                   src={image.image}
                                   alt={`Thumbnail ${index}`}
-                                  className={selectedImage === image.image ? "selected" : ""}
+                                  onClick={() => setSelectedImage(image.image)}
+                                  className={"img-fluid cursor-pointer"}
                                   style={{ maxWidth: `${thumbnailSize}px`, maxHeight: `${thumbnailSize}px` }}
                                 />
-                              </div>
                             ))}
                           </Carousel>
                         </div>
-
                       </div>
                     </div>
                     <div className="col-12 col-lg-7 col-xl-6 col-xxl-5" >
@@ -587,20 +619,28 @@ const ProductDetails = () => {
                             <div className="mb-3">
                               <label className="form-label">Your Name</label>
                               <input
-                                type="text"
-                                className="form-control rounded-0"
-                              />
+                  type="text"
+                  className="form-control rounded-0"
+                  name="name"
+                  onChange={handleInputChange}
+                />
                             </div>
                             <div className="mb-3">
                               <label className="form-label">Your Email</label>
                               <input
-                                type="text"
-                                className="form-control rounded-0"
-                              />
+                  type="file"
+                  className="form-control rounded-0"
+                  name="image"
+                  onChange={handleInputChange}
+                />
                             </div>
                             <div className="mb-3">
                               <label className="form-label">Rating</label>
-                              <select className="form-select rounded-0">
+                              <select
+                  className="form-select rounded-0"
+                  name="rating"
+                  onChange={handleInputChange}
+                >
                                 <option selected>Choose Rating</option>
                                 <option value={1}>1</option>
                                 <option value={2}>2</option>
@@ -614,16 +654,18 @@ const ProductDetails = () => {
                                 Example textarea
                               </label>
                               <textarea
-                                className="form-control rounded-0"
-                                rows={3}
-                                defaultValue={""}
-                              />
+                  className="form-control rounded-0"
+                  rows={3}
+                  name="review"
+                  onChange={handleInputChange}
+                />
                             </div>
                             <div className="d-grid">
-                              <button
-                                type="button"
-                                className="btn btn-dark btn-ecomm"
-                              >
+                            <button
+                  type="button"
+                  className="btn btn-dark btn-ecomm"
+                  onClick={handleSubmit}
+                >
                                 Submit a Review
                               </button>
                             </div>

@@ -1247,17 +1247,15 @@ ul.categories-list li {
 	width: 42px
 }
 
-/* .react-multi-carousel-item
-{
-	width:100px !important;
-} */
-/* Invoice */
-.react-multi-carousel-list ul li
-{
-	padding: 0 10px !important;
-	width: auto !important;
+.react-multi-carousel-item
 
+element.style {
+    flex: 1 1 auto;
+    position: relative;
+    width: 87px !important;
 }
+/* Invoice */
+
 #invoice {
 	padding: 0
 }
@@ -1712,29 +1710,7 @@ ul.categories-list li {
 	box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important
 }
 
-.bg-login {
-	background-image: url(../images/login-images/bg-login-img.jpg);
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-attachment: fixed
-}
 
-.bg-forgot {
-	background-image: url(../images/login-images/bg-forgot-password.jpg);
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-attachment: fixed
-}
-
-.bg-lock-screen {
-	background-image: url(../images/login-images/bg-lock-screen.jpg);
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-attachment: fixed
-}
 
 .login-separater span {
 	position: relative;
@@ -2333,6 +2309,10 @@ body.bg-theme15 {
 	/* justify-content: flex-end!important; */
 }
 
+.thumbnailimage{
+	width: "70%";
+	
+}
 @media screen and (min-width:10px) and (max-width: 430px) {
 	.TopSearch {
 		padding-top: 0!important;
@@ -2464,6 +2444,10 @@ body.bg-theme15 {
 {
 	min-width: 1%!important;
   max-width: 50%!important;
+}
+
+.thumbnailimage{
+	width: "70%";
 }
 	/* .css-bls161-MuiButtonBase-root-MuiBottomNavigationAction-root
 	{
@@ -2601,6 +2585,10 @@ body.bg-theme15 {
 	min-width: 1%!important;
   max-width: 50%!important;
 }
+.thumbnailimage{
+	width: 80%;
+	margin-left: 33px;
+}
 	/* .css-bls161-MuiButtonBase-root-MuiBottomNavigationAction-root
 	{
 		min-width: 1%!important;
@@ -2691,7 +2679,10 @@ body.bg-theme15 {
 	.subImage {
 		padding-left: 25px;
 	}
-	
+	.thumbnailimage{
+		width: 60%;
+		margin-left: 33px;
+	}
 
 }
 
@@ -2759,7 +2750,10 @@ body.bg-theme15 {
 		font-size: 16px;
 		margin-left: 20px;
 	}
-	
+	.thumbnailimage{
+		width: 50%;
+		margin-left: 47px;
+	}
 	
 }
 
@@ -2827,6 +2821,10 @@ body.bg-theme15 {
 	{
 		padding-left: 30px!important;
 	}
+	.thumbnailimage{
+		width: 80%;
+		margin-left: 40px;
+	}
 
 }
 
@@ -2887,6 +2885,11 @@ body.bg-theme15 {
 	{
 		padding-left: 30px!important;
 	}
+	.thumbnailimage{
+		width: 80%;
+		margin-left: 20px;
+	}
+
 }
 @media  screen and (min-width:1400px) and (max-width: 1599px) {
 	
@@ -2912,6 +2915,10 @@ body.bg-theme15 {
 		height: 100% !important;
 	object-fit: cover !important;
 	}
+	.thumbnailimage{
+		width: 90%;
+		margin-left: 25px;
+	}
 }
 @media screen and (min-width:1600px) and (max-width: 1799px) {
 	.subImage {
@@ -2936,6 +2943,10 @@ body.bg-theme15 {
 		height: 100% !important;
 	object-fit: cover !important;
 	}
+	.thumbnailimage{
+		width: 80%;
+		margin-left: 20px;
+	}
 }
 @media  screen and (min-width:1800px) and (max-width: 1999px) {
 	.subImage {
@@ -2956,7 +2967,10 @@ body.bg-theme15 {
 			height: 100% !important;
 		object-fit: cover !important;
 		}
-	
+		.thumbnailimage{
+			width: 80%;
+			margin-left: 15px;
+		}
 	
 }
 
