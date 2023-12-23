@@ -15,7 +15,7 @@ function AddAddres() {
   const [CityData, setCityData] = useState([]);
   const [formData, setFormData] = useState({
     user_id: user_id,
-    type_id: "1",
+    type_id: "",
     full_name: "",
     country_id: "",
     landmark: "",
@@ -26,7 +26,7 @@ function AddAddres() {
     alternate_mobile: "",
     address: "",
   });
-  
+
   useEffect(() => {
     // ------------Fetch Country data-------------------//
     axios
@@ -52,7 +52,7 @@ function AddAddres() {
     //     console.error("Error fetching category data:", error);
     //   });
 
-      axios
+    axios
       .get(`${process.env.REACT_APP_API}/api/state-list`)
       .then((response) => {
         setStateData(response.data.ResponseData);
@@ -244,7 +244,7 @@ function AddAddres() {
                                 onChange={handleChange}
                               />
                             </div>
-                          
+
                             <div className="col-md-12">
                               <label className="form-label">State</label>
                               <select
@@ -286,7 +286,7 @@ function AddAddres() {
                                     );
                                   })}
                               </select>
-                              
+
                             </div>
                             <div className="col-md-12">
                               <label className="form-label">Pincode</label>
@@ -329,6 +329,22 @@ function AddAddres() {
                                 name="address"
                                 onChange={handleChange}
                               />
+                            </div>
+                            <div className="col-md-12">
+                              
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type_id" id="inlineRadio1" value="1" onChange={handleChange} />
+                                <label class="form-check-label" for="inlineRadio1">Home Address</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type_id" id="inlineRadio2" value="2" onChange={handleChange} />
+                                <label class="form-check-label" for="inlineRadio2">Office Address</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type_id" id="inlineRadio3" value="3" onChange={handleChange} />
+                                <label class="form-check-label" for="inlineRadio3">Other Address</label>
+                              </div>
+
                             </div>
                             <div className="col-12">
                               <button

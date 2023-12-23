@@ -48,53 +48,61 @@ const ProductDetails = () => {
   const xxl = useMediaQuery('(min-width:1400px)');
   const isMobile = xs || sm || md || lg || xl || xxl;
 
-
-
-
-    const [value, setValue] = React.useState('cart');
+  const [value, setValue] = React.useState('cart');
   
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    }
-    const [formData, setFormData] = useState({
-      product_id: id,
-      user_id: userId,
-      rating: "",
-      image: null,
-      review: "",
-    });
-  
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  }
+  const formatDate = (dateString) => {
+    const options = { year: "2-digit", month: "2-digit", day: "2-digit" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", options);
+  };
+  const [formData, setFormData] = useState({
+    product_id: id,
+    user_id: userId,
+    name: '',
+    image: null,
+    rating: '',
+    review: '',
+  });
 
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    };
-  
-    const handleSubmit = () => {
-  
-      fetch(`${process.env.REACT_APP_API}/api/addfeedback`, {
+  const handleInputChange = (e) => {
+    const { name, value, files } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: name === 'image' ? files[0] : value,
+    }));
+  };
+
+  const handleSubmit = async () => {
+    const apiUrl = `${process.env.REACT_APP_API}/api/addfeedback`; // Replace with your actual API endpoint
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('product_id',formData.product_id);
+    formDataToSend.append('user_id', formData.user_id);
+    formDataToSend.append('rating', formData.rating);
+    formDataToSend.append('review', formData.review);
+    formDataToSend.append('image', formData.image);
+
+    try {
+      const response = await fetch(apiUrl, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // Handle the API response here
-          console.log(data);
-          // You can perform further actions based on the API response
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          // Handle errors here
-        });
-    };
-  
+        body: formDataToSend,
+      });
 
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
+        // Handle success, maybe show a success message to the user
+      } else {
+        // Handle error, maybe show an error message to the user
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle network error
+    }
+  };
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -115,15 +123,14 @@ const ProductDetails = () => {
             setProductOptionImages(images || []);
           }
         }
-      } catch (error) {
+      }
+      catch (error) {
         console.error('Error fetching product details:', error);
       }
     };
 
     fetchProductData();
   }, [id]);
-
-
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
@@ -150,10 +157,6 @@ const ProductDetails = () => {
       throw new Error('User is not logged in');
     }
   };
-
-
-
-
 
   // -------ADD TO CART --------//
   const addToCart = async (productId) => {
@@ -222,8 +225,8 @@ const ProductDetails = () => {
     }
   };
 
-
-
+ 
+  
 
   let imageWidth, imageHeight;
 
@@ -347,7 +350,6 @@ const ProductDetails = () => {
                               </div>
                             )}
                         </div>
-
                         <div className=" mt-3 thumbnailimage " >
                           <Carousel
                             additionalTransfrom={0}
@@ -380,7 +382,7 @@ const ProductDetails = () => {
                                   min: 0,
                                 },
                                 items: 4,
-                                
+
                               },
                               tablet: {
                                 breakpoint: {
@@ -396,13 +398,13 @@ const ProductDetails = () => {
                             swipeable
                           >
                             {productData.product_image.slice(0, 4).map((image, index) => (
-                                <img
-                                  src={image.image}
-                                  alt={`Thumbnail ${index}`}
-                                  onClick={() => setSelectedImage(image.image)}
-                                  className={"img-fluid cursor-pointer"}
-                                  style={{ maxWidth: `${thumbnailSize}px`, maxHeight: `${thumbnailSize}px` }}
-                                />
+                              <img
+                                src={image.image}
+                                alt={`Thumbnail ${index}`}
+                                onClick={() => setSelectedImage(image.image)}
+                                className={"img-fluid cursor-pointer"}
+                                style={{ maxWidth: `${thumbnailSize}px`, maxHeight: `${thumbnailSize}px` }}
+                              />
                             ))}
                           </Carousel>
                         </div>
@@ -451,7 +453,7 @@ const ProductDetails = () => {
                               <h6>Product Option Images:</h6>
                               <div className="d-flex align-items-center gap-2">
                                 {productOptionImages.map((image, index) => (
-                                  <Link to={`/productdetails/${productData.id}`}>
+                                  <Link to={`/productdetails/${productOptionImages[index].product_id}`}>
                                     <img
                                       key={index}
                                       src={image}
@@ -459,14 +461,15 @@ const ProductDetails = () => {
                                       className=" border p-1"
                                       style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
                                     />
-                                    </Link>
+                                  </Link>
+
                                 ))}
                               </div>
                             </div>
                           )}
                         </div>
                         <div class="row row-cols-auto align-items-center mt-3">
-                          <div class="col">
+                          {/* <div class="col">
                             <label class="form-label">Quantity</label>
                             <select class="form-select form-select-sm">
                               <option>1</option>
@@ -475,7 +478,7 @@ const ProductDetails = () => {
                               <option>4</option>
                               <option>5</option>
                             </select>
-                          </div>
+                          </div> */}
                           {/* <div class="col">
                             <label class="form-label">Size</label>
                             <select class="form-select form-select-sm">
@@ -584,7 +587,7 @@ const ProductDetails = () => {
                                   <div key={review.id} className="d-flex align-items-start">
                                     <div className="review-user">
                                       <img
-                                        src={review.image} // Assuming 'image' field in the API response contains the user's avatar URL
+                                        src={review.image}
                                         width={65}
                                         height={65}
                                         className="rounded-circle"
@@ -592,15 +595,22 @@ const ProductDetails = () => {
                                       />
                                     </div>
                                     <div className="review-content ms-3">
+                                    
+                                   
                                       <div className="rates cursor-pointer fs-6">
-                                        {/* Generating stars based on the 'rating' field in the API response */}
+                                      <div className="review-user">
+                                      <img
+                                        src={review.image}
+                                        width={100}
+                                        height={100}
+                                      />
+                                    </div>
                                         {Array.from({ length: review.rating }, (_, index) => (
                                           <i key={index} className="bx bxs-star text-warning" />
                                         ))}
                                       </div>
-                                      <div className="d-flex align-items-center mb-2">
-                                        <h6 className="mb-0">{review.user_id}</h6>
-                                        <p className="mb-0 ms-auto">{review.created_at}</p>
+                                      <div className=" align-items-center mb-2">
+                                        <p className="mb-0 ms-auto">{formatDate(review.created_at)}</p>
                                       </div>
                                       <p>{review.review}</p>
                                     </div>
@@ -616,31 +626,31 @@ const ProductDetails = () => {
                         <div className="add-review border">
                           <div className="form-body p-3">
                             <h4 className="mb-4">Write a Review</h4>
+                            
                             <div className="mb-3">
                               <label className="form-label">Your Name</label>
                               <input
-                  type="text"
-                  className="form-control rounded-0"
-                  name="name"
-                  onChange={handleInputChange}
-                />
+                                type="text"
+                                className="form-control rounded-0"
+                                name="name"
+                                onChange={handleInputChange}
+                              />
                             </div>
                             <div className="mb-3">
-                              <label className="form-label">Your Email</label>
+                              <label className="form-label">Image</label>
                               <input
-                  type="file"
-                  className="form-control rounded-0"
-                  name="image"
-                  onChange={handleInputChange}
-                />
+                                type="file"
+                                className="form-control rounded-0"
+                                name="image"
+                                onChange={handleInputChange}
+                              />
                             </div>
                             <div className="mb-3">
                               <label className="form-label">Rating</label>
                               <select
-                  className="form-select rounded-0"
-                  name="rating"
-                  onChange={handleInputChange}
-                >
+                                className="form-select rounded-0"
+                                name="rating" onChange={handleInputChange}
+                              >
                                 <option selected>Choose Rating</option>
                                 <option value={1}>1</option>
                                 <option value={2}>2</option>
@@ -654,18 +664,18 @@ const ProductDetails = () => {
                                 Example textarea
                               </label>
                               <textarea
-                  className="form-control rounded-0"
-                  rows={3}
-                  name="review"
-                  onChange={handleInputChange}
-                />
+                                className="form-control rounded-0"
+                                rows={3}
+                                name="review"
+                                onChange={handleInputChange}
+                              />
                             </div>
                             <div className="d-grid">
-                            <button
-                  type="button"
-                  className="btn btn-dark btn-ecomm"
-                  onClick={handleSubmit}
-                >
+                              <button
+                                type="button"
+                                className="btn btn-dark btn-ecomm"
+                                onClick={handleSubmit}
+                              >
                                 Submit a Review
                               </button>
                             </div>
