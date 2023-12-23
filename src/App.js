@@ -32,14 +32,23 @@ import Checkoutcomplete from './Components/Pages/Checkout/Complete/Checkoutcompl
 import TermsConditions from './Components/Pages/TermsConditions/TermsConditions';
 import PrivacyPolicy from './Components/Pages/PrivacyPolicy/PrivacyPolicy';
 import 'react-toastify/dist/ReactToastify.css';
+import PopUp from './Components/Pages/Home/Pop-Up/PopUp';
+import { useState , useEffect } from 'react';
 
 function App() {
   const location = useLocation();
+  const [isPopupOpen, setPopupOpen] = useState(true);
+  
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
   return (
     <>
     <Topbar/>
     <Searchbar/>
     <Menubar/>
+    {isPopupOpen && <PopUp onClose={closePopup} />}
       <Routes>
         <Route path='*' element={<Home />} />
         <Route path='/about' element={<About />}/>

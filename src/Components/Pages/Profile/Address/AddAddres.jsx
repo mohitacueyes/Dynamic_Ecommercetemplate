@@ -259,7 +259,7 @@ function AddAddres() {
                                 {StateData &&
                                   StateData.map((v, index) => {
                                     return (
-                                      <option value={v.id} key={index.id}>
+                                      <option value={v.state_id} key={index.id}>
                                         {v.statename}
                                       </option>
                                     );
@@ -357,6 +357,3 @@ function AddAddres() {
 }
 
 export default AddAddres;
-
-
-// mayank hirpara
