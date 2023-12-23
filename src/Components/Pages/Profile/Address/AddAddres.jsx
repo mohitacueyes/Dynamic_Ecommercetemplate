@@ -107,6 +107,7 @@ function AddAddres() {
   }
   return (
     <>
+      
       <div className="page-wrapper">
         <div className="page-content">
           {/*start breadcrumb*/}
@@ -137,8 +138,6 @@ function AddAddres() {
               </div>
             </div>
           </section>
-          {/*end breadcrumb*/}
-          {/*start shop cart*/}
           <section className="py-4">
             <div className="container">
               <h3 className="d-none">Account</h3>
@@ -274,7 +273,6 @@ function AddAddres() {
                                       <option value={formData.country_id ? "" : ""}>
                                         --select --
                                       </option>
-
                                       {CountryData &&
                                         CountryData.map((v, index) => {
                                           return (
@@ -296,38 +294,6 @@ function AddAddres() {
                                     >
                                       <option value={formData.state_id ? "" : ""}>
                                         --select --
-
-                                    );
-                                  })}
-                              </select>
-                            </div>
-                            <div className="col-md-12">
-                              <label className="form-label">Land Mark</label>
-                              <input
-                                type="text"
-                                className="form-control"
-                                name="landmark"
-                                onChange={handleChange}
-                              />
-                            </div>
-
-                            <div className="col-md-12">
-                              <label className="form-label">State</label>
-                              <select
-                                name="state_id"
-                                id="templateId"
-                                class="form-control"
-                                onChange={(e) => handleChange(e)}
-                              >
-                                <option value={formData.state_id ? "" : ""}>
-                                  --select --
-                                </option>
-                                {StateData &&
-                                  StateData.map((v, index) => {
-                                    return (
-                                      <option value={v.state_id} key={index.id}>
-                                        {v.statename}
-
                                       </option>
                                       {StateData &&
                                         StateData.map((v, index) => {
@@ -354,7 +320,6 @@ function AddAddres() {
                                       <option value={formData.city_id ? "" : ""}>
                                         --select --
                                       </option>
-
                                       {CityData &&
                                         CityData.map((v, index) => {
                                           return (
@@ -375,57 +340,9 @@ function AddAddres() {
                                       onChange={handleChange}
                                     />
                                   </div>
+                                  
                                 </div>
-                                                   
-
-                                    );
-                                  })}
-                              </select>
-
-                            </div>
-                            <div className="col-md-12">
-                              <label className="form-label">Pincode</label>
-                              <input
-                                type="number"
-                                className="form-control"
-                                name="pincode"
-                                onChange={handleChange}
-                              />
-                            </div>
-                            <div className="col-md-12">
-                              <label className="form-label">Phone Number</label>
-                              <input
-                                type="tel"
-                                maxlength="10"
-                                className="form-control"
-                                name="mobile"
-                                onChange={handleChange}
-                              />
-                            </div>
-                            <div className="col-md-12">
-                              <label className="form-label">
-                                Alternate Number
-                              </label>
-                              <input
-                                type="tel"
-                                maxlength="10"
-                                className="form-control"
-                                name="alternate_mobile"
-                                onChange={handleChange}
-                              />
-                            </div>
-                            <div className="col-md-12">
-                              <label className="form-label">
-                                Street Address
-                              </label>
-                              <textarea
-                                type="text"
-                                className="form-control"
-                                name="address"
-                                onChange={handleChange}
-                              />
-                            </div>
-                            <div className="col-md-12">
+                                <div className="col-md-12">
                               
                               <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="type_id" id="inlineRadio1" value="1" onChange={handleChange} />
@@ -441,7 +358,7 @@ function AddAddres() {
                               </div>
 
                             </div>
-
+                                                   
                             <div className="col-12">
                               <button
                                 type="button"
@@ -461,8 +378,7 @@ function AddAddres() {
               </div>
             </div>
           </section>
-          {/*end shop cart*/}
-        </div>
+          </div>
       </div>
     </>
   );
