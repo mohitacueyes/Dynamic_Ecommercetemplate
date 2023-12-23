@@ -37,6 +37,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [productOptionImages, setProductOptionImages] = useState([]);
+  const [mainImage, setMainImage] = useState('');
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
   const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
@@ -85,11 +86,57 @@ const ProductDetails = () => {
     formDataToSend.append('review', formData.review);
     formDataToSend.append('image', formData.image);
 
+
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
         body: formDataToSend,
       });
+
+  const [value, setValue] = React.useState('cart');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  }
+  const [formData, setFormData] = useState({
+    product_id: id,
+    user_id: userId,
+    rating: "",
+    image: null,
+    review: "",
+  });
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+
+    fetch(`${process.env.REACT_APP_API}/api/addfeedback`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the API response here
+        console.log(data);
+        // You can perform further actions based on the API response
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        // Handle errors here
+      });
+  };
+
+
 
       if (response.ok) {
         const responseData = await response.json();
@@ -121,6 +168,7 @@ const ProductDetails = () => {
               link.product_options.map((option) => option.image)
             );
             setProductOptionImages(images || []);
+            setMainImage(images && images.length > 0 ? images[0] : ''); // Set default main image
           }
         }
       }
@@ -131,6 +179,16 @@ const ProductDetails = () => {
 
     fetchProductData();
   }, [id]);
+
+
+
+  // Function to handle click on color variant image
+  const handleColorVariantClick = (imageURL) => {
+    setSelectedImage(imageURL); // Update selectedImage state with the clicked color variant image
+  };
+
+
+
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
@@ -447,6 +505,7 @@ const ProductDetails = () => {
                           <dd className="col-sm-9">#{productData.sku}</dd>
                         </dl>
                         <div className="mt-3 align-items-center">
+
                           {/* <h1>{productData.name}</h1> */}
                           {productOptionImages && productOptionImages.length > 0 && (
                             <div>
@@ -468,6 +527,28 @@ const ProductDetails = () => {
                             </div>
                           )}
                         </div>
+
+        {/* Display main product image */}
+        {productOptionImages && productOptionImages.length > 0 && (
+          <div>
+            <h6>Product Option Images:</h6>
+            <div className="d-flex align-items-center gap-2">
+              {/* Display color variant images */}
+              {productOptionImages.map((image, index) => (
+              <img
+              key={index}
+              src={image}
+              alt={`Product Option ${index + 1}`}
+              className="border p-1"
+              style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
+              onClick={() => handleColorVariantClick(image)} // Click event to update main image
+            />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
                         <div class="row row-cols-auto align-items-center mt-3">
                           {/* <div class="col">
                             <label class="form-label">Quantity</label>
@@ -649,7 +730,12 @@ const ProductDetails = () => {
                               <label className="form-label">Rating</label>
                               <select
                                 className="form-select rounded-0"
+
                                 name="rating" onChange={handleInputChange}
+
+                                name="rating"
+                                onChange={handleInputChange}
+
                               >
                                 <option selected>Choose Rating</option>
                                 <option value={1}>1</option>
