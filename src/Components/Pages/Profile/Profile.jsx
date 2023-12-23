@@ -116,8 +116,7 @@ const Profile = () => {
                       <div className="col-lg-8">
                         <div className="card shadow-none mb-0">
                           <div className="card-body">
-                            <p>Hello <strong>{userData.full_name}</strong> (not <strong>{userData.full_name}?</strong>  <a onClick={handleLogout}>Logout</a>)</p>
-
+                            <p>Hello <strong>{userData.full_name}</strong> (not <strong>{userData.full_name}?</strong>  <span onClick={handleLogout} style={{ cursor: 'pointer', color: 'blue' }}>Logout</span>)</p>
                           </div>
                         </div>
                       </div>

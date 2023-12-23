@@ -176,6 +176,7 @@ const Address = ({ user_id }) => {
                             <div className="col-12 ">
                               {addresses.length > 0 ? (
                                 addresses.map((address) => (
+
                                   <div key={address.id} className="d-flex justify-content-between align-items-start">
                                     <div className="mb-3  ">
                                       <span className="h6">Name:-</span>{address.full_name}
@@ -221,6 +222,41 @@ const Address = ({ user_id }) => {
                                         Delete
                                       </button>
                                     </div>
+
+
+                                  <div key={address.id}>
+                                   <span className="h6">Name:- </span>{address.full_name}
+                                    <br />
+                                    <span className="h6">Address:- </span>{address.address}
+                                    <br />
+                                    <span className="h6">Lan mark:- </span>{address.landmark}
+                                    <br />
+                                    <span className="h6">City:- </span>{address.cityname} <br /><span className="h6">State:-</span>{address.statename}
+                                    <br />
+                                    <span className="h6">Country:- </span>{address.countryname}
+                                    <br />
+                                    <span className="h6">Pincode:- </span>{address.pincode}
+                                    <br />
+                                    <span className="h6">Address Type:- </span>{address.type_id}
+                                    <br />
+                                    
+                                    <button
+                                      type="button"
+                                      className="btn btn-dark btn-ecomm mt-3 me-3"
+                                      onClick={() => {
+                                        window.location.href = `/editaddress/${address.id}`;
+                                      }}
+                                    >
+                                      Edit
+                                    </button>
+                                    <button
+                                      type="button"
+                                      className="btn btn-danger btn-ecomm mt-3"
+                                      onClick={() => handleDeleteClick(address.id)}
+                                    >
+                                      Delete
+                                    </button>
+                                  
 
                                   </div>
 

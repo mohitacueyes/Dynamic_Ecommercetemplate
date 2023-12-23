@@ -49,8 +49,49 @@ const ProductDetails = () => {
   const xxl = useMediaQuery('(min-width:1400px)');
   const isMobile = xs || sm || md || lg || xl || xxl;
 
+  const [value, setValue] = React.useState('cart');
+  
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  }
+  const formatDate = (dateString) => {
+    const options = { year: "2-digit", month: "2-digit", day: "2-digit" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", options);
+  };
+  const [formData, setFormData] = useState({
+    product_id: id,
+    user_id: userId,
+    name: '',
+    image: null,
+    rating: '',
+    review: '',
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value, files } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: name === 'image' ? files[0] : value,
+    }));
+  };
+
+  const handleSubmit = async () => {
+    const apiUrl = `${process.env.REACT_APP_API}/api/addfeedback`; // Replace with your actual API endpoint
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('product_id',formData.product_id);
+    formDataToSend.append('user_id', formData.user_id);
+    formDataToSend.append('rating', formData.rating);
+    formDataToSend.append('review', formData.review);
+    formDataToSend.append('image', formData.image);
 
 
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: formDataToSend,
+      });
 
   const [value, setValue] = React.useState('cart');
 
@@ -95,6 +136,22 @@ const ProductDetails = () => {
       });
   };
 
+
+
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
+        // Handle success, maybe show a success message to the user
+      } else {
+        // Handle error, maybe show an error message to the user
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle network error
+    }
+  };
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -116,18 +173,29 @@ const ProductDetails = () => {
             setMainImage(images && images.length > 0 ? images[0] : ''); // Set default main image
           }
         }
-      } catch (error) {
+      }
+      catch (error) {
         console.error('Error fetching product details:', error);
       }
     };
 
     fetchProductData();
   }, [id]);
+
   const handleColorVariantClick = (variantId, slug) => {
     const productDetailsPath = `/productdetails/${variantId}/${slug}`;
     window.location.href = productDetailsPath;
+
+
+
+
+  // Function to handle click on color variant image
+  const handleColorVariantClick = (imageURL) => {
+    setSelectedImage(imageURL); // Update selectedImage state with the clicked color variant image
+
   };
   
+
 
 
   useEffect(() => {
@@ -155,10 +223,6 @@ const ProductDetails = () => {
       throw new Error('User is not logged in');
     }
   };
-
-
-
-
 
   // -------ADD TO CART --------//
   const addToCart = async (productId) => {
@@ -227,8 +291,8 @@ const ProductDetails = () => {
     }
   };
 
-
-
+ 
+  
 
   let imageWidth, imageHeight;
 
@@ -352,7 +416,6 @@ const ProductDetails = () => {
                               </div>
                             )}
                         </div>
-
                         <div className=" mt-3 thumbnailimage " >
                           <Carousel
                             additionalTransfrom={0}
@@ -450,6 +513,29 @@ const ProductDetails = () => {
                           <dd className="col-sm-9">#{productData.sku}</dd>
                         </dl>
                         <div className="mt-3 align-items-center">
+
+                          {/* <h1>{productData.name}</h1> */}
+                          {productOptionImages && productOptionImages.length > 0 && (
+                            <div>
+                              <h6>Product Option Images:</h6>
+                              <div className="d-flex align-items-center gap-2">
+                                {productOptionImages.map((image, index) => (
+                                  <Link to={`/productdetails/${productOptionImages[index].product_id}`}>
+                                    <img
+                                      key={index}
+                                      src={image}
+                                      alt={`Product Option ${index + 1}`}
+                                      className=" border p-1"
+                                      style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
+                                    />
+                                  </Link>
+
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
         {/* Display main product image */}
         {productOptionImages && productOptionImages.length > 0 && (
         <div>
@@ -470,8 +556,9 @@ const ProductDetails = () => {
         </div>
       )}
       </div>
+
                         <div class="row row-cols-auto align-items-center mt-3">
-                          <div class="col">
+                          {/* <div class="col">
                             <label class="form-label">Quantity</label>
                             <select class="form-select form-select-sm">
                               <option>1</option>
@@ -480,7 +567,7 @@ const ProductDetails = () => {
                               <option>4</option>
                               <option>5</option>
                             </select>
-                          </div>
+                          </div> */}
                           {/* <div class="col">
                             <label class="form-label">Size</label>
                             <select class="form-select form-select-sm">
@@ -589,7 +676,7 @@ const ProductDetails = () => {
                                   <div key={review.id} className="d-flex align-items-start">
                                     <div className="review-user">
                                       <img
-                                        src={review.image} // Assuming 'image' field in the API response contains the user's avatar URL
+                                        src={review.image}
                                         width={65}
                                         height={65}
                                         className="rounded-circle"
@@ -597,15 +684,22 @@ const ProductDetails = () => {
                                       />
                                     </div>
                                     <div className="review-content ms-3">
+                                    
+                                   
                                       <div className="rates cursor-pointer fs-6">
-                                        {/* Generating stars based on the 'rating' field in the API response */}
+                                      <div className="review-user">
+                                      <img
+                                        src={review.image}
+                                        width={100}
+                                        height={100}
+                                      />
+                                    </div>
                                         {Array.from({ length: review.rating }, (_, index) => (
                                           <i key={index} className="bx bxs-star text-warning" />
                                         ))}
                                       </div>
-                                      <div className="d-flex align-items-center mb-2">
-                                        <h6 className="mb-0">{review.user_id}</h6>
-                                        <p className="mb-0 ms-auto">{review.created_at}</p>
+                                      <div className=" align-items-center mb-2">
+                                        <p className="mb-0 ms-auto">{formatDate(review.created_at)}</p>
                                       </div>
                                       <p>{review.review}</p>
                                     </div>
@@ -621,6 +715,7 @@ const ProductDetails = () => {
                         <div className="add-review border">
                           <div className="form-body p-3">
                             <h4 className="mb-4">Write a Review</h4>
+                            
                             <div className="mb-3">
                               <label className="form-label">Your Name</label>
                               <input
@@ -631,7 +726,7 @@ const ProductDetails = () => {
                               />
                             </div>
                             <div className="mb-3">
-                              <label className="form-label">Your Email</label>
+                              <label className="form-label">Image</label>
                               <input
                                 type="file"
                                 className="form-control rounded-0"
@@ -643,8 +738,12 @@ const ProductDetails = () => {
                               <label className="form-label">Rating</label>
                               <select
                                 className="form-select rounded-0"
+
+                                name="rating" onChange={handleInputChange}
+
                                 name="rating"
                                 onChange={handleInputChange}
+
                               >
                                 <option selected>Choose Rating</option>
                                 <option value={1}>1</option>

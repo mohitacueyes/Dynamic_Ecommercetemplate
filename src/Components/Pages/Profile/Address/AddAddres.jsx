@@ -15,7 +15,7 @@ function AddAddres() {
   const [CityData, setCityData] = useState([]);
   const [formData, setFormData] = useState({
     user_id: user_id,
-    type_id: "1",
+    type_id: "",
     full_name: "",
     country_id: "",
     landmark: "",
@@ -274,6 +274,7 @@ function AddAddres() {
                                       <option value={formData.country_id ? "" : ""}>
                                         --select --
                                       </option>
+
                                       {CountryData &&
                                         CountryData.map((v, index) => {
                                           return (
@@ -295,6 +296,38 @@ function AddAddres() {
                                     >
                                       <option value={formData.state_id ? "" : ""}>
                                         --select --
+
+                                    );
+                                  })}
+                              </select>
+                            </div>
+                            <div className="col-md-12">
+                              <label className="form-label">Land Mark</label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                name="landmark"
+                                onChange={handleChange}
+                              />
+                            </div>
+
+                            <div className="col-md-12">
+                              <label className="form-label">State</label>
+                              <select
+                                name="state_id"
+                                id="templateId"
+                                class="form-control"
+                                onChange={(e) => handleChange(e)}
+                              >
+                                <option value={formData.state_id ? "" : ""}>
+                                  --select --
+                                </option>
+                                {StateData &&
+                                  StateData.map((v, index) => {
+                                    return (
+                                      <option value={v.state_id} key={index.id}>
+                                        {v.statename}
+
                                       </option>
                                       {StateData &&
                                         StateData.map((v, index) => {
@@ -321,6 +354,7 @@ function AddAddres() {
                                       <option value={formData.city_id ? "" : ""}>
                                         --select --
                                       </option>
+
                                       {CityData &&
                                         CityData.map((v, index) => {
                                           return (
@@ -343,6 +377,71 @@ function AddAddres() {
                                   </div>
                                 </div>
                                                    
+
+                                    );
+                                  })}
+                              </select>
+
+                            </div>
+                            <div className="col-md-12">
+                              <label className="form-label">Pincode</label>
+                              <input
+                                type="number"
+                                className="form-control"
+                                name="pincode"
+                                onChange={handleChange}
+                              />
+                            </div>
+                            <div className="col-md-12">
+                              <label className="form-label">Phone Number</label>
+                              <input
+                                type="tel"
+                                maxlength="10"
+                                className="form-control"
+                                name="mobile"
+                                onChange={handleChange}
+                              />
+                            </div>
+                            <div className="col-md-12">
+                              <label className="form-label">
+                                Alternate Number
+                              </label>
+                              <input
+                                type="tel"
+                                maxlength="10"
+                                className="form-control"
+                                name="alternate_mobile"
+                                onChange={handleChange}
+                              />
+                            </div>
+                            <div className="col-md-12">
+                              <label className="form-label">
+                                Street Address
+                              </label>
+                              <textarea
+                                type="text"
+                                className="form-control"
+                                name="address"
+                                onChange={handleChange}
+                              />
+                            </div>
+                            <div className="col-md-12">
+                              
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type_id" id="inlineRadio1" value="1" onChange={handleChange} />
+                                <label class="form-check-label" for="inlineRadio1">Home Address</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type_id" id="inlineRadio2" value="2" onChange={handleChange} />
+                                <label class="form-check-label" for="inlineRadio2">Office Address</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type_id" id="inlineRadio3" value="3" onChange={handleChange} />
+                                <label class="form-check-label" for="inlineRadio3">Other Address</label>
+                              </div>
+
+                            </div>
+
                             <div className="col-12">
                               <button
                                 type="button"
