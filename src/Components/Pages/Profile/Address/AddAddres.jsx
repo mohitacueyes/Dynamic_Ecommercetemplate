@@ -206,31 +206,97 @@ function AddAddres() {
                             </div> */}
                           <form className="row g-3">
                             <div className="col-md-12">
-                              <label className="form-label">Full Name</label>
+                              <label className="form-label mt-1">Full Name</label>
                               <input
                                 type="text"
                                 className="form-control"
                                 name="full_name"
                                 onChange={handleChange}
                               />
-                            </div>
-                            <div className="col-md-12">
-                              <label className="form-label">Country</label>
-                              <select
-                                name="country_id"
-                                id="templateId"
-                                class="form-control"
-                                onChange={(e) => handleChange(e)}
-                              >
-                                <option value={formData.country_id ? "" : ""}>
-                                  --select --
-                                </option>
-                                {CountryData &&
-                                  CountryData.map((v, index) => {
-                                    return (
-                                      <option value={v.id} key={index.id}>
-                                        {v.countryname}
+                            </div>                        
+                           <div className="d-flex gap-3 align-items-center">
+                           <div className="col-md-6">
+                                <label className="form-label ">Phone Number</label>
+                                <input
+                                  type="tel"
+                                  maxlength="10"
+                                  className="form-control"
+                                  name="mobile"
+                                  style={{ width: "95%" }}
+                                  onChange={handleChange}
+                                />
+                              </div>
+                              <div className="col-md-6">
+                                <label className="form-label">
+                                  Alternate Number
+                                </label>
+                                <input
+                                  type="tel"
+                                  maxlength="10"
+                                  className="form-control"
+                                  style={{ width: "95%" }}
+                                  name="alternate_mobile"
+                                  onChange={handleChange}
+                                />
+                               </div>
+                           </div>
+                                <div className="col-md-12">
+                                  <label className="form-label">
+                                    Street Address
+                                  </label>
+                                  <textarea
+                                    type="text"
+                                    className="form-control"
+                                    name="address"
+                                    onChange={handleChange}
+                                  />
+                                </div>
+                                <div className="col-md-12">
+                                  <label className="form-label">Land Mark</label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    name="landmark"
+                                    onChange={handleChange}
+                                  />
+                                </div>
+
+                                <div className="d-flex justify-content-between w-100 align-items-center gap-3">
+                                  <div className="col-md-6">
+                                    <label className="form-label">Country</label>
+                                    <select
+                                      name="country_id"
+                                      id="templateId"
+                                      class="form-control "
+                                      style={{ width: "95%" }}
+                                      onChange={(e) => handleChange(e)}
+                                    >
+                                      <option value={formData.country_id ? "" : ""}>
+                                        --select --
                                       </option>
+
+                                      {CountryData &&
+                                        CountryData.map((v, index) => {
+                                          return (
+                                            <option value={v.id} key={index.id}>
+                                              {v.countryname}
+                                            </option>
+                                          );
+                                        })}
+                                    </select>
+                                  </div>
+                                  <div className="col-md-6">
+                                    <label className="form-label">State</label>
+                                    <select
+                                      name="state_id"
+                                      id="templateId"
+                                      class="form-control"
+                                      style={{ width: "95%" }}
+                                      onChange={(e) => handleChange(e)}
+                                    >
+                                      <option value={formData.state_id ? "" : ""}>
+                                        --select --
+
                                     );
                                   })}
                               </select>
@@ -261,28 +327,57 @@ function AddAddres() {
                                     return (
                                       <option value={v.state_id} key={index.id}>
                                         {v.statename}
+
                                       </option>
-                                    );
-                                  })}
-                              </select>
-                            </div>
-                            <div className="col-md-12">
-                              <label className="form-label">City</label>
-                              <select
-                                name="city_id"
-                                id="templateId"
-                                class="form-control"
-                                onChange={(e) => handleChange(e)}
-                              >
-                                <option value={formData.city_id ? "" : ""}>
-                                  --select --
-                                </option>
-                                {CityData &&
-                                  CityData.map((v, index) => {
-                                    return (
-                                      <option value={v.id} key={index.id}>
-                                        {v.cityname}
+                                      {StateData &&
+                                        StateData.map((v, index) => {
+                                          return (
+                                            <option value={v.state_id} key={index.id}>
+                                              {v.statename}
+                                            </option>
+                                          );
+                                        })}
+                                    </select>
+                                  </div>
+
+                                </div>
+                                <div className="d-flex justify-content-between w-100 align-items-center gap-3">
+                                  <div className="col-md-6">
+                                    <label className="form-label">City</label>
+                                    <select
+                                      name="city_id"
+                                      id="templateId"
+                                      class="form-control"
+                                      style={{ width: "95%" }}
+                                      onChange={(e) => handleChange(e)}
+                                    >
+                                      <option value={formData.city_id ? "" : ""}>
+                                        --select --
                                       </option>
+
+                                      {CityData &&
+                                        CityData.map((v, index) => {
+                                          return (
+                                            <option value={v.id} key={index.id}>
+                                              {v.cityname}
+                                            </option>
+                                          );
+                                        })}
+                                    </select>
+                                  </div>
+                                  <div className="col-md-6">
+                                    <label className="form-label">Pincode</label>
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                      style={{ width: "95%" }}
+                                      name="pincode"
+                                      onChange={handleChange}
+                                    />
+                                  </div>
+                                </div>
+                                                   
+
                                     );
                                   })}
                               </select>
@@ -346,6 +441,7 @@ function AddAddres() {
                               </div>
 
                             </div>
+
                             <div className="col-12">
                               <button
                                 type="button"

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, } from "react";
 import axios from "axios";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate, Link} from "react-router-dom";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ReactImageMagnify from 'react-image-magnify';
@@ -138,6 +138,7 @@ const ProductDetails = () => {
 
 
 
+
       if (response.ok) {
         const responseData = await response.json();
         console.log(responseData);
@@ -150,6 +151,7 @@ const ProductDetails = () => {
       // Handle network error
     }
   };
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -167,7 +169,7 @@ const ProductDetails = () => {
             const images = productLinks.flatMap((link) =>
               link.product_options.map((option) => option.image)
             );
-            setProductOptionImages(images || []);
+            setProductOptionImages(productLinks || []);
             setMainImage(images && images.length > 0 ? images[0] : ''); // Set default main image
           }
         }
@@ -180,13 +182,19 @@ const ProductDetails = () => {
     fetchProductData();
   }, [id]);
 
+  const handleColorVariantClick = (variantId, slug) => {
+    const productDetailsPath = `/productdetails/${variantId}/${slug}`;
+    window.location.href = productDetailsPath;
+
+
 
 
   // Function to handle click on color variant image
   const handleColorVariantClick = (imageURL) => {
     setSelectedImage(imageURL); // Update selectedImage state with the clicked color variant image
-  };
 
+  };
+  
 
 
 
@@ -530,23 +538,23 @@ const ProductDetails = () => {
 
         {/* Display main product image */}
         {productOptionImages && productOptionImages.length > 0 && (
-          <div>
-            <h6>Product Option Images:</h6>
-            <div className="d-flex align-items-center gap-2">
-              {/* Display color variant images */}
-              {productOptionImages.map((image, index) => (
+        <div>
+          <h6>Product Option Images:</h6>
+          <div className="d-flex align-items-center gap-2">
+            {/* Display color variant images */}
+            {productOptionImages.map((link) => (
               <img
-              key={index}
-              src={image}
-              alt={`Product Option ${index + 1}`}
-              className="border p-1"
-              style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
-              onClick={() => handleColorVariantClick(image)} // Click event to update main image
-            />
-              ))}
-            </div>
+                key={link.product_link_id}
+                src={link.product_options[0].image} // Assuming the first image for simplicity
+                alt={`Product Option ${link.link_product_id}`}
+                className="border p-1"
+                style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
+                onClick={() => handleColorVariantClick(link.link_product_id)}
+              />
+            ))}
           </div>
-        )}
+        </div>
+      )}
       </div>
 
                         <div class="row row-cols-auto align-items-center mt-3">
