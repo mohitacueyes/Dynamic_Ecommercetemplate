@@ -37,6 +37,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [productOptionImages, setProductOptionImages] = useState([]);
+  const [mainImage, setMainImage] = useState('');
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
   const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
@@ -51,49 +52,49 @@ const ProductDetails = () => {
 
 
 
-    const [value, setValue] = React.useState('cart');
-  
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    }
-    const [formData, setFormData] = useState({
-      product_id: id,
-      user_id: userId,
-      rating: "",
-      image: null,
-      review: "",
-    });
-  
+  const [value, setValue] = React.useState('cart');
 
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    };
-  
-    const handleSubmit = () => {
-  
-      fetch(`${process.env.REACT_APP_API}/api/addfeedback`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  }
+  const [formData, setFormData] = useState({
+    product_id: id,
+    user_id: userId,
+    rating: "",
+    image: null,
+    review: "",
+  });
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+
+    fetch(`${process.env.REACT_APP_API}/api/addfeedback`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the API response here
+        console.log(data);
+        // You can perform further actions based on the API response
       })
-        .then((response) => response.json())
-        .then((data) => {
-          // Handle the API response here
-          console.log(data);
-          // You can perform further actions based on the API response
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          // Handle errors here
-        });
-    };
-  
+      .catch((error) => {
+        console.error('Error:', error);
+        // Handle errors here
+      });
+  };
+
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -113,6 +114,7 @@ const ProductDetails = () => {
               link.product_options.map((option) => option.image)
             );
             setProductOptionImages(images || []);
+            setMainImage(images && images.length > 0 ? images[0] : ''); // Set default main image
           }
         }
       } catch (error) {
@@ -122,6 +124,11 @@ const ProductDetails = () => {
 
     fetchProductData();
   }, [id]);
+
+  // Function to handle click on color variant image
+  const handleColorVariantClick = (imageURL) => {
+    setSelectedImage(imageURL); // Update selectedImage state with the clicked color variant image
+  };
 
 
 
@@ -380,7 +387,7 @@ const ProductDetails = () => {
                                   min: 0,
                                 },
                                 items: 4,
-                                
+
                               },
                               tablet: {
                                 breakpoint: {
@@ -396,13 +403,13 @@ const ProductDetails = () => {
                             swipeable
                           >
                             {productData.product_image.slice(0, 4).map((image, index) => (
-                                <img
-                                  src={image.image}
-                                  alt={`Thumbnail ${index}`}
-                                  onClick={() => setSelectedImage(image.image)}
-                                  className={"img-fluid cursor-pointer"}
-                                  style={{ maxWidth: `${thumbnailSize}px`, maxHeight: `${thumbnailSize}px` }}
-                                />
+                              <img
+                                src={image.image}
+                                alt={`Thumbnail ${index}`}
+                                onClick={() => setSelectedImage(image.image)}
+                                className={"img-fluid cursor-pointer"}
+                                style={{ maxWidth: `${thumbnailSize}px`, maxHeight: `${thumbnailSize}px` }}
+                              />
                             ))}
                           </Carousel>
                         </div>
@@ -445,26 +452,26 @@ const ProductDetails = () => {
                           <dd className="col-sm-9">#{productData.sku}</dd>
                         </dl>
                         <div className="mt-3 align-items-center">
-                          {/* <h1>{productData.name}</h1> */}
-                          {productOptionImages && productOptionImages.length > 0 && (
-                            <div>
-                              <h6>Product Option Images:</h6>
-                              <div className="d-flex align-items-center gap-2">
-                                {productOptionImages.map((image, index) => (
-                                  <Link to={`/productdetails/${productData.id}`}>
-                                    <img
-                                      key={index}
-                                      src={image}
-                                      alt={`Product Option ${index + 1}`}
-                                      className=" border p-1"
-                                      style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
-                                    />
-                                    </Link>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
+        {/* Display main product image */}
+        {productOptionImages && productOptionImages.length > 0 && (
+          <div>
+            <h6>Product Option Images:</h6>
+            <div className="d-flex align-items-center gap-2">
+              {/* Display color variant images */}
+              {productOptionImages.map((image, index) => (
+              <img
+              key={index}
+              src={image}
+              alt={`Product Option ${index + 1}`}
+              className="border p-1"
+              style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
+              onClick={() => handleColorVariantClick(image)} // Click event to update main image
+            />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
                         <div class="row row-cols-auto align-items-center mt-3">
                           <div class="col">
                             <label class="form-label">Quantity</label>
@@ -619,28 +626,28 @@ const ProductDetails = () => {
                             <div className="mb-3">
                               <label className="form-label">Your Name</label>
                               <input
-                  type="text"
-                  className="form-control rounded-0"
-                  name="name"
-                  onChange={handleInputChange}
-                />
+                                type="text"
+                                className="form-control rounded-0"
+                                name="name"
+                                onChange={handleInputChange}
+                              />
                             </div>
                             <div className="mb-3">
                               <label className="form-label">Your Email</label>
                               <input
-                  type="file"
-                  className="form-control rounded-0"
-                  name="image"
-                  onChange={handleInputChange}
-                />
+                                type="file"
+                                className="form-control rounded-0"
+                                name="image"
+                                onChange={handleInputChange}
+                              />
                             </div>
                             <div className="mb-3">
                               <label className="form-label">Rating</label>
                               <select
-                  className="form-select rounded-0"
-                  name="rating"
-                  onChange={handleInputChange}
-                >
+                                className="form-select rounded-0"
+                                name="rating"
+                                onChange={handleInputChange}
+                              >
                                 <option selected>Choose Rating</option>
                                 <option value={1}>1</option>
                                 <option value={2}>2</option>
@@ -654,18 +661,18 @@ const ProductDetails = () => {
                                 Example textarea
                               </label>
                               <textarea
-                  className="form-control rounded-0"
-                  rows={3}
-                  name="review"
-                  onChange={handleInputChange}
-                />
+                                className="form-control rounded-0"
+                                rows={3}
+                                name="review"
+                                onChange={handleInputChange}
+                              />
                             </div>
                             <div className="d-grid">
-                            <button
-                  type="button"
-                  className="btn btn-dark btn-ecomm"
-                  onClick={handleSubmit}
-                >
+                              <button
+                                type="button"
+                                className="btn btn-dark btn-ecomm"
+                                onClick={handleSubmit}
+                              >
                                 Submit a Review
                               </button>
                             </div>
