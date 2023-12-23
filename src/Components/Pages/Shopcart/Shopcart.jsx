@@ -1,20 +1,59 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
-
-
 import axios from "axios";
-import ProductBottomNavigation from "../../Layout/Footer/ProductBottomNavigation/ProductBottomNavigation";
 function Shopcart() {
   const [cartItems, setCartItems] = useState([]);
   const user_id = localStorage.getItem("userId");
   const [country, setCountry] = useState([]);
   const [state, setstate] = useState([]);
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
-
-
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+
+
+  const handleQuantityChange = async (cartId, newQuantity) => {
+    const apiUrl = `${process.env.REACT_APP_API}/api/update-cartqty/${cartId}`; // Replace with your actual API endpoint
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          qty: newQuantity,
+          cart_id: cartId,
+        }),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        if (responseData.ResponseCode === 1) {
+          // Quantity updated successfully, update the local state
+          setCartItems((prevCartItems) =>
+            prevCartItems.map((item) =>
+              item.cart_id === cartId ? { ...item, quantity: newQuantity } : item
+            )
+          );
+        } else {
+          // Handle error response from the API
+          console.error('Error updating quantity:', responseData.ResponseText);
+        }
+      } else {
+        // Handle non-OK response from the API
+        console.error('Error updating quantity. HTTP status:', response.status);
+      }
+    } catch (error) {
+      console.error('Error updating quantity:', error);
+    }
+  };
+
+
+
+
+
   useEffect(() => {
 
     const userId = localStorage.getItem('userId');
@@ -233,9 +272,12 @@ const imageHeight = 600;
                               <input
                                 type="number"
                                 className="form-control rounded-0"
-                                defaultValue={1}
+                                value={item.qty}
                                 min={1}
                                 style={{ maxWidth: "80px" }}
+                                onChange={(e) =>
+                                  handleQuantityChange(item.cart_id, e.target.value)
+                                }
                               />
                             </div>
                           </div>
@@ -252,10 +294,8 @@ const imageHeight = 600;
                                   Remove
                                 </a>
                                 <a
-
                                     onClick={() => addToLikes(item.id)}
                                   className="btn-facebook btn-ecomm"
-
                                 >
                                   <i className="bx bx-heart me-0 Heart"  />
                                 </a>
@@ -350,7 +390,7 @@ const imageHeight = 600;
                             <span className="float-end">
                               ₹
                               {cartItems.reduce(
-                                (acc, item) => acc + item.discounted_price,
+                                (acc, item) => acc +item.qty * item.discounted_price,
                                 0
                               )}
                             </span>
@@ -370,7 +410,7 @@ const imageHeight = 600;
                             <span className="float-end">
                               ₹
                               {cartItems.reduce(
-                                (acc, item) => acc + item.discounted_price,
+                                (acc, item) => acc +item.qty * item.discounted_price,
                                 0
                               )}
                             </span>

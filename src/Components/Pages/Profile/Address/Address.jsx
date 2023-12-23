@@ -177,18 +177,21 @@ const Address = ({ user_id }) => {
                               {addresses.length > 0 ? (
                                 addresses.map((address) => (
                                   <div key={address.id}>
-                                   <span className="h6">Name:-</span>{address.full_name}
+                                   <span className="h6">Name:- </span>{address.full_name}
                                     <br />
-                                    <span className="h6">Address:-</span>{address.address}
+                                    <span className="h6">Address:- </span>{address.address}
                                     <br />
-                                    <span className="h6">Lan mark:-</span>{address.landmark}
+                                    <span className="h6">Lan mark:- </span>{address.landmark}
                                     <br />
-                                    <span className="h6">City:-</span>{address.city_id} <br /><span className="h6">State:-</span>{address.state_id}
+                                    <span className="h6">City:- </span>{address.cityname} <br /><span className="h6">State:-</span>{address.statename}
                                     <br />
-                                    <span className="h6">Pincode:-</span>{address.pincode}
+                                    <span className="h6">Country:- </span>{address.countryname}
                                     <br />
-                                    <span className="h6">Country:-</span>{address.country_id}
+                                    <span className="h6">Pincode:- </span>{address.pincode}
                                     <br />
+                                    <span className="h6">Address Type:- </span>{address.type_id}
+                                    <br />
+                                    
                                     <button
                                       type="button"
                                       className="btn btn-dark btn-ecomm mt-3 me-3"
