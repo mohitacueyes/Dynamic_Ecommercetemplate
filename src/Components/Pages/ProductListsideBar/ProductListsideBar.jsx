@@ -1176,7 +1176,7 @@ const ProductListsideBar = () => {
                     >
                       <ul className="pagination">
                         <li className="page-item">
-                          <a className="page-link" href="javascript:;">
+                          <a className="page-link" href="">
                             <i className="bx bx-chevron-left" /> Prev
                           </a>
                         </li>
