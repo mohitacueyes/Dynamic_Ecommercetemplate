@@ -40,20 +40,16 @@ const PaymentDetail = () => {
   }, []);
   console.log(cartItems);
   function handleLogout() {
-    // Clear user session data from local storage
     localStorage.removeItem('userId');
-    // Redirect the user to the login page or any other page you prefer
-    window.location.href = '/login'; // Replace '/login' with the URL of your login page
+    window.location.href = '/login'; 
   }
 
 
   
   return (
    <>
-  {/*start page wrapper */}
 <div className="page-wrapper">
   <div className="page-content">
-    {/*start breadcrumb*/}
     <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
       <div className="container">
         <div className="page-breadcrumb d-flex align-items-center">
@@ -72,8 +68,6 @@ const PaymentDetail = () => {
         </div>
       </div>
     </section>
-    {/*end breadcrumb*/}
-    {/*start shop cart*/}
     <section className="py-4">
       <div className="container">
         <h3 className="d-none">Account</h3>
@@ -86,9 +80,7 @@ const PaymentDetail = () => {
                     <div className="list-group list-group-flush">	
                     <a href="/profile" className="list-group-item  d-flex justify-content-between align-items-center bg-transparent">Dashboard <i className="bx bx-tachometer fs-5" /></a>
                       <a href="/order" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Orders <i className="bx bx-cart-alt fs-5" /></a>
-                      {/* <a href="/downloadprofile" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Downloads <i className="bx bx-download fs-5" /></a> */}
                       <a href="/address" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Addresses <i className="bx bx-home-smile fs-5" /></a>
-                      {/* <a href="/addaddress" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Add-Addresses <i className="bx bx-home-smile fs-5" /></a> */}
                       <a href="/paymentdetail" className="list-group-item active d-flex justify-content-between align-items-center ">Payment Methods <i className="bx bx-credit-card fs-5" /></a>
                       <a href="/accountdetails" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Account Details <i className="bx bx-user-circle fs-5" /></a>
                       <a href="#" className="list-group-item d-flex justify-content-between align-items-center bg-transparent" onClick={handleLogout}>Logout <i className="bx bx-log-out fs-5" /></a>
@@ -126,16 +118,12 @@ const PaymentDetail = () => {
                 </div>
               </div>
             </div>
-            {/*end row*/}
           </div>
         </div>
       </div>
     </section>
-    {/*end shop cart*/}
   </div>
 </div>
-{/*end page wrapper */}
-
    </>
   )
 }

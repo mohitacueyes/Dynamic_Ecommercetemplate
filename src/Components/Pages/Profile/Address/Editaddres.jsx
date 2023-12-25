@@ -1,4 +1,4 @@
-import React , { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 function Editaddres() {
@@ -27,22 +27,18 @@ function Editaddres() {
     address: "",
   });
 
-  // Function to handle form submission
   function handleSaveAddress() {
     axios
       .post(`${process.env.REACT_APP_API}/api/address-update/${addresid}`, formData)
       .then((response) => {
         console.log("Address Updated Successfully:", response.data);
         navigate("/address");
-        // Handle success (e.g., show a success message)
       })
       .catch((error) => {
         console.error("Error updating address:", error);
-        // Handle error (e.g., show an error message)
       });
   }
 
-  // Function to handle form input changes
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData({
@@ -51,30 +47,6 @@ function Editaddres() {
     });
   }
 
-  // Fetch existing address data when component mounts
-//   useEffect(() => {
-//     axios
-//       .post(`https://ecom.iconixitsolution.com/api/address-update/${addresid}`)
-//       .then((response) => {
-//         const addressData = response.data.ResponseData[0]; // Assuming you want the first address in the response
-//         setFormData({
-//           user_id: addressData.user_id,
-//           type_id: addressData.type_id,
-//           country_id: addressData.country_id,
-//           state_id: addressData.state_id,
-//           city_id: addressData.city_id,
-//           full_name: addressData.full_name,
-//           landmark: addressData.landmark,
-//           pincode: addressData.pincode,
-//           mobile: addressData.mobile,
-//           alternate_mobile: addressData.alternate_mobile,
-//           address: addressData.address,
-//         });
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching address data:", error);
-//       });
-//   }, [addresid]);
   return (
     <>
       <div className="page-wrapper">
@@ -128,12 +100,6 @@ function Editaddres() {
                             >
                               Orders <i className="bx bx-cart-alt fs-5" />
                             </a>
-                            {/* <a
-                              href="/downloadprofile"
-                              className="list-group-item d-flex justify-content-between align-items-center bg-transparent"
-                            >
-                              Downloads <i className="bx bx-download fs-5" />
-                            </a> */}
                             <a
                               href="/address"
                               className="list-group-item active d-flex justify-content-between align-items-center "

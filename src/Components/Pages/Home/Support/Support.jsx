@@ -3,7 +3,6 @@ import React from 'react'
 const Support = () => {
   return (
    <>
-    {/*start support info*/}
     <section className="py-5 bg-light">
       <div className="container">
         <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
@@ -44,10 +43,8 @@ const Support = () => {
             </div>
           </div>
         </div>
-        {/*end row*/}
       </div>
     </section>
-    {/*end support info*/}
    </>
   )
 }

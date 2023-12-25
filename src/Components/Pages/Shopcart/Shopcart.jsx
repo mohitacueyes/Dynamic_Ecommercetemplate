@@ -14,7 +14,7 @@ function Shopcart() {
 
 
   const handleQuantityChange = async (cartId, newQuantity) => {
-    const apiUrl = `${process.env.REACT_APP_API}/api/update-cartqty/${cartId}`; // Replace with your actual API endpoint
+    const apiUrl = `${process.env.REACT_APP_API}/api/update-cartqty/${cartId}`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -31,18 +31,15 @@ function Shopcart() {
       if (response.ok) {
         const responseData = await response.json();
         if (responseData.ResponseCode === 1) {
-          // Quantity updated successfully, update the local state
           setCartItems((prevCartItems) =>
             prevCartItems.map((item) =>
               item.cart_id === cartId ? { ...item, quantity: newQuantity } : item
             )
           );
         } else {
-          // Handle error response from the API
           console.error('Error updating quantity:', responseData.ResponseText);
         }
       } else {
-        // Handle non-OK response from the API
         console.error('Error updating quantity. HTTP status:', response.status);
       }
     } catch (error) {
@@ -50,15 +47,8 @@ function Shopcart() {
     }
   };
 
-
-
-
-
   useEffect(() => {
-
     const userId = localStorage.getItem('userId');
-
-    // Check if user ID exists
     if (!userId) {
       window.location.href = '/login';
       return;
@@ -99,30 +89,28 @@ function Shopcart() {
 
     fetchCartData();
   }, []);
-  // console.log(cartItems);
 
   //-----DELETE CART ITEMS-----//
   const [response, setResponse] = useState(null);
 
   const handleDeleteClick = async (cart_id) => {
-    const apiUrl = `${process.env.REACT_APP_API}/api/delete`; 
-  
+    const apiUrl = `${process.env.REACT_APP_API}/api/delete`;
+
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-         cart_id: cart_id,
-       }),
+        body: JSON.stringify({
+          cart_id: cart_id,
+        }),
       });
-  
+
       const data = await response.json();
-  
+
       if (data.ResponseCode === 1) {
         setResponse(data.ResponseText);
-        // Update addresses state after successful deletion
         setCartItems(prevAddresses => prevAddresses.filter(favorites => favorites.cart_id !== cart_id));
         toast.success(data.ResponseText);
       } else {
@@ -133,7 +121,7 @@ function Shopcart() {
       setResponse('Error deleting favorites');
     }
   };
-   //--------------------------//
+  //--------------------------//
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -144,11 +132,11 @@ function Shopcart() {
       } catch (error) {
         console.error("Error fetching countries:", error);
       }
-      
+
     };
-    
+
     fetchData();
-  },[]);
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -159,46 +147,45 @@ function Shopcart() {
       } catch (error) {
         console.error("Error fetching countries:", error);
       }
-      
+
     };
-    
+
     fetchData();
-  },[]);
- // -------ADD TO LIKES --------//
- const addToLikes = async (productId) => {
-  try {
-    const response = await fetch(
-      `${process.env.REACT_APP_API}/api/add-favorites`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: userId,
-          user_id: userId,
-          product_id: productId,
-          favorites: "1",
-        }),
-      }
-    );
-    console.log(response);
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error("Error adding to likes:", error);
-    
-  }
-};
-const imageWidth = 500; // Set your desired width
-const imageHeight = 600;
+  }, []);
+  // -------ADD TO LIKES --------//
+  const addToLikes = async (productId) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API}/api/add-favorites`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: userId,
+            user_id: userId,
+            product_id: productId,
+            favorites: "1",
+          }),
+        }
+      );
+      console.log(response);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error adding to likes:", error);
+
+    }
+  };
+  const imageWidth = 500;
+  const imageHeight = 600;
   return (
     <>
       <div className="page-wrapper">
         <div className="page-content">
-          {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
-          <Container fluid className="pe-lg-5 ps-lg-5">
+            <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="page-breadcrumb d-flex align-items-center">
                 <h3 className="breadcrumb-title pe-3">Shop Cart</h3>
                 <div className="ms-auto">
@@ -224,10 +211,8 @@ const imageHeight = 600;
               </div>
             </Container>
           </section>
-          {/*end breadcrumb*/}
-          {/*start shop cart*/}
           <section className="py-4">
-          <Container fluid className="pe-lg-5 ps-lg-5">
+            <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="shop-cart">
                 <div className="row">
                   <div className="col-12 col-xl-8">
@@ -237,10 +222,10 @@ const imageHeight = 600;
                           <div className=" col-sm-6 col-lg-6 col-xl-6 col-xxl-6 ">
                             <div className="d-flex flex-row align-items-start gap-3">
                               <div className="cart-imggg text-sm-start  text-xl-start">
-                              <img
+                                <img
                                   src={item.imageLink}
-                                  className="rounded-3 " 
-                                  style={{ objectFit: "cover"}}
+                                  className="rounded-3 "
+                                  style={{ objectFit: "cover" }}
                                   alt
                                 />
                               </div>
@@ -254,7 +239,6 @@ const imageHeight = 600;
                                 <p className="mb-2">
                                   Color: <span>White &amp; Blue</span>
                                 </p>
-                                {/* <h5 className="mb-0">${item.discounted_price}</h5> */}
                                 <div className="d-flex align-items-center  mt-3 gap-2">
                                   <h6 className="mb-0 text-decoration-line-through text-light-3 text-secondary">
 
@@ -287,17 +271,17 @@ const imageHeight = 600;
                               <div className="d-flex gap-3 justify-content-lg-end align-items-sm-center">
 
                                 <a
-                                 onClick={() => handleDeleteClick(item.cart_id)}
+                                  onClick={() => handleDeleteClick(item.cart_id)}
                                   className="btn btn-outline-dark rounded-0 btn-ecomm Removebtn"
                                 >
                                   <i className="bx bx-x d-md-none d-sm-none" />
                                   Remove
                                 </a>
                                 <a
-                                    onClick={() => addToLikes(item.id)}
+                                  onClick={() => addToLikes(item.id)}
                                   className="btn-facebook btn-ecomm"
                                 >
-                                  <i className="bx bx-heart me-0 Heart"  />
+                                  <i className="bx bx-heart me-0 Heart" />
                                 </a>
                               </div>
                             </div>
@@ -390,7 +374,7 @@ const imageHeight = 600;
                             <span className="float-end">
                               ₹
                               {cartItems.reduce(
-                                (acc, item) => acc +item.qty * item.discounted_price,
+                                (acc, item) => acc + item.qty * item.discounted_price,
                                 0
                               )}
                             </span>
@@ -410,7 +394,7 @@ const imageHeight = 600;
                             <span className="float-end">
                               ₹
                               {cartItems.reduce(
-                                (acc, item) => acc +item.qty * item.discounted_price,
+                                (acc, item) => acc + item.qty * item.discounted_price,
                                 0
                               )}
                             </span>
@@ -430,21 +414,14 @@ const imageHeight = 600;
                     </div>
                   </div>
                 </div>
-                {/*end row*/}
               </div>
             </Container>
           </section>
-          {/*end shop cart*/}
         </div>
       </div>
       <ToastContainer />
-{/* <ProductBottomNavigation/> */}
     </>
   );
 }
 
 export default Shopcart;
-
-
-
-// krunal files

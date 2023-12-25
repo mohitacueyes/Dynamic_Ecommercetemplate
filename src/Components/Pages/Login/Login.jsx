@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { GoogleLogin } from '@react-oauth/google';
 import { useGoogleLogin } from "@react-oauth/google";
 import FacebookLogin from 'react-facebook-login';
 import { Container } from "react-bootstrap";
@@ -20,12 +19,9 @@ const Login = () => {
 //--------------facebook---------------//
 const responseFacebook = (response) => {
   console.log("Facebook Sign-In response:", response);
-
   if (response && response.accessToken) {
     console.log("Facebook Sign-In successful!");
     console.log("User details:", response);
-
-    // Handle the user profile data here as needed
   } else {
     console.error("Facebook Sign-In failed or insufficient data received.");
   }
@@ -39,7 +35,6 @@ const responseFacebook = (response) => {
 
     try {
       const response = await fetch(`${process.env.REACT_APP_API}/api/login`, {
-        // 'https://ecom.iconixitsolution.com/api/login'
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +57,6 @@ const responseFacebook = (response) => {
         setAuthToken(data.ResponseData.token);
         localStorage.setItem("userId", userId);
         console.log("Login successful");
-        // navigate('/');
         window.location.href = "/";
       } else {
         setError("Invalid credentials. Please try again.");
@@ -84,13 +78,10 @@ const responseFacebook = (response) => {
       console.log("Google Sign-In successful!");
       console.log("User details:", response.profileObj);
 
-      // Handle the user profile data here as needed
     } else {
       console.error("Google Sign-In failed or insufficient data received.");
     }
   };
-
-
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -98,11 +89,8 @@ const responseFacebook = (response) => {
 
   return (
     <>
-      {/*start page wrapper */}
-
       <div className="page-wrapper">
         <div className="page-content">
-          {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
           <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="page-breadcrumb d-flex align-items-center">
@@ -130,8 +118,6 @@ const responseFacebook = (response) => {
               </div>
             </Container>
           </section>
-          {/*end breadcrumb*/}
-          {/*start shop cart*/}
           <section className>
             <div className="container">
               <div className="section-authentication-signin d-flex align-items-center justify-content-center my-5">
@@ -147,7 +133,7 @@ const responseFacebook = (response) => {
                               <a href="/register">Sign up here</a>
                             </p>
                           </div>
-                          <div className="d-grid">
+                          {/* <div className="d-grid">
                             <button
                               onClick={() => login()}
                               className="btn btn-transparent"
@@ -161,7 +147,7 @@ const responseFacebook = (response) => {
                               <i className="bx bxl-facebook" />
                               Sign in with Facebook
                             </a>
-                          </div>
+                          </div> */}
                           <div className="login-separater text-center mb-4">
                             {" "}
                             <span>OR SIGN IN WITH EMAIL</span>
@@ -206,11 +192,9 @@ const responseFacebook = (response) => {
                                     required
                                     className="form-control border-end-0"
                                     id="inputChoosePassword"
-                                    // defaultValue={12345678}
                                     placeholder="Enter Password"
                                   />
                                   <a
-                                    // href="javascript:;"
                                     className="input-group-text bg-transparent"
                                     onClick={togglePasswordVisibility}
                                   >
@@ -259,14 +243,11 @@ const responseFacebook = (response) => {
                     </div>
                   </div>
                 </div>
-                {/*end row*/}
               </div>
             </div>
           </section>
-          {/*end shop cart*/}
         </div>
       </div>
-      {/*end page wrapper */}
     </>
   );
 };

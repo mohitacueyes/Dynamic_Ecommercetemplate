@@ -3,7 +3,6 @@ import React from 'react'
 const ProductSection = () => {
   return (
     <>
-     {/*start bottom products section*/}
      <section className="py-4 border-top">
       <div className="container">
         <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4">
@@ -332,10 +331,8 @@ const ProductSection = () => {
             </div>
           </div>
         </div>
-        {/*end row*/}
       </div>
     </section>
-    {/*end bottom products section*/}
     </>
   )
 }

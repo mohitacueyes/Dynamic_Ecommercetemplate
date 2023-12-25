@@ -43,10 +43,8 @@ function Checkoutshipping() {
   return (
     <>
       <div>
-        {/*start page wrapper */}
         <div className="page-wrapper">
           <div className="page-content">
-            {/*start breadcrumb*/}
             <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
               <Container fluid className="pe-lg-5 ps-lg-5">
                 <div className="page-breadcrumb d-flex align-items-center">
@@ -66,8 +64,6 @@ function Checkoutshipping() {
               </Container>
 
             </section>
-            {/*end breadcrumb*/}
-            {/*start shop cart*/}
             <section className="py-4">
               <Container fluid className="pe-lg-5 ps-lg-5">
                 <div className="shop-cart">
@@ -85,7 +81,7 @@ function Checkoutshipping() {
                               <a className="step-item active" href="/details">
                                 <div className="step-progress"><span className="step-count">2</span>
                                 </div>
-                                <div className="step-label"><i className="bx bx-user-circle" />Details</div>
+                                <div className="step-label"><i class="bx bx-map" />Address</div>
                               </a>
                               <a className="step-item active current" href="/shoppingcart">
                                 <div className="step-progress"><span className="step-count">3</span>
@@ -107,7 +103,7 @@ function Checkoutshipping() {
                         </div>
                         <div className="card rounded-0 shadow-none">
                           <div className="card-body">
-                            <h2 className="h5 mb-0">Choose Shipping Method</h2>
+                            <h2 className="h5 mb-0"> Shipping Method</h2>
                             <div className="my-3 border-bottom" />
                             <div className="table-responsive">
                               <table className="table">
@@ -136,7 +132,7 @@ function Checkoutshipping() {
                             <div className="row">
                               <div className="col-md-6">
                                 <div className="d-grid">
-                                  <a href="/details" className="btn btn-light btn-ecomm"><i className="bx bx-chevron-left" />Back to Details</a>
+                                  <a href="/details" className="btn btn-light btn-ecomm"><i className="bx bx-chevron-left" />Back to Address</a>
                                 </div>
                               </div>
                               <div className="col-md-6">
@@ -207,16 +203,12 @@ function Checkoutshipping() {
                       </div>
                     </div>
                   </div>
-                  {/*end row*/}
                 </div>
               </Container>
             </section>
-            {/*end shop cart*/}
           </div>
         </div>
-        {/*end page wrapper */}
       </div>
-
     </>
   )
 }

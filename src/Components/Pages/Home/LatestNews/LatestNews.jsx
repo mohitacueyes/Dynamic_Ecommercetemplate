@@ -5,7 +5,6 @@ const LatestNews = () => {
 
   return (
    <>
-   {/*start News*/}
    <section className="py-4">
       <div className="container">
         <div className="pb-4 text-center">
@@ -149,7 +148,6 @@ const LatestNews = () => {
         </div>
       </div>
     </section>
-    {/*end News*/}
    </>
   )
 }

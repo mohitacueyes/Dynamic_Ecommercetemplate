@@ -6,7 +6,6 @@ function Wishlist() {
   const [wishlistData, setWishlistData] = useState([]);
   const user_id = localStorage.getItem("userId");
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
-
   useEffect(() => {
     if (!userId) {
       window.location.href = '/login';
@@ -23,83 +22,67 @@ function Wishlist() {
         console.error("Error fetching wishlist data:", error);
       }
     };
-
     fetchWishlistData();
   }, [user_id]);
-
   // -------ADD TO CART --------//
-const addToCart = async (productId) => {
-  try {
-    const response = await fetch(`${process.env.REACT_APP_API}/api/add-cart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+  const addToCart = async (productId) => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API}/api/add-cart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
 
-        id: userId,
-        user_id: userId,
-        product_id: productId,
-        qty: "1",
-        price: "1",
-        save_for_later: "0",
-      }),
-      
-    });
-console.log(response);
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error("Error adding to cart:", error);
-  }
-};
-
- //-----DELETE favorites-----//
- const [response, setResponse] = useState(null);
-
- const handleDeleteClick = async (id ,productId) => {
-   const apiUrl = `${process.env.REACT_APP_API}/api/favorites-remove/${id}`; 
-
-   try {
-     const response = await fetch(apiUrl, {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({ 
-        user_id:user_id,
-        product_id:productId,
-        favorites:"2"
-
-        
-      
-      }),
-     });
-
-     const data = await response.json();
-
-     if (data.ResponseCode === 1) {
-       setResponse(data.ResponseText);
-       // Update addresses state after successful deletion
-       setWishlistData(prevAddresses => prevAddresses.filter(favorites => favorites.id !== id));
-     } else {
-       setResponse('Error deleting favorites');
-     }
-   } catch (error) {
-     console.error('Error:', error);
-     setResponse('Error deleting favorites');
-   }
- };
-
-
+          id: userId,
+          user_id: userId,
+          product_id: productId,
+          qty: "1",
+          price: "1",
+          save_for_later: "0",
+        }),
+      });
+      console.log(response);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  };
+  //-----DELETE favorites-----//
+  const [response, setResponse] = useState(null);
+  const handleDeleteClick = async (id, productId) => {
+    const apiUrl = `${process.env.REACT_APP_API}/api/favorites-remove/${id}`;
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_id: user_id,
+          product_id: productId,
+          favorites: "2"
+        }),
+      });
+      const data = await response.json();
+      if (data.ResponseCode === 1) {
+        setResponse(data.ResponseText);
+        setWishlistData(prevAddresses => prevAddresses.filter(favorites => favorites.id !== id));
+      } else {
+        setResponse('Error deleting favorites');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setResponse('Error deleting favorites');
+    }
+  };
   return (
     <>
-      {/*start page wrapper */}
       <div className="page-wrapper">
         <div className="page-content">
-          {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
-          <Container fluid className="pe-lg-5 ps-lg-5">
+            <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="page-breadcrumb d-flex align-items-center">
                 <h3 className="breadcrumb-title pe-3">Wishlist Grid</h3>
                 <div className="ms-auto">
@@ -123,12 +106,10 @@ console.log(response);
                   </nav>
                 </div>
               </div>
-           </Container>
+            </Container>
           </section>
-          {/*end breadcrumb*/}
-          {/*start Featured product*/}
           <section className="py-4">
-           <Container fluid className="pe-lg-5 ps-lg-5">
+            <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="product-grid">
                 <div className="row  row-cols-2 row-cols-md-3 row-cols-lg-3  row-cols-xl-4 row-cols-xxl-5 g-4">
                   {wishlistData.map((item) => (
@@ -137,40 +118,30 @@ console.log(response);
                         <div className="">
                           <a>
                             <Link to={`/productdetails/${item.product_id}/${item.slug}`}>
-                            <img
-                              src={item.image}              
-                              className="card-img-top img-fluid" 
-                              style={{ height: "393.75px" , width: "393.75px" }} 
+                              <img
+                                src={item.image}
+                                className="card-img-top img-fluid"
+                                style={{ height: "393.75px", width: "393.75px" }}
                                 alt="..."
-                            />
+                              />
                             </Link>
                           </a>
                         </div>
                         <div className="card-body">
                           <div className="product-info">
-                            <a href="">
-                              <h6 className="product-name mb-2">
-                                {item.name.substring(0, 16)}...
-                              </h6>
-                            </a>
+                            <h6 className="product-name mb-2">
+                              {item.name.substring(0, 16)}...
+                            </h6>
                             <div className="d-flex align-items-center">
                               <div className="mb-1 product-price">
                                 {" "}
                                 <span className="me-1 text-decoration-line-through ListName">
-                                ₹{item.price}
+                                  ₹{item.price}
                                 </span>
                                 <span className="fs-5 ListName">
-                                ₹{item.discounted_price}
+                                  ₹{item.discounted_price}
                                 </span>
                               </div>
-                              {/* <div className="cursor-pointer ms-auto">
-                                {" "}
-                                <i className="bx bxs-star text-warning" />
-                                <i className="bx bxs-star text-warning" />
-                                <i className="bx bxs-star text-warning" />
-                                <i className="bx bxs-star text-warning" />
-                                <i className="bx bxs-star text-warning" />
-                              </div> */}
                             </div>
                             <div className="product-action mt-2">
                               <div className="d-grid gap-2">
@@ -194,12 +165,10 @@ console.log(response);
                   ))}
                 </div>
               </div>
-           </Container>
+            </Container>
           </section>
-          {/*end Featured product*/}
         </div>
       </div>
-      {/*end page wrapper */}
     </>
   );
 }

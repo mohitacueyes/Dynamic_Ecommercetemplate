@@ -4,10 +4,8 @@ import { Container } from "react-bootstrap";
 function Contact() {
   return (
     <>
-      {/*start page wrapper */}
       <div className="page-wrapper">
         <div className="page-content">
-          {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
            <Container fluid className="pe-5 ps-5">
               <div className="page-breadcrumb d-flex align-items-center">
@@ -35,8 +33,6 @@ function Contact() {
               </div>
             </Container>
           </section>
-          {/*end breadcrumb*/}
-          {/*start page content*/}
           <section className="py-4">
           <Container fluid className="mapInfo">
               <h3 className="d-none">Google Map</h3>
@@ -117,13 +113,10 @@ function Contact() {
                   </div>
                 </div>
               </div>
-              {/*end row*/}
               </Container>
           </section>
-          {/*end start page content*/}
         </div>
       </div>
-      {/*end page wrapper */}
     </>
   );
 }

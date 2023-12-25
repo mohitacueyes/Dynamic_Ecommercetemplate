@@ -3,8 +3,6 @@ import React from 'react'
 const Brands = () => {
   return (
     <>
-    
-    {/*start brands*/}
     <section className="py-4">
       <div className="container">
         <h3 className="d-none">Brands</h3>
@@ -63,7 +61,6 @@ const Brands = () => {
         </div>
       </div>
     </section>
-    {/*end brands*/}
     </>
   )
 }
