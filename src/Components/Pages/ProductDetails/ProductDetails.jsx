@@ -8,7 +8,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { ToastContainer, toast } from 'react-toastify';
 import { Container } from "react-bootstrap";
-import ProductBottomNavigation from "../../Layout/Footer/ProductBottomNavigation/ProductBottomNavigation";
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -33,7 +32,6 @@ const styles = {
 
 const ProductDetails = () => {
   const theme = useTheme();
-  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const [productOptionImages, setProductOptionImages] = useState([]);
@@ -50,7 +48,7 @@ const ProductDetails = () => {
   const isMobile = xs || sm || md || lg || xl || xxl;
 
   const [value, setValue] = React.useState('cart');
-  
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   }
@@ -67,7 +65,7 @@ const ProductDetails = () => {
     rating: '',
     review: '',
   });
-
+  //------- ADD-review -------//
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
     setFormData((prevData) => ({
@@ -77,10 +75,10 @@ const ProductDetails = () => {
   };
 
   const handleSubmit = async () => {
-    const apiUrl = `${process.env.REACT_APP_API}/api/addfeedback`; // Replace with your actual API endpoint
+    const apiUrl = `${process.env.REACT_APP_API}/api/addfeedback`;
 
     const formDataToSend = new FormData();
-    formDataToSend.append('product_id',formData.product_id);
+    formDataToSend.append('product_id', formData.product_id);
     formDataToSend.append('user_id', formData.user_id);
     formDataToSend.append('rating', formData.rating);
     formDataToSend.append('review', formData.review);
@@ -94,16 +92,16 @@ const ProductDetails = () => {
 
       if (response.ok) {
         const responseData = await response.json();
+        toast.success(responseData.ResponseText);
         console.log(responseData);
-        // Handle success, maybe show a success message to the user
       } else {
         // Handle error, maybe show an error message to the user
       }
     } catch (error) {
       console.error('Error:', error);
-      // Handle network error
     }
   };
+  //------- (End) ADD-review -------//
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -147,7 +145,6 @@ const ProductDetails = () => {
 
   // -------Reviews --------//
   useEffect(() => {
-    // Replace 'your-api-endpoint' with the actual endpoint for fetching reviews
     fetch(`${process.env.REACT_APP_API}/api/feedbacklist/${id}`)
       .then(response => response.json())
       .then(data => setReviews(data.ResponseData))
@@ -156,7 +153,7 @@ const ProductDetails = () => {
 
   const [selectedImage, setSelectedImage] = useState(null);
   if (!productData) {
-    return <div>Loading...</div>; // Placeholder for when data is loading
+    return <div>Loading...</div>; 
   }
   const checkLoggedIn = (userId) => {
     if (!userId) {
@@ -231,8 +228,8 @@ const ProductDetails = () => {
     }
   };
 
- 
-  
+
+
 
   let imageWidth, imageHeight;
 
@@ -245,19 +242,15 @@ const ProductDetails = () => {
     imageHeight = 500;
 
   } else if (md) {
-    // For desktop and larger screens
     imageWidth = 450;
     imageHeight = 550;
   } else if (lg) {
-    // For desktop and larger screens
     imageWidth = 400;
     imageHeight = 500;
   } else if (xl) {
-    // For desktop and larger screens
     imageWidth = 450;
     imageHeight = 550;
   } else if (xxl) {
-    // For desktop and larger screens
     imageWidth = 500;
     imageHeight = 600;
   }
@@ -269,24 +262,19 @@ const ProductDetails = () => {
   } else if (sm) {
     thumbnailSize = 110;
   } else if (md) {
-    thumbnailSize = 127; // Set the same value as 'md' if needed
+    thumbnailSize = 127; 
   } else if (lg) {
-    thumbnailSize = 100; // Set the same value as 'lg' if needed
+    thumbnailSize = 100; 
   } else if (xl) {
-    thumbnailSize = 127; // Set the same value as 'xl' if needed
+    thumbnailSize = 127; 
   } else if (xxl) {
-    thumbnailSize = 145; // Set the same value as 'xxl' if needed
+    thumbnailSize = 145;
   }
-  // const imageWidth = isMobile ?  380 : 400; // Adjust the width for mobile view
-  // const imageHeight = isMobile ? 450 : 500;
-  // const thumbnailSize = isMobile ? 100 : 145;
-
+ 
   return (
     <>
-      {/*start page wrapper */}
       <div className="page-wrapper">
         <div className="page-content">
-          {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
             <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="page-breadcrumb d-flex align-items-center">
@@ -314,8 +302,6 @@ const ProductDetails = () => {
               </div>
             </Container>
           </section>
-          {/*end breadcrumb*/}
-          {/*start product detail*/}
           <section className="py-4">
             <Container fluid className="pe-lg-5 ps-lg-5 pe-3 ps-4">
               <div className="product-detail-card">
@@ -362,7 +348,6 @@ const ProductDetails = () => {
                             arrows
                             autoPlaySpeed={3000}
                             centerMode={false}
-                            // autoPlay ={false}
                             containerClass="container"
                             customButtonGroup={<button></button>}
                             dotListClass=""
@@ -421,19 +406,7 @@ const ProductDetails = () => {
                         <h3 className="mt-3 mt-lg-0 mb-0">
                           {productData.name}
                         </h3>
-                        {/* <div className="product-rating d-flex align-items-center mt-2">
-                          <div className="rates cursor-pointer font-13">
-                            {" "}
-                            <i className="bx bxs-star text-warning" />
-                            <i className="bx bxs-star text-warning" />
-                            <i className="bx bxs-star text-warning" />
-                            <i className="bx bxs-star text-warning" />
-                            <i className="bx bxs-star text-light-4" />
-                          </div>
-                          <div className="ms-1">
-                            <p className="mb-0">(24 Ratings)</p>
-                          </div>
-                        </div> */}
+                       
                         <div className="d-flex align-items-center mt-3 gap-2">
                           <h5 className="mb-0 text-decoration-line-through text-light-3 text-secondary">
                             ₹{productData.price}
@@ -446,33 +419,32 @@ const ProductDetails = () => {
                           <h6>Discription :</h6>
                           <p className="mb-0">{productData.shotdescription}</p>
                         </div>
-
                         <dl className="row mt-3">
                           {" "}
                           <dt className="col-sm-3">Product id</dt>
                           <dd className="col-sm-9">#{productData.sku}</dd>
                         </dl>
                         <div className="mt-3 align-items-center">
-        {/* Display main product image */}
-        {productOptionImages && productOptionImages.length > 0 && (
-        <div>
-          <h6>Product Option Images:</h6>
-          <div className="d-flex align-items-center gap-2">
-            {/* Display color variant images */}
-            {productOptionImages.map((link) => (
-              <img
-                key={link.product_link_id}
-                src={link.product_options[0].image} // Assuming the first image for simplicity
-                alt={`Product Option ${link.link_product_id}`}
-                className="border p-1"
-                style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
-                onClick={() => handleColorVariantClick(link.link_product_id)}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-      </div>
+                          {/* Display main product image */}
+                          {productOptionImages && productOptionImages.length > 0 && (
+                            <div>
+                              <h6>Product Option Images:</h6>
+                              <div className="d-flex align-items-center gap-2">
+                                {/* Display color variant images */}
+                                {productOptionImages.map((link) => (
+                                  <img
+                                    key={link.product_link_id}
+                                    src={link.product_options[0].image} 
+                                    alt={`Product Option ${link.link_product_id}`}
+                                    className="border p-1"
+                                    style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
+                                    onClick={() => handleColorVariantClick(link.link_product_id)}
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
                         <div class="row row-cols-auto align-items-center mt-3">
                           {/* <div class="col">
                             <label class="form-label">Quantity</label>
@@ -506,7 +478,7 @@ const ProductDetails = () => {
                           </a>
                           <a
 
-                            // onClick={() => addToCart(productData.id)}
+                            href="/checkout"
                             className="btn btn-dark btn-ecomm"
                           >
                             Buy now
@@ -522,15 +494,11 @@ const ProductDetails = () => {
                     </div>
                     <div className="col-12   col-xxl-2">
                     </div>
-                    {/*end row*/}
                   </div>
                 </div>
               </div>
             </Container>
           </section>
-
-          {/*end product detail*/}
-          {/*start product more info*/}
           <section className="py-4">
             <Container fluid className="pe-5 ps-5">
               <div className="product-more-info">
@@ -565,28 +533,13 @@ const ProductDetails = () => {
                 <div className="tab-content pt-3">
                   <div className="tab-pane fade show active" id="discription">
                     <p>{productData.shotdescription}</p>
-                    <ul>
-                      <li>Not just for commute</li>
-                      <li>Branded tongue and cuff</li>
-                      <li>Super fast and amazing</li>
-                      <li>Lorem sed do eiusmod tempor</li>
-                    </ul>
-                    <p className="mb-1">
-                      Cosby sweater eu banh mi, qui irure terry richardson ex
-                      squid. Aliquip placeat salvia cillum iphone.
-                    </p>
-                    <p className="mb-1">
-                      Seitan aliquip quis cardigan american apparel, butcher
-                      voluptate nisi.
-                    </p>
                   </div>
                   <div className="tab-pane fade " id="reviews">
                     <div className="row">
                       <div className="col   col-12 col-lg-8 ">
                         <div className="product-review">
-                          <h5 className="mb-4">3 Reviews For The Product</h5>
                           <div className="review-list">
-                            <div>
+                            <div className="card rounded-0 border bg-transparent shadow-none overflow-auto " style={{ maxHeight: '520px' }}>
                               {reviews.map(review => (
                                 <div>
                                   <div key={review.id} className="d-flex align-items-start">
@@ -600,16 +553,14 @@ const ProductDetails = () => {
                                       />
                                     </div>
                                     <div className="review-content ms-3">
-                                    
-                                   
                                       <div className="rates cursor-pointer fs-6">
-                                      <div className="review-user">
-                                      <img
-                                        src={review.image}
-                                        width={100}
-                                        height={100}
-                                      />
-                                    </div>
+                                        <div className="review-user">
+                                          <img
+                                            src={review.image}
+                                            width={100}
+                                            height={100}
+                                          />
+                                        </div>
                                         {Array.from({ length: review.rating }, (_, index) => (
                                           <i key={index} className="bx bxs-star text-warning" />
                                         ))}
@@ -631,7 +582,6 @@ const ProductDetails = () => {
                         <div className="add-review border">
                           <div className="form-body p-3">
                             <h4 className="mb-4">Write a Review</h4>
-                            
                             <div className="mb-3">
                               <label className="form-label">Your Name</label>
                               <input
@@ -693,10 +643,8 @@ const ProductDetails = () => {
               </div>
             </Container>
           </section>
-          {/*end product more info*/}
         </div>
       </div>
-      <ToastContainer />
       <div className="homeFooter mt-5">
         <BottomNavigation sx={styles.root} value={value} onChange={handleChange} showLabels={true}>
           <BottomNavigationAction
@@ -733,6 +681,7 @@ const ProductDetails = () => {
           />
         </BottomNavigation>
       </div>
+      <ToastContainer />
     </>
   );
 };

@@ -3,10 +3,8 @@ import React from 'react'
 const ResetPassword = () => {
   return (
  <>
-{/*start page wrapper */}
 <div className="page-wrapper">
   <div className="page-content">
-    {/*start breadcrumb*/}
     <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
       <div className="container">
         <div className="page-breadcrumb d-flex align-items-center">
@@ -25,8 +23,6 @@ const ResetPassword = () => {
         </div>
       </div>
     </section>
-    {/*end breadcrumb*/}  
-    {/*start shop cart*/}
     <section className>
       <div className="container">
         <div className="authentication-reset-password d-flex align-items-center justify-content-center my-5">
@@ -62,12 +58,9 @@ const ResetPassword = () => {
           </div>
         </div>
       </div>
-    </section>
-    {/*end shop cart*/}  
+    </section> 
   </div>
 </div>
-{/*end page wrapper */}
-
  </>
   )
 }

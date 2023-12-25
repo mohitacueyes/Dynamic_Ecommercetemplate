@@ -5,10 +5,8 @@ function Checkoutcomplete() {
   return (
     <>
             <div>
-            {/*start page wrapper */}
             <div className="page-wrapper">
                 <div className="page-content">
-                {/*start breadcrumb*/}
                 <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
                 <Container fluid className="pe-lg-5 ps-lg-5">
                     <div className="page-breadcrumb d-flex align-items-center">
@@ -27,8 +25,6 @@ function Checkoutcomplete() {
                     </div>
                    </Container>
                 </section>
-                {/*end breadcrumb*/}
-                {/*start shop cart*/}
                 <section className="py-4">
                     <div className="container">
                     <div className="card py-3 mt-sm-3">
@@ -43,12 +39,9 @@ function Checkoutcomplete() {
                     </div>
                     </div>
                 </section>
-                {/*end shop cart*/}
                 </div>
             </div>
-            {/*end page wrapper */}
     </div>
-
     </>
   )
 }

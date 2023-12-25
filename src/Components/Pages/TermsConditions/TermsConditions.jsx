@@ -22,17 +22,17 @@ const TermsConditions = () => {
     <>
       <Container>
         <div className="App mt-5 mb-5">
-           <div className="separator">
+          <div className="separator">
             <h5 className="mb-5 fw-bold separator-title border-bottom border-3 ms-2">
               shopping policy
             </h5>
-            </div>
+          </div>
           <div className="separator">
-          {responseData && (
+            {responseData && (
               <div
-              className="text-left"
-              style={{ fontSize: "16px", lineHeight: "1.6", color: "black" , textAlign: "justify"}}
-              dangerouslySetInnerHTML={{ __html: responseData.description }} />
+                className="text-left"
+                style={{ fontSize: "16px", lineHeight: "1.6", color: "black", textAlign: "justify" }}
+                dangerouslySetInnerHTML={{ __html: responseData.description }} />
             )}
           </div>
         </div>

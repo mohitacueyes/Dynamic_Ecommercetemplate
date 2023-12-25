@@ -1,4 +1,3 @@
-import { Login } from "@mui/icons-material";
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Link , useNavigate } from "react-router-dom";
@@ -11,17 +10,14 @@ const FeaturedProduct = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch data from your API
     fetch(`${process.env.REACT_APP_API}/api/home`
     )
       .then((response) => response.json())
       .then((data) => {
-        // Assuming data.homefeedList is your list of featured products
         setFeaturedProducts(data.ResponseData.homefeedList);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-  // console.log(featuredProducts);
 
   const checkLoggedIn = (userId) => {
     if (!userId) {
@@ -97,7 +93,6 @@ const addToLikes = async (productId) => {
   
   return (
     <>
-      {/*start Featured product*/}
       <section>
         {featuredProducts &&
           featuredProducts.map((feed) => (
@@ -107,7 +102,6 @@ const addToLikes = async (productId) => {
                 <h5 className="mb-0 fw-bold separator-title border-bottom border-3 ms-2 mt-5">
                   {feed.feedname}
                 </h5>
-             
               </div>
               <div className="product-grid">
                 <div className="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-3 g-sm-2">
@@ -120,12 +114,6 @@ const addToLikes = async (productId) => {
                               <i className="bx bx-cart-add" />
                             </a>
                           </div>
-                          {/* <div className="quick-view position-absolute start-0 bottom-0 end-0">
-                            <a><Link to={`/productdetails/${product.id}`}>
-                              Quick View
-                            </Link></a>
-                          </div> */}
-                          
                             <Link to={`/productdetails/${product.id}/${product.slug}`}>
                             <img
                               src={product.product_imageLink}
@@ -134,7 +122,6 @@ const addToLikes = async (productId) => {
                               alt="..."
                             />
                             </Link>
-                          
                         </div>
                         <div className="card-body px-0">
                           <div className="d-flex align-items-center justify-content-between">
@@ -174,7 +161,6 @@ const addToLikes = async (productId) => {
             </Container>
             )
           ))}
-          
       </section>
       <ToastContainer />
     </>

@@ -4,10 +4,8 @@ import { Container } from "react-bootstrap";
 function About() {
   return (
     <>
-      {/*start page wrapper */}
       <div className="page-wrapper">
         <div className="page-content">
-          {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
            <Container fluid className="pe-5 ps-5">
               <div className="page-breadcrumb d-flex align-items-center">
@@ -35,8 +33,6 @@ function About() {
               </div>
               </Container>
           </section>
-          {/*end breadcrumb*/}
-          {/*start page content*/}
           <section className="py-0 py-lg-4">
           <Container fluid className="pe-5 ps-5">
             <h2 className="fw-bold mb-3 mt-4 aboutHead">About Us</h2>
@@ -126,7 +122,6 @@ function About() {
                   </div>
                 </div>
               </div>
-              {/*end row*/}
             </div>
           </section>
           <section className="py-4">
@@ -332,10 +327,8 @@ function About() {
               </div>
               </Container>
           </section>
-          {/*end start page content*/}
         </div>
       </div>
-      {/*end page wrapper */}
     </>
   );
 }

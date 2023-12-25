@@ -3,7 +3,6 @@ import React from 'react'
 const Categories = () => {
   return (
   <>
-   {/*start categories*/}
    <section className="py-4">
       <div className="container">
         <div className="separator pb-4">
@@ -149,7 +148,6 @@ const Categories = () => {
         </div>
       </div>
     </section>
-    {/*end categories*/}
   </>
   )
 }

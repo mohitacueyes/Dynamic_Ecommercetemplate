@@ -2,13 +2,10 @@ import React, { useState, useEffect } from "react";
 
 const Address = ({ user_id }) => {
   function handleLogout() {
-    // Clear user ID and token from local storage
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
-    
-    // Redirect the user to the login page or any other page you prefer
-    window.location.href = '/login'; // Replace '/login' with the URL of your login page
-}
+    window.location.href = '/login';
+  }
   const [addresses, setAddresses] = useState([]);
 
   useEffect(() => {
@@ -35,38 +32,41 @@ const Address = ({ user_id }) => {
 
     fetchAddressList();
   }, [user_id]);
+  const typeMapping = {
+    1: 'Home',
+    2: 'Office',
+    3: 'Other',
+  };
 
-    //-----DELETE ADDRESS-----//
-    const [response, setResponse] = useState(null);
+  //-----DELETE ADDRESS-----//
+  const [response, setResponse] = useState(null);
 
-    const handleDeleteClick = async (id) => {
-      const apiUrl = `${process.env.REACT_APP_API}/api/addressdelete`; // Replace with your actual API endpoint
-  
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ id }),
-        });
-  
-        const data = await response.json();
-  
-        if (data.ResponseCode === 1) {
-          setResponse(data.ResponseText);
-          // Update addresses state after successful deletion
-          setAddresses(prevAddresses => prevAddresses.filter(address => address.id !== id));
-        } else {
-          setResponse('Error deleting address');
-        }
-      } catch (error) {
-        console.error('Error:', error);
+  const handleDeleteClick = async (id) => {
+    const apiUrl = `${process.env.REACT_APP_API}/api/addressdelete`;
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
+      });
+
+      const data = await response.json();
+
+      if (data.ResponseCode === 1) {
+        setResponse(data.ResponseText);
+        setAddresses(prevAddresses => prevAddresses.filter(address => address.id !== id));
+      } else {
         setResponse('Error deleting address');
       }
-    };
+    } catch (error) {
+      console.error('Error:', error);
+      setResponse('Error deleting address');
+    }
+  };
 
-  // console.log(addresses);
   return (
     <>
       <div className="page-wrapper">
@@ -120,26 +120,12 @@ const Address = ({ user_id }) => {
                             >
                               Orders <i className="bx bx-cart-alt fs-5" />
                             </a>
-                            {/* <a
-                              href="/downloadprofile"
-                              className="list-group-item d-flex justify-content-between align-items-center bg-transparent"
-                            >
-                              Downloads <i className="bx bx-download fs-5" />
-                            </a> */}
                             <a
                               href="/address"
                               className="list-group-item active d-flex justify-content-between align-items-center "
                             >
                               Addresses <i className="bx bx-home-smile fs-5" />
                             </a>
-                            
-                            {/* <a
-                              href="/paymentdetail"
-                              className="list-group-item d-flex justify-content-between align-items-center bg-transparent"
-                            >
-                              Payment Methods{" "}
-                              <i className="bx bx-credit-card fs-5" />
-                            </a> */}
                             <a
                               href="/accountdetails"
                               className="list-group-item d-flex justify-content-between align-items-center bg-transparent"
@@ -173,7 +159,7 @@ const Address = ({ user_id }) => {
                           </button>
                           <h5 className="mb-4">Addresses</h5>
                           <div className="row">
-                          <div className="col-12 ">
+                            <div className="col-12 ">
                               {addresses.length > 0 ? (
                                 addresses.map((address) => (
                                   <div key={address.id} className="d-flex justify-content-between align-items-start">
@@ -200,8 +186,8 @@ const Address = ({ user_id }) => {
                                       <br />
                                       <span className="h6">Country:-</span>{address.countryname}
                                       <br />
-                                      <span className="h6">Address Type:- </span>{address.type_id}
-                                    <br />
+                                      <span className="h6">Address Type:- </span>{typeMapping[address.type_id]}
+                                      <br />
                                     </div>
 
                                     <div className="d-flex flex-row gap-4 ">

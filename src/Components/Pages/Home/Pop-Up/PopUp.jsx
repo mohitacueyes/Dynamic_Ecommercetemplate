@@ -19,13 +19,10 @@ const PopUp = ({ onClose }) => {
 
     localStorage.setItem('lastEmailEntryTime', new Date().getTime());
 
-    // Close the pop-up
     onClose();
-
-    // Remove lastEmailEntryTime from local storage after two days
     setTimeout(() => {
       localStorage.removeItem('lastEmailEntryTime');
-    }, 2 * 24 * 60 * 60 * 1000); // Two days in milliseconds
+    }, 2 * 24 * 60 * 60 * 1000); 
   };
 
   const isTwoDaysPassed = (lastTime) => {

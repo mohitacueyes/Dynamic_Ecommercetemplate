@@ -11,10 +11,7 @@ const AccountDetails = ({ userId }) => {
   useEffect(() => {
 
     const userId = localStorage.getItem('userId');
-    // API endpoint URL
-    const apiUrl = `${process.env.REACT_APP_API}/api/userdetails`; ;
-  
-    // Make API call using fetch
+    const apiUrl = `${process.env.REACT_APP_API}/api/userdetails`;;
     fetch(apiUrl, {
       method: 'POST',
       headers: {
@@ -26,7 +23,6 @@ const AccountDetails = ({ userId }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Set user data received from the API response
         setUserData({
           id: data.ResponseData.id,
           full_name: data.ResponseData.full_name || '',
@@ -39,7 +35,7 @@ const AccountDetails = ({ userId }) => {
       .catch((error) => {
         console.error('Error fetching data: ', error);
       });
-  }, []); // Empty dependency array ensures the effect runs once after initial render
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,21 +46,16 @@ const AccountDetails = ({ userId }) => {
   };
 
   function handleLogout() {
-    // Clear user ID and token from local storage
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
-    
-    // Redirect the user to the login page or any other page you prefer
-    window.location.href = '/login'; // Replace '/login' with the URL of your login page
-}
+    window.location.href = '/login';
+  }
 
 
   return (
     <>
-      {/*start page wrapper */}
       <div className="page-wrapper">
         <div className="page-content">
-          {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
             <div className="container">
               <div className="page-breadcrumb d-flex align-items-center">
@@ -83,8 +74,6 @@ const AccountDetails = ({ userId }) => {
               </div>
             </div>
           </section>
-          {/*end breadcrumb*/}
-          {/*start shop cart*/}
           <section className="py-4">
             <div className="container">
               <h3 className="d-none">Account</h3>
@@ -115,14 +104,14 @@ const AccountDetails = ({ userId }) => {
                               <label className="form-label">Full Name</label>
                               <input type="text"
                                 className="form-control"
-                               name="full_name"
-                               value={userData.full_name}
-            onChange={handleInputChange}
+                                name="full_name"
+                                value={userData.full_name}
+                                onChange={handleInputChange}
                               />
                             </div>
                             <div className="col-12">
                               <label className="form-label">Gender</label>
-                              <select className="form-select" name="gender" value={userData.gender}  onChange={handleInputChange} >
+                              <select className="form-select" name="gender" value={userData.gender} onChange={handleInputChange} >
                                 <option>Select Gender</option>
                                 <option value="1">Male</option>
                                 <option value="2">Female</option>
@@ -131,20 +120,16 @@ const AccountDetails = ({ userId }) => {
                             </div>
                             <div className="col-12">
                               <label className="form-label">Birth Date</label>
-                              <input type="date" name='bod'  value={userData.bod} className="form-control" onChange={handleInputChange}/>
+                              <input type="date" name='bod' value={userData.bod} className="form-control" onChange={handleInputChange} />
                             </div>
                             <div className="col-12">
                               <label className="form-label">Email</label>
-                              <input type="email" name='email' value={userData.email}  className="form-control" onChange={handleInputChange} />
+                              <input type="email" name='email' value={userData.email} className="form-control" onChange={handleInputChange} />
                             </div>
                             <div className="col-12">
                               <label className="form-label">Phone Number</label>
-                              <input type="number" name='phone'  value={userData.phone} className="form-control" onChange={handleInputChange} />
+                              <input type="number" name='phone' value={userData.phone} className="form-control" onChange={handleInputChange} />
                             </div>
-                            {/* <div className="col-12">
-                        <label className="form-label"> Password</label>
-                        <input type="password"  className="form-control" />
-                      </div> */}
                             <div className="col-12">
                               <button type="button" className="btn btn-dark btn-ecomm" >Save Changes</button>
                             </div>
@@ -153,18 +138,16 @@ const AccountDetails = ({ userId }) => {
                       </div>
                     </div>
                   </div>
-                  {/*end row*/}
                 </div>
               </div>
             </div>
           </section>
-          {/*end shop cart*/}
         </div>
       </div>
-      {/*end page wrapper */}
     </>
   )
 }
+
 export default AccountDetails
 
 
