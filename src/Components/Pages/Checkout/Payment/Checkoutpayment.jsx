@@ -329,7 +329,10 @@ function Checkoutpayment() {
                             </div>
                             <div className="card rounded-0 border bg-transparent mb-0 shadow-none">
                               <div className="card-body">
-                                <p className="mb-2">Subtotal: <span className="float-end">₹{cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</span>
+                                <p className="mb-2">Subtotal: <span className="float-end">₹{cartItems.reduce(
+                                  (acc, item) => acc + item.qty * item.discounted_price,
+                                  0
+                                )}</span>
                                 </p>
                                 <p className="mb-2">Shipping: <span className="float-end">--</span>
                                 </p>
@@ -338,7 +341,10 @@ function Checkoutpayment() {
                                 <p className="mb-0">Discount: <span className="float-end">--</span>
                                 </p>
                                 <div className="my-3 border-top" />
-                                <h5 className="mb-0">Order Total: <span className="float-end">₹{cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</span></h5>
+                                <h5 className="mb-0">Order Total: <span className="float-end">₹{cartItems.reduce(
+                                  (acc, item) => acc + item.qty * item.discounted_price,
+                                  0
+                                )}</span></h5>
                               </div>
                             </div>
                           </div>

@@ -185,7 +185,7 @@ const handleDeleteClick = async (cart_id) => {
                               )}</h5>
                           </div>
                           <a
-                            href="/checkout"
+                            href="/details"
                             className="btn btn-dark btn-ecomm"
                           >
                             CHECKOUT
