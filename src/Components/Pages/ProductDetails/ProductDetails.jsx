@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, } from "react";
 import axios from "axios";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate, Link} from "react-router-dom";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ReactImageMagnify from 'react-image-magnify';
@@ -101,7 +101,11 @@ const ProductDetails = () => {
       console.error('Error:', error);
     }
   };
+<<<<<<< HEAD
+
+=======
   //------- (End) ADD-review -------//
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -130,11 +134,19 @@ const ProductDetails = () => {
 
     fetchProductData();
   }, [id]);
+<<<<<<< HEAD
+=======
 
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
   const handleColorVariantClick = (variantId, slug) => {
     const productDetailsPath = `/productdetails/${variantId}/${slug}`;
     window.location.href = productDetailsPath;
   };
+<<<<<<< HEAD
+  
+
+=======
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
@@ -425,6 +437,28 @@ const ProductDetails = () => {
                           <dd className="col-sm-9">#{productData.sku}</dd>
                         </dl>
                         <div className="mt-3 align-items-center">
+<<<<<<< HEAD
+        {/* Display main product image */}
+        {productOptionImages && productOptionImages.length > 0 && (
+        <div>
+          <h6>Product Option Images:</h6>
+          <div className="d-flex align-items-center gap-2">
+            {/* Display color variant images */}
+            {productOptionImages.map((link) => (
+              <img
+                key={link.product_link_id}
+                src={link.product_options[0].image} // Assuming the first image for simplicity
+                alt={`Product Option ${link.link_product_id}`}
+                className="border p-1"
+                style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
+                onClick={() => handleColorVariantClick(link.link_product_id)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+      </div>
+=======
                           {/* Display main product image */}
                           {productOptionImages && productOptionImages.length > 0 && (
                             <div>
@@ -445,6 +479,7 @@ const ProductDetails = () => {
                             </div>
                           )}
                         </div>
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
                         <div class="row row-cols-auto align-items-center mt-3">
                           {/* <div class="col">
                             <label class="form-label">Quantity</label>

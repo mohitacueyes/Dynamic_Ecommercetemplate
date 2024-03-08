@@ -4,7 +4,13 @@ const Address = ({ user_id }) => {
   function handleLogout() {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
+<<<<<<< HEAD
+
+    // Redirect the user to the login page or any other page you prefer
+    window.location.href = '/login'; // Replace '/login' with the URL of your login page
+=======
     window.location.href = '/login';
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
   }
   const [addresses, setAddresses] = useState([]);
 
@@ -42,7 +48,11 @@ const Address = ({ user_id }) => {
   const [response, setResponse] = useState(null);
 
   const handleDeleteClick = async (id) => {
+<<<<<<< HEAD
+    const apiUrl = `${process.env.REACT_APP_API}/api/addressdelete`; // Replace with your actual API endpoint
+=======
     const apiUrl = `${process.env.REACT_APP_API}/api/addressdelete`;
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
 
     try {
       const response = await fetch(apiUrl, {
@@ -57,6 +67,10 @@ const Address = ({ user_id }) => {
 
       if (data.ResponseCode === 1) {
         setResponse(data.ResponseText);
+<<<<<<< HEAD
+        // Update addresses state after successful deletion
+=======
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
         setAddresses(prevAddresses => prevAddresses.filter(address => address.id !== id));
       } else {
         setResponse('Error deleting address');
@@ -126,6 +140,17 @@ const Address = ({ user_id }) => {
                             >
                               Addresses <i className="bx bx-home-smile fs-5" />
                             </a>
+<<<<<<< HEAD
+
+                            {/* <a
+                              href="/paymentdetail"
+                              className="list-group-item d-flex justify-content-between align-items-center bg-transparent"
+                            >
+                              Payment Methods{" "}
+                              <i className="bx bx-credit-card fs-5" />
+                            </a> */}
+=======
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
                             <a
                               href="/accountdetails"
                               className="list-group-item d-flex justify-content-between align-items-center bg-transparent"
@@ -180,6 +205,13 @@ const Address = ({ user_id }) => {
                                       </div>
                                       <span className="h6">Landmark:-</span>{address.landmark}
                                       <br />
+<<<<<<< HEAD
+                                      <span className="h6">City:-</span>{address.city_id} <br /><span className="h6">State:-</span>{address.state_id}
+                                      <br />
+                                      <span className="h6">Pincode:-</span>{address.pincode}
+                                      <br />
+                                      <span className="h6">Country:-</span>{address.country_id}
+=======
                                       <span className="h6">City:-</span>{address.cityname} <br /><span className="h6">State:-</span>{address.statename}
                                       <br />
                                       <span className="h6">Pincode:-</span>{address.pincode}
@@ -188,6 +220,7 @@ const Address = ({ user_id }) => {
                                       <br />
                                       <span className="h6">Address Type:- </span>{typeMapping[address.type_id]}
                                       <br />
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
                                     </div>
 
                                     <div className="d-flex flex-row gap-4 ">

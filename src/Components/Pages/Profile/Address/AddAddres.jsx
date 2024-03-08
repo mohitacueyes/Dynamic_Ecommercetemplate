@@ -32,7 +32,34 @@ function AddAddres() {
         setCountryData(response.data.ResponseData);
       })
       .catch((error) => {
+<<<<<<< HEAD
+        console.error("Error fetching category data:", error);
+      });
+
+    // ------------Fetch  data-------------------//
+    // axios
+    //   .get(`${process.env.REACT_APP_API}/api/city-list-statewise`,{
+    //     params: {
+    //       state_id: StateData,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     setCityData(response.data.ResponseData);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching category data:", error);
+    //   });
+
+    axios
+      .get(`${process.env.REACT_APP_API}/api/state-list`)
+      .then((response) => {
+        setStateData(response.data.ResponseData);
+      })
+      .catch((error) => {
+        console.error("Error fetching category data:", error);
+=======
         console.error('Error fetching country data:', error);
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
       });
   }, []);
 
@@ -188,9 +215,15 @@ function AddAddres() {
                                 name="full_name"
                                 onChange={handleChange}
                               />
+<<<<<<< HEAD
+                            </div>                        
+                           <div className="d-flex gap-3 align-items-center">
+                           <div className="col-md-6">
+=======
                             </div>
                             <div className="d-flex gap-3 align-items-center">
                               <div className="col-md-6">
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
                                 <label className="form-label ">Phone Number</label>
                                 <input
                                   type="tel"
@@ -213,6 +246,113 @@ function AddAddres() {
                                   name="alternate_mobile"
                                   onChange={handleChange}
                                 />
+<<<<<<< HEAD
+                               </div>
+                           </div>
+                                <div className="col-md-12">
+                                  <label className="form-label">
+                                    Street Address
+                                  </label>
+                                  <textarea
+                                    type="text"
+                                    className="form-control"
+                                    name="address"
+                                    onChange={handleChange}
+                                  />
+                                </div>
+                                <div className="col-md-12">
+                                  <label className="form-label">Land Mark</label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    name="landmark"
+                                    onChange={handleChange}
+                                  />
+                                </div>
+
+                                <div className="d-flex justify-content-between w-100 align-items-center gap-3">
+                                  <div className="col-md-6">
+                                    <label className="form-label">Country</label>
+                                    <select
+                                      name="country_id"
+                                      id="templateId"
+                                      class="form-control "
+                                      style={{ width: "95%" }}
+                                      onChange={(e) => handleChange(e)}
+                                    >
+                                      <option value={formData.country_id ? "" : ""}>
+                                        --select --
+                                      </option>
+                                      {CountryData &&
+                                        CountryData.map((v, index) => {
+                                          return (
+                                            <option value={v.id} key={index.id}>
+                                              {v.countryname}
+                                            </option>
+                                          );
+                                        })}
+                                    </select>
+                                  </div>
+                                  <div className="col-md-6">
+                                    <label className="form-label">State</label>
+                                    <select
+                                      name="state_id"
+                                      id="templateId"
+                                      class="form-control"
+                                      style={{ width: "95%" }}
+                                      onChange={(e) => handleChange(e)}
+                                    >
+                                      <option value={formData.state_id ? "" : ""}>
+                                        --select --
+                                      </option>
+                                      {StateData &&
+                                        StateData.map((v, index) => {
+                                          return (
+                                            <option value={v.state_id} key={index.id}>
+                                              {v.statename}
+                                            </option>
+                                          );
+                                        })}
+                                    </select>
+                                  </div>
+
+                                </div>
+                                <div className="d-flex justify-content-between w-100 align-items-center gap-3">
+                                  <div className="col-md-6">
+                                    <label className="form-label">City</label>
+                                    <select
+                                      name="city_id"
+                                      id="templateId"
+                                      class="form-control"
+                                      style={{ width: "95%" }}
+                                      onChange={(e) => handleChange(e)}
+                                    >
+                                      <option value={formData.city_id ? "" : ""}>
+                                        --select --
+                                      </option>
+                                      {CityData &&
+                                        CityData.map((v, index) => {
+                                          return (
+                                            <option value={v.id} key={index.id}>
+                                              {v.cityname}
+                                            </option>
+                                          );
+                                        })}
+                                    </select>
+                                  </div>
+                                  <div className="col-md-6">
+                                    <label className="form-label">Pincode</label>
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                      style={{ width: "95%" }}
+                                      name="pincode"
+                                      onChange={handleChange}
+                                    />
+                                  </div>
+                                </div>
+                                                   
+=======
                               </div>
                             </div>
                             <div className="col-md-12">
@@ -335,6 +475,7 @@ function AddAddres() {
 
                             </div>
 
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
                             <div className="col-12">
                               <button
                                 type="button"
