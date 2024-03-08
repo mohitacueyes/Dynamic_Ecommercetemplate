@@ -5,17 +5,15 @@ function AddAddres() {
   const user_id = localStorage.getItem("userId");
   const navigate = useNavigate();
   function handleLogout() {
-    // Clear user session data from local storage
     localStorage.removeItem("user");
-    // Redirect the user to the login page or any other page you prefer
-    window.location.href = "/login"; // Replace '/login' with the URL of your login page
+    window.location.href = "/login";
   }
   const [CountryData, setCountryData] = useState([]);
   const [StateData, setStateData] = useState([]);
   const [CityData, setCityData] = useState([]);
   const [formData, setFormData] = useState({
     user_id: user_id,
-    type_id: "1",
+    type_id: "",
     full_name: "",
     country_id: "",
     landmark: "",
@@ -28,13 +26,13 @@ function AddAddres() {
   });
 
   useEffect(() => {
-    // ------------Fetch Country data-------------------//
     axios
       .get(`${process.env.REACT_APP_API}/api/country-list`)
       .then((response) => {
         setCountryData(response.data.ResponseData);
       })
       .catch((error) => {
+<<<<<<< HEAD
         console.error("Error fetching category data:", error);
       });
 
@@ -59,13 +57,28 @@ function AddAddres() {
       })
       .catch((error) => {
         console.error("Error fetching category data:", error);
+=======
+        console.error('Error fetching country data:', error);
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
       });
   }, []);
+
+  useEffect(() => {
+    if (formData.country_id) {
+      axios
+        .get(`${process.env.REACT_APP_API}/api/state-list-countrywise/${formData.country_id}`)
+        .then((response) => {
+          setStateData(response.data.ResponseData);
+        })
+        .catch((error) => {
+          console.error('Error fetching state data:', error);
+        });
+    }
+  }, [formData.country_id]);
   function handleChange(event) {
     const { name, value } = event.target;
 
     if (name === "state_id") {
-      // Fetch City data based on the selected state using POST method
       axios
         .post(`${process.env.REACT_APP_API}/api/city-list-statewise`, {
           state_id: value,
@@ -77,6 +90,7 @@ function AddAddres() {
           console.error("Error fetching city data:", error);
         });
     }
+
 
     setFormData({
       ...formData,
@@ -109,7 +123,6 @@ function AddAddres() {
     <>
       <div className="page-wrapper">
         <div className="page-content">
-          {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
             <div className="container">
               <div className="page-breadcrumb d-flex align-items-center">
@@ -137,8 +150,6 @@ function AddAddres() {
               </div>
             </div>
           </section>
-          {/*end breadcrumb*/}
-          {/*start shop cart*/}
           <section className="py-4">
             <div className="container">
               <h3 className="d-none">Account</h3>
@@ -161,12 +172,6 @@ function AddAddres() {
                             >
                               Orders <i className="bx bx-cart-alt fs-5" />
                             </a>
-                            {/* <a
-                              href="/downloadprofile"
-                              className="list-group-item d-flex justify-content-between align-items-center bg-transparent"
-                            >
-                              Downloads <i className="bx bx-download fs-5" />
-                            </a> */}
                             <a
                               href="/address"
                               className="list-group-item active d-flex justify-content-between align-items-center "
@@ -201,9 +206,6 @@ function AddAddres() {
                     <div className="col-lg-8">
                       <div className="card shadow-none mb-0 border">
                         <div className="card-body ">
-                          {/* <div className="col-12 ">
-                              <button type="button" className="justify-content-end btn btn-dark btn-ecomm" style={{marginLeft:"80%"}} >ADD-Address</button>
-                            </div> */}
                           <form className="row g-3">
                             <div className="col-md-12">
                               <label className="form-label mt-1">Full Name</label>
@@ -213,9 +215,15 @@ function AddAddres() {
                                 name="full_name"
                                 onChange={handleChange}
                               />
+<<<<<<< HEAD
                             </div>                        
                            <div className="d-flex gap-3 align-items-center">
                            <div className="col-md-6">
+=======
+                            </div>
+                            <div className="d-flex gap-3 align-items-center">
+                              <div className="col-md-6">
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
                                 <label className="form-label ">Phone Number</label>
                                 <input
                                   type="tel"
@@ -238,6 +246,7 @@ function AddAddres() {
                                   name="alternate_mobile"
                                   onChange={handleChange}
                                 />
+<<<<<<< HEAD
                                </div>
                            </div>
                                 <div className="col-md-12">
@@ -343,6 +352,130 @@ function AddAddres() {
                                   </div>
                                 </div>
                                                    
+=======
+                              </div>
+                            </div>
+                            <div className="col-md-12">
+                              <label className="form-label">
+                                Street Address
+                              </label>
+                              <textarea
+                                type="text"
+                                className="form-control"
+                                name="address"
+                                onChange={handleChange}
+                              />
+                            </div>
+                            <div className="col-md-12">
+                              <label className="form-label">Land Mark</label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                name="landmark"
+                                onChange={handleChange}
+                              />
+                            </div>
+
+                            <div className="d-flex justify-content-between w-100 align-items-center gap-3">
+                              <div className="col-md-6">
+                                <label className="form-label">Country</label>
+                                <select
+                                  name="country_id"
+                                  id="templateId"
+                                  class="form-control "
+                                  style={{ width: "95%" }}
+                                  onChange={(e) => handleChange(e)}
+                                >
+                                  <option value={formData.country_id ? "" : ""}>
+                                    --select --
+                                  </option>
+                                  {CountryData &&
+                                    CountryData.map((v, index) => {
+                                      return (
+                                        <option value={v.id} key={index.id}>
+                                          {v.countryname}
+                                        </option>
+                                      );
+                                    })}
+                                </select>
+                              </div>
+                              <div className="col-md-6">
+                                <label className="form-label">State</label>
+                                <select
+                                  name="state_id"
+                                  id="templateId"
+                                  class="form-control"
+                                  style={{ width: "95%" }}
+                                  onChange={(e) => handleChange(e)}
+                                >
+                                  <option value={formData.state_id ? "" : ""}>
+                                    --select --
+                                  </option>
+                                  {StateData &&
+                                    StateData.map((v, index) => {
+                                      return (
+                                        <option value={v.state_id} key={index.id}>
+                                          {v.statename}
+                                        </option>
+                                      );
+                                    })}
+                                </select>
+                              </div>
+
+                            </div>
+                            <div className="d-flex justify-content-between w-100 align-items-center gap-3">
+                              <div className="col-md-6">
+                                <label className="form-label">City</label>
+                                <select
+                                  name="city_id"
+                                  id="templateId"
+                                  class="form-control"
+                                  style={{ width: "95%" }}
+                                  onChange={(e) => handleChange(e)}
+                                >
+                                  <option value={formData.city_id ? "" : ""}>
+                                    --select --
+                                  </option>
+                                  {CityData &&
+                                    CityData.map((v, index) => {
+                                      return (
+                                        <option value={v.id} key={index.id}>
+                                          {v.cityname}
+                                        </option>
+                                      );
+                                    })}
+                                </select>
+                              </div>
+                              <div className="col-md-6">
+                                <label className="form-label">Pincode</label>
+                                <input
+                                  type="number"
+                                  className="form-control"
+                                  style={{ width: "95%" }}
+                                  name="pincode"
+                                  onChange={handleChange}
+                                />
+                              </div>
+
+                            </div>
+                            <div className="col-md-12">
+
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type_id" id="inlineRadio1" value="1" onChange={handleChange} />
+                                <label class="form-check-label" for="inlineRadio1">Home Address</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type_id" id="inlineRadio2" value="2" onChange={handleChange} />
+                                <label class="form-check-label" for="inlineRadio2">Office Address</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type_id" id="inlineRadio3" value="3" onChange={handleChange} />
+                                <label class="form-check-label" for="inlineRadio3">Other Address</label>
+                              </div>
+
+                            </div>
+
+>>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
                             <div className="col-12">
                               <button
                                 type="button"
@@ -357,12 +490,10 @@ function AddAddres() {
                       </div>
                     </div>
                   </div>
-                  {/*end row*/}
                 </div>
               </div>
             </div>
           </section>
-          {/*end shop cart*/}
         </div>
       </div>
     </>

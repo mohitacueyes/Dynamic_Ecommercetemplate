@@ -1,10 +1,5 @@
 
 import React, { useState } from 'react';
-import HomeIcon from '@mui/icons-material/Home';
-import SearchIcon from '@mui/icons-material/Search';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import BottommNavigation from './BottommNavigation';
 import { Container } from 'react-bootstrap';
 
 
@@ -15,7 +10,7 @@ const styles = {
     position: 'fixed',
     bottom: 0,
     zIndex: 1000,
-    margin: 0, // Ensure the navigation stays above other elements if needed
+    margin: 0, 
   },
 };
 
@@ -41,11 +36,8 @@ export const Footer = ({ currentPage }) => {
     setPoliciesVisible(!policiesVisible);
   };
 
-
-
   return (
     <>
-      {/*start footer section*/}
       <footer className="footer-section">
         <section className="py-5 border-top bgColor">
           <Container fluid className="pe-5 ps-5">
@@ -122,7 +114,6 @@ export const Footer = ({ currentPage }) => {
                 </div>
               </div>
             </div>
-            {/*end row*/}
           </Container>
         </section>
         <section className="footer-strip text-center py-3 border-top positon-absolute bottom-0">
@@ -240,9 +231,6 @@ export const Footer = ({ currentPage }) => {
           </ul>
         )}
       </footer>
-     {/* </div> */}
-      {/*end footer section*/}
-
     </>
   )
 }

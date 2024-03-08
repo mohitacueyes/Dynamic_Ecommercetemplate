@@ -6,12 +6,10 @@ export const Menubar = () => {
     const [menuList, setMenuList] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API}/api/home`) // Replace with your actual API endpoint
+    fetch(`${process.env.REACT_APP_API}/api/home`) 
       .then(response => response.json())
       .then(data => {
         setMenuList(data.ResponseData.menuList);
-
-      
       })
       .catch(error => console.error('Error fetching menu:', error));
   }, []);
@@ -30,9 +28,6 @@ export const Menubar = () => {
       <div className="offcanvas-body primary-menu">
         <ul className="navbar-nav justify-content-start flex-grow-1 gap-1">
         {menuList.map(item => (
-          // <li className="nav-item" key={item.id}>
-          //   <a className="nav-link" href="/">{item.name}</a>
-          // </li>
           <li className="nav-item dropdown">
           <a className="nav-link  dropdown-toggle-nocaret" href="tv-shows.html" data-bs-toggle="dropdown">
           {item.category_name}

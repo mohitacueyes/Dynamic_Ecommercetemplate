@@ -13,7 +13,6 @@ export const Searchbar = () => {
     const fetchCartData = async () => {
       const user_id = localStorage.getItem('userId');
 
-
       try {
         if (user_id) {
           const response = await fetch(`${process.env.REACT_APP_API}/api/cart-listuseridwise`, {
@@ -51,7 +50,6 @@ const [response, setResponse] = useState(null);
 
 const handleDeleteClick = async (cart_id) => {
   const apiUrl = `${process.env.REACT_APP_API}/api/delete`; 
-
   try {
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -67,7 +65,6 @@ const handleDeleteClick = async (cart_id) => {
 
     if (data.ResponseCode === 1) {
       setResponse(data.ResponseText);
-      // Update addresses state after successful deletion
       setCartItems(prevAddresses => prevAddresses.filter(favorites => favorites.cart_id !== cart_id));
       toast.success(data.ResponseText);
     } else {
@@ -117,7 +114,6 @@ const handleDeleteClick = async (cart_id) => {
                   type="button"
                 >
                   <i className="bx bx-search" />
-
                 </button>
               </div>
             </div>
@@ -154,7 +150,6 @@ const handleDeleteClick = async (cart_id) => {
                             </p>
                           </div>
                         </a>
-
                         <div className="cart-list">
                           {cartItems.map((item, index) => (
                             <a className="dropdown-item" href="javascript:;" key={index}>
@@ -163,7 +158,7 @@ const handleDeleteClick = async (cart_id) => {
                                   <h6 className="cart-product-title">
                                     {item.name.slice(0, 20)}...
                                   </h6>
-                                  <p className="cart-product-price">1 X ₹{item.discounted_price}</p>
+                                  <p className="cart-product-price">{item.qty} X ₹{item.discounted_price}</p>
                                 </div>
                                 <div className="position-relative">
                                   <div className="cart-product-cancel position-absolute" >
@@ -181,11 +176,13 @@ const handleDeleteClick = async (cart_id) => {
                             </a>
                           ))}
                         </div>
-
                         <div className="d-grid p-3 border-top">
                           <div className="d-flex align-items-center justify-content-between mb-3">
                             <h5 className="mb-0">TOTAL</h5>
-                            <h5 className="mb-0">₹{cartItems.reduce((acc, item) => acc + item.discounted_price, 0)}</h5>
+                            <h5 className="mb-0">₹{cartItems.reduce(
+                                (acc, item) => acc +item.qty * item.discounted_price,
+                                0
+                              )}</h5>
                           </div>
                           <a
                             href="/checkout"

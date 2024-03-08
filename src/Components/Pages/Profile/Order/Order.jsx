@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 
 const Order = ({ user_id }) => {
   function handleLogout() {
-    // Clear user ID and token from local storage
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
-    
-    // Redirect the user to the login page or any other page you prefer
-    window.location.href = '/login'; // Replace '/login' with the URL of your login page
+    window.location.href = '/login'; 
 }
   const [orders, setorders] = useState([]);
 
@@ -100,7 +97,6 @@ const Order = ({ user_id }) => {
                                 Orders{" "}
                                 <i className="bx bx-cart-alt fs-5 fs-5" />
                               </a>
-                              {/* <a href="/downloadprofile" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Downloads <i className="bx bx-download fs-5" /></a> */}
                               <a
                                 href="/address"
                                 className="list-group-item d-flex justify-content-between align-items-center bg-transparent"
@@ -108,7 +104,6 @@ const Order = ({ user_id }) => {
                                 Addresses{" "}
                                 <i className="bx bx-home-smile fs-5" />
                               </a>
-                              {/* <a href="/paymentdetail" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Payment Methods <i className="bx bx-credit-card fs-5" /></a> */}
                               <a
                                 href="/accountdetails"
                                 className="list-group-item d-flex justify-content-between align-items-center bg-transparent"

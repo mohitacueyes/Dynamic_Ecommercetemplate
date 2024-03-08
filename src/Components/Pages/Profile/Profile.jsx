@@ -42,8 +42,6 @@ const Profile = () => {
       const timeoutId = setTimeout(() => {
         window.location.href = '/login';
       },);
-
-      // Cleanup the timeout to avoid memory leaks
       return () => clearTimeout(timeoutId);
     }
   }, []);
@@ -54,9 +52,8 @@ const Profile = () => {
   }
 
   if (!isLoggedIn) {
-    // If the user is not logged in, redirect to the login page
     window.location.href = '/login';
-    return null; // This line is added to avoid the "Cannot update during an existing state transition" warning
+    return null;
   }
 
   function handleLogout() {
@@ -67,10 +64,8 @@ const Profile = () => {
   return (
     <>
       <div class="wrapper">
-        {/*start page wrapper */}
         <div className="page-wrapper">
           <div className="page-content">
-            {/*start breadcrumb*/}
             <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
               <Container fluid className="pe-lg-5 ps-lg-5">
                 <div className="page-breadcrumb d-flex align-items-center">
@@ -89,8 +84,6 @@ const Profile = () => {
                 </div>
               </Container>
             </section>
-            {/*end breadcrumb*/}
-            {/*start shop cart*/}
             <section className="py-4">
               <div className="container">
                 <h3 className="d-none">Account</h3>
@@ -103,10 +96,7 @@ const Profile = () => {
                             <div className="list-group list-group-flush">
                               <a href="/profile" className="list-group-item active d-flex justify-content-between align-items-center">Dashboard <i className="bx bx-tachometer fs-5" /></a>
                               <a href="/order" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Orders <i className="bx bx-cart-alt fs-5" /></a>
-                              {/* <a href="/downloadprofile" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Downloads <i className="bx bx-download fs-5" /></a> */}
                               <a href="/address" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Addresses <i className="bx bx-home-smile fs-5" /></a>
-                              {/* <a href="/addaddress" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Add-Addresses <i className="bx bx-home-smile fs-5" /></a> */}
-                              {/* <a href="/paymentdetail" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Payment Methods <i className="bx bx-credit-card fs-5" /></a> */}
                               <a href="/accountdetails" className="list-group-item d-flex justify-content-between align-items-center bg-transparent">Account Details <i className="bx bx-user-circle fs-5" /></a>
                               <a href="#" className="list-group-item d-flex justify-content-between align-items-center bg-transparent" onClick={handleLogout}>Logout <i className="bx bx-log-out fs-5" /></a>
                             </div>
@@ -116,23 +106,18 @@ const Profile = () => {
                       <div className="col-lg-8">
                         <div className="card shadow-none mb-0">
                           <div className="card-body">
-                            <p>Hello <strong>{userData.full_name}</strong> (not <strong>{userData.full_name}?</strong>  <a onClick={handleLogout}>Logout</a>)</p>
-
+                            <p>Hello <strong>{userData.full_name}</strong> (not <strong>{userData.full_name}?</strong>  <span onClick={handleLogout} style={{ cursor: 'pointer', color: 'blue' }}>Logout</span>)</p>
                           </div>
                         </div>
                       </div>
                     </div>
-                    {/*end row*/}
                   </div>
                 </div>
               </div>
             </section>
-            {/*end shop cart*/}
           </div>
         </div>
       </div>
-      {/*end page wrapper */}
-
     </>
   )
 }

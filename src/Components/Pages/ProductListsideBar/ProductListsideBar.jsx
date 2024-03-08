@@ -17,25 +17,9 @@ const ProductListsideBar = () => {
 
 
   //------------------ for filter----------- //
-  const handleCategoryFilter = (category) => {
-    // Logic to update selectedCategories state
-  };
-
-  // Function to handle brand filter selection
-  const handleBrandFilter = (brand) => {
-    // Logic to update selectedBrands state
-  };
-
-  // Function to handle price range filter
   const handlePriceFilter = () => {
     // Use the priceRange state to filter items within the selected price range
   };
-
-  // Function to handle color filter selection
-  const handleColorFilter = (color) => {
-    // Logic to update selectedColors state
-  };
-
 
   useEffect(() => {
 
@@ -47,17 +31,11 @@ const ProductListsideBar = () => {
       .catch((error) => console.error("Error:", error));
   }, []);
 
-
-
   const checkLoggedIn = (userId) => {
     if (!userId) {
       throw new Error('User is not logged in');
     }
   };
-
-
-
-
 
   // -------ADD TO CART --------//
   const addToCart = async (productId) => {
@@ -128,7 +106,6 @@ const ProductListsideBar = () => {
     <>
       <div className="page-wrapper">
         <div className="page-content">
-          {/*start breadcrumb*/}
           <section className="py-3 border-bottom border-top d-none d-md-flex bg-light">
             <Container fluid className="pe-lg-5 ps-lg-5">
               <div className="page-breadcrumb d-flex align-items-center">
@@ -158,8 +135,6 @@ const ProductListsideBar = () => {
               </div>
             </Container>
           </section>
-          {/*end breadcrumb*/}
-          {/*start shop area*/}
           <section className="py-4">
             <Container fluid className="pe-lg-5 ps-lg-5">
               <div
@@ -1108,16 +1083,11 @@ const ProductListsideBar = () => {
                               <div className="card" >
                                 <div className="position-relative overflow-hidden">
                                   <div className="add-cart position-absolute top-0 end-0 mt-3 me-3">
-                                    <a href="" onClick={() => addToCart(product.id)}>
+                                    <a onClick={() => addToCart(product.id)}>
                                       <i className="bx bx-cart-add" />
                                     </a>
                                   </div>
-                                  {/* <div className="quick-view position-absolute start-0 bottom-0 end-0">
-                                    <a><Link to={`/productdetails/${product.id}`}>
-                                      Quick View
-                                    </Link></a>
-                                  </div> */}
-                                                                  <Link
+                                  <Link
                                     to={`/productdetails/${product.id}/${product.slug}`}
                                   >
                                     <img
@@ -1127,10 +1097,6 @@ const ProductListsideBar = () => {
                                       alt="..."
                                     />
                                   </Link>
-
-                                
-
-
                                 </div>
                                 <div className="card-body px-0">
                                   <div className="d-flex align-items-center justify-content-between">
@@ -1226,10 +1192,8 @@ const ProductListsideBar = () => {
                   </div>
                 </div>
               </div>
-              {/*end row*/}
             </Container>
           </section>
-          {/*end shop area*/}
         </div>
       </div>
       <ToastContainer />
