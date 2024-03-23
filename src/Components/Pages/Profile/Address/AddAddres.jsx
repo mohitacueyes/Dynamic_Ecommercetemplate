@@ -32,7 +32,7 @@ function AddAddres() {
         setCountryData(response.data.ResponseData);
       })
       .catch((error) => {
-<<<<<<< HEAD
+
         console.error("Error fetching category data:", error);
       });
 
@@ -57,9 +57,9 @@ function AddAddres() {
       })
       .catch((error) => {
         console.error("Error fetching category data:", error);
-=======
+
         console.error('Error fetching country data:', error);
->>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
+
       });
   }, []);
 
@@ -215,15 +215,15 @@ function AddAddres() {
                                 name="full_name"
                                 onChange={handleChange}
                               />
-<<<<<<< HEAD
+
                             </div>                        
                            <div className="d-flex gap-3 align-items-center">
                            <div className="col-md-6">
-=======
+
                             </div>
                             <div className="d-flex gap-3 align-items-center">
                               <div className="col-md-6">
->>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
+
                                 <label className="form-label ">Phone Number</label>
                                 <input
                                   type="tel"
@@ -246,7 +246,7 @@ function AddAddres() {
                                   name="alternate_mobile"
                                   onChange={handleChange}
                                 />
-<<<<<<< HEAD
+
                                </div>
                            </div>
                                 <div className="col-md-12">
@@ -352,9 +352,10 @@ function AddAddres() {
                                   </div>
                                 </div>
                                                    
-=======
                               </div>
+                              </form>
                             </div>
+                            
                             <div className="col-md-12">
                               <label className="form-label">
                                 Street Address
@@ -475,7 +476,8 @@ function AddAddres() {
 
                             </div>
 
->>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
+                            
+
                             <div className="col-12">
                               <button
                                 type="button"
@@ -485,15 +487,16 @@ function AddAddres() {
                                 Save Address
                               </button>
                             </div>
-                          </form>
+                         
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+             
+          </div>                          
           </section>
+          
         </div>
       </div>
     </>
