@@ -101,11 +101,11 @@ const ProductDetails = () => {
       console.error('Error:', error);
     }
   };
-<<<<<<< HEAD
 
-=======
+
+
   //------- (End) ADD-review -------//
->>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -134,19 +134,18 @@ const ProductDetails = () => {
 
     fetchProductData();
   }, [id]);
-<<<<<<< HEAD
-=======
 
->>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
+
+
   const handleColorVariantClick = (variantId, slug) => {
     const productDetailsPath = `/productdetails/${variantId}/${slug}`;
     window.location.href = productDetailsPath;
   };
-<<<<<<< HEAD
+
   
 
-=======
->>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
+
+
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/api/product-detail/${id}`)
@@ -437,7 +436,7 @@ const ProductDetails = () => {
                           <dd className="col-sm-9">#{productData.sku}</dd>
                         </dl>
                         <div className="mt-3 align-items-center">
-<<<<<<< HEAD
+                              
         {/* Display main product image */}
         {productOptionImages && productOptionImages.length > 0 && (
         <div>
@@ -458,7 +457,7 @@ const ProductDetails = () => {
         </div>
       )}
       </div>
-=======
+
                           {/* Display main product image */}
                           {productOptionImages && productOptionImages.length > 0 && (
                             <div>
@@ -479,7 +478,7 @@ const ProductDetails = () => {
                             </div>
                           )}
                         </div>
->>>>>>> f40315ced16818d6c9c6d722cf47aa8a8979364d
+
                         <div class="row row-cols-auto align-items-center mt-3">
                           {/* <div class="col">
                             <label class="form-label">Quantity</label>
@@ -531,7 +530,7 @@ const ProductDetails = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+            
             </Container>
           </section>
           <section className="py-4">
