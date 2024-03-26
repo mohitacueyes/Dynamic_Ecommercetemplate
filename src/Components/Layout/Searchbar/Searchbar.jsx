@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 export const Searchbar = () => {
   const [cartItems, setCartItems] = useState([]);
   const user_id = localStorage.getItem("userId");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate(); 
+  const [showSearchResults, setShowSearchResults] = useState(true); 
+
 
 
   useEffect(() => {
@@ -76,6 +83,46 @@ const handleDeleteClick = async (cart_id) => {
   }
 };
  //--------------------------//
+ const handleSearch = async (query) => {
+  try {
+    setIsLoading(true);
+    const response = await axios.get(`${process.env.REACT_APP_API}/api/search/${query}`);
+    if (response.data.ResponseCode === 1) {
+      setSearchResults(response.data.ResponseData || []);
+    } else {
+      console.error('Error fetching search results:', response.data.ResponseText);
+      setSearchResults([]);
+    }
+  } catch (error) {
+    console.error('Error fetching search results:', error);
+    setSearchResults([]);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+useEffect(() => {
+  if (searchQuery.trim() !== '') {
+    handleSearch(searchQuery);
+    setShowSearchResults(true); // Show search results when there's input
+  } else {
+    setSearchResults([]);
+    setShowSearchResults(false); // Hide search results when input is empty
+  }
+}, [searchQuery]);
+
+const handleChange = async (e) => {
+  const { value } = e.target;
+  setSearchQuery(value);
+};
+
+const handleResultClick = (id, slug) => {
+  navigate(`/productdetails/${id}/${slug}`);
+  setShowSearchResults(false);    
+};
+
+
+// Function to handle click on search result item
 
   return (
     <>
@@ -103,20 +150,37 @@ const handleDeleteClick = async (cart_id) => {
               </div>
             </div>
             <div className="d-sm-none col-md-5 d-md-flex d-xxl-flex  col-lg-6 col-xl-8 col-xxl-8">
-              <div className="input-group flex-nowrap  pb-xl-0">
+              <div id="searchecom" className="input-group flex-nowrap  pb-xl-0">
                 <input
                   type="text"
                   class="form-control w-100 border-dark border border-2 d-none d-sm-block"
                   placeholder="Search for Products"
+                  aria-label="Username"
+                  aria-describedby="addon-wrapping"
+                  value={searchQuery}
+                  onChange={handleChange}
                 />
                 <button
                   class="btn btn-dark btn-ecomm border-2 d-none d-sm-block"
                   type="button"
+                  onClick={handleSearch}
                 >
                   <i className="bx bx-search" />
                 </button>
               </div>
+              {isLoading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      {showSearchResults && searchResults.length > 0 && (
+                <div className="mt-5" style={{ zIndex: 1 }}>
+                  <ul className="bg-white position-absolute mt-3 list-unstyled p-3 border rounded" style={{ left:'19%' }} >
+                    {searchResults.map((product) => (
+                      <li key={product.id} className="cursor-pointer" onClick={() => handleResultClick(product.id, product.slug)}>{product.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
+ 
             <div className="col-auto col-xl-2 col-xxl-2 col-sm-3 cartFlex">
               <div className="top-cart-icons">
                 <nav className="navbar navbar-expand">

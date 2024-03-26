@@ -32,6 +32,7 @@ import PrivacyPolicy from './Components/Pages/PrivacyPolicy/PrivacyPolicy';
 import 'react-toastify/dist/ReactToastify.css';
 import PopUp from './Components/Pages/Home/Pop-Up/PopUp';
 import { useState, useEffect } from 'react';
+import { BottombarSearch } from './Components/Pages/BottombarSearch';
 
 function App() {
   const location = useLocation();
@@ -73,6 +74,7 @@ function App() {
         <Route path='/complete' element={<Checkoutcomplete />} />
         <Route path='/terms-conditions' element={<TermsConditions />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+        <Route path='/search' element={<BottombarSearch />} />
       </Routes>
       <Footer />
     </>

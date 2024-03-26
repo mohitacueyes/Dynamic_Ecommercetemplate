@@ -27,7 +27,7 @@ const BottommNavigation = () => {
       <div className="homeFooter mt-5">
         <BottomNavigation sx={styles.root} value={value} onChange={handleChange}>
           <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} component={Link} to="*" />
-          <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} />
+          <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} component={Link} to="/search"  />
           <BottomNavigationAction label="Cart" value="cart" icon={<ShoppingCartIcon />} component={Link} to="/shopcart" />
           <BottomNavigationAction
         label="Account"
