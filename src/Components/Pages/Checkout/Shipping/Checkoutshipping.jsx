@@ -83,13 +83,9 @@ function Checkoutshipping() {
                                 </div>
                                 <div className="step-label"><i class="bx bx-map" />Address</div>
                               </a>
-                              <a className="step-item active current" href="/shoppingcart">
-                                <div className="step-progress"><span className="step-count">3</span>
-                                </div>
-                                <div className="step-label"><i className="bx bx-cube" />Shipping</div>
-                              </a>
+                            
                               <a className="step-item" href="/payment">
-                                <div className="step-progress"><span className="step-count">4</span>
+                                <div className="step-progress"><span className="step-count">3</span>
                                 </div>
                                 <div className="step-label"><i className="bx bx-credit-card" />Payment</div>
                               </a>
@@ -101,32 +97,7 @@ function Checkoutshipping() {
                             </div>
                           </div>
                         </div>
-                        <div className="card rounded-0 shadow-none">
-                          <div className="card-body">
-                            <h2 className="h5 mb-0"> Shipping Method</h2>
-                            <div className="my-3 border-bottom" />
-                            <div className="table-responsive">
-                              <table className="table">
-                                <thead className="table-light">
-                                  <tr>
-                                    <th>Product Name</th>
-                                    <th>Time</th>
-                                    <th>Fee</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {cartItems.map((item, index) => (
-                                    <tr>
-                                      <td>{item.name.substring(0, 18)}</td>
-                                      <td>2 days</td>
-                                      <td>₹{item.price}</td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
+                     
                         <div className="card rounded-0 shadow-none">
                           <div className="card-body">
                             <div className="row">

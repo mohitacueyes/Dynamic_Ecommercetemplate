@@ -1,6 +1,6 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
-import { useParams, useNavigate, Link} from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import "react-medium-image-zoom/dist/styles.css";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ReactImageMagnify from 'react-image-magnify';
@@ -26,7 +26,7 @@ const styles = {
     position: 'fixed',
     bottom: 0,
     zIndex: 1000,
-    margin: 0, // Ensure the navigation stays above other elements if needed
+    margin: 0,
   },
 };
 
@@ -142,7 +142,7 @@ const ProductDetails = () => {
     window.location.href = productDetailsPath;
   };
 
-  
+
 
 
 
@@ -164,7 +164,7 @@ const ProductDetails = () => {
 
   const [selectedImage, setSelectedImage] = useState(null);
   if (!productData) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
   const checkLoggedIn = (userId) => {
     if (!userId) {
@@ -273,15 +273,15 @@ const ProductDetails = () => {
   } else if (sm) {
     thumbnailSize = 110;
   } else if (md) {
-    thumbnailSize = 127; 
+    thumbnailSize = 127;
   } else if (lg) {
-    thumbnailSize = 100; 
+    thumbnailSize = 100;
   } else if (xl) {
-    thumbnailSize = 127; 
+    thumbnailSize = 127;
   } else if (xxl) {
     thumbnailSize = 145;
   }
- 
+
   return (
     <>
       <div className="page-wrapper">
@@ -417,7 +417,7 @@ const ProductDetails = () => {
                         <h3 className="mt-3 mt-lg-0 mb-0">
                           {productData.name}
                         </h3>
-                       
+
                         <div className="d-flex align-items-center mt-3 gap-2">
                           <h5 className="mb-0 text-decoration-line-through text-light-3 text-secondary">
                             ₹{productData.price}
@@ -436,27 +436,6 @@ const ProductDetails = () => {
                           <dd className="col-sm-9">#{productData.sku}</dd>
                         </dl>
                         <div className="mt-3 align-items-center">
-                              
-        {/* Display main product image */}
-        {productOptionImages && productOptionImages.length > 0 && (
-        <div>
-          <h6>Product Option Images:</h6>
-          <div className="d-flex align-items-center gap-2">
-            {/* Display color variant images */}
-            {productOptionImages.map((link) => (
-              <img
-                key={link.product_link_id}
-                src={link.product_options[0].image} // Assuming the first image for simplicity
-                alt={`Product Option ${link.link_product_id}`}
-                className="border p-1"
-                style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
-                onClick={() => handleColorVariantClick(link.link_product_id)}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-      </div>
 
                           {/* Display main product image */}
                           {productOptionImages && productOptionImages.length > 0 && (
@@ -467,7 +446,7 @@ const ProductDetails = () => {
                                 {productOptionImages.map((link) => (
                                   <img
                                     key={link.product_link_id}
-                                    src={link.product_options[0].image} 
+                                    src={link.product_options[0].image} // Assuming the first image for simplicity
                                     alt={`Product Option ${link.link_product_id}`}
                                     className="border p-1"
                                     style={{ maxWidth: "100px", maxHeight: "100px", objectFit: "cover" }}
@@ -479,8 +458,10 @@ const ProductDetails = () => {
                           )}
                         </div>
 
-                        <div class="row row-cols-auto align-items-center mt-3">
-                          {/* <div class="col">
+                      </div>
+
+                      <div class="row row-cols-auto align-items-center mt-3">
+                        {/* <div class="col">
                             <label class="form-label">Quantity</label>
                             <select class="form-select form-select-sm">
                               <option>1</option>
@@ -490,7 +471,7 @@ const ProductDetails = () => {
                               <option>5</option>
                             </select>
                           </div> */}
-                          {/* <div class="col">
+                        {/* <div class="col">
                             <label class="form-label">Size</label>
                             <select class="form-select form-select-sm">
                               <option>S</option>
@@ -500,37 +481,77 @@ const ProductDetails = () => {
                               <option>XL</option>
                             </select>
                           </div> */}
-                        </div>
-                        <div className="d-flex gap-2 mt-3">
-                          <a
+                      </div>
+                      <div className="d-flex gap-2 mt-3">
+                        <a
 
-                            onClick={() => addToCart(productData.id)}
-                            className="btn btn-dark btn-ecomm"
-                          >
-                            <i className="bx bxs-cart-add" />
-                            Add to Cart
-                          </a>
-                          <a
+                          onClick={() => addToCart(productData.id)}
+                          className="btn btn-dark btn-ecomm"
+                        >
+                          <i className="bx bxs-cart-add" />
+                          Add to Cart
+                        </a>
+                        <a
 
-                            href="/checkout"
-                            className="btn btn-dark btn-ecomm"
-                          >
-                            Buy now
-                          </a>
-                          <a
-                            onClick={() => addToLikes(productData.id)}
-                            className="btn-facebook btn-ecomm"
-                          >
-                            <i className="bx bx-heart" />
-                          </a>
+                          href="/checkout"
+                          className="btn btn-dark btn-ecomm"
+                        >
+                          Buy now
+                        </a>
+                        <a
+                          onClick={() => addToLikes(productData.id)}
+                          className="btn-facebook btn-ecomm"
+                        >
+                          <i className="bx bx-heart" />
+                        </a>
+                      </div>
+                      <div className="mt-3 border border-1 rounded p-3">
+                        <h4>Specification</h4>
+                        <hr />
+                        <h5>General</h5>
+                        <div className="border border-1 rounded p-3 text-start">
+                          <table className="table">
+                            <tbody >
+                              <tr>
+                                <th scope="row">Modal Name</th>
+                                <td><strong>Test</strong></td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Series</th>
+                                <td><strong>Test</strong></td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Color</th>
+                                <td><strong>Test</strong></td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Display</th>
+                                <td><strong>Test</strong></td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Panel Type</th>
+                                <td><strong>Test</strong></td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Resolution</th>
+                                <td><strong>Test</strong></td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Warranty</th>
+                                <td><strong>Test</strong></td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
                       </div>
-                    </div>
-                    <div className="col-12   col-xxl-2">
+
                     </div>
                   </div>
+                  <div className="col-12   col-xxl-2">
+                  </div>
                 </div>
-            
+              </div>
+
             </Container>
           </section>
           <section className="py-4">
@@ -566,7 +587,7 @@ const ProductDetails = () => {
                 </ul>
                 <div className="tab-content pt-3">
                   <div className="tab-pane fade show active" id="discription">
-                    <p>{productData.shotdescription}</p>
+                    <div className="description-content" dangerouslySetInnerHTML={{ __html: productData.description }} />
                   </div>
                   <div className="tab-pane fade " id="reviews">
                     <div className="row">

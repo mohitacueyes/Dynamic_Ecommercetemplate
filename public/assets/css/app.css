@@ -2313,6 +2313,26 @@ body.bg-theme15 {
 	width: "70%";
 	
 }
+
+
+.cart-imggg
+	{
+		height: 200px !important;
+		width: 150px!important;
+		/* object-fit: fill!important; */
+	}
+	.cart-imggg img
+	{
+		height: 100% !important;
+		width: 100% !important;
+	    object-fit: fill;
+		
+
+	}
+	.description-content img {
+		max-width: 100%; /* Adjust the value as needed */
+		max-height: 100%; /* Adjust the value as needed */
+	  }
 @media screen and (min-width:10px) and (max-width: 430px) {
 	.TopSearch {
 		padding-top: 0!important;
@@ -2445,7 +2465,15 @@ body.bg-theme15 {
 	min-width: 1%!important;
   max-width: 50%!important;
 }
-
+.btn-ecomm {
+	font-size: 11px!important;
+	font-weight: 500;
+	border-radius: 0;
+	text-transform: uppercase;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
 .thumbnailimage{
 	width: "70%";
 }
@@ -2588,6 +2616,15 @@ body.bg-theme15 {
 .thumbnailimage{
 	width: 80%;
 	margin-left: 33px;
+}
+.btn-ecomm {
+	font-size: 12px!important;
+	font-weight: 500;
+	border-radius: 0;
+	text-transform: uppercase;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 }
 	/* .css-bls161-MuiButtonBase-root-MuiBottomNavigationAction-root
 	{
@@ -2863,16 +2900,7 @@ body.bg-theme15 {
 	.footer-section-mobile {
 		display: none;
 	}
-	.cart-imggg
-	{
-		height: 200px !important;
-	width: 150px!important;
-	}
-	.cart-imggg img
-	{
-		height: 100% !important;
-	object-fit: cover !important;
-	}
+
 	.subImage {
 		padding-left: 25px!important;
 		
@@ -2905,16 +2933,6 @@ body.bg-theme15 {
 	{
 		padding-left: 30px!important;
 	}
-	.cart-imggg
-	{
-		height: 200px !important;
-	width: 150px!important;
-	}
-	.cart-imggg img
-	{
-		height: 100% !important;
-	object-fit: cover !important;
-	}
 	.thumbnailimage{
 		width: 90%;
 		margin-left: 25px;
@@ -2933,16 +2951,7 @@ body.bg-theme15 {
 	{
 		padding-left: 30px!important;
 	}
-	.cart-imggg
-	{
-		height: 200px !important;
-	width: 150px!important;
-	}
-	.cart-imggg img
-	{
-		height: 100% !important;
-	object-fit: cover !important;
-	}
+
 	.thumbnailimage{
 		width: 80%;
 		margin-left: 20px;
@@ -2957,16 +2966,7 @@ body.bg-theme15 {
 				
 			padding-left: 25px!important;
 		}
-		.cart-imggg
-		{
-			height: 200px !important;
-		width: 150px!important;
-		}
-		.cart-imggg img
-		{
-			height: 100% !important;
-		object-fit: cover !important;
-		}
+	
 		.thumbnailimage{
 			width: 80%;
 			margin-left: 15px;

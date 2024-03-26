@@ -13,39 +13,51 @@ function Shopcart() {
 
 
 
-  const handleQuantityChange = async (cartId, newQuantity) => {
-    const apiUrl = `${process.env.REACT_APP_API}/api/update-cartqty/${cartId}`;
+ const handleQuantityChange = async (cartId, newQuantity) => {
+  const apiUrl = `${process.env.REACT_APP_API}/api/update-cartqty/${cartId}`;
 
-    try {
-      const response = await fetch(apiUrl, {
+  try {
+    // Step 1: Update quantity in the backend
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        qty: newQuantity,
+        cart_id: cartId,
+      }),
+    });
+
+    if (response.ok) {
+      // Step 2: Retrieve updated cart items from backend
+      const updatedCartItemsResponse = await fetch(`${process.env.REACT_APP_API}/api/cart-listuseridwise`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          qty: newQuantity,
-          cart_id: cartId,
-        }),
+        body: JSON.stringify({ user_id }), // Assuming you have user_id defined
       });
 
-      if (response.ok) {
-        const responseData = await response.json();
-        if (responseData.ResponseCode === 1) {
-          setCartItems((prevCartItems) =>
-            prevCartItems.map((item) =>
-              item.cart_id === cartId ? { ...item, quantity: newQuantity } : item
-            )
-          );
+      if (updatedCartItemsResponse.ok) {
+        const updatedCartItemsData = await updatedCartItemsResponse.json();
+        if (Array.isArray(updatedCartItemsData.ResponseData)) {
+          // Step 3: Update state with updated cart items
+          setCartItems(updatedCartItemsData.ResponseData);
         } else {
-          console.error('Error updating quantity:', responseData.ResponseText);
+          console.error('Error fetching updated cart items:', updatedCartItemsData.ResponseText);
         }
       } else {
-        console.error('Error updating quantity. HTTP status:', response.status);
+        console.error('Error fetching updated cart items. HTTP status:', updatedCartItemsResponse.status);
       }
-    } catch (error) {
-      console.error('Error updating quantity:', error);
+    } else {
+      console.error('Error updating quantity. HTTP status:', response.status);
     }
-  };
+  } catch (error) {
+    console.error('Error updating quantity:', error);
+  }
+};
+
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
@@ -224,8 +236,7 @@ function Shopcart() {
                               <div className="cart-imggg text-sm-start  text-xl-start">
                                 <img
                                   src={item.imageLink}
-                                  className="rounded-3 "
-                                  style={{ objectFit: "cover" }}
+                                  className="rounded-3 "                                
                                   alt
                                 />
                               </div>
@@ -403,7 +414,7 @@ function Shopcart() {
                           <div className="d-grid">
                             {" "}
                             <a
-                              href="/checkout"
+                              href="/details"
                               className="btn btn-dark btn-ecomm"
                             >
                               Proceed to Checkout

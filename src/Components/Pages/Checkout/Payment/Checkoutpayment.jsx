@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import { Container } from "react-bootstrap";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import useRazorpay from "react-razorpay";
 
 function Checkoutpayment() {
 
@@ -40,6 +44,51 @@ function Checkoutpayment() {
 
     fetchCartData();
   }, []);
+
+
+  const [Razorpay] = useRazorpay();
+
+  const createOrder = async () => {
+   return {
+       // id: "order_123",
+       amount: 5000,
+       currency: "INR",
+   };
+};
+
+const handlePayment = useCallback(async () => {
+   const order = await createOrder();
+
+   const options = {
+       key: "rzp_test_1DP5mmOlF5G5ag", 
+       amount: "5000",
+       currency: "INR",
+       name: "Acme Corp",
+       description: "Test Transaction",
+       image: "https://example.com/your_logo",
+       order_id: order.id,
+       handler: function (response) {
+        alert(response.razorpay_payment_id);
+      alert(response.razorpay_order_id);
+      alert(response.razorpay_signature);
+        
+       },
+       prefill: {
+           name: "Piyush Garg",
+           email: "youremail@example.com",
+           contact: "9712033388",
+       },
+       notes: {
+           address: "Razorpay Corporate Office",
+       },
+       theme: {
+           color: "#3399cc",
+       },
+   };
+
+   const rzpay = new Razorpay(options);
+   rzpay.open();
+}, [Razorpay]);
   return (
     <>
       <div>
@@ -104,24 +153,13 @@ function Checkoutpayment() {
                                   <i class="bx bx-map" />Address
                                 </div>
                               </a>
-                              <a
-                                className="step-item active"
-                                href="/shoppingcart"
-                              >
-                                <div className="step-progress">
-                                  <span className="step-count">3</span>
-                                </div>
-                                <div className="step-label">
-                                  <i className="bx bx-cube" />
-                                  Shipping
-                                </div>
-                              </a>
+                         
                               <a
                                 className="step-item active current"
                                 href="/payment"
                               >
                                 <div className="step-progress">
-                                  <span className="step-count">4</span>
+                                  <span className="step-count">3</span>
                                 </div>
                                 <div className="step-label">
                                   <i className="bx bx-credit-card" />
@@ -154,29 +192,20 @@ function Checkoutpayment() {
                                   <div className="d-flex align-items-center">
                                     <div className="tab-icon"><i className="bx bx-credit-card font-18 me-1" />
                                     </div>
-                                    <div className="tab-title">Credit Card</div>
+                                    <div className="tab-title">Online Payment</div>
                                   </div>
                                 </a>
                               </li>
                               <li className="nav-item" role="presentation">
                                 <a className="nav-link rounded-0" data-bs-toggle="pill" href="#paypal-payment" role="tab" aria-selected="false">
                                   <div className="d-flex align-items-center">
-                                    <div className="tab-icon"><i className="bx bxl-paypal font-18 me-1" />
+                                    <div className="tab-icon"><i className="bx bx-mobile  font-18 me-1" />
                                     </div>
-                                    <div className="tab-title">Paypal</div>
+                                    <div className="tab-title">Cash On Delivery</div>
                                   </div>
                                 </a>
                               </li>
-                              <li className="nav-item" role="presentation">
-                                <a className="nav-link rounded-0" data-bs-toggle="pill" href="#net-banking" role="tab" aria-selected="false">
-                                  <div className="d-flex align-items-center">
-                                    <div className="tab-icon"><i className="bx bx-mobile font-18 me-1" />
-                                    </div>
-                                    <div className="tab-title">Net Banking</div>
-                                  </div>
-                                </a>
-                              </li>
-                            </ul>
+                                                        </ul>
                             <div className="tab-content" id="pills-tabContent">
                               <div className="tab-pane fade show active" id="credit-card" role="tabpanel">
                                 <div className="p-3 border">
@@ -185,15 +214,15 @@ function Checkoutpayment() {
                                       <label className="form-label">Card Owner</label>
                                       <input type="text" className="form-control rounded-0" placeholder="Card Owner name" />
                                     </div>
-                                    <div className="mb-3">
+                                    {/* <div className="mb-3">
                                       <label className="form-label">Card number</label>
                                       <div className="input-group">
                                         <input type="text" className="form-control rounded-0" placeholder="Valid Owner number" />	<span className="input-group-text rounded-0"><img src="assets/images/icons/mastercard.png" width={35} alt /></span>
                                         <span className="input-group-text rounded-0"><img src="assets/images/icons/visa.png" width={35} alt /></span>
                                         <span className="input-group-text rounded-0"><img src="assets/images/icons/american-express.png" width={35} alt /></span>
                                       </div>
-                                    </div>
-                                    <div className="row">
+                                    </div> */}
+                                    {/* <div className="row">
                                       <div className="col-12 col-lg-8">
                                         <div className="mb-3">
                                           <label className="form-label">Expiration Date</label>
@@ -209,10 +238,10 @@ function Checkoutpayment() {
                                           <input type="text" className="form-control rounded-0" placeholder="Three digit CCV number" />
                                         </div>
                                       </div>
-                                    </div>
+                                    </div> */}
                                     <div className="row">
                                       <div className="col-md-12">
-                                        <div className="d-grid">	<a href="javascript:;" className="btn btn-dark btn-ecomm rounded-0">Confirm Payment</a>
+                                        <div className="d-grid">	<a href="javascript:;" className="btn btn-dark btn-ecomm rounded-0" onClick={handlePayment}>Confirm Payment</a>
                                         </div>
                                       </div>
                                     </div>
@@ -241,26 +270,7 @@ function Checkoutpayment() {
                                   </div>
                                 </div>
                               </div>
-                              <div className="tab-pane fade" id="net-banking" role="tabpanel">
-                                <div className="p-3 border">
-                                  <div className="mb-3">
-                                    <p>Select your Bank</p>
-                                    <select className="form-select rounded-0" aria-label="Default select example">
-                                      <option selected>--Please Select Your Bank--</option>
-                                      <option value={1}>Bank Name 1</option>
-                                      <option value={2}>Bank Name 2</option>
-                                      <option value={3}>Bank Name 3</option>
-                                    </select>
-                                  </div>
-                                  <div className="mb-3">
-                                    <div className="d-block"> <a href="javscript:;" className="btn btn-light rounded-0"><i className="bx bxl-paypal" />Login to my Paypal</a>
-                                    </div>
-                                  </div>
-                                  <div className="mb-3">
-                                    <p className="mb-0">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order.</p>
-                                  </div>
-                                </div>
-                              </div>
+                            
                             </div>
                           </div>
                         </div>
@@ -315,7 +325,7 @@ function Checkoutpayment() {
                                     <div className="my-2 border-top" />
                                     <div className="d-flex align-items-center">
                                       <a className="d-block flex-shrink-0" href="javascript:;">
-                                        <img src={item.imageLink} width={75} alt="Product" />
+                                        <img src={item.imageLink} width={75} height={75} alt="Product" className="border" />
                                       </a>
                                       <div className="ps-2">
                                         <h6 className="mb-1"><a href="javascript:;" className="text-dark">{item.name.slice(0, 18)}</a></h6>
