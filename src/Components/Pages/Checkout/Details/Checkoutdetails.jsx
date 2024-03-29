@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
-function Checkoutdetails({ user_id }) {
+function Checkoutdetails() {
   const [response, setResponse] = useState(null);
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
@@ -19,9 +19,11 @@ function Checkoutdetails({ user_id }) {
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
   const navigate = useNavigate();
+  const user_id = localStorage.getItem("userId");
   const [CountryData, setCountryData] = useState([]);
   const [StateData, setStateData] = useState([]);
   const [CityData, setCityData] = useState([]);
+  const [addressId, setAddressId] = useState(null);
   const [formData, setFormData] = useState({
     user_id: user_id,
     type_id: "",
@@ -92,10 +94,22 @@ function Checkoutdetails({ user_id }) {
       }
     }
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if (name === "state_id") {
+      const stateId = StateData.find((state) => state.statename === value)?.stateid;
+
+      if (stateId) {
+        // Set state ID instead of state name in the formData state
+        setFormData({
+          ...formData,
+          state_id: stateId,
+        });
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   }
 
   function handleSaveAddress() {
@@ -108,12 +122,13 @@ function Checkoutdetails({ user_id }) {
     fetch(`${process.env.REACT_APP_API}/api/add-address`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        // Handle the API response data here
         console.log(data);
-        navigate("/address");
-        // You can update the UI or perform other actions based on the response data
-        // For example, if you want to display a success message, you can set a state variable
-        // and conditionally render the message in your JSX.
+        fetchAddressList();
+
+
+        navigate("/details");
+
+
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -159,31 +174,41 @@ function Checkoutdetails({ user_id }) {
   }, []);
 
   const [addresses, setAddresses] = useState([]);
-
-  useEffect(() => {
+  const fetchAddressList = async () => {
     const user_id = localStorage.getItem("userId");
-    const fetchAddressList = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_API}/api/user-addresslist/${user_id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          }
+    const response = await fetch(
+      `${process.env.REACT_APP_API}/api/user-addresslist/${user_id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
         }
-      );
-
-      const data = await response.json();
-
-      if (data.ResponseCode === 1) {
-        setAddresses(data.ResponseData);
-      } else {
-        console.error("Error fetching address list:", data.ResponseText);
       }
-    };
+    );
 
+    const data = await response.json();
+
+    if (data.ResponseCode === 1) {
+      setAddresses(data.ResponseData);
+      
+      // Extract the address ID from the first address object in the array
+      const firstAddress = data.ResponseData[0];
+      if (firstAddress && firstAddress.id) {
+        setAddressId(firstAddress.id);
+      } else {
+        console.error('Address ID not found in response data');
+      }
+    } else {
+      console.error("Error fetching address list:", data.ResponseText);
+    }
+  };
+
+  // Call fetchAddressList function on component mount
+  useEffect(() => {
     fetchAddressList();
-  }, [user_id]);
+  }, []);
+ 
+
   //   Order Details   //
 
   const [cartItems, setCartItems] = useState([]);
@@ -223,7 +248,7 @@ function Checkoutdetails({ user_id }) {
     fetchCartData();
   }, []);
   const handleDeleteClick = async (id) => {
-    const apiUrl = `${process.env.REACT_APP_API}/api/addressdelete`; // Replace with your actual API endpoint
+    const apiUrl = `${process.env.REACT_APP_API}/api/addressdelete`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -259,11 +284,35 @@ function Checkoutdetails({ user_id }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (selectedType) {
-      window.location.href = '/shoppingcart';
+      window.location.href = '/payment';
     } else {
       toast('Please select an address ');
     }
   };
+
+function handleUpdateAddress() {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData), // Assuming formData holds the updated address data
+  };
+
+  fetch(`${process.env.REACT_APP_API}/api/address-update/${addressId}`, requestOptions) // Assuming you have the address ID stored in addressId variable
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      
+    
+      fetchAddressList();
+    
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+
+
   return (
     <>
       <div>
@@ -337,22 +386,25 @@ function Checkoutdetails({ user_id }) {
                                       <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div className="modal-body">
-                                      <form >
+                                      <form  >
                                         <div className="mb-3">
                                           <label htmlFor="fullName" className="form-label">Full Name</label>
-                                          <input type="text" name='full_name'
+                                          <input type="text"
+                                            name='full_name'
                                             className="form-control"
                                             onChange={handleChange} required />
                                         </div>
                                         <div className="mb-3">
                                           <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
                                           <input type="tel" className="form-control"
+                                            name='mobile'
                                             id="phoneNumber"
                                             onChange={handleChange} required />
                                         </div>
                                         <div className="mb-3">
                                           <label htmlFor="alternateNumber" className="form-label">Alternate Number</label>
                                           <input type="tel" className="form-control"
+                                            name='alternate_number'
                                             id="alternateNumber"
                                             onChange={handleChange}
                                           />
@@ -361,6 +413,7 @@ function Checkoutdetails({ user_id }) {
                                           <label htmlFor="streetAddress" className="form-label">Street Address</label>
                                           <input type="text" className="form-control"
                                             id="streetAddress"
+                                            name="address"
                                             onChange={handleChange}
                                             required />
                                         </div>
@@ -368,6 +421,7 @@ function Checkoutdetails({ user_id }) {
                                           <label htmlFor="landmark" className="form-label">Landmark</label>
                                           <input type="text" className="form-control"
                                             id="landmark"
+                                            name="landmark"
                                             onChange={handleChange}
                                           />
                                         </div>
@@ -399,7 +453,7 @@ function Checkoutdetails({ user_id }) {
                                             <select
                                               name="state_id"
                                               id="templateId"
-                                              class="form-control"
+                                              className="form-control"
                                               style={{ width: "95%" }}
                                               onChange={(e) => handleChange(e)}
                                             >
@@ -409,7 +463,7 @@ function Checkoutdetails({ user_id }) {
                                               {StateData &&
                                                 StateData.map((v, index) => {
                                                   return (
-                                                    <option value={v.state_id} key={index.id}>
+                                                    <option value={v.state_id} key={v.state_id}>
                                                       {v.statename}
                                                     </option>
                                                   );
@@ -453,9 +507,24 @@ function Checkoutdetails({ user_id }) {
                                           </div>
 
                                         </div>
+                                        <div className="col-12">
 
+                                          <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="type_id" id="inlineRadio1" value="1" onChange={handleChange} />
+                                            <label class="form-check-label" for="inlineRadio1">Home Address</label>
+                                          </div>
+                                          <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="type_id" id="inlineRadio2" value="2" onChange={handleChange} />
+                                            <label class="form-check-label" for="inlineRadio2">Office Address</label>
+                                          </div>
+                                          <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="type_id" id="inlineRadio3" value="3" onChange={handleChange} />
+                                            <label class="form-check-label" for="inlineRadio3">Other Address</label>
+                                          </div>
+
+                                        </div>
                                         <div className="modal-footer">
-                                          <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleSaveAddress}>Save changes</button>
+                                          <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleSaveAddress}>Save changes</button>
                                         </div>
                                       </form>
                                     </div>
@@ -473,6 +542,7 @@ function Checkoutdetails({ user_id }) {
                                       <div className="col-12 ">
                                         {addresses.length > 0 ? (
                                           addresses.map((address) => (
+
                                             <div key={address.id} className="d-flex justify-content-between align-items-start">
                                               <div className="mb-3  ">
                                                 <div class="form-check form-check-inline">
@@ -511,9 +581,8 @@ function Checkoutdetails({ user_id }) {
                                                   type="button"
                                                   className="btn btn-dark btn-ecomm mt-3 "
                                                   style={{ fontSize: "14px" }}
-                                                  onClick={() => {
-                                                    window.location.href = `/editaddress/${address.id}`;
-                                                  }}
+                                                data-bs-toggle="modal"
+                                data-bs-target="#EditAddressModal"
                                                 >
                                                   Edit
                                                 </button>
@@ -535,6 +604,162 @@ function Checkoutdetails({ user_id }) {
                                     </div>
                                   </div>
                                 </div>
+
+                                <div className="modal fade" id="EditAddressModal" tabIndex="-1" aria-labelledby="EditAddressModalLabel" aria-hidden="true">
+                                  <div className="modal-dialog modal-dialog-centered">
+                                    <div className="modal-content">
+                                      <div className="modal-header">
+                                        <h5 className="modal-title" id="addAddressModalLabel">Edit Address</h5>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div className="modal-body">
+                                        <form  >
+                                          <div className="mb-3">
+                                            <label htmlFor="fullName" className="form-label">Full Name</label>
+                                            <input type="text"
+                                              name='full_name'
+                                              id="fullName"
+                                             className="form-control"
+                                              required />
+                                          </div>
+                                          <div className="mb-3">
+                                            <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
+                                            <input type="tel" className="form-control"
+                                              name='mobile'
+                                              id="phoneNumber"
+                                              required />
+                                          </div>
+                                          <div className="mb-3">
+                                            <label htmlFor="alternateNumber" className="form-label">Alternate Number</label>
+                                            <input type="tel" className="form-control"
+                                              name='alternate_number'
+                                              id="alternateNumber"
+
+                                            />
+                                          </div>
+                                          <div className="mb-3">
+                                            <label htmlFor="streetAddress" className="form-label">Street Address</label>
+                                            <input type="text" className="form-control"
+                                              id="streetAddress"
+                                              name="address"
+
+                                              required />
+                                          </div>
+                                          <div className="mb-3">
+                                            <label htmlFor="landmark" className="form-label">Landmark</label>
+                                            <input type="text" className="form-control"
+                                              id="landmark"
+                                              name="landmark"
+
+                                            />
+                                          </div>
+                                          <div className="d-flex justify-content-between w-100 align-items-center gap-3">
+                                            <div className="col-6">
+                                              <label className="form-label">Country</label>
+                                              <select
+                                                name="country_id"
+                                                id="templateId"
+                                                class="form-control "
+                                                style={{ width: "95%" }}
+                                                onChange={(e) => handleChange(e)}
+                                              >
+                                                <option value={formData.country_id ? "" : ""}>
+                                                  --select --
+                                                </option>
+                                                {CountryData &&
+                                                  CountryData.map((v, index) => {
+                                                    return (
+                                                      <option value={v.id} key={index.id}>
+                                                        {v.countryname}
+                                                      </option>
+                                                    );
+                                                  })}
+                                              </select>
+                                            </div>
+                                            <div className="col-6">
+                                              <label className="form-label">State</label>
+                                              <select
+                                                name="state_id"
+                                                id="templateId"
+                                                className="form-control"
+                                                style={{ width: "95%" }}
+                                                onChange={(e) => handleChange(e)}
+                                              >
+                                                <option value={formData.state_id ? "" : ""}>
+                                                  --select --
+                                                </option>
+                                                {StateData &&
+                                                  StateData.map((v, index) => {
+                                                    return (
+                                                      <option value={v.state_id} key={v.state_id}>
+                                                        {v.statename}
+                                                      </option>
+                                                    );
+                                                  })}
+                                              </select>
+                                            </div>
+
+                                          </div>
+                                          <div className="d-flex justify-content-between w-100 align-items-center gap-3">
+                                            <div className="col-6">
+                                              <label className="form-label">City</label>
+                                              <select
+                                                name="city_id"
+                                                id="templateId"
+                                                class="form-control"
+                                                style={{ width: "95%" }}
+                                                onChange={(e) => handleChange(e)}
+                                              >
+                                                <option value={formData.city_id ? "" : ""}>
+                                                  --select --
+                                                </option>
+                                                {CityData &&
+                                                  CityData.map((v, index) => {
+                                                    return (
+                                                      <option value={v.id} key={index.id}>
+                                                        {v.cityname}
+                                                      </option>
+                                                    );
+                                                  })}
+                                              </select>
+                                            </div>
+                                            <div className="col-6">
+                                              <label className="form-label">Pincode</label>
+                                              <input
+                                                type="number"
+                                                className="form-control"
+                                                style={{ width: "95%" }}
+                                                name="pincode"
+                                                onChange={handleChange}
+                                              />
+                                            </div>
+
+                                          </div>
+                                          <div className="col-12">
+
+                                            <div class="form-check form-check-inline">
+                                              <input class="form-check-input" type="radio" name="type_id" id="inlineRadio1" value="1" onChange={handleChange} />
+                                              <label class="form-check-label" for="inlineRadio1">Home Address</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                              <input class="form-check-input" type="radio" name="type_id" id="inlineRadio2" value="2" onChange={handleChange} />
+                                              <label class="form-check-label" for="inlineRadio2">Office Address</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                              <input class="form-check-input" type="radio" name="type_id" id="inlineRadio3" value="3" onChange={handleChange} />
+                                              <label class="form-check-label" for="inlineRadio3">Other Address</label>
+                                            </div>
+
+                                          </div>
+                                          <div className="modal-footer">
+                                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleUpdateAddress} >Save changes</button>
+                                          </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
                                 <div className="card rounded-0 shadow-none border">
                                   <div className="card-body">
                                     <div className="row">

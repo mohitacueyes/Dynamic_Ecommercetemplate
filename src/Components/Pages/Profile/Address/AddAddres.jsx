@@ -36,19 +36,7 @@ function AddAddres() {
         console.error("Error fetching category data:", error);
       });
 
-    // ------------Fetch  data-------------------//
-    // axios
-    //   .get(`${process.env.REACT_APP_API}/api/city-list-statewise`,{
-    //     params: {
-    //       state_id: StateData,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     setCityData(response.data.ResponseData);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching category data:", error);
-    //   });
+  
 
     axios
       .get(`${process.env.REACT_APP_API}/api/state-list`)
@@ -95,12 +83,24 @@ function AddAddres() {
       }
     }
   
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if (name === "state_id") {
+      const stateId = StateData.find((state) => state.statename === value)?.stateid;
+  
+      if (stateId) {
+        // Set state ID instead of state name in the formData state
+        setFormData({
+          ...formData,
+          state_id: stateId,
+        });
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   }
-
+  
   function handleSaveAddress() {
     const requestOptions = {
       method: "POST",
@@ -111,12 +111,10 @@ function AddAddres() {
     fetch(`${process.env.REACT_APP_API}/api/add-address`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        // Handle the API response data here
+      
         console.log(data);
         navigate("/address");
-        // You can update the UI or perform other actions based on the response data
-        // For example, if you want to display a success message, you can set a state variable
-        // and conditionally render the message in your JSX.
+       
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -295,7 +293,7 @@ function AddAddres() {
                                 <select
                                   name="state_id"
                                   id="templateId"
-                                  class="form-control"
+                                  className="form-control"
                                   style={{ width: "95%" }}
                                   onChange={(e) => handleChange(e)}
                                 >
@@ -305,7 +303,7 @@ function AddAddres() {
                                   {StateData &&
                                     StateData.map((v, index) => {
                                       return (
-                                        <option value={v.state_id} key={index.id}>
+                                        <option value={v.state_id} key={v.state_id}>
                                           {v.statename}
                                         </option>
                                       );

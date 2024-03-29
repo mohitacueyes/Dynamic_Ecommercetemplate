@@ -3,7 +3,6 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 function Editaddres() {
 
-
   function handleLogout() {
     localStorage.removeItem("user");
     window.location.href = "/login";
@@ -15,10 +14,10 @@ function Editaddres() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     user_id: user_id,
-    type_id: "1",
-    country_id: "1",
-    state_id: "1",
-    city_id: "1",
+    type_id: "",
+    country_id: "",
+    state_id: "",
+    city_id: "",
     full_name: "",
     landmark: "",
     pincode: "",
@@ -38,6 +37,7 @@ function Editaddres() {
         console.error("Error updating address:", error);
       });
   }
+  console.log(formData);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -134,7 +134,7 @@ function Editaddres() {
                     <div className="col-lg-8">
                       <div className="card shadow-none mb-0 border">
                         <div className="card-body ">
-                          <form className="row g-3">
+                          <form className="row g-3" >
                             <div className="col-md-12">
                               <label className="form-label">Full Name</label>
                               <input
@@ -150,6 +150,7 @@ function Editaddres() {
                                 type="text"
                                 className="form-control"
                                 name="landmark"
+                                
                                 onChange={handleChange}
                               />
                             </div>

@@ -493,7 +493,7 @@ const ProductDetails = () => {
                         </a>
                         <a
 
-                          href="/checkout"
+                          href="/details"
                           className="btn btn-dark btn-ecomm"
                         >
                           Buy now
