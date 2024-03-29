@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Container } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -49,46 +49,83 @@ function Checkoutpayment() {
   const [Razorpay] = useRazorpay();
 
   const createOrder = async () => {
-   return {
-       // id: "order_123",
-       amount: 5000,
-       currency: "INR",
-   };
-};
+    return {
+      // id: "order_123",
+      amount: 5000,
+      currency: "INR",
+    };
+  };
 
-const handlePayment = useCallback(async () => {
-   const order = await createOrder();
+  const handlePayment = useCallback(async () => {
+    const order = await createOrder();
 
-   const options = {
-       key: "rzp_test_1DP5mmOlF5G5ag", 
-       amount: "5000",
-       currency: "INR",
-       name: "Acme Corp",
-       description: "Test Transaction",
-       image: "https://example.com/your_logo",
-       order_id: order.id,
-       handler: function (response) {
+    const options = {
+      key: "rzp_test_1DP5mmOlF5G5ag",
+      amount: "5000",
+      currency: "INR",
+      name: "Acme Corp",
+      description: "Test Transaction",
+      image: "https://example.com/your_logo",
+      order_id: order.id,
+      handler: function (response) {
         alert(response.razorpay_payment_id);
-      alert(response.razorpay_order_id);
-      alert(response.razorpay_signature);
-        
-       },
-       prefill: {
-           name: "Piyush Garg",
-           email: "youremail@example.com",
-           contact: "9712033388",
-       },
-       notes: {
-           address: "Razorpay Corporate Office",
-       },
-       theme: {
-           color: "#3399cc",
-       },
-   };
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature);
 
-   const rzpay = new Razorpay(options);
-   rzpay.open();
-}, [Razorpay]);
+      },
+      prefill: {
+        name: "Piyush Garg",
+        email: "youremail@example.com",
+        contact: "9712033388",
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    const rzpay = new Razorpay(options);
+    rzpay.open();
+  }, [Razorpay]);
+
+  const [selectedOption, setSelectedOption] = useState('online-payment');
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+  const handleConfirmAndPay = () => {
+    if (selectedOption === 'online-payment') {
+      handlePayment();
+    } else if (selectedOption === 'cash-on-delivery') {
+      placeOrder(); // Call the placeOrder function for cash on delivery
+    }
+  };
+  const placeOrder = async () => {
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API}/api/place-order`, {
+        user_id: 1,
+        total: 200,
+        tax_amount: 1,
+        tax_percentage: 1,
+        discount: 100,
+        promo_code: 1,
+        final_total: 100,
+        payment_method: 'cod',
+        address_id: 1,
+        total_item: 6,
+        ordernumber: 1,
+        status: 1,
+        active_status: 'active'
+      });
+
+      console.log('Place order response:', response.data);
+      // Handle success response
+    } catch (error) {
+      console.error('Error placing order:', error);
+      // Handle error
+    }
+  };
   return (
     <>
       <div>
@@ -153,7 +190,7 @@ const handlePayment = useCallback(async () => {
                                   <i class="bx bx-map" />Address
                                 </div>
                               </a>
-                         
+
                               <a
                                 className="step-item active current"
                                 href="/payment"
@@ -186,98 +223,57 @@ const handlePayment = useCallback(async () => {
                             <h2 className="h5 my-2">Choose Payment Method</h2>
                           </div>
                           <div className="card-body">
-                            <ul className="nav nav-pills mb-3 border p-3" role="tablist">
-                              <li className="nav-item" role="presentation">
-                                <a className="nav-link active rounded-0" data-bs-toggle="pill" href="#credit-card" role="tab" aria-selected="true">
-                                  <div className="d-flex align-items-center">
-                                    <div className="tab-icon"><i className="bx bx-credit-card font-18 me-1" />
-                                    </div>
-                                    <div className="tab-title">Online Payment</div>
-                                  </div>
-                                </a>
-                              </li>
-                              <li className="nav-item" role="presentation">
-                                <a className="nav-link rounded-0" data-bs-toggle="pill" href="#paypal-payment" role="tab" aria-selected="false">
-                                  <div className="d-flex align-items-center">
-                                    <div className="tab-icon"><i className="bx bx-mobile  font-18 me-1" />
-                                    </div>
-                                    <div className="tab-title">Cash On Delivery</div>
-                                  </div>
-                                </a>
-                              </li>
-                                                        </ul>
-                            <div className="tab-content" id="pills-tabContent">
-                              <div className="tab-pane fade show active" id="credit-card" role="tabpanel">
-                                <div className="p-3 border">
-                                  <form>
-                                    <div className="mb-3">
-                                      <label className="form-label">Card Owner</label>
-                                      <input type="text" className="form-control rounded-0" placeholder="Card Owner name" />
-                                    </div>
-                                    {/* <div className="mb-3">
-                                      <label className="form-label">Card number</label>
-                                      <div className="input-group">
-                                        <input type="text" className="form-control rounded-0" placeholder="Valid Owner number" />	<span className="input-group-text rounded-0"><img src="assets/images/icons/mastercard.png" width={35} alt /></span>
-                                        <span className="input-group-text rounded-0"><img src="assets/images/icons/visa.png" width={35} alt /></span>
-                                        <span className="input-group-text rounded-0"><img src="assets/images/icons/american-express.png" width={35} alt /></span>
-                                      </div>
-                                    </div> */}
-                                    {/* <div className="row">
-                                      <div className="col-12 col-lg-8">
-                                        <div className="mb-3">
-                                          <label className="form-label">Expiration Date</label>
-                                          <div className="input-group">
-                                            <input type="text" className="form-control rounded-0" placeholder="MM" />
-                                            <input type="text" className="form-control rounded-0" placeholder="YY" />
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div className="col-12 col-lg-4">
-                                        <div className="mb-3">
-                                          <label className="form-label">CVV</label>
-                                          <input type="text" className="form-control rounded-0" placeholder="Three digit CCV number" />
-                                        </div>
-                                      </div>
-                                    </div> */}
-                                    <div className="row">
-                                      <div className="col-md-12">
-                                        <div className="d-grid">	<a href="javascript:;" className="btn btn-dark btn-ecomm rounded-0" onClick={handlePayment}>Confirm Payment</a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </form>
+                            <div>
+                              {/* Radio buttons */}
+                              <div className="mb-3">
+                                <input
+                                  type="radio"
+                                  id="online-payment"
+                                  name="payment-option"
+                                  value="online-payment"
+                                  checked={selectedOption === 'online-payment'}
+                                  onChange={handleOptionChange}
+                                />
+                                <label htmlFor="online-payment" className="ms-2">Online Payment</label>
+                              </div>
+                              <div className="mb-3">
+                                <input
+                                  type="radio"
+                                  id="cash-on-delivery"
+                                  name="payment-option"
+                                  value="cash-on-delivery"
+                                  checked={selectedOption === 'cash-on-delivery'}
+                                  onChange={handleOptionChange}
+                                />
+                                <label htmlFor="cash-on-delivery" className="ms-2">Cash On Delivery</label>
+                              </div>
+
+                              {/* Content based on selected option */}
+                              {selectedOption === 'online-payment' && (
+                                <div>
+                                  {/* Online Payment content */}
+                                  {/* Place your online payment content here */}
+                                </div>
+                              )}
+                              {selectedOption === 'cash-on-delivery' && (
+                                <div>
+                                  {/* Cash on Delivery content */}
+                                  {/* Place your cash on delivery content here */}
+                                </div>
+                              )}
+                            </div>
+                            <div >
+                              <div >
+                                <div >
                                 </div>
                               </div>
-                              <div className="tab-pane fade" id="paypal-payment" role="tabpanel">
-                                <div className="p-3 border">
-                                  <div className="mb-3">
-                                    <p>Select your Paypal Account type</p>
-                                    <div className="form-check form-check-inline">
-                                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" />
-                                      <label className="form-check-label" htmlFor="inlineRadio1">Domestic</label>
-                                    </div>
-                                    <div className="form-check form-check-inline">
-                                      <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" defaultValue="option2" />
-                                      <label className="form-check-label" htmlFor="inlineRadio2">International</label>
-                                    </div>
-                                  </div>
-                                  <div className="mb-3">
-                                    <div className="d-block">	<a href="javscript:;" className="btn btn-light rounded-0"><i className="bx bxl-paypal" />Login to my Paypal</a>
-                                    </div>
-                                  </div>
-                                  <div className="mb-3">
-                                    <p className="mb-0">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order.</p>
-                                  </div>
-                                </div>
-                              </div>
-                            
                             </div>
                           </div>
                         </div>
                         <div className="card rounded-0 shadow-none border">
                           <div className="card-body">
-                            <div className="row">
-                              <div className="col-md-6">
+                            <div className="row ">
+                              <div className="col-md-6 ">
                                 <div className="d-grid">
                                   <a
                                     href="/shoppingcart"
@@ -290,13 +286,10 @@ const handlePayment = useCallback(async () => {
                               </div>
                               <div className="col-md-6">
                                 <div className="d-grid">
-                                  <a
-                                    href="/complete"
-                                    className="btn btn-outline-dark btn-ecomm"
-                                  >
-                                    Review Your Order
+                                  <button onClick={handleConfirmAndPay} className="btn btn-outline-dark btn-ecomm">
+                                    Confirm and Pay
                                     <i className="bx bx-chevron-right" />
-                                  </a>
+                                  </button>
                                 </div>
                               </div>
                             </div>

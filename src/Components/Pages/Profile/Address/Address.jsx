@@ -50,10 +50,6 @@ const Address = ({ user_id }) => {
   const handleDeleteClick = async (id) => {
 
     const apiUrl = `${process.env.REACT_APP_API}/api/addressdelete`; // Replace with your actual API endpoint
-
- 
-
-
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
